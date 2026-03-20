@@ -55,6 +55,29 @@ export const INSTRUCTORS = [
   },
 ] as const;
 
+export const LOCATIONS = [
+  {
+    name: "Winterthur",
+    instructors: ["Doma Caleta", "Merjema Radič"],
+  },
+  {
+    name: "Bülach",
+    instructors: ["Gianni Sebestin"],
+  },
+  {
+    name: "Regensdorf",
+    instructors: ["Samir Radič"],
+  },
+  {
+    name: "Albisgütli",
+    instructors: ["Tomi Caleta"],
+  },
+  {
+    name: "Bassersdorf",
+    instructors: ["Doma Caleta", "Gianni Sebestin"],
+  },
+] as const;
+
 export const EDOOBOX_LINKS = {
   nothelferkurs: "https://app1.edoobox.com/de/LetZHgo/Nothelferkurse/?edref=letzhgo",
   motorrad: "https://app1.edoobox.com/de/LetZHgo/Motorradkurse/?edref=letzhgo",
@@ -163,10 +186,10 @@ export const PRICING = [
 ] as const;
 
 export const STATS = [
-  { value: "450+", label: "Ausgebildete Fahrschüler:innen" },
-  { value: "1'050+", label: "Durchgeführte Fahrlektionen" },
-  { value: "2+", label: "Jahre Erfahrung in der Fahrausbildung" },
-  { value: "30%", label: "Fokus auf Sicherheit & individuelle Betreuung" },
+  { value: "500+", label: "Ausgebildete Fahrschüler:innen" },
+  { value: "10'000+", label: "Durchgeführte Fahrlektionen" },
+  { value: "30+", label: "Jahre Erfahrung in der Fahrausbildung" },
+  { value: "100%", label: "Fokus auf Sicherheit & individuelle Betreuung" },
 ] as const;
 
 export const STEPS = [

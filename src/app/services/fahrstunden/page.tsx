@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { IMAGES } from "@/lib/constants";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const HIGHLIGHTS = [
   "Individuelle Fahrstunden in deinem Tempo",
@@ -56,6 +57,13 @@ export default function FahrstundenPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-20 md:px-16">
+        <div className="mb-10">
+          <Breadcrumbs items={[
+            { label: "Home", href: "/" },
+            { label: "Services", href: "/services" },
+            { label: "Fahrstunden" },
+          ]} />
+        </div>
         <div className="grid gap-16 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <motion.div
@@ -105,6 +113,15 @@ export default function FahrstundenPage() {
                 </p>
               </blockquote>
             </motion.div>
+            <Link
+              href="/services"
+              className="mt-12 inline-flex items-center gap-2 text-sm font-medium text-accent transition-colors hover:text-accent-dark"
+            >
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M10 4l-4 4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Zurück zu allen Services
+            </Link>
           </div>
 
           <motion.aside
@@ -164,18 +181,6 @@ export default function FahrstundenPage() {
             </div>
           </motion.aside>
         </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-16">
-        <Link
-          href="/services"
-          className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
-        >
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-            <path d="M10 4l-4 4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          Zurück zu allen Services
-        </Link>
       </section>
     </>
   );

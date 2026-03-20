@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { NAV_LINKS, SITE } from "@/lib/constants";
+import { NAV_LINKS } from "@/lib/constants";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -12,8 +13,15 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" className="text-xl font-bold tracking-tight text-foreground">
-          {SITE.name}
+        <Link href="/" className="relative block h-10 w-40">
+          <Image
+            src="/images/logo.png"
+            alt="Let'ZHgo"
+            fill
+            className="object-contain object-left"
+            priority
+            sizes="160px"
+          />
         </Link>
 
         {/* Desktop */}

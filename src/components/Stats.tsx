@@ -1,39 +1,121 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { STATS } from "@/lib/constants";
+
+function parseValue(value: string): { num: number; prefix: string; suffix: string } {
+  const match = value.match(/^([^\d]*)(\d[\d']*\.?\d*)(.*)$/);
+  if (!match) return { num: 0, prefix: "", suffix: value };
+  const num = parseFloat(match[2].replace(/'/g, ""));
+  return { num, prefix: match[1], suffix: match[3] };
+}
+
+function formatNumber(n: number, original: string): string {
+  if (original.includes("'")) {
+    const rounded = Math.round(n);
+    return rounded.toLocaleString("de-CH");
+  }
+  if (original.includes(".")) return n.toFixed(0);
+  return Math.round(n).toString();
+}
+
+function CountingNumber({ value, isInView }: { value: string; isInView: boolean }) {
+  const { num, prefix, suffix } = parseValue(value);
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    const duration = 2500;
+    const startTime = performance.now();
+
+    function step(now: number) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(eased * num);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }, [isInView, num]);
+
+  return (
+    <span>
+      {prefix}{formatNumber(display, value)}{suffix}
+    </span>
+  );
+}
+
+function AnimatedStat({ value, label, index }: { value: string; label: string; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 0.15 + index * 0.2, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: "-80px" }}
+    >
+      <motion.p
+        className="text-5xl font-bold text-accent md:text-6xl lg:text-7xl"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 1, delay: 0.15 + index * 0.2, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <CountingNumber value={value} isInView={isInView} />
+      </motion.p>
+      <motion.p
+        className="mt-4 text-sm text-muted"
+        initial={{ opacity: 0, y: 10 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.4 + index * 0.2 }}
+      >
+        {label}
+      </motion.p>
+    </motion.div>
+  );
+}
 
 export default function Stats() {
   return (
-    <section className="bg-card">
-      <div className="mx-auto max-w-7xl px-6 py-24">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-foreground md:text-4xl">
-            Vom ersten Fahrversuch bis zur bestandenen Prüfung.
-            <br className="hidden md:block" /> Zahlen, die Vertrauen schaffen.
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-muted">
-            Hinter jeder Zahl steckt eine Erfolgsgeschichte. Diese Meilensteine
-            zeigen die Erfahrung, das Engagement und die Qualität unserer
-            Ausbildung.
-          </p>
+    <section>
+      <div className="mx-auto px-8 py-40 md:px-16 md:py-52 lg:px-24 xl:px-32">
+        {/* Top: Title left, description right */}
+        <div className="grid items-start gap-16 lg:grid-cols-[1fr_0.55fr]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-80px" }}
+          >
+            <h2 className="text-3xl font-bold leading-tight text-foreground md:text-4xl lg:text-5xl">
+              Vom ersten Fahrversuch bis zur bestandenen Prüfung.{" "}
+              <span className="text-accent">Zahlen, die Vertrauen schaffen.</span>
+            </h2>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-80px" }}
+            className="lg:pt-2"
+          >
+            <p className="text-lg leading-relaxed text-muted">
+              Hinter jeder Zahl steckt eine Erfolgsgeschichte. Diese Meilensteine
+              zeigen die Erfahrung, das Engagement und die Qualität unserer
+              Ausbildung.
+            </p>
+          </motion.div>
         </div>
 
-        <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-4">
+        {/* Bottom: Numbers full-width */}
+        <div className="mt-32 grid grid-cols-2 gap-16 md:mt-40 md:grid-cols-4 md:gap-20">
           {STATS.map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <p className="text-4xl font-bold text-accent md:text-5xl">
-                {stat.value}
-              </p>
-              <p className="mt-2 text-sm text-muted">{stat.label}</p>
-            </motion.div>
+            <AnimatedStat key={i} value={stat.value} label={stat.label} index={i} />
           ))}
         </div>
       </div>

@@ -1,114 +1,87 @@
 import Image from "next/image";
 import Link from "next/link";
-import { SITE, IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
+import { SITE, IMAGES } from "@/lib/constants";
 
-const FOOTER_LINKS = {
-  Kurse: [
-    { label: "Nothelferkurs", href: "/services/nothelferkurs" },
-    { label: "Verkehrskunde", href: "/services/verkehrskunde" },
-    { label: "Motorrad-Grundkurs", href: "/services/motorrad" },
-    { label: "Fahrstunden", href: "/services/fahrstunden" },
-  ],
-  Anmeldung: [
-    { label: "Nothelferkurs buchen", href: EDOOBOX_LINKS.nothelferkurs, external: true },
-    { label: "VKU buchen", href: EDOOBOX_LINKS.verkehrskunde, external: true },
-    { label: "Motorradkurs buchen", href: EDOOBOX_LINKS.motorrad, external: true },
-  ],
-  Navigation: [
-    { label: "Home", href: "/" },
-    { label: "Über uns", href: "/ueber-uns" },
-    { label: "Services", href: "/services" },
-    { label: "Kontakt", href: "/kontakt" },
-  ],
-};
+const NAV_LINKS = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Über uns", href: "/ueber-uns" },
+  { label: "Kontakt", href: "/kontakt" },
+  { label: "Nothelferkurs", href: "/services/nothelferkurs" },
+  { label: "Verkehrskunde", href: "/services/verkehrskunde" },
+  { label: "Motorradkurs", href: "/services/motorrad" },
+  { label: "Fahrstunden", href: "/services/fahrstunden" },
+];
 
 export default function Footer() {
   return (
-    <footer className="relative w-full">
+    <footer className="relative flex min-h-screen w-full flex-col">
       <Image
         src={IMAGES.footerBg}
         alt=""
         fill
-        className="object-cover brightness-[0.2]"
+        className="object-cover brightness-[0.3]"
         sizes="100vw"
       />
 
-      <div className="relative z-10">
-        <div className="mx-auto grid max-w-7xl gap-16 px-8 py-20 md:px-16 lg:grid-cols-2">
+      <div className="relative z-10 flex flex-1 flex-col">
+        <div className="mx-auto flex w-full flex-1 items-center justify-between gap-20 px-12 py-24 md:px-24 lg:flex-row lg:px-32">
           {/* Left: CTA */}
-          <div className="flex flex-col justify-center">
-            <p className="text-sm font-medium uppercase tracking-widest text-accent">
-              Let&apos;s go
-            </p>
-            <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
+          <div>
+            <h2 className="text-4xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
               Bereit für deinen
               <br />
               Führerschein?
             </h2>
-            <p className="mt-6 max-w-md text-white/60">
+            <p className="mt-8 max-w-lg text-lg text-white/50">
               Starte jetzt mit dem passenden Kurs – Nothelfer, Verkehrskunde
               oder Fahrstunden. Wir begleiten dich Schritt für Schritt bis zur
               Prüfung.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href="/kontakt"
-                className="rounded-full bg-accent px-8 py-3 font-medium text-white transition-colors hover:bg-accent-dark"
-              >
-                Jetzt starten
-              </Link>
-              <a
-                href={`mailto:${SITE.email}`}
-                className="rounded-full border border-white/20 px-8 py-3 font-medium text-white transition-colors hover:bg-white/10"
-              >
-                {SITE.email}
-              </a>
-            </div>
+            <Link
+              href="/kontakt"
+              className="mt-10 inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-lg font-medium text-white transition-colors hover:bg-accent-dark"
+            >
+              Anmelden
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+                <path d="M4 8h8M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
           </div>
 
-          {/* Right: Link columns */}
-          <div className="grid gap-10 sm:grid-cols-3">
-            {Object.entries(FOOTER_LINKS).map(([category, links]) => (
-              <div key={category}>
-                <p className="text-sm font-semibold uppercase tracking-widest text-white/40">
-                  {category}
-                </p>
-                <ul className="mt-5 space-y-3">
-                  {links.map((link) => (
-                    <li key={link.label}>
-                      {"external" in link && link.external ? (
-                        <a
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-white/70 transition-colors hover:text-white"
-                        >
-                          {link.label}
-                        </a>
-                      ) : (
-                        <Link
-                          href={link.href}
-                          className="text-sm text-white/70 transition-colors hover:text-white"
-                        >
-                          {link.label}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          {/* Right: Navigation */}
+          <div className="flex-shrink-0">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40">
+              Navigation
+            </p>
+            <nav className="mt-8 grid grid-cols-2 gap-x-20 gap-y-7">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-lg text-white/70 transition-colors hover:text-white"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="border-t border-white/10">
-          <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-8 py-6 md:flex-row md:px-16">
+          <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-8 py-8 md:flex-row md:px-16">
+            <div className="flex items-center gap-2 text-sm text-white/50">
+              Kontaktiere uns:{" "}
+              <a
+                href={`mailto:${SITE.email}`}
+                className="font-semibold text-white transition-colors hover:text-accent"
+              >
+                {SITE.email}
+              </a>
+            </div>
             <span className="text-sm text-white/40">
-              © {new Date().getFullYear()} {SITE.name} · Fahrschule Zürich
-            </span>
-            <span className="text-sm text-white/40">
-              Designed with passion
+              © {new Date().getFullYear()} | {SITE.name}
             </span>
           </div>
         </div>

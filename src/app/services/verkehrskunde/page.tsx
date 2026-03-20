@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const COURSE_HIGHLIGHTS = [
   "Verkehrsregeln vertieft verstehen",
@@ -52,6 +53,13 @@ export default function VerkehrskundePage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-20 md:px-16">
+        <div className="mb-10">
+          <Breadcrumbs items={[
+            { label: "Home", href: "/" },
+            { label: "Services", href: "/services" },
+            { label: "Verkehrskundeunterricht" },
+          ]} />
+        </div>
         <div className="grid gap-16 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <motion.div
@@ -106,6 +114,15 @@ export default function VerkehrskundePage() {
                 Oberglatt an.
               </p>
             </motion.div>
+            <Link
+              href="/services"
+              className="mt-12 inline-flex items-center gap-2 text-sm font-medium text-accent transition-colors hover:text-accent-dark"
+            >
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M10 4l-4 4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Zurück zu allen Services
+            </Link>
           </div>
 
           <motion.aside
@@ -122,10 +139,10 @@ export default function VerkehrskundePage() {
               <dl className="mt-6 space-y-4">
                 <div>
                   <dt className="text-sm text-muted">Kosten</dt>
-                  <dd className="mt-1 text-lg font-semibold text-foreground">
-                    CHF 150.00
+                  <dd className="mt-2 flex items-baseline gap-3">
+                    <span className="text-2xl font-bold text-accent">CHF 150.–</span>
+                    <span className="text-sm text-muted line-through">CHF 200.–</span>
                   </dd>
-                  <dd className="text-xs text-muted">anstatt CHF 200.00</dd>
                 </div>
                 <div className="border-t border-border pt-4">
                   <dt className="text-sm text-muted">Dauer</dt>
@@ -167,18 +184,6 @@ export default function VerkehrskundePage() {
             </div>
           </motion.aside>
         </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-16">
-        <Link
-          href="/services"
-          className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
-        >
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-            <path d="M10 4l-4 4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          Zurück zu allen Services
-        </Link>
       </section>
     </>
   );

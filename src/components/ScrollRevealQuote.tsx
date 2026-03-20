@@ -22,13 +22,12 @@ function Word({
   total: number;
   scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
 }) {
-  const start = index / total;
-  const end = start + 1 / total;
-
-  const opacity = useTransform(scrollYProgress, [start * 0.8, end * 0.8], [0.2, 1]);
+  const start = (index / total) * 0.7;
+  const end = start + 0.7 / total;
+  const opacity = useTransform(scrollYProgress, [start, end], [0.15, 1]);
 
   return (
-    <motion.span style={{ opacity }} className="inline-block mr-[0.3em]">
+    <motion.span style={{ opacity }} className="inline-block mr-[0.3em] will-change-[opacity]">
       {word}
     </motion.span>
   );
@@ -39,21 +38,24 @@ export default function ScrollRevealQuote() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "center center"],
+    offset: ["start end", "end start"],
   });
 
-  const buttonOpacity = useTransform(scrollYProgress, [0.85, 1], [0, 1]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.1, 1]);
+  const buttonOpacity = useTransform(scrollYProgress, [0.5, 0.65], [0, 1]);
 
   return (
-    <section ref={containerRef} className="relative min-h-screen w-full">
+    <section ref={containerRef} className="relative min-h-[160vh] w-full will-change-transform">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <Image
-          src={IMAGES.quoteBg}
-          alt=""
-          fill
-          className="object-cover brightness-[0.25]"
-          sizes="100vw"
-        />
+        <motion.div className="absolute inset-0" style={{ scale: imageScale }}>
+          <Image
+            src={IMAGES.quoteBg}
+            alt=""
+            fill
+            className="object-cover brightness-[0.25]"
+            sizes="100vw"
+          />
+        </motion.div>
         <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center md:px-16">
           <p className="text-sm uppercase tracking-widest text-accent">
             Unsere Philosophie
