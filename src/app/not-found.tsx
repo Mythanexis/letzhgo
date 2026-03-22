@@ -11,25 +11,27 @@ const ROAD_SIGNS = [
   { rotation: 20, x: 200, y: 60, delay: 1.2, text: "✕" },
 ];
 
+const SPEED_LINE_WIDTHS = [38, 52, 31, 59, 44, 36, 48, 55, 41, 63, 35, 47];
+
 function SpeedLines() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-[0.03]">
-      {Array.from({ length: 12 }).map((_, i) => (
+      {SPEED_LINE_WIDTHS.map((widthPct, i) => (
         <motion.div
           key={i}
           className="absolute h-[1px] bg-foreground"
           style={{
             top: `${8 + i * 8}%`,
             left: "-10%",
-            width: `${30 + Math.random() * 40}%`,
+            width: `${widthPct}%`,
           }}
           initial={{ x: "-100%", opacity: 0 }}
           animate={{ x: "400%", opacity: [0, 1, 0] }}
           transition={{
-            duration: 2 + Math.random() * 2,
+            duration: 2 + (i % 4) * 0.5,
             delay: i * 0.3,
             repeat: Infinity,
-            repeatDelay: Math.random() * 3,
+            repeatDelay: 0.4 + (i % 5) * 0.55,
             ease: "linear",
           }}
         />
