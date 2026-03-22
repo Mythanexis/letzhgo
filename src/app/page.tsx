@@ -306,6 +306,40 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Wegweiser Motorrad-Führerschein */}
+      <section className="relative overflow-hidden bg-[#f7f8fa]">
+        <div className="pointer-events-none absolute inset-0">
+          <Image
+            src={IMAGES.motorrad}
+            alt="Motorradfahren bei Let'ZHgo"
+            fill
+            className="object-cover opacity-40"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/60" />
+        </div>
+
+        <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-32">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-accent">
+              Wegweiser Motorrad-Führerschein
+            </p>
+            <h2 className="mt-5 text-3xl font-extrabold leading-snug text-foreground md:text-4xl lg:text-5xl">
+              Oft fragen uns Mütter, wie ihr Kind bei uns die Motorrad-Prüfung absolvieren kann.
+            </h2>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
+              Damit ihr den Überblick behaltet, haben wir einen detaillierten Wegweiser erstellt, der alle Schritte vom ersten Kurs bis zur praktischen Prüfung zusammenfasst.
+            </p>
+            <Link
+              href="/wegweiser-motorrad-fuehrerschein"
+              className="mt-10 inline-flex items-center justify-center rounded-full bg-accent px-8 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg transition-transform hover:translate-y-[-1px] hover:bg-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+            >
+              Informationen findet ihr hier
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Fahrlehrer:innen */}
       <InstructorsSection />
 
