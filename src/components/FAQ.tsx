@@ -8,7 +8,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="bg-[#f7f8fa]">
+    <section>
       <div className="mx-auto max-w-7xl px-6 py-24">
       <div className="grid gap-12 lg:grid-cols-[1fr_1.5fr]">
         <motion.div
@@ -40,13 +40,13 @@ export default function FAQ() {
             <div key={i}>
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="flex w-full items-center justify-between py-5 text-left text-lg font-medium text-foreground transition-colors hover:text-accent"
+                className={`flex w-full items-center justify-between py-5 text-left text-lg font-medium transition-colors hover:text-accent ${openIndex === i ? "text-accent" : "text-foreground"}`}
               >
                 {item.question}
                 <motion.span
                   animate={{ rotate: openIndex === i ? 45 : 0 }}
                   transition={{ duration: 0.4 }}
-                  className="ml-4 shrink-0 text-2xl text-muted"
+                  className={`ml-4 shrink-0 text-2xl ${openIndex === i ? "text-accent" : "text-muted"}`}
                 >
                   +
                 </motion.span>

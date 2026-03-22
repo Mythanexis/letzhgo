@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Let'ZHgo",
   tagline: "Deine Fahrschule in Zürich",
-  email: "info@letzhgo.ch",
+  email: "m00144550@gmail.com",
   url: "https://letzhgo.ch",
 };
 
@@ -27,31 +27,36 @@ export const INSTRUCTORS = [
     name: "Doma Caleta",
     role: "Fahrlehrer für Auto, Verkehrskundelehrer",
     whatsapp: "https://wa.me/41793388032",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face",
+    image: "/images/doma.png",
+    slug: "doma-caleta",
   },
   {
     name: "Merjema Radič",
     role: "Fahrlehrerin für Auto, Nothelferinstruktorin, Theorielehrerin für Verkehrskunde",
     whatsapp: "https://wa.me/41768156688",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face",
+    image: "/images/merjema.png",
+    slug: "merjema-radic",
   },
   {
     name: "Gianni Sebestin",
     role: "Fahrlehrer für Auto, Motorrad und Anhänger, Fahrlehrer-Ausbildner",
     whatsapp: "https://wa.me/41794340966",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    image: "/images/gianni.png",
+    slug: "gianni-sebestin",
   },
   {
     name: "Samir Radič",
     role: "Fahrlehrer für Auto und Motorrad, Theorielehrer Verkehrskunde",
     whatsapp: "https://wa.me/41788888899",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    image: "/images/samir.png",
+    slug: "samir-radic",
   },
   {
     name: "Tomi Caleta",
     role: "Fahrlehrer für Auto, Motorrad und Anhänger, Lehrer Theorie Verkehrskunde und Nothelfer",
     whatsapp: "https://wa.me/41764303101",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face",
+    image: "/images/tomi.png",
+    slug: "tomi-caleta",
   },
 ] as const;
 

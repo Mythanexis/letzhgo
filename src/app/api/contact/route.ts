@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
         },
         body: JSON.stringify({
           from: "Let'ZHgo Website <onboarding@resend.dev>",
-          to: ["info@letzhgo.ch"],
+          to: ["m00144550@gmail.com"],
           subject: `Neue Kontaktanfrage von ${name}`,
           html: `
             <h2>Neue Kontaktanfrage</h2>

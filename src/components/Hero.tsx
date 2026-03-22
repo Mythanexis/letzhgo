@@ -6,11 +6,28 @@ import { motion } from "framer-motion";
 import { IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
 
 const BOOKING_ITEMS = [
-  { label: "Autofahrstunden", href: "/services/fahrstunden", external: false },
-  { label: "Nothelferkurs", href: EDOOBOX_LINKS.nothelferkurs, external: true },
-  { label: "Verkehrskundeunterricht", href: EDOOBOX_LINKS.verkehrskunde, external: true },
-  { label: "Motorrad-Grundkurs", href: EDOOBOX_LINKS.motorrad, external: true },
+  { label: "Autofahrstunden", href: "/services/fahrstunden", external: false, iconType: "car" as const },
+  { label: "Nothelferkurs", href: EDOOBOX_LINKS.nothelferkurs, external: true, iconType: "cross" as const },
+  { label: "Verkehrskundeunterricht", href: EDOOBOX_LINKS.verkehrskunde, external: true, iconType: "traffic" as const },
+  { label: "Motorrad-Grundkurs", href: EDOOBOX_LINKS.motorrad, external: true, iconType: "moto" as const },
 ];
+
+function BookingIcon({ type }: { type: string }) {
+  const cls = "h-5 w-5";
+  const props = { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  switch (type) {
+    case "car":
+      return <svg className={cls} {...props}><path d="M5 17h14M5 17a2 2 0 01-2-2v-2h2.5l1.5-5h9l1.5 5H20v2a2 2 0 01-2 2M5 17a2 2 0 002 2h1a2 2 0 002-2M14 17a2 2 0 002 2h1a2 2 0 002-2" /><circle cx="7.5" cy="17" r="0.5" fill="currentColor" stroke="none" /><circle cx="16.5" cy="17" r="0.5" fill="currentColor" stroke="none" /></svg>;
+    case "cross":
+      return <svg className={cls} {...props}><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M12 8v8M8 12h8" /></svg>;
+    case "traffic":
+      return <svg className={cls} {...props}><rect x="7" y="2" width="10" height="20" rx="2" /><circle cx="12" cy="7" r="1.5" /><circle cx="12" cy="12" r="1.5" /><circle cx="12" cy="17" r="1.5" /></svg>;
+    case "moto":
+      return <svg className={cls} {...props}><circle cx="5.5" cy="17" r="3.5" /><circle cx="18.5" cy="17" r="3.5" /><path d="M15 6h2l3 5.5M9 17h6M6.5 13.5L9 7h4l2.5 6.5" /></svg>;
+    default:
+      return null;
+  }
+}
 
 interface HeroProps {
   title: string;
@@ -95,7 +112,10 @@ export default function Hero({ title, subtitle, ctaText, ctaHref, showImage = fa
                     transition={{ duration: 0.7, delay: 1.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-5 py-4 text-white transition-all duration-300 hover:border-accent/50 hover:bg-accent/20"
                   >
-                    <span className="text-sm font-medium">{item.label}</span>
+                    <span className="flex items-center gap-3">
+                      <span className="opacity-50 transition-opacity duration-300 group-hover:opacity-100"><BookingIcon type={item.iconType} /></span>
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </span>
                     <svg className="h-4 w-4 opacity-40 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>

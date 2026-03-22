@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { INSTRUCTORS, LOCATIONS } from "@/lib/constants";
 
@@ -26,33 +28,35 @@ function InstructorBlob({
 }) {
   return (
     <div className="group flex flex-col items-center text-center">
-      <div className="relative mb-6 h-52 w-52 md:h-64 md:w-64 drop-shadow-lg">
-        <svg
-          viewBox="-80 -80 160 160"
-          className="h-full w-full overflow-visible"
-        >
-          <defs>
-            <clipPath id={id}>
-              <path d={blobPath} />
-            </clipPath>
-          </defs>
-          <image
-            href={instructor.image}
-            x="-80"
-            y="-80"
-            width="160"
-            height="160"
-            clipPath={`url(#${id})`}
-            preserveAspectRatio="xMidYMid slice"
-          />
-        </svg>
-      </div>
-      <h4 className="text-lg font-semibold text-foreground">
-        {instructor.name}
-      </h4>
-      <p className="mt-1 max-w-[220px] text-sm leading-relaxed text-muted">
-        {instructor.role}
-      </p>
+      <Link href={`/fahrlehrer/${instructor.slug}`} className="flex flex-col items-center">
+        <div className="relative mb-6 h-52 w-52 md:h-64 md:w-64 drop-shadow-lg transition-transform duration-300 group-hover:scale-105">
+          <svg
+            viewBox="-80 -80 160 160"
+            className="h-full w-full overflow-visible"
+          >
+            <defs>
+              <clipPath id={id}>
+                <path d={blobPath} />
+              </clipPath>
+            </defs>
+            <image
+              href={instructor.image}
+              x="-80"
+              y="-80"
+              width="160"
+              height="160"
+              clipPath={`url(#${id})`}
+              preserveAspectRatio="xMidYMid slice"
+            />
+          </svg>
+        </div>
+        <h4 className="text-lg font-semibold text-foreground transition-colors duration-200 group-hover:text-accent">
+          {instructor.name}
+        </h4>
+        <p className="mt-1 max-w-[220px] text-sm leading-relaxed text-muted">
+          {instructor.role}
+        </p>
+      </Link>
       <a
         href={instructor.whatsapp}
         target="_blank"
@@ -71,7 +75,7 @@ function InstructorBlob({
 
 export default function InstructorsSection() {
   return (
-    <section className="bg-[#f7f8fa]">
+    <section id="fahrlehrer">
       <div className="mx-auto max-w-7xl px-6 py-32 md:py-40">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

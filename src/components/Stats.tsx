@@ -82,7 +82,7 @@ function AnimatedStat({ value, label, index }: { value: string; label: string; i
 
 export default function Stats() {
   return (
-    <section>
+    <section className="bg-[#f7f8fa]">
       <div className="mx-auto px-8 py-40 md:px-16 md:py-52 lg:px-24 xl:px-32">
         {/* Top: Title left, description right */}
         <div className="grid items-start gap-16 lg:grid-cols-[1fr_0.55fr]">
