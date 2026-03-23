@@ -17,6 +17,7 @@ export const IMAGES = {
   autoFahrstunden: "/images/auto-fahrstunden.png",
   nothelferkurs: "/images/nothelferkurs.png",
   verkehrskunde: "/images/verkehrskunde.png",
+  vkuPopup: "/images/vku-popup.png",
   motorrad: "/images/motorrad.png",
   quoteBg: "/images/quote-bg.png",
   footerBg: "/images/footer-bg.png",

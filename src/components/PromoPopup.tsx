@@ -1,21 +1,85 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
 
 export default function PromoPopup() {
+  const PROMOS = [
+    {
+      id: "vku",
+      image: IMAGES.vkuPopup,
+      alt: "Verkehrskundeunterricht",
+      badge: "Aktion",
+      title: "Verkehrskundeunterricht",
+      description:
+        "Jetzt zum Aktionspreis! Lerne Gefahren frühzeitig zu erkennen und sicher im Strassenverkehr unterwegs zu sein.",
+      price: "CHF 150.–",
+      oldPrice: "CHF 200.–",
+      discount: "–25%",
+      ctaText: "Jetzt buchen",
+      href: EDOOBOX_LINKS.verkehrskunde,
+    },
+    {
+      id: "schnupperkurs",
+      image: "/images/schnupperkurs.png",
+      alt: "Motorrad Schnupperkurs bei Let'ZHgo",
+      badge: "Neu",
+      title: "Schnupperkurs Motorrad",
+      description:
+        "Wir bieten dir auch wieder ab 9. Mai 2026 einen Schnupperkurs an. Minderjährige müssen in Begleitung eines Elternteils sein.",
+      price: "CHF 80.–",
+      detail: "Samstag, 9. Mai 2026 · 13:00 – 15:00",
+      ctaText: "Jetzt anmelden",
+      href: EDOOBOX_LINKS.schnupperkurs,
+    },
+    {
+      id: "manoeverplatz",
+      image: "/images/larag-areal.jpg",
+      alt: "LARAG-Areal Rümlang – Manöverplatz",
+      badge: "Wieder offen",
+      title: "Manöverplatz",
+      description:
+        "Der Manöverplatz ist ab 25.03.2026 wieder offen. Jeden Mittwoch von 19:00 – 21:00 Uhr auf dem LARAG-Areal in Rümlang.",
+      price: "CHF 50.–",
+      detail: "Jeden Mittwoch · 19:00 – 21:00 Uhr",
+      ctaText: "Standort öffnen",
+      href: "https://www.google.com/maps/search/?api=1&query=Riedgrabenstrasse+26+8153+Rümlang",
+    },
+  ] as const;
+
+  const INITIAL_DELAY_MS = 5000;
+  const NEXT_POPUP_DELAY_MS = 30000;
+
+  const [order, setOrder] = useState<number[]>([]);
+  const [currentPromoIndex, setCurrentPromoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsOpen(true), 5000);
-    return () => clearTimeout(timer);
+    const shuffled = PROMOS.map((_, i) => i).sort(() => Math.random() - 0.5);
+    setOrder(shuffled);
+    timerRef.current = setTimeout(() => setIsOpen(true), INITIAL_DELAY_MS);
+
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, []);
 
   function close() {
     setIsOpen(false);
+    const hasNext = currentPromoIndex < order.length - 1;
+    if (hasNext) {
+      timerRef.current = setTimeout(() => {
+        setCurrentPromoIndex((prev) => prev + 1);
+        setIsOpen(true);
+      }, NEXT_POPUP_DELAY_MS);
+    }
   }
+
+  if (!order.length) return null;
+  const promo = PROMOS[order[currentPromoIndex]];
 
   return (
     <AnimatePresence>
@@ -53,8 +117,8 @@ export default function PromoPopup() {
               {/* Image */}
               <div className="relative h-56 w-full">
                 <Image
-                  src={IMAGES.verkehrskunde}
-                  alt="Verkehrskundeunterricht"
+                  src={promo.image}
+                  alt={promo.alt}
                   fill
                   className="object-cover"
                   sizes="(max-width: 448px) 100vw, 448px"
@@ -62,7 +126,7 @@ export default function PromoPopup() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-4 left-6">
                   <span className="rounded-full bg-accent px-3 py-1 text-xs font-semibold text-white">
-                    Aktion
+                    {promo.badge}
                   </span>
                 </div>
               </div>
@@ -70,30 +134,36 @@ export default function PromoPopup() {
               {/* Content */}
               <div className="p-6">
                 <h3 className="text-xl font-bold text-foreground">
-                  Verkehrskundeunterricht
+                  {promo.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">
-                  Jetzt zum Aktionspreis! Lerne Gefahren frühzeitig zu erkennen und
-                  sicher im Strassenverkehr unterwegs zu sein.
+                  {promo.description}
                 </p>
 
                 {/* Pricing */}
                 <div className="mt-4 flex items-baseline gap-3">
-                  <span className="text-2xl font-bold text-accent">CHF 150.–</span>
-                  <span className="text-sm text-muted line-through">CHF 200.–</span>
-                  <span className="rounded-md bg-accent/10 px-2 py-0.5 text-xs font-semibold text-accent">
-                    –25%
-                  </span>
+                  <span className="text-2xl font-bold text-accent">{promo.price}</span>
+                  {promo.oldPrice && (
+                    <span className="text-sm text-muted line-through">{promo.oldPrice}</span>
+                  )}
+                  {promo.discount && (
+                    <span className="rounded-md bg-accent/10 px-2 py-0.5 text-xs font-semibold text-accent">
+                      {promo.discount}
+                    </span>
+                  )}
                 </div>
+                {promo.detail && (
+                  <p className="mt-2 text-xs font-medium text-muted">{promo.detail}</p>
+                )}
 
                 {/* CTA */}
                 <a
-                  href={EDOOBOX_LINKS.verkehrskunde}
+                  href={promo.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-accent py-3.5 text-sm font-semibold text-white transition-all hover:bg-accent-dark hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  Jetzt buchen
+                  {promo.ctaText}
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
