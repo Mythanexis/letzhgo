@@ -24,62 +24,63 @@ export const IMAGES = {
 
 export const INSTRUCTORS = [
   {
-    name: "Doma Caleta",
-    role: "Fahrlehrer für Auto, Verkehrskundelehrer",
-    whatsapp: "https://wa.me/41793388032",
-    image: "/images/doma.png",
-    slug: "doma-caleta",
-  },
-  {
-    name: "Merjema Radič",
-    role: "Fahrlehrerin für Auto, Nothelferinstruktorin, Theorielehrerin für Verkehrskunde",
-    whatsapp: "https://wa.me/41768156688",
-    image: "/images/merjema.png",
-    slug: "merjema-radic",
-  },
-  {
     name: "Gianni Sebestin",
     role: "Fahrlehrer für Auto, Motorrad und Anhänger, Fahrlehrer-Ausbildner",
+    languages: ["Deutsch", "Englisch"],
     whatsapp: "https://wa.me/41794340966",
     image: "/images/gianni.png",
     slug: "gianni-sebestin",
   },
   {
-    name: "Samir Radič",
-    role: "Fahrlehrer für Auto und Motorrad, Theorielehrer Verkehrskunde",
-    whatsapp: "https://wa.me/41788888899",
-    image: "/images/samir.png",
-    slug: "samir-radic",
+    name: "Merjema Secli-Radič",
+    role: "Fahrlehrerin für Auto, Nothelferinstruktorin, Theorielehrerin für Verkehrskunde",
+    languages: ["Deutsch", "Kroatisch", "Englisch"],
+    whatsapp: "https://wa.me/41768156688",
+    image: "/images/merjema.png",
+    slug: "merjema-radic",
   },
   {
     name: "Tomi Caleta",
     role: "Fahrlehrer für Auto, Motorrad und Anhänger, Lehrer Theorie Verkehrskunde und Nothelfer",
+    languages: ["Deutsch", "Kroatisch", "Englisch"],
     whatsapp: "https://wa.me/41764303101",
     image: "/images/tomi.png",
     slug: "tomi-caleta",
+  },
+  {
+    name: "Doma Caleta",
+    role: "Fahrlehrer für Auto, Verkehrskundelehrer",
+    languages: ["Deutsch", "Kroatisch", "Englisch"],
+    whatsapp: "https://wa.me/41793388032",
+    image: "/images/doma.png",
+    slug: "doma-caleta",
+  },
+  {
+    name: "Samir Radič",
+    role: "Fahrlehrer für Auto und Motorrad, Theorielehrer Verkehrskunde",
+    languages: ["Deutsch", "Kroatisch", "Englisch"],
+    whatsapp: "https://wa.me/41788888899",
+    image: "/images/samir.png",
+    slug: "samir-radic",
   },
 ] as const;
 
 export const LOCATIONS = [
   {
-    name: "Winterthur",
-    instructors: ["Doma Caleta", "Merjema Radič"],
-  },
-  {
     name: "Bülach",
-    instructors: ["Gianni Sebestin"],
+    instructors: ["Gianni Sebestin", "Doma Caleta"],
   },
   {
     name: "Regensdorf",
-    instructors: ["Samir Radič"],
-  },
-  {
-    name: "Albisgütli",
-    instructors: ["Tomi Caleta"],
+    instructors: ["Gianni Sebestin", "Merjema Secli-Radič", "Tomi Caleta", "Doma Caleta", "Samir Radič"],
   },
   {
     name: "Bassersdorf",
-    instructors: ["Doma Caleta", "Gianni Sebestin"],
+    instructors: ["Gianni Sebestin", "Merjema Secli-Radič", "Tomi Caleta", "Samir Radič"],
+  },
+  {
+    name: "Albisgütli",
+    instructors: ["Tomi Caleta", "Doma Caleta"],
   },
 ] as const;
 

@@ -47,6 +47,10 @@ export default function DomaPage() {
                 <p className="text-sm font-medium uppercase tracking-widest text-accent">Kontakt</p>
                 <a href="tel:+41793388032" className="mt-2 block text-foreground hover:text-accent transition-colors">+41 79 338 80 32</a>
               </div>
+              <div>
+                <p className="text-sm font-medium uppercase tracking-widest text-accent">Sprachen</p>
+                <p className="mt-2 text-foreground">Deutsch, Kroatisch, Englisch</p>
+              </div>
             </div>
 
             <a href="https://wa.me/41793388032" target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2.5 rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1fb855]">

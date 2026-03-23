@@ -20,7 +20,7 @@ const COURSE_CONTENT = [
 
 const INSTRUCTORS = [
   { name: "Sandra Sebestin", phone: "+41 79 423 01 74" },
-  { name: "Merjema Radič", phone: "+41 76 815 66 88" },
+  { name: "Merjema Secli-Radič", phone: "+41 76 815 66 88" },
   { name: "Ervin Radič", phone: "+41 79 589 99 93" },
 ];
 

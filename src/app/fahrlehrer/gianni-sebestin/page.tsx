@@ -69,6 +69,10 @@ export default function GianniPage() {
                 <p className="text-sm font-medium uppercase tracking-widest text-accent">Kontakt</p>
                 <a href="tel:+41794340966" className="mt-2 block text-foreground hover:text-accent transition-colors">+41 79 434 09 66</a>
               </div>
+              <div>
+                <p className="text-sm font-medium uppercase tracking-widest text-accent">Sprachen</p>
+                <p className="mt-2 text-foreground">Deutsch, Englisch</p>
+              </div>
             </div>
 
             <a href="https://wa.me/41794340966" target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2.5 rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1fb855]">

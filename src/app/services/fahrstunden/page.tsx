@@ -17,7 +17,7 @@ const HIGHLIGHTS = [
 
 const INSTRUCTORS = [
   { name: "Doma Caleta", phone: "+41 79 338 80 32", whatsapp: "https://wa.me/41793388032" },
-  { name: "Merjema Radič", phone: "+41 76 815 66 88", whatsapp: "https://wa.me/41768156688" },
+  { name: "Merjema Secli-Radič", phone: "+41 76 815 66 88", whatsapp: "https://wa.me/41768156688" },
   { name: "Gianni Sebestin", phone: "+41 79 434 09 66", whatsapp: "https://wa.me/41794340966" },
   { name: "Samir Radič", phone: "+41 78 888 88 99", whatsapp: "https://wa.me/41788888899" },
   { name: "Tomi Caleta", phone: "+41 76 430 31 01", whatsapp: "https://wa.me/41764303101" },

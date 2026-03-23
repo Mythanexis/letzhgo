@@ -18,14 +18,14 @@ export default function MerjemaPage() {
         <Breadcrumbs items={[
           { label: "Home", href: "/" },
           { label: "Fahrlehrer:innen", href: "/#fahrlehrer" },
-          { label: "Merjema Radič" },
+          { label: "Merjema Secli-Radič" },
         ]} />
       </div>
 
       <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
         <div className="lg:col-span-3">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }}>
-            <h1 className="text-4xl font-bold text-foreground md:text-5xl">Merjema Radič</h1>
+            <h1 className="text-4xl font-bold text-foreground md:text-5xl">Merjema Secli-Radič</h1>
             <p className="mt-3 text-lg text-muted">Fahrlehrerin für Auto, Nothelferinstruktorin, Theorielehrerin für Verkehrskunde</p>
           </motion.div>
 
@@ -46,6 +46,10 @@ export default function MerjemaPage() {
               <div>
                 <p className="text-sm font-medium uppercase tracking-widest text-accent">Kontakt</p>
                 <a href="tel:+41768156688" className="mt-2 block text-foreground hover:text-accent transition-colors">+41 76 815 66 88</a>
+              </div>
+              <div>
+                <p className="text-sm font-medium uppercase tracking-widest text-accent">Sprachen</p>
+                <p className="mt-2 text-foreground">Deutsch, Kroatisch, Englisch</p>
               </div>
             </div>
 
@@ -70,7 +74,7 @@ export default function MerjemaPage() {
 
           <div className="mt-12">
             <div className="w-44">
-              <Image src="/images/qr-merjema.png" alt="QR Code Merjema Radič" width={200} height={200} className="w-full" />
+              <Image src="/images/qr-merjema.png" alt="QR Code Merjema Secli-Radič" width={200} height={200} className="w-full" />
             </div>
             <div className="mt-3 w-36">
               <Image src="/images/scan-mich.png" alt="Scan mich – Meine Kontaktdaten" width={200} height={60} className="w-full" />
@@ -86,7 +90,7 @@ export default function MerjemaPage() {
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.3 }} className="lg:col-span-2">
           <div className="lg:sticky lg:top-28">
             <div className="overflow-hidden rounded-2xl">
-              <Image src="/images/merjema-portrait.png" alt="Merjema Radič" width={600} height={400} className="w-full object-cover" priority />
+              <Image src="/images/merjema-portrait.png" alt="Merjema Secli-Radič" width={600} height={400} className="w-full object-cover" priority />
             </div>
           </div>
         </motion.div>
