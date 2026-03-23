@@ -18,6 +18,7 @@ import PartnersSection from "@/components/PartnersSection";
 import HostettlerSection from "@/components/HostettlerSection";
 import ManoeverplatzSection from "@/components/ManoeverplatzSection";
 import InstagramSection from "@/components/InstagramSection";
+import TikTokSection from "@/components/TikTokSection";
 import {
   SERVICES_OVERVIEW,
   PRICING,
@@ -331,6 +332,9 @@ export default function HomePage() {
 
       {/* Instagram */}
       <InstagramSection />
+
+      {/* TikTok */}
+      <TikTokSection />
 
       {/* FAQ */}
       <FAQ />

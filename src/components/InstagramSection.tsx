@@ -1,18 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 
 const INSTAGRAM_PROFILE = "https://www.instagram.com/letzhgo/";
 
 const POSTS = [
-  { image: "/images/instagram/post-1.jpg", href: "https://www.instagram.com/p/DVq-VRVjLlh/" },
-  { image: "/images/instagram/post-2.jpg", href: "https://www.instagram.com/p/DV8GWswjB53/" },
-  { image: "/images/instagram/post-3.jpg", href: "https://www.instagram.com/p/DWONznsjNMk/" },
-  { image: "/images/instagram/post-4.jpg", href: "https://www.instagram.com/p/DV-igLBDMPb/" },
-  { image: "/images/instagram/post-5.jpg", href: "https://www.instagram.com/p/DWDv8pNDCsE/" },
-  { image: "/images/instagram/post-6.jpg", href: "https://www.instagram.com/p/DWBcBDzDPBt/" },
+  { image: "/images/instagram/post-1.jpg", href: "https://www.instagram.com/p/DVq-VRVjLlh/?utm_source=ig_embed&utm_campaign=loading" },
+  { image: "/images/instagram/post-2.jpg", href: "https://www.instagram.com/p/DV8GWswjB53/?utm_source=ig_embed&utm_campaign=loading" },
+  { image: "/images/instagram/post-3.jpg", href: "https://www.instagram.com/p/DWONznsjNMk/?utm_source=ig_embed&utm_campaign=loading" },
+  { image: "/images/instagram/post-4.jpg", href: "https://www.instagram.com/p/DV-igLBDMPb/?utm_source=ig_embed&utm_campaign=loading" },
+  { image: "/images/instagram/post-5.jpg", href: "https://www.instagram.com/p/DWDv8pNDCsE/?utm_source=ig_embed&utm_campaign=loading" },
+  { image: "/images/instagram/post-6.jpg", href: "https://www.instagram.com/p/DWBcBDzDPBt/?utm_source=ig_embed&utm_campaign=loading" },
 ];
 
 export default function InstagramSection() {
@@ -51,7 +50,7 @@ export default function InstagramSection() {
               }}
               viewport={{ once: true, margin: "-40px" }}
             >
-              <Link
+              <a
                 href={post.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -80,7 +79,7 @@ export default function InstagramSection() {
                     <circle cx="17.5" cy="6.5" r="1.5" />
                   </svg>
                 </div>
-              </Link>
+              </a>
             </motion.div>
           ))}
         </div>
@@ -92,7 +91,7 @@ export default function InstagramSection() {
           viewport={{ once: true }}
           className="mt-14 text-center"
         >
-          <Link
+          <a
             href={INSTAGRAM_PROFILE}
             target="_blank"
             rel="noopener noreferrer"
@@ -112,7 +111,7 @@ export default function InstagramSection() {
               <circle cx="17.5" cy="6.5" r="1.5" />
             </svg>
             Alle Beiträge anzeigen
-          </Link>
+          </a>
         </motion.div>
       </div>
     </section>
