@@ -68,7 +68,7 @@ export default function HostettlerSection() {
             className="mt-8"
           >
             <Link
-              href="https://www.hostettler.com"
+              href="https://www.hostettler-moto.ch/zuerich-nord/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-accent-dark"
