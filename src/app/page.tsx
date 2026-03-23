@@ -13,6 +13,7 @@ import InstructorsSection from "@/components/InstructorsSection";
 import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
 import ContactForm from "@/components/ContactForm";
+import WegweiserHomeTeaser from "@/components/WegweiserHomeTeaser";
 import {
   SERVICES_OVERVIEW,
   PRICING,
@@ -305,6 +306,9 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Wegweiser Motorrad-Führerschein */}
+      <WegweiserHomeTeaser />
 
       {/* Fahrlehrer:innen */}
       <InstructorsSection />

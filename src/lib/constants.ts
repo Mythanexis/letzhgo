@@ -87,6 +87,21 @@ export const EDOOBOX_LINKS = {
   nothelferkurs: "https://app1.edoobox.com/de/LetZHgo/Nothelferkurse/?edref=letzhgo",
   motorrad: "https://app1.edoobox.com/de/LetZHgo/Motorradkurse/?edref=letzhgo",
   verkehrskunde: "https://app1.edoobox.com/de/LetZHgo/Verkehrskundekurse/?edref=letzhgo",
+  schnupperkurs: "https://app1.edoobox.com/de/LetZHgo/Schnupperkurs?edref=letzhgo",
+} as const;
+
+export const WEGWEISER_MOTORRAD_IMAGES = {
+  hero: "/images/wegweiser/step-01.jpg",
+  steps: [
+    "/images/nothelferkurs.png",
+    "/images/wegweiser/step-02.jpg",
+    "/images/wegweiser/step-03.jpg",
+    "/images/wegweiser/step-04.jpg",
+    "/images/wegweiser/step-05.jpg",
+    "/images/wegweiser/step-06.jpg",
+    "/images/wegweiser/step-07.jpg",
+    "/images/wegweiser/step-08.jpg",
+  ],
 } as const;
 
 export const SERVICES_OVERVIEW = [
