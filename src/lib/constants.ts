@@ -26,6 +26,7 @@ export const INSTRUCTORS = [
   {
     name: "Gianni Sebestin",
     role: "Fahrlehrer für Auto, Motorrad und Anhänger, Fahrlehrer-Ausbildner",
+    tags: ["Auto", "Motorrad", "Anhänger", "Ausbildner"],
     languages: ["Deutsch", "Englisch"],
     whatsapp: "https://wa.me/41794340966",
     image: "/images/gianni.png",
@@ -34,6 +35,7 @@ export const INSTRUCTORS = [
   {
     name: "Merjema Secli-Radič",
     role: "Fahrlehrerin für Auto, Nothelferinstruktorin, Theorielehrerin für Verkehrskunde",
+    tags: ["Auto", "Nothelferkurs", "VKU"],
     languages: ["Deutsch", "Kroatisch", "Englisch"],
     whatsapp: "https://wa.me/41768156688",
     image: "/images/merjema.png",
@@ -42,6 +44,7 @@ export const INSTRUCTORS = [
   {
     name: "Tomi Caleta",
     role: "Fahrlehrer für Auto, Motorrad und Anhänger, Lehrer Theorie Verkehrskunde und Nothelfer",
+    tags: ["Auto", "Motorrad", "Anhänger", "VKU", "Nothelferkurs"],
     languages: ["Deutsch", "Kroatisch", "Englisch"],
     whatsapp: "https://wa.me/41764303101",
     image: "/images/tomi.png",
@@ -50,6 +53,7 @@ export const INSTRUCTORS = [
   {
     name: "Doma Caleta",
     role: "Fahrlehrer für Auto, Verkehrskundelehrer",
+    tags: ["Auto", "VKU"],
     languages: ["Deutsch", "Kroatisch", "Englisch"],
     whatsapp: "https://wa.me/41793388032",
     image: "/images/doma.png",
@@ -58,6 +62,7 @@ export const INSTRUCTORS = [
   {
     name: "Samir Radič",
     role: "Fahrlehrer für Auto und Motorrad, Theorielehrer Verkehrskunde",
+    tags: ["Auto", "Motorrad", "VKU"],
     languages: ["Deutsch", "Kroatisch", "Englisch"],
     whatsapp: "https://wa.me/41788888899",
     image: "/images/samir.png",
