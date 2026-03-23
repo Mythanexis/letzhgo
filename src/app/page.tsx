@@ -16,6 +16,7 @@ import ContactForm from "@/components/ContactForm";
 import WegweiserHomeTeaser from "@/components/WegweiserHomeTeaser";
 import PartnersSection from "@/components/PartnersSection";
 import HostettlerSection from "@/components/HostettlerSection";
+import ManoeverplatzSection from "@/components/ManoeverplatzSection";
 import InstagramSection from "@/components/InstagramSection";
 import {
   SERVICES_OVERVIEW,
@@ -221,6 +222,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Manöverplatz */}
+      <ManoeverplatzSection />
 
       {/* Bericht von 20 Minuten */}
       <section className="bg-[#f7f8fa]">
