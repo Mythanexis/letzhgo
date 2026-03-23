@@ -14,6 +14,9 @@ import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
 import ContactForm from "@/components/ContactForm";
 import WegweiserHomeTeaser from "@/components/WegweiserHomeTeaser";
+import PartnersSection from "@/components/PartnersSection";
+import HostettlerSection from "@/components/HostettlerSection";
+import InstagramSection from "@/components/InstagramSection";
 import {
   SERVICES_OVERVIEW,
   PRICING,
@@ -315,6 +318,15 @@ export default function HomePage() {
 
       {/* Stats */}
       <Stats />
+
+      {/* Partner */}
+      <PartnersSection />
+
+      {/* Hostettler Moto */}
+      <HostettlerSection />
+
+      {/* Instagram */}
+      <InstagramSection />
 
       {/* FAQ */}
       <FAQ />
