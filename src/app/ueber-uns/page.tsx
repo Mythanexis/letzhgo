@@ -8,6 +8,18 @@ import FAQ from "@/components/FAQ";
 import { INSTRUCTORS } from "@/lib/constants";
 
 export default function UeberUnsPage() {
+  const ORDERED_INSTRUCTORS = [
+    "Gianni Sebestin",
+    "Samir Radič",
+    "Tomi Caleta",
+    "Doma Caleta",
+    "Merjema Secli-Radič",
+  ] as const;
+
+  const instructorsInOrder = ORDERED_INSTRUCTORS.map((name) =>
+    INSTRUCTORS.find((instructor) => instructor.name === name),
+  ).filter((instructor): instructor is (typeof INSTRUCTORS)[number] => Boolean(instructor));
+
   return (
     <>
       {/* Hero */}
@@ -66,7 +78,7 @@ export default function UeberUnsPage() {
         </div>
 
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {INSTRUCTORS.map((instructor, i) => (
+          {instructorsInOrder.map((instructor, i) => (
             <InstructorCard key={instructor.name} {...instructor} index={i} />
           ))}
         </div>
