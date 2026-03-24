@@ -16,11 +16,14 @@ const QUOTE_EYEBROW = "So bilden wir aus";
 const QUOTE_TEXT =
   "Wir starten mit Zuhören – wirklich zuhören – um dein aktuelles Fahrniveau und dein Lerntempo zu verstehen. Darauf aufbauend gestalten wir eine Ausbildung, die strukturiert, realistisch und auf dich zugeschnitten ist. Jede Fahrstunde gibt dir Sicherheit und lässt dich Schritt für Schritt wachsen.";
 
-/** 0–CURTAIN_END: Vorhang + Word-Reveal laufen gemeinsam; letztes Wort genau bei CURTAIN_END voll. Danach Ruhe-Scroll bis 1. */
-const CURTAIN_END = 0.2;
+/**
+ * 0–CURTAIN_END: Clip + Word-Reveal; letztes Wort exakt bei CURTAIN_END voll.
+ * Großer Anteil (~wenig Rest nach 1) = nach der Quote keine endlose Leer-Scroll-Phase.
+ */
+const CURTAIN_END = 0.88;
 
-/** Gesamt-Scrollhöhe: höher = mehr Pixel-Scroll pro Fortschritt (weniger „1 cm = fertig“) */
-const SCROLL_TRACK_VH = 400;
+/** Mehr Höhe = ruhigeres Scrollen pro % (weniger „ein Ruck = durch“). Mit CURTAIN_END bleibt ~12 % nur Nachlauf. */
+const SCROLL_TRACK_VH = 330;
 
 function CurtainWord({
   word,
