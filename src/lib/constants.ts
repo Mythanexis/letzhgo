@@ -108,6 +108,8 @@ export const EDOOBOX_LINKS = {
 
 export const WEGWEISER_MOTORRAD_IMAGES = {
   hero: "/images/wegweiser/wegweiser-teaser.png",
+  /** Full-bleed hero on `/wegweiser-motorrad-fuehrerschein` only */
+  pageHero: "/images/wegweiser/wegweiser-page-hero.jpg",
   steps: [
     "/images/nothelferkurs.png",
     "/images/wegweiser/step-02.jpg",

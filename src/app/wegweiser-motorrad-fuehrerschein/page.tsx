@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { EDOOBOX_LINKS, IMAGES, WEGWEISER_MOTORRAD_IMAGES } from "@/lib/constants";
+import { EDOOBOX_LINKS, WEGWEISER_MOTORRAD_IMAGES } from "@/lib/constants";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 interface StepContent {
@@ -135,10 +135,10 @@ export default function WegweiserMotorradFuehrerscheinPage() {
       {/* Hero */}
       <section className="relative flex h-[55vh] min-h-[380px] items-end overflow-hidden">
         <Image
-          src={IMAGES.motorrad}
-          alt="Motorradkurs bei Let'ZHgo"
+          src={WEGWEISER_MOTORRAD_IMAGES.pageHero}
+          alt="Wegweiser Motorrad-Führerschein – Wegweiser-Schild und Motorradfahrer in den Bergen"
           fill
-          className="object-cover brightness-[0.35]"
+          className="object-cover object-[32%_center] brightness-[0.38] max-md:object-center"
           priority
           sizes="100vw"
         />
