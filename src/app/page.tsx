@@ -19,6 +19,7 @@ import HostettlerSection from "@/components/HostettlerSection";
 import ManoeverplatzSection from "@/components/ManoeverplatzSection";
 import InstagramSection from "@/components/InstagramSection";
 import TikTokSection from "@/components/TikTokSection";
+import AutofahrenAb17Section from "@/components/AutofahrenAb17Section";
 import {
   SERVICES_OVERVIEW,
   PRICING,
@@ -408,6 +409,9 @@ export default function HomePage() {
         </div>
       </div>
       </section>
+
+      {/* Autof ab 17 – Jahrgänge */}
+      <AutofahrenAb17Section />
     </>
   );
 }
