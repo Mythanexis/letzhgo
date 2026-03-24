@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import Hero from "@/components/Hero";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import InstructorCard from "@/components/InstructorCard";
 import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
@@ -23,10 +24,47 @@ export default function UeberUnsPage() {
   return (
     <>
       {/* Hero */}
-      <Hero
-        title="Dein Weg, Unsere Mission."
-        subtitle="Wir stehen für strukturierte Ausbildung, moderne Lernmethoden und persönliche Betreuung – damit du nicht nur bestehst, sondern sicher unterwegs bist."
-      />
+      <section className="relative flex min-h-[72vh] items-center justify-center overflow-hidden">
+        <Image
+          src="/images/ueber-uns-hero.png"
+          alt="Let'ZHgo Fahrzeuge"
+          fill
+          priority
+          className="object-cover object-center brightness-[0.6]"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/25 to-black/10" />
+
+        <div className="relative z-10 mx-auto max-w-5xl px-6 pt-24 text-center text-white">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-4xl font-bold leading-tight md:text-6xl lg:text-7xl"
+          >
+            Dein Weg, Unsere Mission.
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto mt-6 max-w-3xl text-lg text-white/85 md:text-xl"
+          >
+            Wir stehen für strukturierte Ausbildung, moderne Lernmethoden und
+            persönliche Betreuung – damit du nicht nur bestehst, sondern sicher
+            unterwegs bist.
+          </motion.p>
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-7xl px-6 py-6 md:py-8">
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Über uns" },
+          ]}
+        />
+      </div>
 
       {/* About */}
       <section className="mx-auto max-w-7xl px-6 py-24">

@@ -35,15 +35,23 @@ interface HeroProps {
   ctaText?: string;
   ctaHref?: string;
   showImage?: boolean;
+  imageSrc?: string;
 }
 
-export default function Hero({ title, subtitle, ctaText, ctaHref, showImage = false }: HeroProps) {
+export default function Hero({
+  title,
+  subtitle,
+  ctaText,
+  ctaHref,
+  showImage = false,
+  imageSrc,
+}: HeroProps) {
   if (showImage) {
     return (
       <section className="relative flex h-screen items-end overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src={IMAGES.hero}
+            src={imageSrc ?? IMAGES.hero}
             alt="Let'ZHgo Team"
             fill
             className="object-cover brightness-[0.4]"
