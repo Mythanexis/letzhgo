@@ -90,6 +90,15 @@ export const LOCATIONS = [
   },
 ] as const;
 
+/** Homepage: Team einmal pro Person (ohne Standort-Wiederholungen). */
+export const INSTRUCTORS_HOMEPAGE_ORDER = [
+  "Gianni Sebestin",
+  "Samir Radič",
+  "Tomi Caleta",
+  "Doma Caleta",
+  "Merjema Secli-Radič",
+] as const;
+
 export const EDOOBOX_LINKS = {
   nothelferkurs: "https://app1.edoobox.com/de/LetZHgo/Nothelferkurse/?edref=letzhgo",
   motorrad: "https://app1.edoobox.com/de/LetZHgo/Motorradkurse/?edref=letzhgo",

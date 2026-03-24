@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { INSTRUCTORS, LOCATIONS } from "@/lib/constants";
+import { INSTRUCTORS, INSTRUCTORS_HOMEPAGE_ORDER, LOCATIONS } from "@/lib/constants";
 
 function getInstructor(name: string) {
   return INSTRUCTORS.find((i) => i.name === name);
@@ -64,16 +64,21 @@ function InstructorCard({
   );
 }
 
-export default function InstructorsSection() {
+type InstructorsSectionProps = {
+  /** `singleGrid`: ein Grid pro Fahrlehrer (kürzere Homepage). `byLocation`: nach Standort gruppiert. */
+  layout?: "byLocation" | "singleGrid";
+};
+
+export default function InstructorsSection({ layout = "byLocation" }: InstructorsSectionProps) {
   return (
     <section id="fahrlehrer">
-      <div className="mx-auto max-w-7xl px-6 py-32 md:py-40">
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true, margin: "-80px" }}
-          className="mb-24 text-center"
+          className="mb-16 text-center md:mb-20"
         >
           <p className="text-sm font-medium uppercase tracking-widest text-accent">
             Unser Team
@@ -82,11 +87,35 @@ export default function InstructorsSection() {
             Deine Fahrlehrer:innen
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted">
-            An verschiedenen Standorten in der Region Zürich stehen dir unsere
-            erfahrenen Fahrlehrer:innen zur Seite.
+            {layout === "singleGrid"
+              ? "Unser Team im Überblick – Details und Standorte findest du auf den Profilseiten."
+              : "An verschiedenen Standorten in der Region Zürich stehen dir unsere erfahrenen Fahrlehrer:innen zur Seite."}
           </p>
         </motion.div>
 
+        {layout === "singleGrid" ? (
+          <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+            {INSTRUCTORS_HOMEPAGE_ORDER.map((name, i) => {
+              const instructor = getInstructor(name);
+              if (!instructor) return null;
+              return (
+                <motion.div
+                  key={name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.15 + i * 0.08,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  viewport={{ once: true, margin: "-60px" }}
+                >
+                  <InstructorCard instructor={instructor} />
+                </motion.div>
+              );
+            })}
+          </div>
+        ) : (
         <div className="space-y-28">
           {LOCATIONS.map((location, locIdx) => (
             <motion.div
@@ -151,6 +180,7 @@ export default function InstructorsSection() {
             </motion.div>
           ))}
         </div>
+        )}
       </div>
     </section>
   );

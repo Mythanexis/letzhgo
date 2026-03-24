@@ -6,18 +6,10 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import InstructorCard from "@/components/InstructorCard";
 import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
-import { INSTRUCTORS } from "@/lib/constants";
+import { INSTRUCTORS, INSTRUCTORS_HOMEPAGE_ORDER } from "@/lib/constants";
 
 export default function UeberUnsPage() {
-  const ORDERED_INSTRUCTORS = [
-    "Gianni Sebestin",
-    "Samir Radič",
-    "Tomi Caleta",
-    "Doma Caleta",
-    "Merjema Secli-Radič",
-  ] as const;
-
-  const instructorsInOrder = ORDERED_INSTRUCTORS.map((name) =>
+  const instructorsInOrder = INSTRUCTORS_HOMEPAGE_ORDER.map((name) =>
     INSTRUCTORS.find((instructor) => instructor.name === name),
   ).filter((instructor): instructor is (typeof INSTRUCTORS)[number] => Boolean(instructor));
 

@@ -73,36 +73,7 @@ export default function HomePage() {
       {/* CTA Banner */}
       <CTABanner />
 
-      {/* Preise */}
-      <section>
-        <div className="mx-auto max-w-7xl px-6 py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="text-center"
-          >
-            <p className="text-sm font-medium uppercase tracking-widest text-accent">
-              Unsere Preise
-            </p>
-            <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl">
-              Dein Führerschein. Dein Tempo.
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-muted">
-              Starte mit dem passenden Kurs und baue deine Fahrpraxis gezielt auf –
-              professionell begleitet bis zur erfolgreichen Prüfung.
-            </p>
-          </motion.div>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {PRICING.map((plan, i) => (
-              <PricingCard key={plan.title} {...plan} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Ausbildung mit System */}
+      {/* Ausbildung mit System (Value vor Preisen – Funnel) */}
       <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-7xl px-6 py-24">
           <div className="grid items-start gap-12 lg:grid-cols-2">
@@ -135,6 +106,39 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Preise */}
+      <section>
+        <div className="mx-auto max-w-7xl px-6 py-24">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-80px" }}
+            className="text-center"
+          >
+            <p className="text-sm font-medium uppercase tracking-widest text-accent">
+              Unsere Preise
+            </p>
+            <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl">
+              Dein Führerschein. Dein Tempo.
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-muted">
+              Starte mit dem passenden Kurs und baue deine Fahrpraxis gezielt auf –
+              professionell begleitet bis zur erfolgreichen Prüfung.
+            </p>
+          </motion.div>
+          <div className="mt-12 grid gap-8 md:grid-cols-3">
+            {PRICING.map((plan, i) => (
+              <PricingCard key={plan.title} {...plan} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Autofahren ab 17 – vor Conversion-Block (FAQ/Kontakt) */}
+      <AutofahrenAb17Section />
+
+      {/* Aktuelle Angebote: Schnupperkurs & Manöverplatz */}
       {/* Schnupperkurs Motorrad */}
       <section className="relative overflow-hidden">
         {/* Hintergrundbild */}
@@ -228,7 +232,13 @@ export default function HomePage() {
       {/* Manöverplatz */}
       <ManoeverplatzSection />
 
-      {/* Bericht von 20 Minuten */}
+      {/* Fahrlehrer:innen (kompakt: einmal pro Person) */}
+      <InstructorsSection layout="singleGrid" />
+
+      {/* Stats */}
+      <Stats />
+
+      {/* Bericht von 20 Minuten – Trust / PR */}
       <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-7xl px-6 py-24 md:py-28">
           <motion.div
@@ -316,15 +326,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Wegweiser Motorrad-Führerschein */}
-      <WegweiserHomeTeaser />
-
-      {/* Fahrlehrer:innen */}
-      <InstructorsSection />
-
-      {/* Stats */}
-      <Stats />
-
       {/* Partner */}
       <PartnersSection />
 
@@ -336,6 +337,9 @@ export default function HomePage() {
 
       {/* TikTok */}
       <TikTokSection />
+
+      {/* Wegweiser Motorrad-Führerschein (nach Trust/Social) */}
+      <WegweiserHomeTeaser />
 
       {/* FAQ */}
       <FAQ />
@@ -409,9 +413,6 @@ export default function HomePage() {
         </div>
       </div>
       </section>
-
-      {/* Autof ab 17 – Jahrgänge */}
-      <AutofahrenAb17Section />
     </>
   );
 }
