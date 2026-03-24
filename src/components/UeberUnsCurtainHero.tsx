@@ -1,19 +1,79 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useMemo, useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+
+const QUOTE_BG = "/images/ueber-uns/quote-road.jpg";
 
 const QUOTE_EYEBROW = "So bilden wir aus";
 
 const QUOTE_TEXT =
   "Wir starten mit Zuhören – wirklich zuhören – um dein aktuelles Fahrniveau und dein Lerntempo zu verstehen. Darauf aufbauend gestalten wir eine Ausbildung, die strukturiert, realistisch und auf dich zugeschnitten ist. Jede Fahrstunde gibt dir Sicherheit und lässt dich Schritt für Schritt wachsen.";
 
-/** Volle Hero-Fläche (zweimal gemountet für Ober-/Unter-Vorhang). `mirror`: unterer Spiegel ohne doppeltes h1. */
-function HeroFullLayer({ mirror = false }: { mirror?: boolean }) {
-  const TitleTag = mirror ? "div" : "h1";
+/** 0–CURTAIN_END: Vorhang + Word-Reveal laufen gemeinsam; letztes Wort genau bei CURTAIN_END voll. Danach Ruhe-Scroll bis 1. */
+const CURTAIN_END = 0.2;
+
+/** Gesamt-Scrollhöhe: höher = mehr Pixel-Scroll pro Fortschritt (weniger „1 cm = fertig“) */
+const SCROLL_TRACK_VH = 400;
+
+function CurtainWord({
+  word,
+  index,
+  total,
+  scrollYProgress,
+  reducedMotion,
+}: {
+  word: string;
+  index: number;
+  total: number;
+  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
+  reducedMotion: boolean;
+}) {
+  /** Gleicher Zeitbereich wie Vorhang [0, CURTAIN_END]: harte Slots, kein Sichtbarwerden vor slotStart. */
+  const slotStart = (index / total) * CURTAIN_END;
+  const slotEnd = ((index + 1) / total) * CURTAIN_END;
+
+  /** Unrevealed: sichtbares helles Grau auf dem dunklen Foto; Reveal blendet zu vollem Weiß (kein opacity:0). */
+  const DIM_WHITE_ALPHA = 0.27;
+
+  const color = useTransform(scrollYProgress, (p) => {
+    let t: number;
+    if (reducedMotion) {
+      if (p < 0.02) t = 0;
+      else if (p >= Math.min(0.09, CURTAIN_END)) t = 1;
+      else
+        t = (p - 0.02) / (Math.min(0.09, CURTAIN_END) - 0.02);
+    } else if (p < slotStart) {
+      t = 0;
+    } else if (p >= slotEnd) {
+      t = 1;
+    } else {
+      t = (p - slotStart) / (slotEnd - slotStart);
+    }
+    const a = DIM_WHITE_ALPHA + (1 - DIM_WHITE_ALPHA) * t;
+    return `rgba(255,255,255,${a})`;
+  });
+
   return (
-    <div className="relative min-h-[100dvh] min-h-[100svh] w-full overflow-hidden bg-gradient-to-b from-accent-light/35 via-background to-background pt-20 pb-14 md:pt-28 md:pb-20">
+    <motion.span
+      style={{ color }}
+      className="inline-block mr-[0.3em] will-change-[color]"
+    >
+      {word}
+    </motion.span>
+  );
+}
+
+/** Volle Hero-Fläche — eine Instanz, statisch (kein Parent-`transform`), liegt unter dem Zitat. */
+function HeroFullLayer() {
+  return (
+    <div className="relative flex min-h-[100dvh] min-h-[100svh] w-full flex-col justify-center overflow-hidden bg-gradient-to-b from-accent-light/35 via-background to-background pt-20 pb-14 md:pt-28 md:pb-20">
       <div
         className="pointer-events-none absolute -right-20 top-1/3 h-72 w-72 rounded-full bg-accent/[0.06] blur-[80px]"
         aria-hidden
@@ -23,26 +83,19 @@ function HeroFullLayer({ mirror = false }: { mirror?: boolean }) {
         aria-hidden
       />
 
-      <div
-        className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16"
-        {...(mirror ? { "aria-hidden": true as const } : {})}
-      >
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
         <div className="max-w-xl lg:max-w-none lg:pt-2">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">Über uns</p>
-          <TitleTag className="mt-4 text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl lg:text-[3.25rem] lg:leading-[1.06]">
+          <h1 className="mt-4 text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl lg:text-[3.25rem] lg:leading-[1.06]">
             Dein Weg,{" "}
             <span className="bg-gradient-to-r from-accent to-accent-dark bg-clip-text text-transparent">
               unsere Mission.
             </span>
-          </TitleTag>
+          </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted md:text-xl md:leading-relaxed">
             Wir stehen für strukturierte Ausbildung, moderne Lernmethoden und persönliche
             Betreuung – damit du nicht nur bestehst, sondern sicher unterwegs bist.
           </p>
-          <div
-            className="mt-8 h-px max-w-[120px] bg-gradient-to-r from-accent to-transparent"
-            aria-hidden
-          />
         </div>
 
         <div className="relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none">
@@ -56,7 +109,7 @@ function HeroFullLayer({ mirror = false }: { mirror?: boolean }) {
                 src="/images/ueber-uns-hero.png"
                 alt="Fahrzeuge und Team von Let'ZHgo"
                 fill
-                priority={!mirror}
+                priority
                 className="object-cover object-center"
                 sizes="(max-width: 1024px) 100vw, 45vw"
               />
@@ -68,10 +121,6 @@ function HeroFullLayer({ mirror = false }: { mirror?: boolean }) {
   );
 }
 
-/**
- * Vollbild-Hero mit Vorhang-Öffnung (Mitte): oben nach oben, unten nach unten.
- * h-[50dvh] + transform in vh (nicht %), damit Layout zuverlässig rendert.
- */
 export default function UeberUnsCurtainHero() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -81,53 +130,83 @@ export default function UeberUnsCurtainHero() {
     offset: ["start start", "end end"],
   });
 
-  const topRange = prefersReducedMotion ? ([0, 0.08, 1] as const) : ([0, 1] as const);
-  const topOut = prefersReducedMotion
-    ? (["0%", "-100%", "-100%"] as const)
-    : (["0%", "-100%"] as const);
-  const bottomOut = prefersReducedMotion
-    ? (["0%", "100%", "100%"] as const)
-    : (["0%", "100%"] as const);
+  const words = useMemo(
+    () => QUOTE_TEXT.split(/\s+/).filter(Boolean),
+    [],
+  );
 
-  const yTop = useTransform(scrollYProgress, topRange, topOut);
-  const yBottom = useTransform(scrollYProgress, topRange, bottomOut);
+  const quoteImageScale = useTransform(
+    scrollYProgress,
+    [0, CURTAIN_END],
+    [1.06, 1],
+  );
+
+  /** Zitat-Ebene über statischem Hero; Öffnung = „Vorhang“ (Hero bewegt sich nicht mit). */
+  const quoteClipPath = useTransform(scrollYProgress, (p) => {
+    if (prefersReducedMotion) {
+      const t = Math.min(1, p / 0.06);
+      const inset = Math.max(0, 50 * (1 - t));
+      return `inset(${inset}% 0 ${inset}% 0)`;
+    }
+    const t = Math.min(1, p / CURTAIN_END);
+    const inset = Math.max(0, 50 * (1 - t));
+    return `inset(${inset}% 0 ${inset}% 0)`;
+  });
 
   return (
-    <div ref={scrollRef} className="relative w-full" style={{ height: "280vh" }}>
-      <div className="sticky top-0 isolate flex h-[100svh] min-h-[100svh] w-full flex-col overflow-hidden bg-neutral-950 md:h-[100dvh] md:min-h-[100dvh]">
-        {/* Zitat — eigener Stacking-Context, feste Farben (nicht nur Tailwind-Arbitrary) */}
-        <div
-          className="absolute inset-0 z-[1] flex flex-col items-center justify-center px-6 md:px-16"
-          style={{ backgroundColor: "#0a0a0a" }}
-        >
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
-            {QUOTE_EYEBROW}
-          </p>
-          <p
-            className="mt-8 max-w-4xl text-center text-2xl font-medium leading-relaxed md:text-3xl lg:text-4xl"
-            style={{ color: "#fafafa" }}
-          >
-            {QUOTE_TEXT}
-          </p>
+    <div
+      ref={scrollRef}
+      className="relative w-full"
+      style={{ height: `${SCROLL_TRACK_VH}vh` }}
+    >
+      <div className="sticky top-0 isolate flex h-[100svh] min-h-[100svh] w-full flex-col overflow-hidden md:h-[100dvh] md:min-h-[100dvh]">
+        {/* Hero: eine Ebene, kein translateY — bleibt stabil während Scroll/Clip */}
+        <div className="absolute inset-0 z-[1] overflow-hidden">
+          <HeroFullLayer />
         </div>
 
-        {/* Oberer Vorhang */}
+        {/* Zitat + Road: darüber, sichtbarer Bereich wächst mit Scroll (ersetzt die alten bewegten Vorhang-Hälften) */}
         <motion.div
-          style={{ y: yTop }}
-          className="pointer-events-none absolute left-0 right-0 top-0 z-[2] h-1/2 overflow-hidden bg-background shadow-[0_2px_0_rgba(0,0,0,0.04)]"
+          className="pointer-events-none absolute inset-0 z-[2] overflow-hidden"
+          style={{ clipPath: quoteClipPath }}
         >
-          <div className="absolute left-0 right-0 top-0 h-[100dvh] min-h-[100svh] w-full max-w-none">
-            <HeroFullLayer />
-          </div>
-        </motion.div>
+          <motion.div
+            className="absolute inset-0"
+            style={{ scale: quoteImageScale }}
+          >
+            <Image
+              src={QUOTE_BG}
+              alt=""
+              fill
+              className="object-cover object-center brightness-[0.32]"
+              sizes="100vw"
+            />
+          </motion.div>
+          <div
+            className="absolute inset-0 bg-black/45"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/35 via-black/45 to-black/55"
+            aria-hidden
+          />
 
-        {/* Unterer Vorhang */}
-        <motion.div
-          style={{ y: yBottom }}
-          className="pointer-events-none absolute left-0 right-0 top-1/2 z-[2] h-1/2 overflow-hidden bg-background shadow-[0_-2px_0_rgba(0,0,0,0.04)]"
-        >
-          <div className="absolute bottom-0 left-0 right-0 h-[100dvh] min-h-[100svh] w-full max-w-none">
-            <HeroFullLayer mirror />
+          <div className="relative flex h-full flex-col items-center justify-center px-6 text-center md:px-16">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
+              {QUOTE_EYEBROW}
+            </p>
+            <blockquote className="mx-auto mt-8 max-w-4xl text-2xl font-medium leading-relaxed text-white md:text-3xl lg:text-4xl">
+              {words.map((word, i) => (
+                <CurtainWord
+                  key={`${i}-${word}`}
+                  word={word}
+                  index={i}
+                  total={words.length}
+                  scrollYProgress={scrollYProgress}
+                  reducedMotion={!!prefersReducedMotion}
+                />
+              ))}
+            </blockquote>
           </div>
         </motion.div>
       </div>
