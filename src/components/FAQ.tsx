@@ -4,11 +4,15 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FAQ_ITEMS } from "@/lib/constants";
 
-export default function FAQ() {
+type FAQProps = {
+  className?: string;
+};
+
+export default function FAQ({ className }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section>
+    <section className={className}>
       <div className="mx-auto max-w-7xl px-6 py-24">
       <div className="grid gap-12 lg:grid-cols-[1fr_1.5fr]">
         <motion.div

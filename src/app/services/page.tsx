@@ -185,7 +185,7 @@ export default function ServicesPage() {
       </section>
 
       {/* FAQ */}
-      <FAQ />
+      <FAQ className="bg-[#f7f8fa]" />
     </>
   );
 }

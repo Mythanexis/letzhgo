@@ -67,11 +67,15 @@ function InstructorCard({
 type InstructorsSectionProps = {
   /** `singleGrid`: ein Grid pro Fahrlehrer (kürzere Homepage). `byLocation`: nach Standort gruppiert. */
   layout?: "byLocation" | "singleGrid";
+  className?: string;
 };
 
-export default function InstructorsSection({ layout = "byLocation" }: InstructorsSectionProps) {
+export default function InstructorsSection({
+  layout = "byLocation",
+  className,
+}: InstructorsSectionProps) {
   return (
-    <section id="fahrlehrer">
+    <section id="fahrlehrer" className={className}>
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

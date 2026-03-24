@@ -16,7 +16,7 @@ const POSTS = [
 
 export default function InstagramSection() {
   return (
-    <section className="bg-[#f7f8fa]">
+    <section className="bg-background">
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

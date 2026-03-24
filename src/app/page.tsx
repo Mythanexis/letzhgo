@@ -39,7 +39,8 @@ export default function HomePage() {
       />
 
       {/* Services Grid */}
-      <section className="mx-auto max-w-7xl px-6 py-32 md:py-40">
+      <section className="bg-background">
+        <div className="mx-auto max-w-7xl px-6 py-32 md:py-40">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -62,6 +63,7 @@ export default function HomePage() {
             />
           ))}
         </div>
+        </div>
       </section>
 
       {/* Philosophie – Scroll Reveal Quote */}
@@ -74,7 +76,7 @@ export default function HomePage() {
       <CTABanner />
 
       {/* Ausbildung mit System (Value vor Preisen – Funnel) */}
-      <section className="bg-[#f7f8fa]">
+      <section className="bg-background">
         <div className="mx-auto max-w-7xl px-6 py-24">
           <div className="grid items-start gap-12 lg:grid-cols-2">
             <motion.div
@@ -107,7 +109,7 @@ export default function HomePage() {
       </section>
 
       {/* Preise */}
-      <section>
+      <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-7xl px-6 py-24">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -233,10 +235,10 @@ export default function HomePage() {
       <ManoeverplatzSection />
 
       {/* Fahrlehrer:innen (kompakt: einmal pro Person) */}
-      <InstructorsSection layout="singleGrid" />
+      <InstructorsSection layout="singleGrid" className="bg-[#f7f8fa]" />
 
       {/* Stats */}
-      <Stats />
+      <Stats surface="light" />
 
       {/* Bericht von 20 Minuten – Trust / PR */}
       <section className="bg-[#f7f8fa]">
@@ -342,7 +344,7 @@ export default function HomePage() {
       <WegweiserHomeTeaser />
 
       {/* FAQ */}
-      <FAQ />
+      <FAQ className="bg-background" />
 
       {/* Kontakt */}
       <section className="bg-[#f7f8fa]">
