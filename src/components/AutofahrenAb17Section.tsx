@@ -161,6 +161,10 @@ export default function AutofahrenAb17Section() {
             </motion.article>
           ))}
         </motion.div>
+
+        <p className="mt-10 text-left text-[11px] font-medium text-muted md:mt-12 md:text-xs">
+          LFA = Lernfahrausweis
+        </p>
       </div>
     </section>
   );
