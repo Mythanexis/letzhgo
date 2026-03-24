@@ -55,7 +55,7 @@ export default function WegweiserHomeTeaser() {
             <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] border border-border bg-card shadow-xl shadow-black/5">
               <Image
                 src={WEGWEISER_MOTORRAD_IMAGES.hero}
-                alt="Motorradfahren – Wegweiser"
+                alt="Wegweiser Motorrad-Führerschein – Schild und Motorrad auf Bergstrasse"
                 fill
                 className="object-cover object-center"
                 sizes="(max-width: 1024px) 100vw, 40vw"

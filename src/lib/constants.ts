@@ -107,7 +107,7 @@ export const EDOOBOX_LINKS = {
 } as const;
 
 export const WEGWEISER_MOTORRAD_IMAGES = {
-  hero: "/images/wegweiser/step-01.jpg",
+  hero: "/images/wegweiser/wegweiser-teaser.png",
   steps: [
     "/images/nothelferkurs.png",
     "/images/wegweiser/step-02.jpg",
