@@ -121,6 +121,28 @@ export default function UeberUnsPage() {
         </div>
       </section>
 
+      {/* About bottom */}
+      <section className="mx-auto max-w-7xl px-6 py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="grid items-center gap-12 lg:grid-cols-2"
+        >
+          <h2 className="text-3xl font-bold md:text-4xl">
+            Ausbildung mit Erfahrung, geführt von Klarheit –{" "}
+            <span className="text-accent">für nachhaltige Sicherheit.</span>
+          </h2>
+          <p className="text-lg text-muted">
+            Unsere Ausbildung schafft die Grundlage für echte Sicherheit im
+            Strassenverkehr. Wir nehmen uns Zeit, dein Fahrniveau zu verstehen,
+            geben dir klare Strukturen und begleiten dich Schritt für Schritt –
+            mit Fokus auf dein Ziel: selbstständig und souverän unterwegs zu sein.
+          </p>
+        </motion.div>
+      </section>
+
       {/* Quote */}
       <section className="mx-auto max-w-7xl px-6 py-24">
         <motion.div
@@ -136,28 +158,6 @@ export default function UeberUnsPage() {
           </blockquote>
           <p className="mt-6 text-muted">
             — Samir Radič, Gründer Let&apos;ZHgo
-          </p>
-        </motion.div>
-      </section>
-
-      {/* About bottom */}
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="grid items-center gap-12 lg:grid-cols-2"
-        >
-          <h2 className="text-3xl font-bold md:text-4xl">
-            Ausbildung mit Erfahrung, geführt von Klarheit – für nachhaltige
-            Sicherheit.
-          </h2>
-          <p className="text-lg text-muted">
-            Unsere Ausbildung schafft die Grundlage für echte Sicherheit im
-            Strassenverkehr. Wir nehmen uns Zeit, dein Fahrniveau zu verstehen,
-            geben dir klare Strukturen und begleiten dich Schritt für Schritt –
-            mit Fokus auf dein Ziel: selbstständig und souverän unterwegs zu sein.
           </p>
         </motion.div>
       </section>

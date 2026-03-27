@@ -74,7 +74,7 @@ function CurtainWord({
 }
 
 /** Volle Hero-Fläche — eine Instanz, statisch (kein Parent-`transform`), liegt unter dem Zitat. */
-function HeroFullLayer() {
+function HeroFullLayer({ reducedMotion }: { reducedMotion: boolean }) {
   return (
     <div className="relative flex min-h-[100dvh] min-h-[100svh] w-full flex-col justify-center overflow-hidden bg-gradient-to-b from-accent-light/35 via-background to-background pt-20 pb-14 md:pt-28 md:pb-20">
       <div
@@ -87,7 +87,12 @@ function HeroFullLayer() {
       />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
-        <div className="max-w-xl lg:max-w-none lg:pt-2">
+        <motion.div
+          initial={reducedMotion ? false : { opacity: 0, y: 24 }}
+          animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={reducedMotion ? undefined : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-xl lg:max-w-none lg:pt-2"
+        >
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">Über uns</p>
           <h1 className="mt-4 text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl lg:text-[3.25rem] lg:leading-[1.06]">
             Dein Weg,{" "}
@@ -99,9 +104,14 @@ function HeroFullLayer() {
             Wir stehen für strukturierte Ausbildung, moderne Lernmethoden und persönliche
             Betreuung – damit du nicht nur bestehst, sondern sicher unterwegs bist.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none">
+        <motion.div
+          initial={reducedMotion ? false : { opacity: 0, y: 28, scale: 0.98 }}
+          animate={reducedMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+          transition={reducedMotion ? undefined : { duration: 0.8, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+          className="relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none"
+        >
           <div
             className="absolute -inset-1 rounded-[28px] bg-gradient-to-br from-accent/20 via-transparent to-accent/10 opacity-80 blur-xl"
             aria-hidden
@@ -118,7 +128,7 @@ function HeroFullLayer() {
               />
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
@@ -165,7 +175,7 @@ export default function UeberUnsCurtainHero() {
       <div className="sticky top-0 isolate flex h-[100svh] min-h-[100svh] w-full flex-col overflow-hidden md:h-[100dvh] md:min-h-[100dvh]">
         {/* Hero: eine Ebene, kein translateY — bleibt stabil während Scroll/Clip */}
         <div className="absolute inset-0 z-[1] overflow-hidden">
-          <HeroFullLayer />
+          <HeroFullLayer reducedMotion={!!prefersReducedMotion} />
         </div>
 
         {/* Zitat + Road: darüber, sichtbarer Bereich wächst mit Scroll (ersetzt die alten bewegten Vorhang-Hälften) */}

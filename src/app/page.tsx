@@ -234,8 +234,8 @@ export default function HomePage() {
       {/* Manöverplatz */}
       <ManoeverplatzSection />
 
-      {/* Fahrlehrer:innen (kompakt: einmal pro Person) */}
-      <InstructorsSection layout="singleGrid" className="bg-[#f7f8fa]" />
+      {/* Fahrlehrer:innen (nach Orten gruppiert) */}
+      <InstructorsSection className="bg-[#f7f8fa]" />
 
       {/* Stats */}
       <Stats surface="light" />
