@@ -9,6 +9,7 @@ export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Über uns", href: "/ueber-uns" },
   { label: "Services", href: "/services" },
+  { label: "Lokationen", href: "/lokationen" },
   { label: "Kontakt", href: "/kontakt" },
 ] as const;
 
