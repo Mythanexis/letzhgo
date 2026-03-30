@@ -5,8 +5,23 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
 
+interface Promo {
+  id: string;
+  image: string;
+  alt: string;
+  badge: string;
+  title: string;
+  description: string;
+  price: string;
+  oldPrice?: string;
+  discount?: string;
+  detail?: string;
+  ctaText: string;
+  href: string;
+}
+
 export default function PromoPopup() {
-  const PROMOS = [
+  const PROMOS: Promo[] = [
     {
       id: "vku",
       image: IMAGES.vkuPopup,
@@ -47,7 +62,7 @@ export default function PromoPopup() {
       ctaText: "Standort öffnen",
       href: "https://www.google.com/maps/search/?api=1&query=Riedgrabenstrasse+26+8153+Rümlang",
     },
-  ] as const;
+  ];
 
   const INITIAL_DELAY_MS = 5000;
   const NEXT_POPUP_DELAY_MS = 30000;
