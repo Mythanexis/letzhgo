@@ -14,7 +14,9 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Kein global smooth: sonst wirkt jede Route-Navigation wie „hochscrollen“.
+   * Sprungmarken (#anker) springen direkt; für bewusst weiche Scrolls ggf. per JS. */
+  scroll-behavior: auto;
 }
 
 body {
