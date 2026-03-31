@@ -71,14 +71,30 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-white/10">
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-8 py-8 md:flex-row md:px-16">
-            <div className="flex items-center gap-2 text-sm text-white/50">
-              Kontaktiere uns:{" "}
-              <a
-                href={`mailto:${SITE.email}`}
-                className="font-semibold text-white transition-colors hover:text-accent"
-              >
-                {SITE.email}
-              </a>
+            <div className="flex flex-col items-center gap-2 text-sm text-white/50 md:items-start">
+              <div className="flex items-center gap-2">
+                Kontaktiere uns:{" "}
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="font-semibold text-white transition-colors hover:text-accent"
+                >
+                  {SITE.email}
+                </a>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-white/60">
+                <Link href="/impressum" className="transition-colors hover:text-white">
+                  Impressum
+                </Link>
+                <Link
+                  href="/datenschutzerklaerung"
+                  className="transition-colors hover:text-white"
+                >
+                  Datenschutzerklärung
+                </Link>
+                <Link href="/agb" className="transition-colors hover:text-white">
+                  AGB
+                </Link>
+              </div>
             </div>
             <span className="text-sm text-white/40">
               © {new Date().getFullYear()} | {SITE.name}
