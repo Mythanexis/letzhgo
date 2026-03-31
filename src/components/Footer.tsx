@@ -25,7 +25,7 @@ export default function Footer() {
       />
 
       <div className="relative z-10 flex flex-1 flex-col">
-        <div className="mx-auto flex w-full flex-1 items-center justify-between gap-20 px-12 py-24 md:px-24 lg:flex-row lg:px-32">
+        <div className="mx-auto flex w-full flex-1 flex-col items-start justify-start gap-16 px-6 py-24 md:px-24 lg:flex-row lg:items-center lg:justify-between lg:gap-20 lg:px-32">
           {/* Left: CTA */}
           <div>
             <h2 className="text-4xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
@@ -50,11 +50,11 @@ export default function Footer() {
           </div>
 
           {/* Right: Navigation */}
-          <div className="flex-shrink-0">
+          <div className="w-full flex-shrink-0 lg:w-auto">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40">
               Navigation
             </p>
-            <nav className="mt-8 grid grid-cols-2 gap-x-20 gap-y-7">
+            <nav className="mt-10 grid grid-cols-1 gap-y-5 lg:mt-8 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-7">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.label}
@@ -68,7 +68,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mx-auto w-full px-12 pb-12 md:px-24 lg:px-32">
+        <div className="mx-auto w-full px-6 pb-12 md:px-24 lg:px-32">
           <div className="grid items-center gap-y-3 text-sm text-white/50 md:grid-cols-[1fr_auto_1fr]">
             <div className="flex items-center justify-center gap-2 md:justify-start">
               Kontaktiere uns:{" "}
