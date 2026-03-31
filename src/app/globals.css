@@ -17,14 +17,12 @@ html {
   /* Kein global smooth: sonst wirkt jede Route-Navigation wie „hochscrollen“.
    * Sprungmarken (#anker) springen direkt; für bewusst weiche Scrolls ggf. per JS. */
   scroll-behavior: auto;
-  overflow-x: hidden;
 }
 
 body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
-  overflow-x: hidden;
 }
 
 ::selection {
