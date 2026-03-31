@@ -68,37 +68,36 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/10">
-          <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-8 py-8 md:flex-row md:px-16">
-            <div className="flex flex-col items-center gap-2 text-sm text-white/50 md:items-start">
-              <div className="flex items-center gap-2">
-                Kontaktiere uns:{" "}
-                <a
-                  href={`mailto:${SITE.email}`}
-                  className="font-semibold text-white transition-colors hover:text-accent"
-                >
-                  {SITE.email}
-                </a>
-              </div>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-white/60">
-                <Link href="/impressum" className="transition-colors hover:text-white">
-                  Impressum
-                </Link>
-                <Link
-                  href="/datenschutzerklaerung"
-                  className="transition-colors hover:text-white"
-                >
-                  Datenschutzerklärung
-                </Link>
-                <Link href="/agb" className="transition-colors hover:text-white">
-                  AGB
-                </Link>
-              </div>
+        <div className="mx-auto w-full px-12 pb-12 md:px-24 lg:px-32">
+          <div className="grid items-center gap-y-3 text-sm text-white/50 md:grid-cols-[1fr_auto_1fr]">
+            <div className="flex items-center justify-center gap-2 md:justify-start">
+              Kontaktiere uns:{" "}
+              <a
+                href={`mailto:${SITE.email}`}
+                className="font-semibold text-white transition-colors hover:text-accent"
+              >
+                {SITE.email}
+              </a>
             </div>
-            <span className="text-sm text-white/40">
-              © {new Date().getFullYear()} | {SITE.name}
-            </span>
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-white/60">
+              <Link href="/impressum" className="transition-colors hover:text-white">
+                Impressum
+              </Link>
+              <Link
+                href="/datenschutzerklaerung"
+                className="transition-colors hover:text-white"
+              >
+                Datenschutzerklärung
+              </Link>
+              <Link href="/agb" className="transition-colors hover:text-white">
+                AGB
+              </Link>
+            </div>
+            <div className="flex items-center justify-center md:justify-end">
+              <span className="text-white/40">
+                © {new Date().getFullYear()} | {SITE.name}
+              </span>
+            </div>
           </div>
         </div>
       </div>
