@@ -22,7 +22,6 @@ interface Promo {
 
 export default function PromoPopup() {
   const PROMOS: Promo[] = [
-  const PROMOS: Promo[] = [
     {
       id: "vku",
       image: IMAGES.vkuPopup,
@@ -63,7 +62,6 @@ export default function PromoPopup() {
       ctaText: "Standort öffnen",
       href: "https://www.google.com/maps/search/?api=1&query=Riedgrabenstrasse+26+8153+Rümlang",
     },
-  ];
   ];
 
   const INITIAL_DELAY_MS = 5000;
