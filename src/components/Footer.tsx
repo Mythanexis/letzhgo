@@ -25,7 +25,7 @@ export default function Footer() {
       />
 
       <div className="relative z-10 flex flex-1 flex-col">
-        <div className="mx-auto flex w-full flex-1 items-center justify-between gap-20 px-12 py-24 md:px-24 lg:flex-row lg:px-32">
+        <div className="mx-auto flex w-full flex-1 flex-col items-start justify-start gap-16 px-6 py-24 md:px-24 lg:flex-row lg:items-center lg:justify-between lg:gap-20 lg:px-32">
           {/* Left: CTA */}
           <div>
             <h2 className="text-4xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
@@ -50,11 +50,11 @@ export default function Footer() {
           </div>
 
           {/* Right: Navigation */}
-          <div className="flex-shrink-0">
+          <div className="w-full flex-shrink-0 lg:w-auto">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40">
               Navigation
             </p>
-            <nav className="mt-8 grid grid-cols-2 gap-x-20 gap-y-7">
+            <nav className="mt-10 grid grid-cols-1 gap-y-5 lg:mt-8 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-7">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.label}
@@ -68,10 +68,9 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/10">
-          <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-8 py-8 md:flex-row md:px-16">
-            <div className="flex items-center gap-2 text-sm text-white/50">
+        <div className="mx-auto w-full px-6 pb-12 md:px-24 lg:px-32">
+          <div className="grid items-center gap-y-3 text-sm text-white/50 md:grid-cols-[1fr_auto_1fr]">
+            <div className="flex items-center justify-center gap-2 md:justify-start">
               Kontaktiere uns:{" "}
               <a
                 href={`mailto:${SITE.email}`}
@@ -80,9 +79,25 @@ export default function Footer() {
                 {SITE.email}
               </a>
             </div>
-            <span className="text-sm text-white/40">
-              © {new Date().getFullYear()} | {SITE.name}
-            </span>
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-white/60">
+              <Link href="/impressum" className="transition-colors hover:text-white">
+                Impressum
+              </Link>
+              <Link
+                href="/datenschutzerklaerung"
+                className="transition-colors hover:text-white"
+              >
+                Datenschutzerklärung
+              </Link>
+              <Link href="/agb" className="transition-colors hover:text-white">
+                AGB
+              </Link>
+            </div>
+            <div className="flex items-center justify-center md:justify-end">
+              <span className="text-white/40">
+                © {new Date().getFullYear()} | {SITE.name}
+              </span>
+            </div>
           </div>
         </div>
       </div>

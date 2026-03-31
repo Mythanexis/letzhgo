@@ -172,7 +172,7 @@ export const SERVICES_DETAIL = [
     title: "Verkehrskunde",
     description: "Ein gutes Verständnis des Verkehrs ist die Grundlage für sicheres Fahren. In unserem Verkehrskundeunterricht lernst du, Situationen frühzeitig zu erkennen, Gefahren richtig einzuschätzen und vorausschauend zu handeln.",
     longDescription: "Wir zeigen dir, wie du komplexe Verkehrssituationen analysierst und verantwortungsbewusste Entscheidungen triffst – praxisnah, verständlich erklärt und optimal vorbereitet auf die Theorieprüfung.",
-    image: IMAGES.verkehrskunde,
+    image: IMAGES.vkuPopup,
     bookingLink: EDOOBOX_LINKS.verkehrskunde,
   },
   {

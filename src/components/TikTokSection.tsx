@@ -30,7 +30,24 @@ export default function TikTokSection() {
 
   return (
     <>
-      <section className="bg-[#f7f8fa]">
+      <section className="relative overflow-hidden bg-[#f7f8fa]">
+        <motion.div
+          className="pointer-events-none absolute left-12 top-10 hidden md:block"
+          initial={{ opacity: 0, y: -16, rotate: -4 }}
+          whileInView={{ opacity: 1, y: 0, rotate: -10 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "-80px" }}
+        >
+          <div className="relative h-24 w-24">
+            <Image
+              src="/images/tiktok/tiktok.png"
+              alt=""
+              fill
+              className="object-contain opacity-90 drop-shadow-[0_10px_30px_rgba(0,0,0,0.25)]"
+              sizes="96px"
+            />
+          </div>
+        </motion.div>
         <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

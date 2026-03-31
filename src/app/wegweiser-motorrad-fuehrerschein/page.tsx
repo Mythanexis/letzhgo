@@ -33,7 +33,7 @@ const STEPS_RAW: StepContent[] = [
     ],
     cta: {
       label: "Lernfahrgesuch für Zürich",
-      href: "https://www.zh.ch/de/mobilitaet/fuehrerausweis-fahren-lernen/gesuch-lernfahrausweis.html",
+      href: "https://www.zh.ch/de/mobilitaet/fuehrerausweis-fahren-lernen/fahren-lernen/anmeldung-lernfahrer.html",
     },
   },
   {
@@ -175,7 +175,7 @@ export default function WegweiserMotorradFuehrerscheinPage() {
 
       {/* Breadcrumbs + Steps */}
       <main className="w-full pb-16 md:pb-24">
-        <div className="px-6 py-6 md:px-16">
+        <div className="px-6 pt-10 pb-6 sm:px-10 md:px-14 xl:px-20">
           <Breadcrumbs
             items={[
               { label: "Home", href: "/" },
@@ -191,7 +191,7 @@ export default function WegweiserMotorradFuehrerscheinPage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className={`grid w-full grid-cols-1 border-b border-border lg:grid-cols-2 lg:min-h-[min(520px,75vh)] ${
+              className={`grid w-full grid-cols-1 lg:grid-cols-2 lg:min-h-[min(520px,75vh)] ${
                 index % 2 === 0 ? "bg-background" : "bg-[#f7f8fa]"
               }`}
             >
