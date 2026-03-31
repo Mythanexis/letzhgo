@@ -9,6 +9,8 @@ import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
 import { SERVICES_DETAIL, PRICING } from "@/lib/constants";
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 function ServiceSection({
   service,
   index,
@@ -31,12 +33,10 @@ function ServiceSection({
   const contentY = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [60, 0, 0, -60]);
 
   const isLast = index === total - 1;
-  const finalOpacity = isLast
-    ? useTransform(scrollYProgress, [0.1, 0.3], [0, 1])
-    : contentOpacity;
-  const finalY = isLast
-    ? useTransform(scrollYProgress, [0.1, 0.3], [60, 0])
-    : contentY;
+  const lastOpacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1]);
+  const lastY = useTransform(scrollYProgress, [0.1, 0.3], [60, 0]);
+  const finalOpacity = isLast ? lastOpacity : contentOpacity;
+  const finalY = isLast ? lastY : contentY;
 
   return (
     <section
@@ -109,47 +109,128 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero Header */}
-      <section className="flex h-screen snap-start items-center justify-center bg-background pt-16">
-        <div className="text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-sm font-medium uppercase tracking-[0.2em] text-accent"
-          >
-            Was wir anbieten
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="mt-5 text-5xl font-bold text-foreground md:text-7xl lg:text-8xl"
-          >
-            Unsere Services
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="mx-auto mt-6 max-w-xl text-lg text-muted"
-          >
-            Entdecke unsere Kurse und Fahrstunden – abgestimmt auf dein Ziel,
-            dein Tempo und deine Erfahrung.
-          </motion.p>
+      <section className="relative flex h-screen snap-start items-center overflow-hidden bg-background pt-16">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-100"
+          aria-hidden
+          style={{
+            background:
+              "radial-gradient(980px 660px at 20% 28%, rgba(30, 99, 255, 0.15), transparent 62%), radial-gradient(900px 620px at 84% 70%, rgba(30, 99, 255, 0.12), transparent 64%), radial-gradient(780px 520px at 55% 15%, rgba(30, 99, 255, 0.06), transparent 60%), linear-gradient(180deg, rgba(30, 99, 255, 0.055), transparent 58%)",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute -left-24 top-16 h-72 w-72 rounded-full bg-accent/15 blur-[110px]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -right-24 bottom-10 h-96 w-96 rounded-full bg-accent-light/35 blur-[120px]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.22]"
+          aria-hidden
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.08) 1px, transparent 0)",
+            backgroundSize: "22px 22px",
+          }}
+        />
+
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="mt-12 flex justify-center"
+            initial={{ opacity: 0, y: 26 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.25, ease: EASE }}
+            className="absolute left-10 top-24 hidden lg:block"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="animate-bounce text-muted">
-              <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <div className="relative h-[420px] w-[320px] -rotate-[10deg] overflow-hidden rounded-[28px] border border-border/70 bg-transparent shadow-[0_40px_100px_-60px_rgba(0,0,0,0.35)]">
+              <Image
+                src="/images/motorrad-grundkurs-2.jpg"
+                alt=""
+                fill
+                sizes="320px"
+                className="object-cover opacity-[0.86]"
+              />
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.35, ease: EASE }}
+            className="absolute right-6 bottom-16 hidden lg:block"
+          >
+            <div className="relative h-[360px] w-[300px] rotate-[8deg] overflow-hidden rounded-[26px] border border-border/70 bg-transparent shadow-[0_40px_100px_-60px_rgba(0,0,0,0.35)]">
+              <Image
+                src="/images/vku-popup.png"
+                alt=""
+                fill
+                sizes="300px"
+                className="object-cover opacity-[0.84]"
+              />
+            </div>
           </motion.div>
         </div>
+
+        <div className="relative mx-auto w-full max-w-4xl px-6 md:px-10">
+          <div className="text-center">
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: EASE }}
+              className="text-sm font-semibold uppercase tracking-[0.2em] text-accent"
+            >
+              Was wir anbieten
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, delay: 0.1, ease: EASE }}
+              className="mt-5 text-5xl font-bold leading-[1.05] tracking-tight text-foreground md:text-7xl lg:text-8xl"
+            >
+              Unsere{" "}
+              <span className="bg-gradient-to-r from-accent to-accent-dark bg-clip-text text-transparent">
+                Services
+              </span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.22, ease: EASE }}
+              className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted"
+            >
+              Kurse, Fahrstunden und Coachings – strukturiert, modern und auf dein Ziel
+              abgestimmt. Du bekommst Klarheit, Tempo und echte Fortschritte.
+            </motion.p>
+          </div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.9 }}
+          className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2"
+          aria-hidden
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="animate-bounce text-muted"
+          >
+            <path
+              d="M12 5v14M5 12l7 7 7-7"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </motion.div>
       </section>
 
-      <div className="snap-y snap-mandatory">
+      <div id="services" className="snap-y snap-mandatory">
         {SERVICES_DETAIL.map((service, i) => (
           <ServiceSection
             key={service.id}
