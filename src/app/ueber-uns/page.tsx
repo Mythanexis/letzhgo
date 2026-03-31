@@ -100,73 +100,92 @@ export default function UeberUnsPage() {
       </section>
 
       {/* Fahrlehrer */}
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        <div className="text-center">
-          <p className="text-sm uppercase tracking-widest text-accent">
-            Unsere Fahrlehrer
-          </p>
-          <h2 className="mt-4 text-3xl font-bold md:text-4xl">
-            Die, die immer bei dir sind.
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-muted">
-            Unser Team steht für Erfahrung, Geduld und echte Leidenschaft fürs
-            Fahren – damit du dich von Anfang an gut aufgehoben fühlst.
-          </p>
-        </div>
+      <section className="bg-background">
+        <div className="mx-auto max-w-7xl px-6 py-24">
+          <div className="text-center">
+            <p className="text-sm uppercase tracking-widest text-accent">
+              Unsere Fahrlehrer
+            </p>
+            <h2 className="mt-4 text-3xl font-bold md:text-4xl">
+              Die, die immer bei dir sind.
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-muted">
+              Unser Team steht für Erfahrung, Geduld und echte Leidenschaft fürs
+              Fahren – damit du dich von Anfang an gut aufgehoben fühlst.
+            </p>
+          </div>
 
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {instructorsInOrder.map((instructor, i) => (
-            <InstructorCard key={instructor.name} {...instructor} index={i} />
-          ))}
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {instructorsInOrder.map((instructor, i) => (
+              <InstructorCard key={instructor.name} {...instructor} index={i} />
+            ))}
+          </div>
         </div>
       </section>
 
       {/* About bottom */}
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="grid items-center gap-12 lg:grid-cols-2"
-        >
-          <h2 className="text-3xl font-bold md:text-4xl">
-            Ausbildung mit Erfahrung, geführt von Klarheit –{" "}
-            <span className="text-accent">für nachhaltige Sicherheit.</span>
-          </h2>
-          <p className="text-lg text-muted">
-            Unsere Ausbildung schafft die Grundlage für echte Sicherheit im
-            Strassenverkehr. Wir nehmen uns Zeit, dein Fahrniveau zu verstehen,
-            geben dir klare Strukturen und begleiten dich Schritt für Schritt –
-            mit Fokus auf dein Ziel: selbstständig und souverän unterwegs zu sein.
-          </p>
-        </motion.div>
+      <section className="bg-[#f7f8fa]">
+        <div className="mx-auto max-w-7xl px-6 py-32 md:py-40">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="grid items-center gap-12 lg:grid-cols-2"
+          >
+            <h2 className="text-3xl font-bold md:text-4xl">
+              Ausbildung mit Erfahrung, geführt von Klarheit –{" "}
+              <span className="text-accent">für nachhaltige Sicherheit.</span>
+            </h2>
+            <p className="text-lg text-muted">
+              Unsere Ausbildung schafft die Grundlage für echte Sicherheit im
+              Strassenverkehr. Wir nehmen uns Zeit, dein Fahrniveau zu verstehen,
+              geben dir klare Strukturen und begleiten dich Schritt für Schritt –
+              mit Fokus auf dein Ziel: selbstständig und souverän unterwegs zu sein.
+            </p>
+          </motion.div>
+        </div>
       </section>
 
-      {/* Quote */}
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <blockquote className="text-2xl font-medium italic leading-relaxed md:text-3xl">
-            &ldquo;Jede Fahrt beginnt mit dem ersten Gang – entscheidend ist,
-            dass du losfährst.&rdquo;
-          </blockquote>
-          <p className="mt-6 text-muted">
-            — Samir Radič, Gründer Let&apos;ZHgo
-          </p>
-        </motion.div>
+      {/* Quote — Wald, leicht abgedunkelt; Bild unten ausrichten (Strasse), Text vertikal mittig */}
+      <section className="relative flex min-h-[36rem] items-center justify-center overflow-hidden px-6 py-16 md:min-h-[44rem] md:py-20">
+        <Image
+          src="/images/ueber-uns-quote-forest.png"
+          alt=""
+          fill
+          className="object-cover object-bottom"
+          sizes="100vw"
+          priority={false}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/65"
+          aria-hidden
+        />
+        <div className="relative z-10 mx-auto w-full max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mx-auto max-w-5xl text-center"
+          >
+            <blockquote className="not-italic text-5xl font-semibold leading-[1.15] tracking-tight text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.35)] md:text-6xl md:leading-[1.12]">
+              &ldquo;Jede Fahrt beginnt mit dem ersten Gang – entscheidend ist,
+              dass du losfährst.&rdquo;
+            </blockquote>
+            <p className="mt-10 text-base text-white/75 md:mt-12 md:text-lg">
+              — Samir Radič, Gründer Let&apos;ZHgo
+            </p>
+          </motion.div>
+        </div>
       </section>
 
       {/* Stats */}
-      <Stats />
+      <Stats surface="light" />
 
       {/* FAQ */}
-      <FAQ />
+      <FAQ className="bg-[#f7f8fa]" />
     </>
   );
 }
