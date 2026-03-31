@@ -175,7 +175,7 @@ export default function WegweiserMotorradFuehrerscheinPage() {
 
       {/* Breadcrumbs + Steps */}
       <main className="w-full pb-16 md:pb-24">
-        <div className="px-6 py-6 md:px-16">
+        <div className="px-6 pt-10 pb-6 sm:px-10 md:px-14 xl:px-20">
           <Breadcrumbs
             items={[
               { label: "Home", href: "/" },
