@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { IMAGES } from "@/lib/constants";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -160,18 +159,7 @@ export default function LokationenPage() {
         />
         <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: EASE }}
-            viewport={INVIEW}
-          >
-            <Breadcrumbs
-              items={[{ label: "Home", href: "/" }, { label: "Lokationen" }]}
-            />
-          </motion.div>
-
-          <motion.div
-            className="mt-10 md:mt-12"
+            className="text-center"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: EASE }}
@@ -180,10 +168,10 @@ export default function LokationenPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">
               Standorte
             </p>
-            <h2 className="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-foreground md:text-4xl">
               Hier unterrichten und trainieren wir
             </h2>
-            <p className="mt-4 max-w-2xl text-muted md:text-lg">
+            <p className="mx-auto mt-4 max-w-2xl text-muted md:text-lg">
               Drei Anlaufstellen in der Region – jeweils mit Adresse und Link zu
               Google Maps.
             </p>
