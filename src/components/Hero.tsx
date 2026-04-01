@@ -34,6 +34,8 @@ interface HeroProps {
   subtitle: string;
   ctaText?: string;
   ctaHref?: string;
+  secondaryCtaText?: string;
+  secondaryCtaHref?: string;
   showImage?: boolean;
   imageSrc?: string;
 }
@@ -43,6 +45,8 @@ export default function Hero({
   subtitle,
   ctaText,
   ctaHref,
+  secondaryCtaText,
+  secondaryCtaHref,
   showImage = false,
   imageSrc,
 }: HeroProps) {
@@ -79,18 +83,29 @@ export default function Hero({
             >
               {subtitle}
             </motion.p>
-            {ctaText && ctaHref && (
+            {(ctaText || secondaryCtaText) && (
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 2.4, delay: 1.8, ease: [0.25, 0.1, 0.25, 1] }}
+                className="mt-8 flex flex-wrap items-center gap-4"
               >
-                <Link
-                  href={ctaHref}
-                  className="mt-8 inline-block rounded-full bg-accent px-8 py-4 text-lg font-medium text-white transition-all hover:bg-accent-dark hover:scale-105"
-                >
-                  {ctaText}
-                </Link>
+                {ctaText && ctaHref && (
+                  <Link
+                    href={ctaHref}
+                    className="rounded-full bg-accent px-8 py-4 text-lg font-medium text-white transition-all hover:bg-accent-dark hover:scale-105"
+                  >
+                    {ctaText}
+                  </Link>
+                )}
+                {secondaryCtaText && secondaryCtaHref && (
+                  <Link
+                    href={secondaryCtaHref}
+                    className="rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-medium text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-white/20"
+                  >
+                    {secondaryCtaText}
+                  </Link>
+                )}
               </motion.div>
             )}
           </div>
