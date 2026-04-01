@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PromoPopup from "@/components/PromoPopup";
 import ScrollToTopOnNavigate from "@/components/ScrollToTopOnNavigate";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -46,6 +47,7 @@ export default function RootLayout({
     <html lang="de" className="antialiased">
       <body className="flex min-h-dvh flex-col bg-background text-foreground">
         <ScrollToTopOnNavigate />
+        <SmoothScroll />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
