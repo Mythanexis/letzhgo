@@ -29,8 +29,48 @@ function BookingIcon({ type }: { type: string }) {
   }
 }
 
+function BookingPanel() {
+  return (
+    <div className="w-full max-w-sm overflow-hidden rounded-2xl shadow-2xl">
+      <div className="bg-accent px-7 py-5">
+        <h3 className="text-2xl font-extrabold text-white">
+          Jetzt buchen!
+        </h3>
+      </div>
+
+      <div className="bg-white px-5 pb-5 pt-4 md:px-7 md:pb-7 md:pt-5">
+        <p className="mb-3 text-sm font-semibold text-foreground md:mb-4">
+          Dein Führerschein wartet – worauf noch?
+        </p>
+        <div className="flex flex-col gap-2">
+          {BOOKING_ITEMS.map((item, i) => (
+            <motion.a
+              key={item.label}
+              href={item.href}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 1.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="group flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-3 transition-all duration-300 hover:border-accent/30 hover:bg-accent-light hover:shadow-sm md:px-5 md:py-4"
+            >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-white md:h-10 md:w-10">
+                <BookingIcon type={item.iconType} />
+              </span>
+              <span className="text-sm font-bold text-foreground">{item.label}</span>
+              <svg className="ml-auto h-4 w-4 text-muted opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </motion.a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 interface HeroProps {
-  title: string;
+  title: React.ReactNode;
   subtitle: string;
   ctaText?: string;
   ctaHref?: string;
@@ -52,8 +92,8 @@ export default function Hero({
 }: HeroProps) {
   if (showImage) {
     return (
-      <section className="relative flex h-screen items-end overflow-hidden">
-        <div className="absolute inset-0">
+      <section className="relative flex h-screen overflow-x-clip md:overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
           <Image
             src={imageSrc ?? IMAGES.hero}
             alt="Let'ZHgo Team"
@@ -65,13 +105,14 @@ export default function Hero({
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-        <div className="relative z-10 flex w-full items-end justify-between gap-8 px-8 pb-16 md:px-16 md:pb-24">
+        {/* Desktop layout */}
+        <div className="relative z-10 hidden w-full items-end justify-between gap-12 px-16 pb-24 md:flex">
           <div className="max-w-3xl text-left text-white">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 2, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-              className="text-4xl font-bold leading-tight md:text-6xl lg:text-7xl"
+              className="text-7xl font-extrabold leading-[1.05] lg:text-8xl"
             >
               {title}
             </motion.h1>
@@ -79,7 +120,7 @@ export default function Hero({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 2.2, delay: 1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="mt-6 max-w-xl text-lg text-white/80 md:text-xl"
+              className="mt-6 max-w-xl text-xl text-white/80"
             >
               {subtitle}
             </motion.p>
@@ -114,41 +155,63 @@ export default function Hero({
             initial={{ x: "120%" }}
             animate={{ x: 0 }}
             transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden w-full max-w-sm shrink-0 overflow-hidden rounded-2xl shadow-2xl md:block"
+            className="shrink-0"
           >
-            <div className="bg-accent px-7 py-5">
-              <h3 className="text-2xl font-extrabold text-white">
-                Jetzt buchen!
-              </h3>
-            </div>
+            <BookingPanel />
+          </motion.div>
+        </div>
 
-            <div className="bg-white px-7 pb-7 pt-5">
-              <p className="mb-4 text-sm font-semibold text-foreground">
-                Dein Führerschein wartet – worauf noch?
-              </p>
-              <div className="flex flex-col gap-2">
-                {BOOKING_ITEMS.map((item, i) => (
-                  <motion.a
-                    key={item.label}
-                    href={item.href}
-                    target={item.external ? "_blank" : undefined}
-                    rel={item.external ? "noopener noreferrer" : undefined}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 1.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="group flex items-center gap-4 rounded-xl border border-border bg-card px-5 py-4 transition-all duration-300 hover:border-accent/30 hover:bg-accent-light hover:shadow-sm"
-                  >
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
-                      <BookingIcon type={item.iconType} />
-                    </span>
-                    <span className="text-sm font-bold text-foreground">{item.label}</span>
-                    <svg className="ml-auto h-4 w-4 text-muted opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </motion.a>
-                ))}
-              </div>
-            </div>
+        {/* Mobile layout */}
+        <div className="relative z-10 flex w-full flex-col items-center justify-center px-6 pt-24 text-center md:hidden">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 2, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            className="text-5xl font-extrabold leading-[1.05] text-white"
+          >
+            {title}
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 2.2, delay: 1, ease: [0.25, 0.1, 0.25, 1] }}
+            className="mx-auto mt-4 max-w-sm text-base text-white/80"
+          >
+            {subtitle}
+          </motion.p>
+          {(ctaText || secondaryCtaText) && (
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 2.4, delay: 1.8, ease: [0.25, 0.1, 0.25, 1] }}
+              className="mt-6 flex flex-wrap items-center justify-center gap-3"
+            >
+              {ctaText && ctaHref && (
+                <Link
+                  href={ctaHref}
+                  className="rounded-full bg-accent px-6 py-3 text-base font-medium text-white transition-all hover:bg-accent-dark hover:scale-105"
+                >
+                  {ctaText}
+                </Link>
+              )}
+              {secondaryCtaText && secondaryCtaHref && (
+                <Link
+                  href={secondaryCtaHref}
+                  className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-base font-medium text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-white/20"
+                >
+                  {secondaryCtaText}
+                </Link>
+              )}
+            </motion.div>
+          )}
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-8 translate-y-32"
+          >
+            <BookingPanel />
           </motion.div>
         </div>
       </section>
