@@ -245,12 +245,6 @@ export default function DatenschutzerklaerungPage() {
               </div>
             </section>
 
-            <section>
-              <h2 className="text-2xl font-semibold text-foreground">
-                3. ZU BEARBEITENDE PERSONENDATEN
-              </h2>
-            </section>
-
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-foreground">
                 4. ZWECKE UNSERER DATENBEARBEITUNG
