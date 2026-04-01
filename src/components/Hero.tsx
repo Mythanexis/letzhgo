@@ -99,32 +99,35 @@ export default function Hero({
             initial={{ x: "120%" }}
             animate={{ x: 0 }}
             transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden w-full max-w-sm shrink-0 md:block"
+            className="hidden w-full max-w-sm shrink-0 overflow-hidden rounded-2xl shadow-2xl md:block"
           >
-            <div className="rounded-2xl border border-white/10 bg-white/10 p-8 backdrop-blur-xl">
-              <h3 className="text-xl font-bold text-white">
-                Buche deinen Kurs jetzt!
+            <div className="bg-accent px-7 py-5">
+              <h3 className="text-2xl font-extrabold text-white">
+                Jetzt buchen!
               </h3>
-              <p className="mt-2 text-sm text-white/60">
-                Wähle deinen Kurs und starte direkt durch.
+            </div>
+
+            <div className="bg-white px-7 pb-7 pt-5">
+              <p className="mb-4 text-base font-bold text-foreground">
+                Starte jetzt mit deinem Kurs durch!
               </p>
-              <div className="mt-6 flex flex-col gap-3">
+              <div className="flex flex-col gap-2">
                 {BOOKING_ITEMS.map((item, i) => (
                   <motion.a
                     key={item.label}
                     href={item.href}
                     target={item.external ? "_blank" : undefined}
                     rel={item.external ? "noopener noreferrer" : undefined}
-                    initial={{ x: 30 }}
-                    animate={{ x: 0 }}
-                    transition={{ duration: 0.7, delay: 1.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-5 py-4 text-white transition-all duration-300 hover:border-accent/50 hover:bg-accent/20"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 1.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    className="group flex items-center gap-4 rounded-xl border border-border bg-card px-5 py-4 transition-all duration-300 hover:border-accent/30 hover:bg-accent-light hover:shadow-sm"
                   >
-                    <span className="flex items-center gap-3">
-                      <span className="opacity-50 transition-opacity duration-300 group-hover:opacity-100"><BookingIcon type={item.iconType} /></span>
-                      <span className="text-sm font-medium">{item.label}</span>
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
+                      <BookingIcon type={item.iconType} />
                     </span>
-                    <svg className="h-4 w-4 opacity-40 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <span className="text-sm font-bold text-foreground">{item.label}</span>
+                    <svg className="ml-auto h-4 w-4 text-muted opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                   </motion.a>
