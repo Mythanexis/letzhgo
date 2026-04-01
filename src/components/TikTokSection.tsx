@@ -72,7 +72,7 @@ export default function TikTokSection() {
             </a>
           </motion.div>
 
-          <div className="mx-auto grid max-w-4xl grid-cols-3 gap-4 md:gap-5">
+          <div className="mx-auto grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-3 md:gap-5">
             {VIDEOS.map((video, i) => (
               <motion.div
                 key={video.id}

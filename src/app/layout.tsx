@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PromoPopup from "@/components/PromoPopup";
+import PosterPopup from "@/components/PosterPopup";
 import ScrollToTopOnNavigate from "@/components/ScrollToTopOnNavigate";
 import "./globals.css";
 
@@ -46,6 +47,7 @@ export default function RootLayout({
         <main className="flex-1 overflow-x-clip">{children}</main>
         <Footer />
         <PromoPopup />
+        <PosterPopup />
       </body>
     </html>
   );

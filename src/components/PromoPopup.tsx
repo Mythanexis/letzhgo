@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
+import { requestOpen, notifyClose } from "@/lib/popup-coordinator";
 
 interface Promo {
   id: string;
@@ -72,10 +73,18 @@ export default function PromoPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const tryOpen = () => {
+    if (requestOpen("promo")) {
+      setIsOpen(true);
+    } else {
+      timerRef.current = setTimeout(tryOpen, 3000);
+    }
+  };
+
   useEffect(() => {
     const shuffled = PROMOS.map((_, i) => i).sort(() => Math.random() - 0.5);
     setOrder(shuffled);
-    timerRef.current = setTimeout(() => setIsOpen(true), INITIAL_DELAY_MS);
+    timerRef.current = setTimeout(tryOpen, INITIAL_DELAY_MS);
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -84,12 +93,10 @@ export default function PromoPopup() {
 
   function close() {
     setIsOpen(false);
+    notifyClose("promo");
     const hasNext = currentPromoIndex < order.length - 1;
     if (hasNext) {
-      timerRef.current = setTimeout(() => {
-        setCurrentPromoIndex((prev) => prev + 1);
-        setIsOpen(true);
-      }, NEXT_POPUP_DELAY_MS);
+      timerRef.current = setTimeout(tryOpen, NEXT_POPUP_DELAY_MS);
     }
   }
 
