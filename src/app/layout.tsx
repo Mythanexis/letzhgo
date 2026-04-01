@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import PromoPopup from "@/components/PromoPopup";
 import PosterPopup from "@/components/PosterPopup";
 import ScrollToTopOnNavigate from "@/components/ScrollToTopOnNavigate";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -47,6 +48,7 @@ export default function RootLayout({
     <html lang="de" className="antialiased">
       <body className="flex min-h-dvh flex-col bg-background text-foreground">
         <ScrollToTopOnNavigate />
+        <SmoothScroll />
         <Navbar />
         <main className="flex-1 overflow-x-clip">{children}</main>
         <Footer />
