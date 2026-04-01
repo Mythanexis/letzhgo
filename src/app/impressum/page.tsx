@@ -78,7 +78,7 @@ export default function ImpressumPage() {
               </h2>
               <p>CHE-105.168.305 (Gianni Sebestin)</p>
               <p>CHE-307.336.916 (Domagoj Caleta)</p>
-              <p>CHE-319.770.768 (Jakov Budimir)</p>
+
               <p>CHE-112.384.587 (Samir Radič)</p>
               <p>CHE-249.988.596 (Tomislav Caleta)</p>
             </section>
