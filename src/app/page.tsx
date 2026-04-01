@@ -31,10 +31,12 @@ export default function HomePage() {
     <>
       {/* Hero with full-width background image */}
       <Hero
-        title="Willkommen bei Let'ZHgo."
-        subtitle="Wir begleiten dich auf dem Weg zu sicherem und selbstständigem Fahren – ob Auto, Motorrad oder Anhänger. Mit professioneller Unterstützung lernst du souverän und entspannt – ganz in deinem Tempo."
-        ctaText="Reise beginnen"
-        ctaHref="/kontakt"
+        title="Deine Fahrschule in Zürich."
+        subtitle="Ob Auto, Motorrad oder Anhänger – wir begleiten dich mit professioneller Unterstützung auf dem Weg zum Führerschein. Souverän, entspannt und in deinem Tempo."
+        ctaText="Mehr erfahren"
+        ctaHref="#services"
+        secondaryCtaText="Kontakt"
+        secondaryCtaHref="/kontakt"
         showImage
       />
 
