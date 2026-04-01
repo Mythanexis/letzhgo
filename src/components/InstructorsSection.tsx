@@ -19,9 +19,9 @@ function InstructorCard({
   return (
     <Link
       href={`/fahrlehrer/${instructor.slug}`}
-      className="group flex h-[500px] w-[440px] flex-col overflow-hidden rounded-lg bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:-translate-y-1"
+      className="group flex h-[400px] w-[320px] flex-col overflow-hidden rounded-lg bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:-translate-y-1 md:h-[500px] md:w-[440px]"
     >
-      <div className="relative h-[340px] overflow-hidden">
+      <div className="relative h-[260px] overflow-hidden md:h-[340px]">
         <Image
           src={instructor.image}
           alt={instructor.name}

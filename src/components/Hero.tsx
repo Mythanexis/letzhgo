@@ -92,7 +92,7 @@ export default function Hero({
 }: HeroProps) {
   if (showImage) {
     return (
-      <section className="relative flex h-screen overflow-x-clip md:overflow-hidden">
+      <section className="relative flex h-dvh overflow-x-clip md:overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <Image
             src={imageSrc ?? IMAGES.hero}

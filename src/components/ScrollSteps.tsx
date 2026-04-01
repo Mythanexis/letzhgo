@@ -31,7 +31,7 @@ export default function ScrollSteps() {
       style={{ height: `${STEPS.length * 100}vh` }}
       className="relative will-change-transform"
     >
-      <div className="sticky top-0 flex h-screen w-full flex-col justify-between">
+      <div className="sticky top-0 flex h-dvh w-full flex-col justify-between">
         {/* Header */}
         <div className="mx-auto max-w-4xl px-6 pt-32 text-center">
           <motion.p
@@ -65,8 +65,25 @@ export default function ScrollSteps() {
           </motion.p>
         </div>
 
+        {/* Mobile step number */}
+        <div className="relative flex h-24 items-center justify-center overflow-hidden md:hidden">
+          {STEPS.map((step, i) => (
+            <motion.span
+              key={step.number}
+              animate={{
+                opacity: activeIndex === i ? 1 : 0,
+                y: activeIndex === i ? 0 : activeIndex > i ? -40 : 40,
+              }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute text-9xl font-bold leading-none text-accent/10 will-change-transform"
+            >
+              {step.number}
+            </motion.span>
+          ))}
+        </div>
+
         {/* Steps content */}
-        <div className="flex w-full items-end justify-between px-10 pb-20 md:px-20 md:pb-28 lg:px-32 xl:px-40">
+        <div className="flex w-full items-end justify-between px-6 pb-20 md:px-20 md:pb-28 lg:px-32 xl:px-40">
           <div className="max-w-2xl flex-1">
             <div className="relative h-[220px]">
               {STEPS.map((step, i) => (

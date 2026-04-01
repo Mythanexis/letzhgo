@@ -15,7 +15,7 @@ const NAV_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="relative flex min-h-screen w-full flex-col">
+    <footer className="relative flex min-h-dvh w-full flex-col">
       <Image
         src={IMAGES.footerBg}
         alt=""
@@ -100,6 +100,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
+        <div className="h-[env(safe-area-inset-bottom)]" />
       </div>
     </footer>
   );

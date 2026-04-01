@@ -41,7 +41,7 @@ function ServiceSection({
   return (
     <section
       ref={ref}
-      className="relative flex h-screen snap-start items-end overflow-hidden"
+      className="relative flex h-dvh snap-start items-end overflow-hidden"
     >
       <motion.div className="absolute inset-0" style={{ scale: imageScale, y: imageY }}>
         <Image
@@ -109,7 +109,7 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero Header */}
-      <section className="relative flex h-screen snap-start items-center overflow-hidden bg-background pt-16">
+      <section className="relative flex h-dvh snap-start items-center overflow-hidden bg-background pt-16">
         <div
           className="pointer-events-none absolute inset-0 opacity-100"
           aria-hidden
