@@ -123,8 +123,8 @@ export default function Hero({
             </div>
 
             <div className="bg-white px-7 pb-7 pt-5">
-              <p className="mb-4 text-base font-bold text-foreground">
-                Starte jetzt mit deinem Kurs durch!
+              <p className="mb-4 text-sm font-semibold text-foreground">
+                Dein Führerschein wartet – worauf noch?
               </p>
               <div className="flex flex-col gap-2">
                 {BOOKING_ITEMS.map((item, i) => (
