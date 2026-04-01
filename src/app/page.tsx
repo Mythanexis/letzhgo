@@ -65,6 +65,26 @@ export default function HomePage() {
             />
           ))}
         </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "-40px" }}
+          className="mt-12 text-center"
+        >
+          <Link
+            href="/services"
+            className="group relative inline-flex items-center gap-2 pb-0.5 text-base font-semibold text-accent no-underline transition-colors after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-accent-dark after:content-[''] hover:after:scale-x-100"
+          >
+            Services entdecken
+            <span
+              aria-hidden
+              className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Link>
+        </motion.div>
         </div>
       </section>
 
