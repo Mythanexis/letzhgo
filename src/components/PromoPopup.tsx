@@ -77,7 +77,7 @@ export default function PromoPopup() {
     if (requestOpen("promo")) {
       setIsOpen(true);
     } else {
-      timerRef.current = setTimeout(tryOpen, 3000);
+      timerRef.current = setTimeout(tryOpen, 30_000);
     }
   };
 
