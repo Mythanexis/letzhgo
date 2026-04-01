@@ -183,8 +183,8 @@ export default function HomePage() {
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               viewport={{ once: true, margin: "-80px" }}
             >
-              <div className="rounded-3xl bg-white/95 p-8 shadow-xl backdrop-blur-sm">
-                <div className="flex items-center justify-between gap-4">
+              <div className="rounded-3xl bg-white/95 p-6 shadow-xl backdrop-blur-sm md:p-8">
+                <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                       Zeitpunkt
@@ -250,9 +250,9 @@ export default function HomePage() {
             viewport={{ once: true, margin: "-80px" }}
             className="text-center"
           >
-            <h2 className="flex items-center justify-center gap-4 text-2xl font-extrabold tracking-wide text-foreground md:text-3xl">
+            <h2 className="flex flex-wrap items-center justify-center gap-3 text-2xl font-extrabold tracking-wide text-foreground md:gap-4 md:text-3xl">
               <span className="uppercase">Bericht von</span>
-              <span className="inline-flex items-center rounded-full bg-accent px-6 py-2 text-sm font-bold uppercase tracking-[0.18em] text-white md:text-base">
+              <span className="inline-flex items-center rounded-full bg-accent px-5 py-2 text-sm font-bold uppercase tracking-[0.18em] text-white md:px-6 md:text-base">
                 20 Minuten
               </span>
             </h2>

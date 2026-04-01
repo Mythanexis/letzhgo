@@ -14,7 +14,7 @@ const AVATAR_IMAGES = [
 export default function CTABanner() {
   return (
     <section className="bg-[#f7f8fa]">
-      <div className="px-8 py-24 md:px-16 md:py-32 lg:px-24 xl:px-32">
+      <div className="px-6 py-24 md:px-16 md:py-32 lg:px-24 xl:px-32">
         <div className="flex flex-col justify-between gap-16 lg:flex-row lg:items-center">
           {/* Left */}
           <motion.div

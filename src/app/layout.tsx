@@ -43,7 +43,7 @@ export default function RootLayout({
       <body className="flex min-h-screen flex-col bg-background text-foreground">
         <ScrollToTopOnNavigate />
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 overflow-x-clip">{children}</main>
         <Footer />
         <PromoPopup />
       </body>

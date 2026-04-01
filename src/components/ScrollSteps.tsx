@@ -65,8 +65,25 @@ export default function ScrollSteps() {
           </motion.p>
         </div>
 
+        {/* Step number – mobile only, centered */}
+        <div className="relative flex h-24 items-center justify-center overflow-hidden md:hidden">
+          {STEPS.map((step, i) => (
+            <motion.span
+              key={step.number}
+              animate={{
+                opacity: activeIndex === i ? 1 : 0,
+                y: activeIndex === i ? 0 : activeIndex > i ? -40 : 40,
+              }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute text-9xl font-bold leading-none text-accent/10 will-change-transform"
+            >
+              {step.number}
+            </motion.span>
+          ))}
+        </div>
+
         {/* Steps content */}
-        <div className="flex w-full items-end justify-between px-10 pb-20 md:px-20 md:pb-28 lg:px-32 xl:px-40">
+        <div className="flex w-full items-end justify-between px-6 pb-16 sm:px-10 md:px-20 md:pb-28 lg:px-32 xl:px-40">
           <div className="max-w-2xl flex-1">
             <div className="relative h-[220px]">
               {STEPS.map((step, i) => (

@@ -90,7 +90,7 @@ export default function Stats({ surface = "muted" }: StatsProps) {
     <section
       className={surface === "light" ? "bg-background" : "bg-[#f7f8fa]"}
     >
-      <div className="mx-auto px-8 py-40 md:px-16 md:py-52 lg:px-24 xl:px-32">
+      <div className="mx-auto px-6 py-40 md:px-16 md:py-52 lg:px-24 xl:px-32">
         {/* Top: Title left, description right */}
         <div className="grid items-start gap-16 lg:grid-cols-[1fr_0.55fr]">
           <motion.div
@@ -120,7 +120,7 @@ export default function Stats({ surface = "muted" }: StatsProps) {
         </div>
 
         {/* Bottom: Numbers full-width */}
-        <div className="mt-32 grid grid-cols-2 gap-16 md:mt-40 md:grid-cols-4 md:gap-20">
+        <div className="mt-32 grid grid-cols-2 gap-8 md:mt-40 md:grid-cols-4 md:gap-20">
           {STATS.map((stat, i) => (
             <AnimatedStat key={i} value={stat.value} label={stat.label} index={i} />
           ))}
