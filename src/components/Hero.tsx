@@ -112,7 +112,7 @@ export default function Hero({
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 2, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-              className="text-7xl font-extrabold leading-[1.05] lg:text-8xl"
+              className="text-6xl font-extrabold leading-[1.05] lg:text-7xl"
             >
               {title}
             </motion.h1>
