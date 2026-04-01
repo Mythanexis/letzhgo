@@ -55,7 +55,7 @@ export default function NotFound() {
   }, []);
 
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6">
+    <section className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden px-6">
       <SpeedLines />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,var(--color-accent-light)_0%,transparent_70%)] opacity-40" />

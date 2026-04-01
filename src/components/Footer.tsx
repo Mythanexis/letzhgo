@@ -100,6 +100,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
+        <div className="h-[env(safe-area-inset-bottom)]" />
       </div>
     </footer>
   );

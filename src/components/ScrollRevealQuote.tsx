@@ -71,7 +71,7 @@ export default function ScrollRevealQuote({
       ref={containerRef}
       className={`relative w-full will-change-transform ${minHeightClass}`}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-dvh w-full overflow-hidden">
         <motion.div className="absolute inset-0" style={{ scale: imageScale }}>
           <Image
             src={IMAGES.quoteBg}
