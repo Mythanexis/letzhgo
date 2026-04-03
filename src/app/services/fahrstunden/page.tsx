@@ -26,7 +26,7 @@ const INSTRUCTORS = [
 export default function FahrstundenPage() {
   return (
     <>
-      <section className="relative flex h-[60vh] items-end overflow-hidden">
+      <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
         <Image
           src={IMAGES.autoFahrstunden}
           alt="Fahrstunden"

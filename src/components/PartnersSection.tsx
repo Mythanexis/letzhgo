@@ -19,7 +19,7 @@ export default function PartnersSection() {
   const logos = [...PARTNERS, ...PARTNERS];
 
   return (
-    <section className="relative overflow-hidden py-24 md:py-32">
+    <section className="relative overflow-hidden py-24 md:py-32" data-navbar-dark>
       {/* Background image */}
       <div className="pointer-events-none absolute inset-0">
         <Image

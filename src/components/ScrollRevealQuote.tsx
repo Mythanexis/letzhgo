@@ -69,6 +69,7 @@ export default function ScrollRevealQuote({
   return (
     <section
       ref={containerRef}
+      data-navbar-dark
       className={`relative w-full will-change-transform ${minHeightClass}`}
     >
       <div className="sticky top-0 h-dvh w-full overflow-hidden">

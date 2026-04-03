@@ -22,7 +22,7 @@ const COURSE_HIGHLIGHTS = [
 export default function VerkehrskundePage() {
   return (
     <>
-      <section className="relative flex h-[60vh] items-end overflow-hidden">
+      <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
         <Image
           src={IMAGES.verkehrskunde}
           alt="Verkehrskundeunterricht"

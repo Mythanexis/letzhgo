@@ -133,7 +133,10 @@ export default function WegweiserMotorradFuehrerscheinPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative flex h-[55vh] min-h-[380px] items-end overflow-hidden">
+      <section
+        className="relative flex h-[55vh] min-h-[380px] items-end overflow-hidden"
+        data-navbar-dark
+      >
         <Image
           src={WEGWEISER_MOTORRAD_IMAGES.pageHero}
           alt="Wegweiser Motorrad-Führerschein – Wegweiser-Schild und Motorradfahrer in den Bergen"

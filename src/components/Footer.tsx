@@ -15,7 +15,10 @@ const NAV_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="relative flex min-h-screen w-full flex-col overflow-x-clip">
+    <footer
+      className="relative flex min-h-screen w-full flex-col overflow-x-clip"
+      data-navbar-dark
+    >
       <Image
         src={IMAGES.footerBg}
         alt=""

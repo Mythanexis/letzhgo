@@ -31,7 +31,7 @@ const INSTRUCTORS = [
 export default function MotorradPage() {
   return (
     <>
-      <section className="relative flex h-[60vh] items-end overflow-hidden">
+      <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
         <Image
           src={IMAGES.motorrad}
           alt="Motorrad-Grundkurs"

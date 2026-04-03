@@ -27,7 +27,7 @@ const INSTRUCTORS = [
 export default function NothelferkursPage() {
   return (
     <>
-      <section className="relative flex h-[60vh] items-end overflow-hidden">
+      <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
         <Image
           src={IMAGES.nothelferkurs}
           alt="Nothelferkurs"

@@ -148,7 +148,10 @@ export default function UeberUnsPage() {
       </section>
 
       {/* Quote — Wald, leicht abgedunkelt; Bild unten ausrichten (Strasse), Text vertikal mittig */}
-      <section className="relative flex min-h-[36rem] items-center justify-center overflow-hidden px-6 py-16 md:min-h-[44rem] md:py-20">
+      <section
+        className="relative flex min-h-[36rem] items-center justify-center overflow-hidden px-6 py-16 md:min-h-[44rem] md:py-20"
+        data-navbar-dark
+      >
         <Image
           src="/images/ueber-uns-quote-forest.png"
           alt=""

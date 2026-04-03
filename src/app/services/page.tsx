@@ -41,6 +41,7 @@ function ServiceSection({
   return (
     <section
       ref={ref}
+      data-navbar-dark
       className="relative flex h-dvh snap-start items-end overflow-hidden"
     >
       <motion.div className="absolute inset-0" style={{ scale: imageScale, y: imageY }}>
