@@ -117,7 +117,11 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3 sm:px-4 sm:pt-4 md:px-6">
+      <header
+        className={`pointer-events-none fixed inset-x-0 top-0 flex justify-center px-3 pt-3 sm:px-4 sm:pt-4 md:px-6 ${
+          mobileOpen ? "z-[70]" : "z-50"
+        }`}
+      >
         <nav
           className={`pointer-events-auto flex w-full max-w-6xl items-center gap-3 rounded-2xl border px-3 py-2.5 transition-[box-shadow,background-color,border-color] duration-300 sm:gap-4 sm:rounded-[1.25rem] sm:px-4 sm:py-3 md:px-5 ${barShell}`}
           aria-label="Hauptnavigation"
@@ -177,30 +181,36 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className={`flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-xl border transition-colors md:hidden ${
+              className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border transition-[background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${
                 glassNav
                   ? "border-white/30 bg-white/10 hover:bg-white/20"
                   : "border-neutral-200 bg-neutral-50 shadow-sm hover:bg-neutral-100"
-              }`}
+              } ${mobileOpen ? "ring-2 ring-accent/15" : ""}`}
               aria-label={mobileOpen ? "Menu schließen" : "Menu öffnen"}
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
             >
-              <span
-                className={`block h-0.5 w-5 transition-transform ${burgerLine} ${
-                  mobileOpen ? "translate-y-1.5 rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-5 transition-opacity ${burgerLine} ${
-                  mobileOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-5 transition-transform ${burgerLine} ${
-                  mobileOpen ? "-translate-y-1.5 -rotate-45" : ""
-                }`}
-              />
+              <span className="relative block h-5 w-5 shrink-0" aria-hidden>
+                <span
+                  className={`absolute left-0 block h-0.5 w-5 origin-center rounded-full ${burgerLine} transition-[top,bottom,transform,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
+                    mobileOpen
+                      ? "top-1/2 bottom-auto -translate-y-1/2 rotate-45"
+                      : "top-0 bottom-auto translate-y-0 rotate-0"
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-1/2 rounded-full ${burgerLine} transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    mobileOpen ? "scale-x-0 opacity-0" : "scale-x-100 opacity-100"
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 block h-0.5 w-5 origin-center rounded-full ${burgerLine} transition-[top,bottom,transform,opacity] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
+                    mobileOpen
+                      ? "top-1/2 bottom-auto -translate-y-1/2 -rotate-45"
+                      : "top-auto bottom-0 translate-y-0 rotate-0"
+                  }`}
+                />
+              </span>
             </button>
           </div>
         </nav>
