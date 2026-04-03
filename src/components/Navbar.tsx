@@ -10,6 +10,13 @@ import { NAV_LINKS, SITE } from "@/lib/constants";
 /** Home: oben immer Glass, bis gescrollt (Fallback bevor Layout misst). */
 const TRANSPARENT_AT_TOP_PATHS: readonly string[] = ["/"];
 
+/** z. B. „Services“ bleibt aktiv auf `/services/fahrstunden` etc.; „Home“ nur exakt `/`. */
+function isNavLinkActive(currentPath: string, href: string): boolean {
+  if (currentPath === href) return true;
+  if (href === "/") return false;
+  return currentPath.startsWith(`${href}/`);
+}
+
 /** Pixel unterhalb Viewport-Oberkante, die zur „Nav-Zone“ zählen. */
 const NAV_OVERLAP_BAND_PX = 104;
 /** Min. Überlappung mit dunklem Block, damit Glass aktiv wird (vermeidet Rand-Artefakte). */
@@ -95,7 +102,7 @@ export default function Navbar() {
     : "border-neutral-200/95 bg-white shadow-[0_32px_100px_-24px_rgba(15,23,42,0.10),0_18px_56px_-28px_rgba(15,23,42,0.07),0_0_0_1px_rgba(15,23,42,0.045)] backdrop-blur-2xl";
 
   const desktopPill = (href: string) => {
-    const active = pathname === href;
+    const active = isNavLinkActive(pathname, href);
     if (glassNav) {
       return active
         ? "bg-white/20 font-semibold text-white shadow-sm"
@@ -145,6 +152,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  aria-current={isNavLinkActive(pathname, link.href) ? "page" : undefined}
                   className={`rounded-full px-3.5 py-2 text-sm transition-colors lg:px-4 ${desktopPill(link.href)}`}
                 >
                   {link.label}
@@ -220,18 +228,22 @@ export default function Navbar() {
               transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="flex flex-1 flex-col items-center justify-center gap-8">
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={`text-2xl font-semibold tracking-tight transition-colors hover:text-accent ${
-                      pathname === link.href ? "text-accent" : "text-foreground"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {NAV_LINKS.map((link) => {
+                  const active = isNavLinkActive(pathname, link.href);
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      aria-current={active ? "page" : undefined}
+                      className={`text-2xl font-semibold tracking-tight transition-colors hover:text-accent ${
+                        active ? "text-accent" : "text-foreground"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
               </div>
 
               <Link
