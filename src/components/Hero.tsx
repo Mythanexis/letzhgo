@@ -1,8 +1,9 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
 
 const BOOKING_ITEMS = [
@@ -11,6 +12,14 @@ const BOOKING_ITEMS = [
   { label: "Verkehrskundeunterricht", href: EDOOBOX_LINKS.verkehrskunde, external: true, iconType: "traffic" as const },
   { label: "Motorrad-Grundkurs", href: EDOOBOX_LINKS.motorrad, external: true, iconType: "moto" as const },
 ];
+
+const SNAP = [0.16, 1, 0.3, 1] as const;
+/** Ruhiger Ease für CTAs — kein Feder- oder Overshoot-Feeling */
+const CTA_EASE = [0.22, 1, 0.36, 1] as const;
+
+/** Gleicher Start wie Booking-Panel (Desktop: Slide-in, Mobile: Panel-Fade). */
+const HERO_BOOKING_START_DESKTOP = 1.05;
+const HERO_BOOKING_START_MOBILE = 1.48;
 
 function BookingIcon({ type }: { type: string }) {
   const cls = "h-5 w-5";
@@ -51,7 +60,7 @@ function BookingPanel() {
               rel={item.external ? "noopener noreferrer" : undefined}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 1.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.72, delay: 2.1 + i * 0.14, ease: SNAP }}
               className="group flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-3 transition-all duration-300 hover:border-accent/30 hover:bg-accent-light hover:shadow-sm md:px-5 md:py-4"
             >
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-white md:h-10 md:w-10">
@@ -69,8 +78,148 @@ function BookingPanel() {
   );
 }
 
+/** Wort-für-Wort: Maske von unten hoch — kein klassisches Fade-only. */
+function HeroTitleMaskedWords({
+  text,
+  className,
+  startDelay = 0.2,
+}: {
+  text: string;
+  className?: string;
+  /** Wann die erste Silbe loslegt (z. B. synchron mit Modal). */
+  startDelay?: number;
+}) {
+  const reduceMotion = useReducedMotion();
+  const parts = text.split(/(\s+)/);
+
+  return (
+    <h1 className={className}>
+      {parts.map((part, i) => {
+        if (/^\s+$/.test(part)) {
+          return <span key={`s-${i}`}>{part}</span>;
+        }
+        return (
+          <span key={`w-${i}`} className="inline-block overflow-hidden pb-[0.08em] align-baseline">
+            <motion.span
+              className="inline-block"
+              initial={reduceMotion ? false : { y: "115%", rotate: 1.2 }}
+              animate={reduceMotion ? undefined : { y: "0%", rotate: 0 }}
+              transition={{
+                duration: 1.52,
+                delay: startDelay + i * 0.125,
+                ease: SNAP,
+              }}
+            >
+              {part}
+            </motion.span>
+          </span>
+        );
+      })}
+    </h1>
+  );
+}
+
+function HeroHeadline({
+  title,
+  className,
+  /** undefined = Hero ohne Bild: Titel wie bisher früh; gesetzt = Start synchron mit Modal o. ä. */
+  headlineStartDelay,
+}: {
+  title: ReactNode;
+  className: string;
+  headlineStartDelay?: number;
+}) {
+  const reduceMotion = useReducedMotion();
+  if (typeof title === "string") {
+    return (
+      <HeroTitleMaskedWords
+        text={title}
+        className={className}
+        startDelay={headlineStartDelay ?? 0.2}
+      />
+    );
+  }
+  return (
+    <motion.h1
+      className={className}
+      initial={reduceMotion ? false : { clipPath: "inset(0 0 100% 0)" }}
+      animate={reduceMotion ? undefined : { clipPath: "inset(0 0 0% 0)" }}
+      transition={{
+        duration: 1.85,
+        delay: headlineStartDelay ?? 0,
+        ease: SNAP,
+      }}
+    >
+      {title}
+    </motion.h1>
+  );
+}
+
+/** Untertitel: von links „aufgezogen“ + Blur löst sich — liest sich wie Fokussieren. */
+function HeroSubtitleReveal({
+  children,
+  className,
+  delay = 1.2,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const reduceMotion = useReducedMotion();
+  return (
+    <motion.p
+      className={className}
+      initial={
+        reduceMotion
+          ? false
+          : {
+              clipPath: "inset(0 100% 0 0)",
+              filter: "blur(14px)",
+            }
+      }
+      animate={
+        reduceMotion
+          ? undefined
+          : {
+              clipPath: "inset(0 0% 0 0)",
+              filter: "blur(0px)",
+            }
+      }
+      transition={{ duration: 2.85, delay, ease: SNAP }}
+    >
+      {children}
+    </motion.p>
+  );
+}
+
+/** CTAs: dezent — leicht von unten, lange Dauer, kein Spring/Rotate. */
+function HeroCtaEnter({
+  href,
+  children,
+  className,
+  delay,
+}: {
+  href: string;
+  children: ReactNode;
+  className: string;
+  delay: number;
+}) {
+  const reduceMotion = useReducedMotion();
+  return (
+    <motion.div
+      initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+      animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      transition={{ duration: 1.45, delay, ease: CTA_EASE }}
+    >
+      <Link href={href} className={className}>
+        {children}
+      </Link>
+    </motion.div>
+  );
+}
+
 interface HeroProps {
-  title: React.ReactNode;
+  title: ReactNode;
   subtitle: string;
   ctaText?: string;
   ctaHref?: string;
@@ -111,53 +260,49 @@ export default function Hero({
         {/* Desktop layout */}
         <div className="relative z-10 hidden w-full items-end justify-between gap-12 px-16 pb-24 md:flex">
           <div className="max-w-3xl text-left text-white">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 2, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            <HeroHeadline
+              title={title}
               className="text-6xl font-extrabold leading-[1.05] lg:text-7xl"
-            >
-              {title}
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 2.2, delay: 1, ease: [0.25, 0.1, 0.25, 1] }}
+              headlineStartDelay={HERO_BOOKING_START_DESKTOP}
+            />
+            <HeroSubtitleReveal
               className="mt-6 max-w-xl text-xl text-white/80"
+              delay={1.35}
             >
               {subtitle}
-            </motion.p>
+            </HeroSubtitleReveal>
             {(ctaText || secondaryCtaText) && (
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 2.4, delay: 1.8, ease: [0.25, 0.1, 0.25, 1] }}
-                className="mt-8 flex flex-wrap items-center gap-4"
-              >
+              <div className="mt-8 flex flex-wrap items-center gap-4">
                 {ctaText && ctaHref && (
-                  <Link
+                  <HeroCtaEnter
                     href={ctaHref}
+                    delay={2.38}
                     className="rounded-full bg-accent px-8 py-4 text-lg font-medium text-white transition-all hover:bg-accent-dark hover:scale-105"
                   >
                     {ctaText}
-                  </Link>
+                  </HeroCtaEnter>
                 )}
                 {secondaryCtaText && secondaryCtaHref && (
-                  <Link
+                  <HeroCtaEnter
                     href={secondaryCtaHref}
+                    delay={2.58}
                     className="rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-medium text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-white/20"
                   >
                     {secondaryCtaText}
-                  </Link>
+                  </HeroCtaEnter>
                 )}
-              </motion.div>
+              </div>
             )}
           </div>
 
           <motion.div
             initial={{ x: "120%" }}
             animate={{ x: 0 }}
-            transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{
+              duration: 1.55,
+              delay: HERO_BOOKING_START_DESKTOP,
+              ease: SNAP,
+            }}
             className="shrink-0"
           >
             <BookingPanel />
@@ -166,52 +311,48 @@ export default function Hero({
 
         {/* Mobile layout */}
         <div className="relative z-10 flex w-full flex-col items-center justify-center px-6 pt-24 text-center md:hidden">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 2, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+          <HeroHeadline
+            title={title}
             className="text-5xl font-extrabold leading-[1.05] text-white"
-          >
-            {title}
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 2.2, delay: 1, ease: [0.25, 0.1, 0.25, 1] }}
+            headlineStartDelay={HERO_BOOKING_START_MOBILE}
+          />
+          <HeroSubtitleReveal
             className="mx-auto mt-4 max-w-sm text-base text-white/80"
+            delay={1.22}
           >
             {subtitle}
-          </motion.p>
+          </HeroSubtitleReveal>
           {(ctaText || secondaryCtaText) && (
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 2.4, delay: 1.8, ease: [0.25, 0.1, 0.25, 1] }}
-              className="mt-6 flex flex-wrap items-center justify-center gap-3"
-            >
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               {ctaText && ctaHref && (
-                <Link
+                <HeroCtaEnter
                   href={ctaHref}
+                  delay={2.18}
                   className="rounded-full bg-accent px-6 py-3 text-base font-medium text-white transition-all hover:bg-accent-dark hover:scale-105"
                 >
                   {ctaText}
-                </Link>
+                </HeroCtaEnter>
               )}
               {secondaryCtaText && secondaryCtaHref && (
-                <Link
+                <HeroCtaEnter
                   href={secondaryCtaHref}
+                  delay={2.38}
                   className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-base font-medium text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-white/20"
                 >
                   {secondaryCtaText}
-                </Link>
+                </HeroCtaEnter>
               )}
-            </motion.div>
+            </div>
           )}
 
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{
+              duration: 1.35,
+              delay: HERO_BOOKING_START_MOBILE,
+              ease: SNAP,
+            }}
             className="mt-8 translate-y-32"
           >
             <BookingPanel />
@@ -225,35 +366,26 @@ export default function Hero({
     <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden px-6 pt-24">
       <div className="absolute inset-0 bg-gradient-to-b from-accent-light/50 via-transparent to-transparent" />
       <div className="relative z-10 mx-auto max-w-4xl text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        <HeroHeadline
+          title={title}
           className="text-4xl font-bold leading-tight text-foreground md:text-6xl lg:text-7xl"
-        >
-          {title}
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        />
+        <HeroSubtitleReveal
           className="mx-auto mt-6 max-w-2xl text-lg text-muted md:text-xl"
+          delay={1.08}
         >
           {subtitle}
-        </motion.p>
+        </HeroSubtitleReveal>
         {ctaText && ctaHref && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <Link
+          <div className="mt-10">
+            <HeroCtaEnter
               href={ctaHref}
-              className="mt-10 inline-block rounded-full bg-accent px-8 py-4 text-lg font-medium text-white transition-all hover:bg-accent-dark hover:scale-105"
+              delay={2.15}
+              className="inline-block rounded-full bg-accent px-8 py-4 text-lg font-medium text-white transition-all hover:bg-accent-dark hover:scale-105"
             >
               {ctaText}
-            </Link>
-          </motion.div>
+            </HeroCtaEnter>
+          </div>
         )}
       </div>
     </section>
