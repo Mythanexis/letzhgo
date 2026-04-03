@@ -14,7 +14,7 @@ export const NAV_LINKS = [
 ] as const;
 
 export const IMAGES = {
-  hero: "/images/hero.png",
+  hero: "/images/letzhgo-hero.jpg",
   autoFahrstunden: "/images/auto-fahrstunden.png",
   nothelferkurs: "/images/nothelferkurs.png",
   verkehrskunde: "/images/verkehrskunde.png",
