@@ -56,12 +56,12 @@ const item = {
 export default function AutofahrenAb17Section() {
   return (
     <section
-      className="relative overflow-hidden py-24 md:py-36"
+      className="relative overflow-hidden bg-[#f7f8fa] py-24 md:py-36"
       aria-labelledby="autofahren-ab-17-heading"
     >
       {/* Atmosphäre */}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-accent-light/70 via-background to-[#eef2ff]/80"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-accent-light/50 via-[#f7f8fa] to-[#eef2ff]/60"
         aria-hidden
       />
       <div

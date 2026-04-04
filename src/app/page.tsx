@@ -99,7 +99,7 @@ export default function HomePage() {
       <CTABanner />
 
       {/* Preise */}
-      <section className="bg-background">
+      <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-7xl px-6 py-24">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -128,7 +128,7 @@ export default function HomePage() {
       </section>
 
       {/* Ausbildung mit System (Value vor Preisen – Funnel) */}
-      <section className="bg-[#f7f8fa]">
+      <section className="bg-background">
         <div className="mx-auto max-w-7xl px-6 py-24">
           <div className="grid items-start gap-12 lg:grid-cols-2">
             <motion.div
@@ -370,10 +370,10 @@ export default function HomePage() {
       <WegweiserHomeTeaser />
 
       {/* FAQ */}
-      <FAQ className="bg-background" />
+      <FAQ className="bg-[#f7f8fa]" />
 
       {/* Kontakt */}
-      <section className="bg-[#f7f8fa]">
+      <section className="bg-background">
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr]">
           <motion.div
