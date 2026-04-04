@@ -218,6 +218,106 @@ function HeroCtaEnter({
   );
 }
 
+function HeroArrowIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M5 12h14M13 5l7 7-7 7" />
+    </svg>
+  );
+}
+
+function HeroMailIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7" />
+    </svg>
+  );
+}
+
+function HeroSlideIcon({
+  variant,
+  className,
+}: {
+  variant: "arrow" | "mail";
+  className?: string;
+}) {
+  if (variant === "mail") return <HeroMailIcon className={className} />;
+  return <HeroArrowIcon className={className} />;
+}
+
+/**
+ * Hero-CTA: Hover / Focus — nur Transform (kein Fade): Text schiebt nach links raus,
+ * Pfeil-Layer fährt als Ganzes von rechts rein (translate-x-full → 0).
+ */
+function HeroCtaArrowSlide({
+  href,
+  children,
+  className,
+  delay,
+  slideIcon = "arrow",
+}: {
+  href: string;
+  children: ReactNode;
+  className: string;
+  delay: number;
+  /** „Kontakt“: Mail statt Pfeil */
+  slideIcon?: "arrow" | "mail";
+}) {
+  const reduceMotion = useReducedMotion();
+  const slideTf =
+    "transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none";
+  return (
+    <motion.div
+      initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+      animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      transition={{ duration: 1.45, delay, ease: CTA_EASE }}
+    >
+      <Link
+        href={href}
+        className={`group relative inline-flex items-center justify-center overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black/30 ${className}`}
+      >
+        <span
+          className={`relative z-10 inline-block whitespace-nowrap ${slideTf} group-hover:pointer-events-none group-hover:-translate-x-[calc(100%+2.5rem)] group-focus-visible:pointer-events-none group-focus-visible:-translate-x-[calc(100%+2.5rem)] motion-reduce:group-hover:translate-x-0 motion-reduce:group-focus-visible:translate-x-0`}
+        >
+          {children}
+        </span>
+        <span
+          className="pointer-events-none absolute inset-0 flex items-center overflow-hidden motion-reduce:hidden"
+          aria-hidden
+        >
+          <span
+            className={`flex w-full justify-center ${slideTf} translate-x-full group-hover:translate-x-0 group-focus-visible:translate-x-0`}
+          >
+            <HeroSlideIcon
+              variant={slideIcon}
+              className="h-6 w-6 shrink-0 md:h-7 md:w-7"
+            />
+          </span>
+        </span>
+      </Link>
+    </motion.div>
+  );
+}
+
 interface HeroProps {
   title: ReactNode;
   subtitle: string;
@@ -274,22 +374,23 @@ export default function Hero({
             {(ctaText || secondaryCtaText) && (
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 {ctaText && ctaHref && (
-                  <HeroCtaEnter
+                  <HeroCtaArrowSlide
                     href={ctaHref}
                     delay={2.38}
-                    className="rounded-full bg-accent px-8 py-4 text-lg font-medium text-white transition-all hover:bg-accent-dark hover:scale-105"
+                    className="rounded-full bg-accent px-8 py-4 text-lg font-medium text-white transition-colors hover:bg-accent-dark"
                   >
                     {ctaText}
-                  </HeroCtaEnter>
+                  </HeroCtaArrowSlide>
                 )}
                 {secondaryCtaText && secondaryCtaHref && (
-                  <HeroCtaEnter
+                  <HeroCtaArrowSlide
                     href={secondaryCtaHref}
                     delay={2.58}
-                    className="rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-medium text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-white/20"
+                    slideIcon="mail"
+                    className="rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-medium text-white backdrop-blur-md transition-colors hover:bg-white/20"
                   >
                     {secondaryCtaText}
-                  </HeroCtaEnter>
+                  </HeroCtaArrowSlide>
                 )}
               </div>
             )}
@@ -325,22 +426,23 @@ export default function Hero({
           {(ctaText || secondaryCtaText) && (
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               {ctaText && ctaHref && (
-                <HeroCtaEnter
+                <HeroCtaArrowSlide
                   href={ctaHref}
                   delay={2.18}
-                  className="rounded-full bg-accent px-6 py-3 text-base font-medium text-white transition-all hover:bg-accent-dark hover:scale-105"
+                  className="rounded-full bg-accent px-6 py-3 text-base font-medium text-white transition-colors hover:bg-accent-dark"
                 >
                   {ctaText}
-                </HeroCtaEnter>
+                </HeroCtaArrowSlide>
               )}
               {secondaryCtaText && secondaryCtaHref && (
-                <HeroCtaEnter
+                <HeroCtaArrowSlide
                   href={secondaryCtaHref}
                   delay={2.38}
-                  className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-base font-medium text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-white/20"
+                  slideIcon="mail"
+                  className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-base font-medium text-white backdrop-blur-md transition-colors hover:bg-white/20"
                 >
                   {secondaryCtaText}
-                </HeroCtaEnter>
+                </HeroCtaArrowSlide>
               )}
             </div>
           )}
