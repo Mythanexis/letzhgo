@@ -6,6 +6,7 @@ const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Über uns", href: "/ueber-uns" },
+  { label: "Auszeichnungen", href: "/auszeichnungen" },
   { label: "Kontakt", href: "/kontakt" },
   { label: "Nothelferkurs", href: "/services/nothelferkurs" },
   { label: "Verkehrskunde", href: "/services/verkehrskunde" },

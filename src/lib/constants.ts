@@ -10,7 +10,31 @@ export const NAV_LINKS = [
   { label: "Über uns", href: "/ueber-uns" },
   { label: "Services", href: "/services" },
   { label: "Lokationen", href: "/lokationen" },
-  { label: "Kontakt", href: "/kontakt" },
+  { label: "Auszeichnungen", href: "/auszeichnungen" },
+] as const;
+
+/** Qualitätsauszeichnungen – verlinken zu den jeweiligen Plattformen. */
+export const AWARD_ITEMS = [
+  {
+    src: "/images/auszeichnungen/super-fahrlehrer-2021.png",
+    href: "https://www.superfahrlehrer.ch/de/home",
+    alt: "Super Fahrlehrer 2021 – Bewertet durch Fahrschüler:innen auf superfahrlehrer.ch",
+  },
+  {
+    src: "/images/auszeichnungen/sehr-guter-fahrlehrer-2021.png",
+    href: "https://www.superfahrlehrer.ch/de/home",
+    alt: "Sehr guter Fahrlehrer 2021 – Urkunden für Team Let'ZHgo",
+  },
+  {
+    src: "/images/auszeichnungen/top-fahrlehrer-2012-2015.png",
+    href: "https://www.superfahrlehrer.ch/de/home",
+    alt: "Super- und Top-Fahrlehrer 2012–2015 – Gianni Sebestin, Let'ZHgo",
+  },
+  {
+    src: "/images/auszeichnungen/fahrlehrervergleich-excellence.png",
+    href: "https://www.fahrlehrervergleich.ch/",
+    alt: "Certificate of Excellence – Let'ZHgo auf fahrlehrervergleich.ch",
+  },
 ] as const;
 
 export const IMAGES = {

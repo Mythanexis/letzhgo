@@ -376,17 +376,28 @@ export default function Hero({
         >
           {subtitle}
         </HeroSubtitleReveal>
-        {ctaText && ctaHref && (
-          <div className="mt-10">
-            <HeroCtaEnter
-              href={ctaHref}
-              delay={2.15}
-              className="inline-block rounded-full bg-accent px-8 py-4 text-lg font-medium text-white transition-all hover:bg-accent-dark hover:scale-105"
-            >
-              {ctaText}
-            </HeroCtaEnter>
+        {(ctaText && ctaHref) || (secondaryCtaText && secondaryCtaHref) ? (
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            {ctaText && ctaHref && (
+              <HeroCtaEnter
+                href={ctaHref}
+                delay={2.15}
+                className="inline-block rounded-full bg-accent px-8 py-4 text-lg font-medium text-white transition-all hover:bg-accent-dark hover:scale-105"
+              >
+                {ctaText}
+              </HeroCtaEnter>
+            )}
+            {secondaryCtaText && secondaryCtaHref && (
+              <HeroCtaEnter
+                href={secondaryCtaHref}
+                delay={2.35}
+                className="inline-block rounded-full border border-border bg-card px-8 py-4 text-lg font-medium text-foreground transition-all hover:bg-card-hover hover:scale-105"
+              >
+                {secondaryCtaText}
+              </HeroCtaEnter>
+            )}
           </div>
-        )}
+        ) : null}
       </div>
     </section>
   );
