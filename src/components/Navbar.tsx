@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 
@@ -21,6 +21,11 @@ function isNavLinkActive(currentPath: string, href: string): boolean {
 const NAV_OVERLAP_BAND_PX = 104;
 /** Min. Überlappung mit dunklem Block, damit Glass aktiv wird (vermeidet Rand-Artefakte). */
 const NAV_DARK_MIN_OVERLAP_PX = 28;
+
+/** Ab diesem Scroll-Offset bleibt die Desktop-Nav beim Runterscrollen sichtbar (oben immer da). */
+const DESKTOP_NAV_ALWAYS_VISIBLE_UNTIL_PX = 40;
+/** Min. Scroll-Delta pro Frame, damit Richtung gewechselt wird (weniger Flackern). */
+const DESKTOP_NAV_SCROLL_DELTA_PX = 12;
 
 function isNavbarOverDarkBackdrop(): boolean {
   if (typeof document === "undefined") return false;
@@ -41,19 +46,60 @@ export default function Navbar() {
   const [mobileMenuStackActive, setMobileMenuStackActive] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [overDarkBackdrop, setOverDarkBackdrop] = useState(false);
+  /** Nur ≥ md: weg bei Scroll runter, zurück bei Scroll hoch (Mobile unverändert). */
+  const [desktopNavHidden, setDesktopNavHidden] = useState(false);
+  const lastScrollY = useRef(0);
 
   const headerAboveMobileOverlay = mobileOpen || mobileMenuStackActive;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    if (typeof window === "undefined") return;
+    lastScrollY.current = window.scrollY;
+    setDesktopNavHidden(false);
+    setScrolled(window.scrollY > 20);
+  }, [pathname]);
 
   useEffect(() => {
-    setScrolled(typeof window !== "undefined" && window.scrollY > 20);
-  }, [pathname]);
+    const mdMq = window.matchMedia("(min-width: 768px)");
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 20);
+
+      const isMd = mdMq.matches;
+      if (!isMd || mobileOpen || mobileMenuStackActive) {
+        setDesktopNavHidden(false);
+        lastScrollY.current = y;
+        return;
+      }
+
+      const delta = y - lastScrollY.current;
+      lastScrollY.current = y;
+
+      if (y < DESKTOP_NAV_ALWAYS_VISIBLE_UNTIL_PX) {
+        setDesktopNavHidden(false);
+        return;
+      }
+
+      if (delta > DESKTOP_NAV_SCROLL_DELTA_PX) {
+        setDesktopNavHidden(true);
+      } else if (delta < -DESKTOP_NAV_SCROLL_DELTA_PX) {
+        setDesktopNavHidden(false);
+      }
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    const onResize = () => {
+      if (!mdMq.matches) setDesktopNavHidden(false);
+      onScroll();
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [pathname, mobileOpen, mobileMenuStackActive]);
 
   useLayoutEffect(() => {
     let ticking = false;
@@ -126,8 +172,12 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`pointer-events-none fixed inset-x-0 top-0 flex justify-center px-3 pt-3 sm:px-4 sm:pt-4 md:px-6 ${
+        className={`pointer-events-none fixed inset-x-0 top-0 flex justify-center px-3 pt-3 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform motion-reduce:transition-none motion-reduce:md:translate-y-0 sm:px-4 sm:pt-4 md:px-6 ${
           headerAboveMobileOverlay ? "z-[70]" : "z-50"
+        } ${
+          desktopNavHidden
+            ? "md:-translate-y-[calc(100%+0.75rem)]"
+            : "translate-y-0"
         }`}
       >
         <nav
