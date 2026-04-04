@@ -2,6 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { SITE, IMAGES } from "@/lib/constants";
 
+/**
+ * Unterstreichung nur so breit wie der Text: Effekt sitzt auf inline-block span,
+ * Link im Grid nur `w-fit` / `justify-self-start` (sonst volle Spaltenbreite).
+ */
+const footerNavLinkUnderline =
+  "relative inline-block pb-0.5 font-medium text-white/70 no-underline transition-colors after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-white after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] after:content-[''] hover:text-white hover:after:scale-x-100";
+
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
@@ -63,9 +70,11 @@ export default function Footer() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="text-lg text-white/70 transition-colors hover:text-white"
+                  className="justify-self-start rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
                 >
-                  {link.label}
+                  <span className={`${footerNavLinkUnderline} text-lg`}>
+                    {link.label}
+                  </span>
                 </Link>
               ))}
             </nav>
@@ -84,17 +93,27 @@ export default function Footer() {
               </a>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-white/60">
-              <Link href="/impressum" className="transition-colors hover:text-white">
-                Impressum
+              <Link
+                href="/impressum"
+                className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+              >
+                <span className={`${footerNavLinkUnderline} text-sm`}>
+                  Impressum
+                </span>
               </Link>
               <Link
                 href="/datenschutzerklaerung"
-                className="transition-colors hover:text-white"
+                className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
               >
-                Datenschutzerklärung
+                <span className={`${footerNavLinkUnderline} text-sm`}>
+                  Datenschutzerklärung
+                </span>
               </Link>
-              <Link href="/agb" className="transition-colors hover:text-white">
-                AGB
+              <Link
+                href="/agb"
+                className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+              >
+                <span className={`${footerNavLinkUnderline} text-sm`}>AGB</span>
               </Link>
             </div>
             <div className="flex items-center justify-center md:justify-end">
