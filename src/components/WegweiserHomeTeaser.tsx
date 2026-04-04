@@ -8,7 +8,7 @@ import { WEGWEISER_MOTORRAD_IMAGES } from "@/lib/constants";
 export default function WegweiserHomeTeaser() {
   return (
     <section
-      className="relative overflow-hidden border-y border-border bg-background"
+      className="relative overflow-hidden border-t border-border bg-background"
       aria-labelledby="wegweiser-teaser-heading"
     >
       <div

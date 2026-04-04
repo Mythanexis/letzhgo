@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { SITE } from "@/lib/constants";
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,7 +24,7 @@ export async function POST(request: NextRequest) {
         },
         body: JSON.stringify({
           from: "Let'ZHgo Website <onboarding@resend.dev>",
-          to: ["m00144550@gmail.com"],
+          to: [SITE.email],
           subject: `Neue Kontaktanfrage von ${name}`,
           html: `
             <h2>Neue Kontaktanfrage</h2>

@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Let'ZHgo",
   tagline: "Deine Fahrschule in Zürich",
-  email: "m00144550@gmail.com",
+  email: "info@letzhgo.ch",
   url: "https://letzhgo.ch",
 };
 

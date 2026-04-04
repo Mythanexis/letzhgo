@@ -2,6 +2,7 @@
 
 import { useState, useEffect, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SITE } from "@/lib/constants";
 
 const AUTO_CLOSE_MS = 5000;
 
@@ -189,7 +190,7 @@ export default function ContactForm() {
         {status === "error" && (
           <p className="text-center text-red-500">
             Etwas ist schiefgelaufen. Bitte versuche es erneut oder schreib uns
-            direkt an m00144550@gmail.com.
+            direkt an {SITE.email}.
           </p>
         )}
       </form>
