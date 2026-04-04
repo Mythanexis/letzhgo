@@ -101,6 +101,7 @@ export default function AuszeichnungenPage() {
                       height={900}
                       className="h-auto w-full object-contain"
                       sizes="(max-width: 1024px) 100vw, 896px"
+                      priority={i === 0}
                     />
                   </div>
                 </motion.a>
