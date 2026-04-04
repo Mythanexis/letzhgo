@@ -37,8 +37,12 @@ function isNavbarOverDarkBackdrop(): boolean {
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  /** True von Menü-Öffnen bis Exit-Animation Ende — Header bleibt über z-[60]-Overlay. */
+  const [mobileMenuStackActive, setMobileMenuStackActive] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [overDarkBackdrop, setOverDarkBackdrop] = useState(false);
+
+  const headerAboveMobileOverlay = mobileOpen || mobileMenuStackActive;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -73,6 +77,10 @@ export default function Navbar() {
       window.removeEventListener("resize", schedule);
     };
   }, [pathname]);
+
+  useEffect(() => {
+    if (mobileOpen) setMobileMenuStackActive(true);
+  }, [mobileOpen]);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -119,7 +127,7 @@ export default function Navbar() {
     <>
       <header
         className={`pointer-events-none fixed inset-x-0 top-0 flex justify-center px-3 pt-3 sm:px-4 sm:pt-4 md:px-6 ${
-          mobileOpen ? "z-[70]" : "z-50"
+          headerAboveMobileOverlay ? "z-[70]" : "z-50"
         }`}
       >
         <nav
@@ -217,7 +225,9 @@ export default function Navbar() {
       </header>
 
       {/* Mobile full-screen menu */}
-      <AnimatePresence>
+      <AnimatePresence
+        onExitComplete={() => setMobileMenuStackActive(false)}
+      >
         {mobileOpen && (
           <motion.div
             id="mobile-menu"

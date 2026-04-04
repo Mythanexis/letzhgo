@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { IMAGES } from "@/lib/constants";
-
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const INVIEW = { once: true, margin: "-80px" } as const;
@@ -15,8 +13,8 @@ const SITES = [
     note: "Nothelferkurs & Verkehrskunde – zentral und schnell mit ÖV erreichbar.",
     addressLines: ["Binzmühlestrasse 15", "8050 Zürich"],
     mapsQuery: "Binzmühlestrasse 15, 8050 Zürich",
-    image: IMAGES.verkehrskunde,
-    imageAlt: "Verkehrskunde und Theorie",
+    image: "/images/oerlikon.png",
+    imageAlt: "Standort Zürich-Oerlikon",
   },
   {
     title: "Oberglatt",
@@ -24,8 +22,8 @@ const SITES = [
     note: "Kursraum für Motorrad – in wenigen Minuten bist du am Übungsplatz in Rümlang.",
     addressLines: ["Bahnhofstrasse 10", "8154 Oberglatt"],
     mapsQuery: "Bahnhofstrasse 10, 8154 Oberglatt",
-    image: IMAGES.motorrad,
-    imageAlt: "Motorrad-Ausbildung",
+    image: "/images/oberglatt.png",
+    imageAlt: "Standort Oberglatt",
   },
   {
     title: "Rümlang",
