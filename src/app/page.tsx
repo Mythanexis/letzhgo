@@ -9,6 +9,7 @@ import ScrollRevealQuote from "@/components/ScrollRevealQuote";
 import PricingCard from "@/components/PricingCard";
 import ScrollSteps from "@/components/ScrollSteps";
 import CTABanner from "@/components/CTABanner";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import InstructorsSection from "@/components/InstructorsSection";
 import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
@@ -96,6 +97,9 @@ export default function HomePage() {
 
       {/* CTA Banner */}
       <CTABanner />
+
+      {/* Google-Bewertungen */}
+      <GoogleReviewsSection />
 
       {/* Preise */}
       <section className="bg-background">
