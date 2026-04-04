@@ -41,8 +41,8 @@ export default function HomePage() {
         showImage
       />
 
-      {/* Services Grid */}
-      <section className="bg-background">
+      {/* Services Grid — Anker für Hero-CTA „Mehr erfahren“ (#services) */}
+      <section id="services" className="scroll-mt-24 bg-background md:scroll-mt-28">
         <div className="mx-auto max-w-7xl px-6 py-32 md:py-40">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -97,9 +97,6 @@ export default function HomePage() {
 
       {/* CTA Banner */}
       <CTABanner />
-
-      {/* Google-Bewertungen */}
-      <GoogleReviewsSection />
 
       {/* Preise */}
       <section className="bg-background">
@@ -359,6 +356,9 @@ export default function HomePage() {
 
       {/* Hostettler Moto */}
       <HostettlerSection />
+
+      {/* Google-Bewertungen */}
+      <GoogleReviewsSection />
 
       {/* Instagram */}
       <InstagramSection />

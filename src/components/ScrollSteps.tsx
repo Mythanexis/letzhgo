@@ -31,7 +31,7 @@ export default function ScrollSteps() {
       style={{ height: `${STEPS.length * 100}vh` }}
       className="relative will-change-transform"
     >
-      <div className="sticky top-0 flex h-dvh w-full flex-col justify-between">
+      <div className="sticky top-0 flex h-dvh w-full flex-col justify-between bg-[#f7f8fa]">
         {/* Header */}
         <div className="mx-auto max-w-4xl px-6 pt-32 text-center">
           <motion.p

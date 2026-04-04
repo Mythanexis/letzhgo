@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
@@ -192,6 +192,33 @@ function HeroSubtitleReveal({
   );
 }
 
+/**
+ * Next.js behandelt Klicks auf denselben Hash nicht als neue Navigation — dann
+ * scrollt nichts. Wenn die URL schon z. B. `#services` ist, scrollen wir selbst.
+ */
+function handleSameHashAnchorClick(
+  e: MouseEvent<HTMLAnchorElement>,
+  href: string,
+  reduceMotion: boolean | null
+) {
+  if (!href.startsWith("#")) return;
+  const raw = href.slice(1);
+  if (!raw) return;
+  let id: string;
+  try {
+    id = decodeURIComponent(raw);
+  } catch {
+    id = raw;
+  }
+  const el = document.getElementById(id);
+  if (!el || window.location.hash !== href) return;
+  e.preventDefault();
+  el.scrollIntoView({
+    behavior: reduceMotion ? "instant" : "smooth",
+    block: "start",
+  });
+}
+
 /** CTAs: dezent — leicht von unten, lange Dauer, kein Spring/Rotate. */
 function HeroCtaEnter({
   href,
@@ -211,7 +238,11 @@ function HeroCtaEnter({
       animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       transition={{ duration: 1.45, delay, ease: CTA_EASE }}
     >
-      <Link href={href} className={className}>
+      <Link
+        href={href}
+        className={className}
+        onClick={(e) => handleSameHashAnchorClick(e, href, reduceMotion)}
+      >
         {children}
       </Link>
     </motion.div>
@@ -294,6 +325,7 @@ function HeroCtaArrowSlide({
       <Link
         href={href}
         className={`group relative inline-flex items-center justify-center overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black/30 ${className}`}
+        onClick={(e) => handleSameHashAnchorClick(e, href, reduceMotion)}
       >
         <span
           className={`relative z-10 inline-block whitespace-nowrap ${slideTf} group-hover:pointer-events-none group-hover:-translate-x-[calc(100%+2.5rem)] group-focus-visible:pointer-events-none group-focus-visible:-translate-x-[calc(100%+2.5rem)] motion-reduce:group-hover:translate-x-0 motion-reduce:group-focus-visible:translate-x-0`}
