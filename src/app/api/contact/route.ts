@@ -4,13 +4,41 @@ import { SITE } from "@/lib/constants";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, phone, message } = body;
+    const { name, email, phone, message, recaptchaToken } = body;
 
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: "Name, E-Mail und Nachricht sind Pflichtfelder." },
         { status: 400 }
       );
+    }
+
+    // Verify reCAPTCHA token
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    if (secretKey) {
+      if (!recaptchaToken) {
+        return NextResponse.json(
+          { error: "reCAPTCHA-Verifizierung fehlt." },
+          { status: 400 }
+        );
+      }
+      const verifyRes = await fetch(
+        `https://www.google.com/recaptcha/api/siteverify`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `secret=${secretKey}&response=${recaptchaToken}`,
+        }
+      );
+      const verifyData = await verifyRes.json() as { success: boolean; score: number; action: string };
+      console.log("[reCAPTCHA]", { success: verifyData.success, score: verifyData.score, action: verifyData.action });
+      // Reject if score below 0.5 (likely bot)
+      if (!verifyData.success || verifyData.score < 0.5) {
+        return NextResponse.json(
+          { error: "reCAPTCHA-Verifizierung fehlgeschlagen." },
+          { status: 400 }
+        );
+      }
     }
 
     const resendApiKey = process.env.RESEND_API_KEY;
