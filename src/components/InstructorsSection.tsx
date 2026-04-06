@@ -68,14 +68,27 @@ type InstructorsSectionProps = {
   /** `singleGrid`: ein Grid pro Fahrlehrer (kürzere Homepage). `byLocation`: nach Standort gruppiert. */
   layout?: "byLocation" | "singleGrid";
   className?: string;
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  id?: string;
 };
 
 export default function InstructorsSection({
   layout = "byLocation",
   className,
+  eyebrow,
+  title,
+  subtitle,
+  id = "fahrlehrer",
 }: InstructorsSectionProps) {
+  const defaultSubtitle =
+    layout === "singleGrid"
+      ? "Unser Team im Überblick – Details und Standorte findest du auf den Profilseiten."
+      : "An verschiedenen Standorten in der Region Zürich stehen dir unsere erfahrenen Fahrlehrer:innen zur Seite.";
+
   return (
-    <section id="fahrlehrer" className={className}>
+    <section id={id} className={className}>
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -85,15 +98,13 @@ export default function InstructorsSection({
           className="mb-16 text-center md:mb-20"
         >
           <p className="text-sm font-medium uppercase tracking-widest text-accent">
-            Unser Team
+            {eyebrow ?? "Unser Team"}
           </p>
           <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
-            Deine Fahrlehrer:innen
+            {title ?? "Deine Fahrlehrer:innen"}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted">
-            {layout === "singleGrid"
-              ? "Unser Team im Überblick – Details und Standorte findest du auf den Profilseiten."
-              : "An verschiedenen Standorten in der Region Zürich stehen dir unsere erfahrenen Fahrlehrer:innen zur Seite."}
+            {subtitle ?? defaultSubtitle}
           </p>
         </motion.div>
 

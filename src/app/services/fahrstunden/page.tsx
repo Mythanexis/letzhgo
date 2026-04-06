@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { IMAGES } from "@/lib/constants";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 const HIGHLIGHTS = [
   "Individuelle Fahrstunden in deinem Tempo",
   "Stadtverkehr, Autobahn & Manövertraining",
@@ -23,9 +25,56 @@ const INSTRUCTORS = [
   { name: "Tomi Caleta", phone: "+41 76 430 31 01", whatsapp: "https://wa.me/41764303101" },
 ];
 
+const ANHAENGER_DETAILS = [
+  { icon: "cost", label: "Kosten", value: "CHF 130.00 / Lektion à 45 Min." },
+  { icon: "clock", label: "Dauer", value: "45 oder 90 Minuten" },
+  { icon: "pin", label: "Ort", value: "Treffpunkt nach Vereinbarung" },
+  { icon: "calendar", label: "Daten", value: "Mo – Fr 08:00 – 20:00, Sa 08:00 – 16:00" },
+  { icon: "phone", label: "Anmeldung", value: "Telefonisch bei Gianni oder Tomi" },
+];
+
+function DetailIcon({ type }: { type: string }) {
+  const cls = "h-5 w-5 shrink-0 text-accent";
+  switch (type) {
+    case "cost":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+        </svg>
+      );
+    case "clock":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+        </svg>
+      );
+    case "pin":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" />
+        </svg>
+      );
+    case "calendar":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" />
+        </svg>
+      );
+    case "phone":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
 export default function FahrstundenPage() {
   return (
     <>
+      {/* Hero */}
       <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
         <Image
           src={IMAGES.autoFahrstunden}
@@ -56,6 +105,7 @@ export default function FahrstundenPage() {
         </div>
       </section>
 
+      {/* Inhalt */}
       <section className="mx-auto max-w-7xl px-6 py-20 md:px-16">
         <div className="mb-10">
           <Breadcrumbs items={[
@@ -85,8 +135,6 @@ export default function FahrstundenPage() {
               <p className="mt-4 leading-relaxed text-muted">
                 Unser Ziel ist nicht nur die bestandene Prüfung, sondern dass du
                 dich langfristig sicher und souverän im Strassenverkehr bewegst.
-                Unsere Fahrstunden schaffen die Grundlage für nachhaltige
-                Sicherheit im Strassenverkehr.
               </p>
 
               <h3 className="mt-12 text-xl font-semibold text-foreground">
@@ -103,15 +151,36 @@ export default function FahrstundenPage() {
                 ))}
               </ul>
 
-              <blockquote className="mt-12 rounded-2xl border border-border bg-card p-8">
-                <p className="text-lg font-medium italic leading-relaxed text-foreground">
-                  &ldquo;Sicherheit entsteht nicht durch Druck, sondern durch
-                  Vertrauen, Übung und die richtige Begleitung.&rdquo;
-                </p>
-                <p className="mt-4 text-sm text-muted">
-                  — Gianni Sebestin, Gründer Let&apos;ZHgo
-                </p>
-              </blockquote>
+              <h3 className="mt-12 text-xl font-semibold text-foreground">
+                Preise Einzellektionen
+              </h3>
+              <div className="mt-6 overflow-hidden rounded-2xl border border-border">
+                <table className="w-full text-left text-sm">
+                  <thead>
+                    <tr className="border-b border-border bg-[#f7f8fa]">
+                      <th className="px-5 py-3 font-semibold text-foreground">Angebot</th>
+                      <th className="px-5 py-3 text-right font-semibold text-foreground">Preis</th>
+                      <th className="hidden px-5 py-3 text-right font-semibold text-foreground sm:table-cell">Dauer</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border">
+                    <tr>
+                      <td className="px-5 py-3.5 text-foreground">Einzellektion</td>
+                      <td className="px-5 py-3.5 text-right font-semibold text-foreground">CHF 95</td>
+                      <td className="hidden px-5 py-3.5 text-right text-muted sm:table-cell">45 Min.</td>
+                    </tr>
+                    <tr>
+                      <td className="px-5 py-3.5 text-foreground">BPT <span className="text-muted">(Berufsmässiger Personentransport)</span></td>
+                      <td className="px-5 py-3.5 text-right font-semibold text-foreground">CHF 95</td>
+                      <td className="hidden px-5 py-3.5 text-right text-muted sm:table-cell">45 Min.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-3 text-xs text-muted">
+                Alle Lektionen sind auch als Doppellektionen (90 Minuten) möglich.
+              </p>
+
             </motion.div>
             <Link
               href="/services"
@@ -180,6 +249,252 @@ export default function FahrstundenPage() {
               </ul>
             </div>
           </motion.aside>
+        </div>
+      </section>
+
+      {/* Abo-Angebote */}
+      <section className="bg-[#f7f8fa] py-24 md:py-32">
+        <div className="mx-auto max-w-5xl px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: EASE }}
+            viewport={{ once: true, margin: "-60px" }}
+            className="text-center"
+          >
+            <p className="text-sm font-medium uppercase tracking-widest text-accent">
+              Spare mit einem Abo
+            </p>
+            <h2 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
+              Mehr Lektionen, weniger zahlen.
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-muted">
+              Regelmässig üben bringt dich am schnellsten ans Ziel. Mit unseren
+              Abos sparst du bei jeder Lektion — und bleibst am Ball.
+            </p>
+          </motion.div>
+
+          <div className="mt-14 grid gap-8 md:grid-cols-2">
+            {/* 10er-Abo */}
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05, ease: EASE }}
+              viewport={{ once: true, margin: "-60px" }}
+              className="group relative overflow-hidden rounded-3xl border border-border bg-white p-8 shadow-sm transition-all hover:shadow-lg md:p-10"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-lg font-bold text-foreground">10er-Abo</p>
+                  <p className="mt-1 text-sm text-muted">10 Fahrstunden à 45 Min.</p>
+                </div>
+                <span className="shrink-0 rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-bold text-accent">
+                  −5 %
+                </span>
+              </div>
+
+              <div className="mt-8 flex items-baseline gap-1.5">
+                <span className="text-5xl font-extrabold tracking-tight text-foreground">90</span>
+                <div className="ml-1 flex flex-col">
+                  <span className="text-sm font-semibold text-foreground/60">CHF</span>
+                  <span className="text-xs text-muted">pro Lektion</span>
+                </div>
+              </div>
+              <p className="mt-2 text-sm text-muted">
+                <span className="line-through">CHF 950</span>
+                <span className="ml-2 text-foreground/70">→ Total CHF 900</span>
+              </p>
+
+              <div className="mt-8 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+
+              <ul className="mt-8 space-y-3.5">
+                {["Flexibel einteilbar", "Auch als Doppellektionen möglich", "Du sparst CHF 50"].map((t) => (
+                  <li key={t} className="flex items-center gap-3 text-sm text-muted">
+                    <svg className="h-4 w-4 shrink-0 text-accent" viewBox="0 0 16 16" fill="none">
+                      <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href="/kontakt"
+                className="mt-10 block w-full rounded-full border-2 border-accent bg-white py-3.5 text-center text-sm font-semibold text-accent transition-all hover:bg-accent hover:text-white"
+              >
+                10er-Abo anfragen
+              </Link>
+            </motion.div>
+
+            {/* 20er-Abo */}
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
+              viewport={{ once: true, margin: "-60px" }}
+              className="group relative overflow-hidden rounded-3xl border-2 border-accent bg-white p-8 shadow-sm transition-all hover:shadow-lg md:p-10"
+            >
+              <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-accent/8 blur-3xl" />
+
+              <div className="relative flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-lg font-bold text-foreground">20er-Abo</p>
+                  <p className="mt-1 text-sm text-muted">20 Fahrstunden à 45 Min.</p>
+                </div>
+                <span className="shrink-0 rounded-full bg-accent px-3 py-1 text-xs font-bold text-white">
+                  Bestseller
+                </span>
+              </div>
+
+              <div className="relative mt-8 flex items-baseline gap-1.5">
+                <span className="text-5xl font-extrabold tracking-tight text-foreground">85</span>
+                <div className="ml-1 flex flex-col">
+                  <span className="text-sm font-semibold text-foreground/60">CHF</span>
+                  <span className="text-xs text-muted">pro Lektion</span>
+                </div>
+              </div>
+              <p className="mt-2 text-sm text-muted">
+                <span className="line-through">CHF 1&apos;900</span>
+                <span className="ml-2 text-foreground/70">→ Total CHF 1&apos;700</span>
+              </p>
+
+              <div className="mt-8 h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent" />
+
+              <ul className="relative mt-8 space-y-3.5">
+                {[
+                  "Bester Preis pro Lektion",
+                  "Auch als Doppellektionen möglich",
+                  "Du sparst CHF 200",
+                  "Ideal für die komplette Ausbildung",
+                ].map((t) => (
+                  <li key={t} className="flex items-center gap-3 text-sm text-muted">
+                    <svg className="h-4 w-4 shrink-0 text-accent" viewBox="0 0 16 16" fill="none">
+                      <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href="/kontakt"
+                className="relative mt-10 block w-full rounded-full bg-accent py-3.5 text-center text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-accent-dark"
+              >
+                20er-Abo anfragen
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Anhänger */}
+      <section className="bg-background">
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          {/* Bild */}
+          <motion.div
+            initial={{ opacity: 0, scale: 1.04 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: EASE }}
+            viewport={{ once: true, margin: "-80px" }}
+            className="relative min-h-[360px] lg:min-h-[600px]"
+          >
+            <Image
+              src="/images/anhaenger.png"
+              alt="Let'ZHgo Fahrschulfahrzeug mit Anhänger"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-background" />
+          </motion.div>
+
+          {/* Content */}
+          <div className="flex flex-col justify-center px-8 py-16 md:px-16 lg:py-20 xl:px-24">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: EASE }}
+              viewport={{ once: true, margin: "-80px" }}
+            >
+              <p className="text-sm font-medium uppercase tracking-widest text-accent">
+                Kategorie B/E
+              </p>
+              <h2 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
+                Fahrstunden mit Anhänger
+              </h2>
+              <p className="mt-5 leading-relaxed text-muted">
+                Wenn Du den Führerausweis Kategorie B (Auto) nach dem 1. April
+                2003 erworben hast, dann darfst Du einen Anhänger mitführen, wenn
+                das Gesamtgewicht des Anhängers nicht mehr als 750 kg aufweist,
+                oder das Gesamtzuggewicht Zugfahrzeug + Anhänger 3,5 t nicht
+                übersteigt (Gesamtgewicht des Anhängers muss kleiner als das
+                Leergewicht des Zugfahrzeugs sein). In allen anderen Situationen
+                musst Du eine Anhängerprüfung Kategorie B/E absolvieren.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
+              viewport={{ once: true, margin: "-80px" }}
+              className="mt-10 space-y-4"
+            >
+              {ANHAENGER_DETAILS.map((d) => (
+                <div key={d.label} className="flex items-start gap-3.5">
+                  <div className="mt-0.5">
+                    <DetailIcon type={d.icon} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">{d.label}</p>
+                    <p className="text-sm text-muted">{d.value}</p>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.25, ease: EASE }}
+              viewport={{ once: true, margin: "-80px" }}
+              className="mt-10 flex flex-wrap gap-4"
+            >
+              <a
+                href="tel:+41794340966"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-accent-dark"
+              >
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                </svg>
+                Gianni: +41 79 434 09 66
+              </a>
+              <a
+                href="tel:+41764303101"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-all hover:border-accent/30 hover:text-accent"
+              >
+                Tomi: +41 76 430 31 01
+              </a>
+            </motion.div>
+
+            {/* Gianni Fact */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
+              viewport={{ once: true, margin: "-80px" }}
+              className="mt-10 rounded-2xl border border-border bg-[#f7f8fa] p-6"
+            >
+              <p className="text-sm font-semibold text-foreground">
+                Gianni Sebestin — Anhänger-Spezialist
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                17 Jahre lang fuhr er jährlich ca. 80&apos;000 km vorwärts und
+                5&apos;000 km rückwärts = über 1&apos;000&apos;000 km vorwärts
+                &amp; 85&apos;000 km rückwärts.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
     </>

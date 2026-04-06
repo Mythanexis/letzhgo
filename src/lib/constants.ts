@@ -161,8 +161,8 @@ export const SERVICES_OVERVIEW = [
     href: "/services/verkehrskunde",
   },
   {
-    title: "Motorradkurse",
-    description: "In unseren Motorradkursen lernst du, dein Bike sicher zu beherrschen und mit Kontrolle und Vertrauen unterwegs zu sein.",
+    title: "Motorrad",
+    description: "Grundkurs und Fahrstunden – lerne dein Bike sicher zu beherrschen und mit Kontrolle und Vertrauen unterwegs zu sein.",
     image: IMAGES.motorrad,
     href: "/services/motorrad",
   },
@@ -185,8 +185,8 @@ export const SERVICES_DETAIL = [
   },
   {
     id: "motorrad",
-    title: "Motorrad-Grundkurs",
-    description: "Motorradfahren bedeutet Freiheit – aber auch Verantwortung. In unserem Grundkurs lernst du die wichtigsten Techniken für sicheres und kontrolliertes Fahren.",
+    title: "Motorrad",
+    description: "Grundkurs und Fahrstunden – lerne die wichtigsten Techniken für sicheres und kontrolliertes Fahren auf zwei Rädern.",
     longDescription: "Wir trainieren Kurventechnik, Bremsverhalten, Blickführung und Fahrzeugkontrolle Schritt für Schritt. Der Fokus liegt auf Sicherheit, Präzision und einem stabilen Fahrgefühl – damit du dich auf zwei Rädern jederzeit sicher fühlst.",
     image: IMAGES.motorrad,
     bookingLink: EDOOBOX_LINKS.motorrad,

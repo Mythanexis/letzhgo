@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 const COURSE_CONTENT = [
   "Grundlagen und Funktionsweise des Motorrads",
   "Korrektes Verhalten in Gefahrensituationen",
@@ -28,13 +30,53 @@ const INSTRUCTORS = [
   { name: "Tomi Caleta", phone: "+41 76 430 31 01" },
 ];
 
+const RENTAL_BIKES = [
+  "Kawasaki Z650",
+  "Kawasaki Z900",
+  "Kawasaki Versys 650",
+  "KTM 390",
+  "KTM 690",
+];
+
+const FAHRSTUNDEN_DETAILS = [
+  { icon: "cost", label: "Kosten", value: "CHF 95.00 / 45 Minuten" },
+  { icon: "clock", label: "Dauer", value: "45 Minuten (auch als Doppellektion möglich)" },
+  { icon: "pin", label: "Ort", value: "hostettler moto ag, Klotenerstrasse 10, 8153 Rümlang" },
+];
+
+function DetailIcon({ type }: { type: string }) {
+  const cls = "h-5 w-5 shrink-0 text-accent";
+  switch (type) {
+    case "cost":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+        </svg>
+      );
+    case "clock":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+        </svg>
+      );
+    case "pin":
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
 export default function MotorradPage() {
   return (
     <>
       <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
         <Image
           src={IMAGES.motorrad}
-          alt="Motorrad-Grundkurs"
+          alt="Motorrad"
           fill
           className="object-cover brightness-[0.35]"
           priority
@@ -56,17 +98,18 @@ export default function MotorradPage() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="mt-3 text-4xl font-bold text-white md:text-6xl"
           >
-            Motorrad-Grundkurs
+            Motorrad
           </motion.h1>
         </div>
       </section>
 
+      {/* Grundkurs Content */}
       <section className="mx-auto max-w-7xl px-6 py-20 md:px-16">
         <div className="mb-10">
           <Breadcrumbs items={[
             { label: "Home", href: "/" },
             { label: "Services", href: "/services" },
-            { label: "Motorrad-Grundkurs" },
+            { label: "Motorrad" },
           ]} />
         </div>
         <div className="grid gap-16 lg:grid-cols-3">
@@ -78,7 +121,7 @@ export default function MotorradPage() {
               viewport={{ once: true }}
             >
               <h2 className="text-2xl font-bold text-foreground md:text-3xl">
-                Über den Kurs
+                Motorrad-Grundkurs
               </h2>
               <p className="mt-4 leading-relaxed text-muted">
                 Um den Führerausweis der Kat. A, Kat. A beschränkt oder der
@@ -168,10 +211,16 @@ export default function MotorradPage() {
               </p>
               <dl className="mt-6 space-y-4">
                 <div>
-                  <dt className="text-sm text-muted">Kosten</dt>
+                  <dt className="text-sm text-muted">Kosten Grundkurs</dt>
                   <dd className="mt-1 text-lg font-semibold text-foreground">
-                    CHF 180.00 / Kursteil
+                    CHF 570
                   </dd>
+                  <dd className="text-xs text-muted">12 Stunden (3 Kursteile)</dd>
+                  <dt className="mt-4 text-sm text-muted">Motorrad-Fahrstunde</dt>
+                  <dd className="mt-1 text-lg font-semibold text-foreground">
+                    CHF 95
+                  </dd>
+                  <dd className="text-xs text-muted">45 Minuten</dd>
                 </div>
                 <div className="border-t border-border pt-4">
                   <dt className="text-sm text-muted">Dauer</dt>
@@ -233,6 +282,167 @@ export default function MotorradPage() {
               </a>
             </div>
           </motion.aside>
+        </div>
+      </section>
+
+      {/* Motorrad-Fahrstunden */}
+      <section className="bg-[#f7f8fa] py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, ease: EASE }}
+              viewport={{ once: true, margin: "-80px" }}
+            >
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
+                <Image
+                  src="/images/motorrad-fahrstunden.png"
+                  alt="Motorrad-Fahrstunden bei Let'ZHgo"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </motion.div>
+
+            {/* Content */}
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
+              viewport={{ once: true, margin: "-80px" }}
+            >
+              <p className="text-sm font-medium uppercase tracking-widest text-accent">
+                Individuelle Fahrstunden
+              </p>
+              <h2 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
+                Motorrad-Fahrstunden
+              </h2>
+              <p className="mt-5 leading-relaxed text-muted">
+                Wir hatten das Glück, unser Hobby zum Beruf zu machen.
+                Motorradfahren ist unsere Leidenschaft und diese möchten wir Dir
+                gerne weitergeben. Wir wollen, dass Du Dich wohl fühlst, damit Du
+                sicher ans Ziel kommst, ohne dass der Spass dabei auf der Strecke
+                bleibt.
+              </p>
+              <p className="mt-4 leading-relaxed text-muted">
+                Motorradfahren ist pure Freude und genau das werden wir Dir
+                während der Ausbildung vermitteln. In einem intensiven,
+                lehrreichen Ausbildungsprogramm und in kollegialer Atmosphäre
+                lernst Du alles, was es braucht.
+              </p>
+
+              <div className="mt-8 space-y-4">
+                {FAHRSTUNDEN_DETAILS.map((d) => (
+                  <div key={d.label} className="flex items-start gap-3.5">
+                    <div className="mt-0.5">
+                      <DetailIcon type={d.icon} />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{d.label}</p>
+                      <p className="text-sm text-muted">{d.value}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <p className="mt-4 text-sm leading-relaxed text-muted">
+                Wir arbeiten mit{" "}
+                <span className="font-medium text-foreground">BMW Motorrad</span>,{" "}
+                <span className="font-medium text-foreground">Peter Sommer 2-Rad-Sport AG</span>,{" "}
+                <span className="font-medium text-foreground">hostettler moto ag</span> und{" "}
+                <span className="font-medium text-foreground">Polo Motorrad</span>{" "}
+                zusammen.
+              </p>
+
+              <Link
+                href="/kontakt"
+                className="mt-8 inline-flex items-center justify-center rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-accent-dark"
+              >
+                Fahrstunde anfragen
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Motorrad mieten */}
+      <section className="bg-background py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, ease: EASE }}
+              viewport={{ once: true, margin: "-80px" }}
+            >
+              <p className="text-sm font-medium uppercase tracking-widest text-accent">
+                Kein eigenes Motorrad?
+              </p>
+              <h2 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
+                Motorrad mieten bei hostettler
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-muted">
+                Bei hostettler moto ag kannst Du ein Motorrad für die gesamte
+                Ausbildung oder tageweise mieten — jeweils mit 35 KW oder offen.
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-2">
+                {RENTAL_BIKES.map((bike) => (
+                  <span
+                    key={bike}
+                    className="rounded-full border border-border bg-[#f7f8fa] px-4 py-1.5 text-sm font-medium text-foreground"
+                  >
+                    {bike}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href="tel:+41448607740"
+                  className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-accent-dark"
+                >
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                  </svg>
+                  +41 44 860 77 40
+                </a>
+                <Link
+                  href="https://www.hostettler-moto.ch/zuerich-nord/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-all hover:border-accent/30 hover:text-accent"
+                >
+                  hostettler Webseite
+                  <svg className="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4.5 11.5l7-7M4.5 4.5h7v7" />
+                  </svg>
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
+              viewport={{ once: true, margin: "-80px" }}
+            >
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
+                <Image
+                  src="/images/partner-hostettler-zuerich-nord.png"
+                  alt="hostettler moto ag Zürich Nord"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
     </>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import ContactForm from "@/components/ContactForm";
+import InstructorsSection from "@/components/InstructorsSection";
 import { SITE } from "@/lib/constants";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -207,6 +208,16 @@ export default function KontaktPage() {
           </div>
         </div>
       </section>
+
+      {/* Fahrlehrer */}
+      <InstructorsSection
+        layout="singleGrid"
+        className="bg-background"
+        id="fahrlehrer-kontakt"
+        eyebrow="Direkt erreichbar"
+        title="Nimm direkt Kontakt zu unseren Fahrlehrern auf"
+        subtitle="Ruf an oder schreib per WhatsApp — unsere Fahrlehrer helfen dir gerne weiter."
+      />
     </>
   );
 }
