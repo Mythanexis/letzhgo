@@ -73,7 +73,7 @@ export default function KontaktPage() {
                 </span>
                 <span className="text-sm font-semibold">043 300 14 55</span>
               </a>
-              <div className="flex items-center gap-3 text-white/50">
+              <div className="flex items-center gap-3 text-white/70">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-accent">
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -116,8 +116,8 @@ export default function KontaktPage() {
               sizes="(max-width: 1024px) 100vw, 50vw"
               priority
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/80 via-transparent to-transparent" />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/30 via-transparent to-transparent lg:hidden" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#0a0a0a_0%,rgba(10,10,10,0.5)_15%,rgba(10,10,10,0.15)_35%,transparent_55%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/25 via-transparent to-transparent lg:hidden" />
           </motion.div>
         </div>
       </section>
