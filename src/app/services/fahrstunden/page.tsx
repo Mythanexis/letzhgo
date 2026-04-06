@@ -399,8 +399,8 @@ export default function FahrstundenPage() {
             className="relative min-h-[360px] lg:min-h-[600px]"
           >
             <Image
-              src="/images/anhaenger.png"
-              alt="Let'ZHgo Fahrschulfahrzeug mit Anhänger"
+              src="/images/anhaenger-gianni.png"
+              alt="Gianni Sebestin mit Let'ZHgo Anhänger"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
