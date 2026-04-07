@@ -21,6 +21,7 @@ import ManoeverplatzSection from "@/components/ManoeverplatzSection";
 import InstagramSection from "@/components/InstagramSection";
 import TikTokSection from "@/components/TikTokSection";
 import AutofahrenAb17Section from "@/components/AutofahrenAb17Section";
+import BlogHomeSection from "@/components/BlogHomeSection";
 import {
   SERVICES_OVERVIEW,
   PRICING,
@@ -368,6 +369,9 @@ export default function HomePage() {
 
       {/* Wegweiser Motorrad-Führerschein (nach Trust/Social) */}
       <WegweiserHomeTeaser />
+
+      {/* Blog */}
+      <BlogHomeSection />
 
       {/* FAQ */}
       <FAQ className="bg-[#f7f8fa]" />

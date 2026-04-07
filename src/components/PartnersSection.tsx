@@ -8,9 +8,9 @@ const PARTNERS = [
   { name: "TCS", logo: "/images/partners/partner-1.png", href: "https://www.tcs.ch" },
   { name: "Bütikofer Harley-Davidson Zürich", logo: "/images/partners/partner-3.png", href: "https://www.buetikoferhd.ch" },
   { name: "hostettler moto ag", logo: "/images/partners/partner-4.png", href: "https://www.hostettler-moto.ch/zuerich-nord/" },
-  { name: "Partner 5", logo: "/images/partners/partner-5.png", href: "#" },
-  { name: "Partner 6", logo: "/images/partners/partner-6.png", href: "#" },
-  { name: "Partner 7", logo: "/images/partners/partner-7.png", href: "#" },
+  { name: "Fahrlehrervergleich – Zertifizierte Fahrschule", logo: "/images/partners/partner-5.png", href: "#" },
+  { name: "Superfahrlehrer – Ausgezeichnete Fahrlehrer Zürich", logo: "/images/partners/partner-6.png", href: "#" },
+  { name: "Peter Sommer 2-Rad-Sport AG Wädenswil", logo: "/images/partners/partner-7.png", href: "#" },
 ];
 
 const MARQUEE_DURATION = 30;

@@ -15,6 +15,7 @@ const NAV_LINKS = [
   { label: "Über uns", href: "/ueber-uns" },
   { label: "Auszeichnungen", href: "/auszeichnungen" },
   { label: "Kontakt", href: "/kontakt" },
+  { label: "Blog", href: "/blogs" },
   { label: "Nothelferkurs", href: "/services/nothelferkurs" },
   { label: "Verkehrskunde", href: "/services/verkehrskunde" },
   { label: "Motorradkurs", href: "/services/motorrad" },

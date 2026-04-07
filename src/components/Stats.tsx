@@ -22,11 +22,14 @@ function formatNumber(n: number, original: string): string {
 
 function CountingNumber({ value, isInView }: { value: string; isInView: boolean }) {
   const { num, prefix, suffix } = parseValue(value);
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState(num);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView || hasAnimated.current) return;
+    hasAnimated.current = true;
 
+    setDisplay(0);
     const duration = 2500;
     const startTime = performance.now();
 

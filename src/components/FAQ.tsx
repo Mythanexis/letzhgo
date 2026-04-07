@@ -11,8 +11,25 @@ type FAQProps = {
 export default function FAQ({ className }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <section className={className}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="mx-auto max-w-7xl px-6 py-24">
       <div className="grid gap-12 lg:grid-cols-[1fr_1.5fr]">
         <motion.div

@@ -83,17 +83,18 @@ function HeroTitleMaskedWords({
   text,
   className,
   startDelay = 0.2,
+  as: Tag = "h1",
 }: {
   text: string;
   className?: string;
-  /** Wann die erste Silbe loslegt (z. B. synchron mit Modal). */
   startDelay?: number;
+  as?: "h1" | "p";
 }) {
   const reduceMotion = useReducedMotion();
   const parts = text.split(/(\s+)/);
 
   return (
-    <h1 className={className}>
+    <Tag className={className} aria-hidden={Tag !== "h1" ? true : undefined}>
       {parts.map((part, i) => {
         if (/^\s+$/.test(part)) {
           return <span key={`s-${i}`}>{part}</span>;
@@ -115,19 +116,20 @@ function HeroTitleMaskedWords({
           </span>
         );
       })}
-    </h1>
+    </Tag>
   );
 }
 
 function HeroHeadline({
   title,
   className,
-  /** undefined = Hero ohne Bild: Titel wie bisher früh; gesetzt = Start synchron mit Modal o. ä. */
   headlineStartDelay,
+  as = "h1",
 }: {
   title: ReactNode;
   className: string;
   headlineStartDelay?: number;
+  as?: "h1" | "p";
 }) {
   const reduceMotion = useReducedMotion();
   if (typeof title === "string") {
@@ -136,12 +138,15 @@ function HeroHeadline({
         text={title}
         className={className}
         startDelay={headlineStartDelay ?? 0.2}
+        as={as}
       />
     );
   }
+  const MotionTag = as === "h1" ? motion.h1 : motion.p;
   return (
-    <motion.h1
+    <MotionTag
       className={className}
+      aria-hidden={as !== "h1" ? true : undefined}
       initial={reduceMotion ? false : { clipPath: "inset(0 0 100% 0)" }}
       animate={reduceMotion ? undefined : { clipPath: "inset(0 0 0% 0)" }}
       transition={{
@@ -151,7 +156,7 @@ function HeroHeadline({
       }}
     >
       {title}
-    </motion.h1>
+    </MotionTag>
   );
 }
 
@@ -448,6 +453,7 @@ export default function Hero({
             title={title}
             className="text-5xl font-extrabold leading-[1.05] text-white"
             headlineStartDelay={HERO_BOOKING_START_MOBILE}
+            as="p"
           />
           <HeroSubtitleReveal
             className="mx-auto mt-4 max-w-sm text-base text-white/80"
