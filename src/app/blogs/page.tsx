@@ -32,7 +32,7 @@ function MasonryCard({
     >
       <Link
         href={`/blogs/${post.slug}`}
-        className="group block overflow-hidden rounded-lg bg-white shadow-[0_2px_16px_-4px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_-8px_rgba(0,0,0,0.12)]"
+        className="group block overflow-hidden rounded-2xl bg-white shadow-[0_2px_16px_-4px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_-8px_rgba(0,0,0,0.12)]"
       >
         <div
           className={`relative overflow-hidden ${tall ? "aspect-square" : "aspect-[16/8]"}`}
@@ -46,19 +46,16 @@ function MasonryCard({
           />
         </div>
         <div className="p-4 md:p-5">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center justify-between gap-2">
             <span className="text-xs font-semibold uppercase tracking-wider text-accent">
               {post.category}
             </span>
-            <span className="h-1 w-1 rounded-full bg-border" />
-            <span className="text-xs text-muted">{post.readTime}</span>
+            <span className="text-xs text-muted">{formatDate(post.publishedAt)}</span>
           </div>
           <h3 className="mt-2 text-base font-bold leading-snug text-foreground transition-colors group-hover:text-accent md:text-lg">
             {post.title}
           </h3>
-          <p className="mt-1.5 text-xs text-muted">
-            {formatDate(post.publishedAt)}
-          </p>
+          <p className="mt-1.5 text-xs text-muted">{post.readTime} Lesezeit</p>
         </div>
       </Link>
     </motion.div>

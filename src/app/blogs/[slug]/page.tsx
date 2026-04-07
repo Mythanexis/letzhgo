@@ -29,7 +29,7 @@ export default function BlogDetailPage({
   return (
     <>
       {/* Hero image — tall, immersive */}
-      <section className="relative bg-foreground" data-navbar-dark>
+      <section className="relative bg-[#0a0a0a]" data-navbar-dark>
         <div className="relative h-[45vh] min-h-[320px] md:h-[55vh]">
           <Image
             src={post.coverImage}
@@ -39,7 +39,7 @@ export default function BlogDetailPage({
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-[#0a0a0a]/40" />
         </div>
 
         {/* Article header — overlaps image bottom */}
