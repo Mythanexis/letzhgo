@@ -11,7 +11,6 @@ export const NAV_LINKS = [
   { label: "Services", href: "/services" },
   { label: "Lokationen", href: "/lokationen" },
   { label: "Auszeichnungen", href: "/auszeichnungen" },
-  { label: "Blog", href: "/blogs" },
 ] as const;
 
 /** Qualitätsauszeichnungen – verlinken zu den jeweiligen Plattformen. */
