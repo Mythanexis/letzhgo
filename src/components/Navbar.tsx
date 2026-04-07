@@ -48,6 +48,7 @@ export default function Navbar() {
   const [overDarkBackdrop, setOverDarkBackdrop] = useState(false);
   /** Nur ≥ md: weg bei Scroll runter, zurück bei Scroll hoch (Mobile unverändert). */
   const [desktopNavHidden, setDesktopNavHidden] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const lastScrollY = useRef(0);
 
   const headerAboveMobileOverlay = mobileOpen || mobileMenuStackActive;
@@ -157,16 +158,16 @@ export default function Navbar() {
     ? "border-white/25 bg-white/[0.12] shadow-[0_20px_64px_-12px_rgba(0,0,0,0.28),0_0_0_1px_rgba(255,255,255,0.1)] backdrop-blur-2xl"
     : "border-neutral-200/95 bg-white shadow-[0_32px_100px_-24px_rgba(15,23,42,0.10),0_18px_56px_-28px_rgba(15,23,42,0.07),0_0_0_1px_rgba(15,23,42,0.045)] backdrop-blur-2xl";
 
-  const desktopPill = (href: string) => {
+  const desktopPillText = (href: string) => {
     const active = isNavLinkActive(pathname, href);
     if (glassNav) {
       return active
-        ? "bg-white/20 font-semibold text-white shadow-sm"
-        : "text-white/85 hover:bg-white/15 hover:text-white";
+        ? "font-semibold text-white"
+        : "text-white/75 hover:text-white";
     }
     return active
-      ? "bg-accent/12 font-semibold text-accent"
-      : "text-muted hover:bg-border/70 hover:text-foreground";
+      ? "font-semibold text-accent"
+      : "text-muted hover:text-foreground";
   };
 
   const burgerLine = glassNav ? "bg-white" : "bg-foreground";
@@ -212,16 +213,43 @@ export default function Navbar() {
                 glassNav ? "bg-black/15" : "bg-neutral-100 ring-1 ring-neutral-200/80"
               }`}
             >
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  aria-current={isNavLinkActive(pathname, link.href) ? "page" : undefined}
-                  className={`rounded-full px-3.5 py-2 text-sm transition-colors lg:px-4 ${desktopPill(link.href)}`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const active = isNavLinkActive(pathname, link.href);
+                const hovered = hoveredLink === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    aria-current={active ? "page" : undefined}
+                    onMouseEnter={() => setHoveredLink(link.href)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                    className={`relative rounded-full px-3.5 py-2 text-sm transition-colors duration-200 lg:px-4 ${desktopPillText(link.href)}`}
+                  >
+                    {!active && (
+                      <AnimatePresence>
+                        {hovered && (
+                          <motion.span
+                            layoutId="navbar-hover-pill"
+                            className={`absolute inset-0 rounded-full ${glassNav ? "bg-white/10" : "bg-border/60"}`}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ type: "spring", bounce: 0.2, duration: 0.35 }}
+                          />
+                        )}
+                      </AnimatePresence>
+                    )}
+                    {active && (
+                      <motion.span
+                        layoutId="navbar-active-pill"
+                        className={`absolute inset-0 rounded-full ${glassNav ? "bg-white/20 shadow-sm" : "bg-accent/12"}`}
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                      />
+                    )}
+                    <span className="relative z-10">{link.label}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
