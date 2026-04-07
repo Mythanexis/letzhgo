@@ -30,7 +30,7 @@ export default function BlogDetailPage({
     <>
       {/* Hero image — tall, immersive */}
       <section className="relative bg-foreground" data-navbar-dark>
-        <div className="relative h-[55vh] min-h-[400px] md:h-[65vh]">
+        <div className="relative h-[45vh] min-h-[320px] md:h-[55vh]">
           <Image
             src={post.coverImage}
             alt={post.title}

@@ -35,7 +35,7 @@ function MasonryCard({
         className="group block overflow-hidden rounded-lg bg-white shadow-[0_2px_16px_-4px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_-8px_rgba(0,0,0,0.12)]"
       >
         <div
-          className={`relative overflow-hidden ${tall ? "aspect-3/4" : "aspect-4/3"}`}
+          className={`relative overflow-hidden ${tall ? "aspect-square" : "aspect-[16/8]"}`}
         >
           <Image
             src={post.coverImage}
@@ -86,7 +86,7 @@ export default function BlogsPage() {
   return (
     <>
       {/* Hero — dark navy with accent gradient blobs */}
-      <section className="relative overflow-hidden bg-[#0c1020] pb-16 pt-28 md:pb-20 md:pt-32">
+      <section className="relative overflow-hidden bg-[#0c1020] pb-16 pt-28 md:pb-20 md:pt-32" data-navbar-dark>
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden
@@ -185,7 +185,7 @@ export default function BlogsPage() {
                 href={`/blogs/${featured.slug}`}
                 className="group relative block overflow-hidden rounded-3xl"
               >
-                <div className="relative aspect-21/9 md:aspect-3/1">
+                <div className="relative aspect-16/9 md:aspect-[21/9]">
                   <Image
                     src={featured.coverImage}
                     alt={featured.title}

@@ -102,6 +102,9 @@ export default function Navbar() {
   }, [pathname, mobileOpen, mobileMenuStackActive]);
 
   useLayoutEffect(() => {
+    // Synchronous check before first paint — prevents white-navbar flash on dark-hero pages
+    setOverDarkBackdrop(isNavbarOverDarkBackdrop());
+
     let ticking = false;
     const update = () => {
       ticking = false;
@@ -113,7 +116,6 @@ export default function Navbar() {
         requestAnimationFrame(update);
       }
     };
-    schedule();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule, { passive: true });
     const t = window.setTimeout(schedule, 0);

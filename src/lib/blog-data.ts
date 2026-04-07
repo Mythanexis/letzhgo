@@ -67,7 +67,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Ausbildung",
     readTime: "6 Min.",
     publishedAt: "2026-02-28",
-    coverImage: "/images/blog/verkehrskundeunterricht-vku.jpg",
+    coverImage: "/images/blog/verkehrskunde-blog.jpg",
     cta: { label: "VKU jetzt buchen", href: "https://app1.edoobox.com/de/LetZHgo/Verkehrskundekurse/?edref=letzhgo", external: true },
     sections: [
       {
@@ -100,7 +100,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Ausbildung",
     readTime: "5 Min.",
     publishedAt: "2026-02-10",
-    coverImage: "/images/blog/nothelferkurs-warum-wichtig.jpg",
+    coverImage: "/images/blog/nothelfer-blog.PNG",
     cta: { label: "Nothelferkurs buchen", href: "https://app1.edoobox.com/de/LetZHgo/Nothelferkurse/?edref=letzhgo", external: true },
     sections: [
       {
@@ -129,7 +129,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Prüfung",
     readTime: "7 Min.",
     publishedAt: "2026-01-20",
-    coverImage: "/images/blog/tipps-praktische-fahrpruefung.jpg",
+    coverImage: "/images/blog/fahrpruefung-blog.PNG",
     cta: { label: "Fahrstunde buchen", href: "/kontakt" },
     sections: [
       {
@@ -162,7 +162,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Ratgeber",
     readTime: "5 Min.",
     publishedAt: "2025-12-15",
-    coverImage: "/images/blog/autofahren-ab-17.jpg",
+    coverImage: "/images/blog/autofahren-mit-siebzehn.PNG",
     cta: { label: "Jetzt Kontakt aufnehmen", href: "/kontakt" },
     sections: [
       {
@@ -224,7 +224,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Prüfung",
     readTime: "6 Min.",
     publishedAt: "2025-11-10",
-    coverImage: "/images/blog/haeufigste-fehler-fahrpruefung.jpg",
+    coverImage: "/images/blog/zehn-fehler-blog.PNG",
     cta: { label: "Fahrstunde buchen", href: "/kontakt" },
     sections: [
       {
@@ -257,7 +257,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Sicherheit",
     readTime: "6 Min.",
     publishedAt: "2025-10-25",
-    coverImage: "/images/blog/sicher-fahren-im-winter.jpg",
+    coverImage: "/images/blog/fahren-im-winter-blog.PNG",
     cta: { label: "Fahrstunde buchen", href: "/kontakt" },
     sections: [
       {
@@ -290,7 +290,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Ratgeber",
     readTime: "5 Min.",
     publishedAt: "2025-10-10",
-    coverImage: "/images/blog/lernfahrausweis-beantragen.jpg",
+    coverImage: "/images/blog/lernfahrausweis-blog.PNG",
     cta: { label: "Nothelferkurs buchen", href: "https://app1.edoobox.com/de/LetZHgo/Nothelferkurse/?edref=letzhgo", external: true },
     sections: [
       {
@@ -323,7 +323,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Ratgeber",
     readTime: "7 Min.",
     publishedAt: "2025-09-20",
-    coverImage: "/images/blog/fuehrerschein-kosten-zuerich.jpg",
+    coverImage: "/images/blog/fuehrerschein-kosten-zurich.PNG",
     cta: { label: "Unsere Preise ansehen", href: "/services" },
     sections: [
       {

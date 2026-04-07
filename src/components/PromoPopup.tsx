@@ -45,7 +45,7 @@ export default function PromoPopup() {
       title: "Schnupperkurs Motorrad",
       description:
         "Wir bieten dir auch wieder ab 9. Mai 2026 einen Schnupperkurs an. Minderjährige müssen in Begleitung eines Elternteils sein.",
-      price: "CHF 80.–",
+      price: "CHF 50.–",
       detail: "Samstag, 9. Mai 2026 · 13:00 – 15:00",
       ctaText: "Jetzt anmelden",
       href: EDOOBOX_LINKS.schnupperkurs,
