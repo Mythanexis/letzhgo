@@ -220,32 +220,24 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "haeufigste-fehler-fahrpruefung",
     title: "Die häufigsten Fehler bei der Fahrprüfung",
     excerpt:
-      "Welche Fehler führen am häufigsten zum Durchfallen? Wir zeigen dir die typischen Stolpersteine und wie du sie vermeidest.",
+      "Was wirklich über Bestehen oder Durchfallen entscheidet: drei Erkenntnisse aus der Praxis – direkt von unserem Fahrlehrer-Team.",
     category: "Prüfung",
-    readTime: "6 Min.",
+    readTime: "4 Min.",
     publishedAt: "2025-11-10",
     coverImage: "/images/blog/zehn-fehler-blog.PNG",
     cta: { label: "Fahrstunde buchen", href: "/kontakt" },
     sections: [
       {
-        heading: "Fehlender Schulterblick",
-        text: "Der mit Abstand häufigste Fehler bei der Fahrprüfung ist der fehlende oder unvollständige Schulterblick. Ob beim Spurwechsel, beim Abbiegen oder beim Losfahren am Strassenrand – der Blick über die Schulter in den toten Winkel ist Pflicht. Viele Fahrschüler:innen vergessen ihn aus Nervosität oder weil sie zu stark auf die Strasse vor sich fokussiert sind. Übe den Schulterblick so oft, bis er zur automatischen Gewohnheit wird.",
+        heading: "Der unterschätzte Fehler: Auf falsche Ratschläge hören",
+        text: "Einer der häufigsten Gründe für das Durchfallen bei der Fahrprüfung ist, dass Fahrschüler von dem abweichen, was sie in der Fahrschule gelernt haben. Vertraue in der Prüfung ausschliesslich auf das, was dir dein Fahrlehrer beigebracht hat und was ihr gemeinsam geübt habt. Gut gemeinte Tipps von Eltern oder Freunden – wie zum Beispiel «fahr einfach etwas langsamer, dann machst du weniger Fehler» – können in der Prüfung schnell zu Unsicherheiten oder falschem Verhalten führen. Solche Abweichungen vom gelernten Ablauf sind ein häufiger Grund, warum Prüfungen nicht bestanden werden. Halte dich daher konsequent an deine Ausbildung – sie ist genau auf die Prüfung abgestimmt.",
       },
       {
-        heading: "Tempo-30-Zonen und Geschwindigkeit",
-        text: "Tempo-30-Zonen sind in Zürich weit verbreitet, und viele Kandidat:innen fahren dort zu schnell. Auch das umgekehrte Problem kommt vor: zu langsames Fahren auf Hauptstrassen, was den Verkehrsfluss behindert. Achte immer auf die geltende Höchstgeschwindigkeit und passe dein Tempo den Verhältnissen an. In Wohnquartieren und bei Schulen gilt besondere Vorsicht.",
+        heading: "Vorausschauend und mitdenkend fahren",
+        text: "Ein entscheidender Punkt, den viele unterschätzen: Es reicht nicht, selbst alles richtig zu machen. Du musst jederzeit damit rechnen, dass andere Verkehrsteilnehmer Fehler machen. Fahr vorausschauend, denk mit und rechne mit möglichen Situationen – zum Beispiel ein Auto, das plötzlich bremst, oder jemand, der dir die Vorfahrt nimmt. Der Prüfer bewertet dein Verhalten. Auch wenn jemand anderes einen Fehler macht, zählt allein, wie du reagierst. Wer aufmerksam fährt und Fehler anderer ausgleicht, zeigt genau das, was in der Prüfung erwartet wird.",
       },
       {
-        heading: "Unsicheres Verhalten an Kreuzungen",
-        text: "Kreuzungen mit Rechtsvortritt sind ein klassischer Prüfungsschwerpunkt. Viele Kandidat:innen sind unsicher, wann sie fahren dürfen und wann nicht. Das führt zu unnötigem Zögern oder – schlimmer – zu gefährlichem Einfahren, obwohl ein anderes Fahrzeug Vortritt hat. Die Regel ist klar: Wer von rechts kommt, hat Vortritt, sofern keine anderen Signale gelten. Übe Kreuzungssituationen systematisch.",
-      },
-      {
-        heading: "Parkieren und Manöver",
-        text: "Seitwärts einparken, rückwärts in eine Parklücke fahren und Wenden auf engem Raum – diese Manöver bereiten vielen Fahrschüler:innen Schwierigkeiten. In der Prüfung wirst du mindestens eines dieser Manöver zeigen müssen. Der Schlüssel liegt im Üben: Wiederhole jedes Manöver bis es sitzt. Achte auf die korrekte Lenkradstellung und nutze deine Spiegel konsequent.",
-      },
-      {
-        heading: "Nervosität als Fehlerquelle",
-        text: "Prüfungsangst ist der unsichtbare Fehler hinter vielen sichtbaren Fehlern. Nervosität führt zu Konzentrationsverlust, hastigen Entscheidungen und verkrampftem Fahren. Die beste Strategie dagegen: ausreichend Fahrpraxis. Wer hunderte Kilometer gefahren ist, fährt auch in der Prüfung sicher. Zudem helfen Atemübungen vor der Prüfung und das Wissen, dass kleine Fehler nicht automatisch zum Durchfallen führen.",
+        heading: "Bestehen ist kein Zufall",
+        text: "Die Fahrprüfung ist keine Glückssache – sie ist das Ergebnis deiner Vorbereitung und deiner Einstellung. Du musst nicht perfekt fahren. Aber du musst zeigen, dass du sicher, aufmerksam und verantwortungsvoll unterwegs bist. Vertraue auf dein Können, fahr konzentriert und denk immer einen Schritt voraus – dann steht deinem Führerschein nichts mehr im Weg.",
       },
     ],
   },
