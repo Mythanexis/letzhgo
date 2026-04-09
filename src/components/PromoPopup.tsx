@@ -65,8 +65,8 @@ export default function PromoPopup() {
     },
   ];
 
-  const INITIAL_DELAY_MS = 5000;
-  const NEXT_POPUP_DELAY_MS = 30000;
+  const INITIAL_DELAY_MS = 5_000;
+  const NEXT_POPUP_DELAY_MS = 50_000;
 
   const [order, setOrder] = useState<number[]>([]);
   const [currentPromoIndex, setCurrentPromoIndex] = useState(0);
@@ -77,7 +77,7 @@ export default function PromoPopup() {
     if (requestOpen("promo")) {
       setIsOpen(true);
     } else {
-      timerRef.current = setTimeout(tryOpen, 30_000);
+      timerRef.current = setTimeout(tryOpen, 50_000);
     }
   };
 
@@ -96,7 +96,10 @@ export default function PromoPopup() {
     notifyClose("promo");
     const hasNext = currentPromoIndex < order.length - 1;
     if (hasNext) {
-      timerRef.current = setTimeout(tryOpen, NEXT_POPUP_DELAY_MS);
+      timerRef.current = setTimeout(() => {
+        setCurrentPromoIndex((prev) => prev + 1);
+        tryOpen();
+      }, NEXT_POPUP_DELAY_MS);
     }
   }
 

@@ -12,8 +12,8 @@ const POSTERS = [
 ];
 
 const INITIAL_DELAY_MS = 60_000;
-const NEXT_POSTER_DELAY_MS = 90_000;
-const RETRY_DELAY_MS = 30_000;
+const NEXT_POSTER_DELAY_MS = 50_000;
+const RETRY_DELAY_MS = 50_000;
 
 export default function PosterPopup() {
   const [order, setOrder] = useState<number[]>([]);
