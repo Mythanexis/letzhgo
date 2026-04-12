@@ -40,6 +40,21 @@ export const metadata: Metadata = {
     siteName: "Let'ZHgo",
     locale: "de_CH",
     type: "website",
+    images: [
+      {
+        url: "https://letzhgo.ch/images/og-image.webp",
+        width: 1200,
+        height: 630,
+        alt: "Let'ZHgo Fahrschule Zürich – Führerschein mit Profis",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fahrschule Zürich | Let'ZHgo",
+    description:
+      "Deine Fahrschule in Zürich: Fahrstunden, Nothelferkurs, Verkehrskunde und Motorrad-Grundkurs. Jetzt anmelden!",
+    images: ["https://letzhgo.ch/images/og-image.webp"],
   },
 };
 

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Auszeichnungen",
+  title: "Auszeichnungen – Fahrschule Let'ZHgo Zürich",
   description:
-    "Qualitätsauszeichnungen von Superfahrlehrer und Fahrlehrervergleich – unabhängig bewertet durch Fahrschüler:innen in der Schweiz.",
+    "Mehrfach ausgezeichnete Fahrschule in Zürich: SuperFahrlehrer, Top-Fahrlehrer & Certificate of Excellence – unabhängig bewertet durch Fahrschüler:innen. Überzeug dich selbst!",
   alternates: { canonical: "/auszeichnungen" },
 };
 

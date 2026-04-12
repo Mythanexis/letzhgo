@@ -83,6 +83,19 @@ export default function Footer() {
         </div>
 
         <div className="mx-auto w-full px-6 pb-12 md:px-24 lg:px-32">
+          <address className="mb-6 not-italic text-center text-sm text-white/40 md:text-left">
+            <span className="font-semibold text-white/60">Let&apos;ZHgo Fahrschule</span>
+            {" · "}
+            Binzmühlestrasse 15, CH-8050 Zürich
+            {" · "}
+            <a href="tel:+41433001455" className="transition-colors hover:text-white">
+              +41 43 300 14 55
+            </a>
+            {" · "}
+            <a href={`mailto:${SITE.email}`} className="transition-colors hover:text-white">
+              {SITE.email}
+            </a>
+          </address>
           <div className="grid items-center gap-y-3 text-sm text-white/50 md:grid-cols-[1fr_auto_1fr]">
             <div className="flex items-center justify-center gap-2 md:justify-start">
               Kontaktiere uns:{" "}
