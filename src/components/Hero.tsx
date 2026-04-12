@@ -379,7 +379,7 @@ export default function Hero({
   if (showImage) {
     return (
       <section
-        className="relative flex h-dvh overflow-x-clip md:overflow-hidden"
+        className="relative flex h-[100svh] overflow-x-clip md:overflow-hidden"
         data-navbar-dark
       >
         <div className="absolute inset-0 overflow-hidden">
