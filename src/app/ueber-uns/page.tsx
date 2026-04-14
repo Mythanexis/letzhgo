@@ -163,30 +163,6 @@ export default function UeberUnsPage() {
         </div>
       </section>
 
-      {/* Fahrlehrer */}
-      <section className="bg-[#f7f8fa]">
-        <div className="mx-auto max-w-7xl px-6 py-24">
-          <div className="text-center">
-            <p className="text-sm uppercase tracking-widest text-accent">
-              Unsere Fahrlehrer
-            </p>
-            <h2 className="mt-4 text-3xl font-bold md:text-4xl">
-              Die, die immer bei dir sind.
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-muted">
-              Unser Team steht für Erfahrung, Geduld und echte Leidenschaft fürs
-              Fahren – damit du dich von Anfang an gut aufgehoben fühlst.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {instructorsInOrder.map((instructor, i) => (
-              <InstructorCard key={instructor.name} {...instructor} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Testimonial */}
       <section className="relative overflow-hidden bg-[#0a0f1e]" data-navbar-dark>
         <div
@@ -246,6 +222,30 @@ export default function UeberUnsPage() {
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Fahrlehrer */}
+      <section className="bg-[#f7f8fa]">
+        <div className="mx-auto max-w-7xl px-6 py-24">
+          <div className="text-center">
+            <p className="text-sm uppercase tracking-widest text-accent">
+              Unsere Fahrlehrer
+            </p>
+            <h2 className="mt-4 text-3xl font-bold md:text-4xl">
+              Die, die immer bei dir sind.
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-muted">
+              Unser Team steht für Erfahrung, Geduld und echte Leidenschaft fürs
+              Fahren – damit du dich von Anfang an gut aufgehoben fühlst.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {instructorsInOrder.map((instructor, i) => (
+              <InstructorCard key={instructor.name} {...instructor} index={i} />
+            ))}
+          </div>
         </div>
       </section>
 
