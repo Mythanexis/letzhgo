@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Users, MapPin, ClipboardCheck, GraduationCap, Car, Video } from "lucide-react";
 import UeberUnsCurtainHero from "@/components/UeberUnsCurtainHero";
 import InstructorCard from "@/components/InstructorCard";
 import Stats from "@/components/Stats";
@@ -21,7 +22,7 @@ export default function UeberUnsPage() {
       {/* Über */}
       <section className="relative overflow-hidden bg-[#f7f8fa]">
         <div
-          className="pointer-events-none absolute right-0 top-1/2 h-80 w-80 -translate-y-1/2 translate-x-1/4 rounded-full bg-accent/[0.09] blur-[100px]"
+          className="pointer-events-none absolute right-0 top-1/2 h-80 w-80 -translate-y-1/2 translate-x-1/4 rounded-full bg-accent/9 blur-[100px]"
           aria-hidden
         />
 
@@ -79,14 +80,14 @@ export default function UeberUnsPage() {
             >
               <div className="relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none">
                 <div
-                  className="pointer-events-none absolute -inset-3 rounded-[32px] bg-gradient-to-br from-accent/15 via-transparent to-accent/10 blur-2xl"
+                  className="pointer-events-none absolute -inset-3 rounded-[32px] bg-linear-to-br from-accent/15 via-transparent to-accent/10 blur-2xl"
                   aria-hidden
                 />
-                <div className="relative overflow-hidden rounded-[26px] border border-border/80 bg-card shadow-[0_24px_60px_-24px_rgba(0,0,0,0.22)] ring-1 ring-black/[0.04] lg:-rotate-[0.6deg] lg:transition-transform lg:duration-500 lg:hover:rotate-0">
-                  <div className="relative aspect-[4/3] sm:aspect-[5/4]">
+                <div className="relative overflow-hidden rounded-[26px] border border-border/80 bg-card shadow-[0_24px_60px_-24px_rgba(0,0,0,0.22)] ring-1 ring-black/4 lg:-rotate-[0.6deg] lg:transition-transform lg:duration-500 lg:hover:rotate-0">
+                  <div className="relative aspect-4/3 sm:aspect-5/4">
                     <Image
-                      src="/images/ueber-uns-hero.png"
-                      alt="Flotte und Team von Let'ZHgo"
+                      src="/images/fahrschul-team.jpg"
+                      alt="Das Team von Let'ZHgo Fahrschule"
                       fill
                       className="object-cover object-center"
                       sizes="(max-width: 1024px) 100vw, 42vw"
@@ -101,88 +102,63 @@ export default function UeberUnsPage() {
 
       {/* Warum Let'ZHgo */}
       <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6 py-28 md:py-36">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 30, scale: 0.97 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
-            className="mx-auto max-w-3xl text-center"
           >
-            <p className="text-sm font-medium uppercase tracking-widest text-accent">
-              Deine Vorteile
-            </p>
-            <h2 className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl lg:text-6xl">
-              Warum{" "}
-              <span className="text-accent">Let&apos;ZHgo?</span>
-            </h2>
-            <p className="mt-5 text-lg leading-relaxed text-muted">
-              Optimal vorbereitet – ohne Umwege.
-            </p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+              className="text-5xl font-bold leading-[1.1] tracking-tight text-foreground md:text-6xl"
+            >
+              Unsere <span className="text-accent">Vorteile</span>
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+              className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl"
+            >
+              Eine moderne Fahrschule, die mit der Zeit geht –
+              mit Qualität, Flexibilität und individueller Betreuung.
+            </motion.p>
           </motion.div>
 
-          <div className="mt-16 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-20 grid gap-x-16 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              {
-                title: "Maximale Flexibilität",
-                text: "Mehrere Fahrlehrer:innen im Team – du findest immer einen Termin, der passt.",
-                icon: <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />,
-              },
-              {
-                title: "Im ganzen Raum Zürich",
-                text: "Mehrere Standorte: Oerlikon, Oberglatt und Rümlang.",
-                icon: <><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></>,
-              },
-              {
-                title: "Prüfungssimulationen",
-                text: "Realistische Testläufe, damit du am Prüfungstag ruhig bleibst.",
-                icon: <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />,
-              },
-              {
-                title: "Alles an einem Ort",
-                text: "Nothelfer, VKU, Fahrstunden und Motorradkurse aus einer Hand.",
-                icon: <><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></>,
-              },
-              {
-                title: "Moderne Fahrzeuge",
-                text: "Aktuelle Flotte, gepflegt und für die Ausbildung ausgestattet.",
-                icon: <><circle cx="7" cy="17" r="2" /><circle cx="17" cy="17" r="2" /><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2M9 17h6" /></>,
-              },
-              {
-                title: "Videoanalyse",
-                text: "Fahrten per Video analysieren – Fehler erkennen, schneller Fortschritte machen.",
-                icon: <><path d="M23 7l-7 5 7 5V7z" /><rect x="1" y="5" width="15" height="14" rx="2" /></>,
-              },
+              { title: "Maximale Flexibilität", text: "Mehrere Fahrlehrer:innen im Team – du findest immer einen Termin, der passt.", Icon: Users },
+              { title: "Im ganzen Raum Zürich", text: "Mehrere Standorte: Oerlikon, Oberglatt und Rümlang.", Icon: MapPin },
+              { title: "Prüfungssimulationen", text: "Realistische Testläufe, damit du am Prüfungstag ruhig bleibst.", Icon: ClipboardCheck },
+              { title: "Alles an einem Ort", text: "Nothelfer, VKU, Fahrstunden und Motorradkurse aus einer Hand.", Icon: GraduationCap },
+              { title: "Moderne Fahrzeuge", text: "Aktuelle Flotte, gepflegt und für die Ausbildung ausgestattet.", Icon: Car },
+              { title: "Videoanalyse", text: "Fahrten per Video analysieren – Fehler erkennen, schneller Fortschritte machen.", Icon: Video },
             ].map((item, i) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true, margin: "-40px" }}
-                className="text-center"
+                transition={{ duration: 0.6, delay: 0.1 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                viewport={{ once: true, margin: "-60px" }}
               >
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
-                  <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    {item.icon}
-                  </svg>
-                </div>
-                <h3 className="mt-4 text-base font-bold text-foreground">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
+                <motion.div
+                  initial={{ scale: 0, rotate: -20 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 + i * 0.1, type: "spring", stiffness: 200, damping: 15 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  className="w-fit"
+                >
+                  <item.Icon className="h-14 w-14 text-accent" strokeWidth={1.2} />
+                </motion.div>
+                <h3 className="mt-6 text-2xl font-bold text-foreground">{item.title}</h3>
+                <p className="mt-3 text-lg leading-relaxed text-muted">{item.text}</p>
               </motion.div>
             ))}
-          </div>
-
-          <div className="mt-14 flex justify-center">
-            <Link
-              href="/kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-accent-dark"
-            >
-              Jetzt loslegen
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M4 8h8M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
           </div>
         </div>
       </section>
@@ -230,7 +206,7 @@ export default function UeberUnsPage() {
             className="text-center"
           >
             <span
-              className="pointer-events-none select-none font-serif text-[8rem] leading-none text-white/[0.06] md:text-[12rem]"
+              className="pointer-events-none select-none font-serif text-[8rem] leading-none text-white/6 md:text-[12rem]"
               aria-hidden
             >
               &ldquo;
@@ -299,7 +275,7 @@ export default function UeberUnsPage() {
 
       {/* Quote — Wald, leicht abgedunkelt; Bild unten ausrichten (Strasse), Text vertikal mittig */}
       <section
-        className="relative flex min-h-[36rem] items-center justify-center overflow-hidden px-6 py-16 md:min-h-[44rem] md:py-20"
+        className="relative flex min-h-144 items-center justify-center overflow-hidden px-6 py-16 md:min-h-176 md:py-20"
         data-navbar-dark
       >
         <Image
@@ -312,7 +288,7 @@ export default function UeberUnsPage() {
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/65"
+          className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/55 via-black/45 to-black/65"
           aria-hidden
         />
         <div className="relative z-10 mx-auto w-full max-w-7xl">
@@ -335,87 +311,96 @@ export default function UeberUnsPage() {
       </section>
 
       {/* Motorrad-Grundkurs Promo */}
-      <section className="relative overflow-hidden bg-[#f7f8fa]">
-        <div
-          className="pointer-events-none absolute -right-32 top-1/3 h-[450px] w-[450px] rounded-full bg-accent/[0.07] blur-[120px]"
-          aria-hidden
-        />
+      <section className="bg-[#f7f8fa]">
+        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true }}
+            className="mb-10"
+          >
+            <p className="text-sm font-medium uppercase tracking-widest text-accent">
+              Motorrad-Grundkurs
+            </p>
+            <h2 className="mt-4 text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl">
+              Bereit für zwei Räder?{" "}
+              <span className="text-accent">Starte jetzt.</span>
+            </h2>
+          </motion.div>
 
-        <div className="relative mx-auto max-w-6xl px-6 py-24 md:py-32">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true, margin: "-60px" }}
-            className="overflow-hidden rounded-[28px] bg-white shadow-[0_4px_32px_-8px_rgba(0,0,0,0.06),0_16px_48px_-16px_rgba(1,68,220,0.08)] ring-1 ring-black/[0.03]"
+            className="group relative overflow-hidden rounded-[28px] bg-[#0a0f1e] shadow-[0_8px_40px_-12px_rgba(0,0,0,0.25)]"
           >
-            <div className="grid lg:grid-cols-2">
-              <div className="relative min-h-[320px] lg:min-h-0">
+            <div
+              className="pointer-events-none absolute -right-32 -top-32 h-[400px] w-[400px] rounded-full bg-accent/20 blur-[100px]"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute -bottom-20 left-1/4 h-[300px] w-[300px] rounded-full bg-accent/10 blur-[80px]"
+              aria-hidden
+            />
+
+            <div className="relative grid lg:grid-cols-[1.15fr_1fr]">
+              <div className="relative min-h-[320px] overflow-hidden lg:min-h-[460px]">
                 <Image
                   src="/images/posters/motorrad-grundkurs.png"
                   alt="Motorrad-Grundkurs bei Let'ZHgo – Jetzt online buchen"
                   fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  sizes="(max-width: 1024px) 100vw, 55vw"
+                />
+                <div
+                  className="pointer-events-none absolute inset-0 bg-linear-to-r from-transparent via-transparent to-[#0a0f1e]/50 max-lg:bg-linear-to-b max-lg:from-transparent max-lg:via-transparent max-lg:to-[#0a0f1e]/70"
+                  aria-hidden
                 />
               </div>
 
-              <div className="flex flex-col justify-center px-8 py-10 md:px-12 md:py-14 lg:px-14 lg:py-16">
-                <div className="inline-flex w-fit items-center gap-2 rounded-full bg-accent/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent">
-                  <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                  </svg>
-                  Kurs verfügbar
-                </div>
-                <h2 className="mt-5 text-3xl font-bold leading-tight text-foreground md:text-[2.25rem]">
-                  Motorrad-Grundkurs
-                </h2>
-                <p className="mt-4 text-base leading-relaxed text-muted">
-                  12 Stunden praxisnahes Training – von Kurventechnik bis
-                  Verkehrssicherheit. Ob A1 oder A: Wir machen dich startklar.
+              <div className="relative flex flex-col justify-center px-8 py-10 md:px-12 md:py-14 lg:px-14">
+                <p className="text-[0.925rem] leading-relaxed text-white/60">
+                  12 Stunden praxisnahes Training auf dem Übungsplatz – von
+                  Kurventechnik bis Verkehrssicherheit. Ob Kategorie A1 oder A:
+                  Wir machen dich startklar.
                 </p>
 
-                <div className="mt-7 grid grid-cols-3 gap-4 rounded-xl bg-[#f7f8fa] p-4">
+                <div className="mt-7 flex flex-col gap-3.5">
                   {[
-                    { value: "12h", label: "Training" },
-                    { value: "3", label: "Halbtage" },
-                    { value: "A1/A", label: "Kategorien" },
-                  ].map((stat) => (
-                    <div key={stat.label} className="text-center">
-                      <p className="text-xl font-bold text-accent md:text-2xl">{stat.value}</p>
-                      <p className="mt-0.5 text-xs text-muted">{stat.label}</p>
+                    { text: "12 Stunden auf 3 Halbtage verteilt", icon: <path d="M12 6v6l4 2M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z" /> },
+                    { text: "Übungsmotorräder vorhanden", icon: <><circle cx="7" cy="17" r="2" /><circle cx="17" cy="17" r="2" /><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2M9 17h6" /></> },
+                    { text: "Kleine Gruppen, individuelles Feedback", icon: <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /> },
+                  ].map((p) => (
+                    <div key={p.text} className="flex items-center gap-3 text-sm text-white/70">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/8 text-accent">
+                        <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          {p.icon}
+                        </svg>
+                      </span>
+                      {p.text}
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-7 flex flex-col gap-2.5 text-sm text-foreground/80">
-                  {["Übungsmotorräder vorhanden", "Kleine Gruppen, individuelles Feedback"].map((p) => (
-                    <div key={p} className="flex items-center gap-2.5">
-                      <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4 shrink-0 text-accent" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M3.5 8.5l3 3 6-7" />
-                      </svg>
-                      {p}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
+                <div className="mt-9 flex flex-wrap items-center gap-4">
                   <a
                     href="https://app1.edoobox.com/de/LetZHgo/Motorradkurse/?edref=letzhgo"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-accent-dark"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-accent/25 transition-all hover:bg-accent-dark hover:shadow-xl hover:shadow-accent/30"
                   >
-                    Grundkurs buchen
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M4 8h8M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    Jetzt Platz sichern
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </a>
                   <Link
                     href="/services/motorrad"
-                    className="text-sm font-semibold text-foreground underline decoration-border underline-offset-4 transition hover:text-accent hover:decoration-accent"
+                    className="text-sm font-semibold text-white/50 transition hover:text-accent"
                   >
-                    Mehr erfahren
+                    Mehr zum Kurs &rarr;
                   </Link>
                 </div>
               </div>
