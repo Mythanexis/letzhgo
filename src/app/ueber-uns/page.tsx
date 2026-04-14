@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { Users, MapPin, ClipboardCheck, GraduationCap, Car, Video } from "lucide-react";
 import UeberUnsCurtainHero from "@/components/UeberUnsCurtainHero";
 import InstructorCard from "@/components/InstructorCard";
@@ -11,9 +13,70 @@ import FAQ from "@/components/FAQ";
 import { INSTRUCTORS, INSTRUCTORS_HOMEPAGE_ORDER } from "@/lib/constants";
 
 export default function UeberUnsPage() {
+  const GOOGLE_REVIEWS_URL = "https://www.google.com/maps/search/?api=1&query=Let%27ZHgo+Fahrschule+Binzm%C3%BChlestrasse+15+8050+Z%C3%BCrich";
+  const REVIEW_PREVIEW_CHARS = 200;
   const instructorsInOrder = INSTRUCTORS_HOMEPAGE_ORDER.map((name) =>
     INSTRUCTORS.find((instructor) => instructor.name === name),
   ).filter((instructor): instructor is (typeof INSTRUCTORS)[number] => Boolean(instructor));
+  const reviews = [
+    {
+      author: "Dogu Erbek",
+      text: "Ich habe alle Schritte für meinen Führerschein mit LetZHgo gemacht und es war fantastisch. Ich danke am besondersten Gianni, ohne den ich es nicht geschafft hätte. Er hat mich von Anfang bis Ende begleitet und war dabei sehr geduldig und hilfsbereit. Ich kann LetZHgo jedem, der seinen Führerschein machen möchte, wärmstens empfehlen.",
+      date: "vor 1 Monat",
+    },
+    {
+      author: "Delia Ullings",
+      text: "Wer gute Fahrstunden mit einer lockeren Atmosphäre sucht ist hier genau richtig! Ich habe mich immer auf meine Fahrstunden bei Gianni oder auch Heike gefreut. Beide erklären alles verständlich und mit viel Geduld. Der VKU ist auch super aufgebaut. Kann ich nur weiterempfehlen.",
+      date: "vor 5 Monaten",
+    },
+    {
+      author: "K Danijel",
+      text: "Ich durfte beim Gianni Fahrstunden für den Anhänger machen. Ich kann ihn und seine Fahrschule jedem zu 100% weiterempfehlen. Super sympathischer Typ, bringt einem alles in der Praxis bei und hat Spass bei den Fahrstunden. Er hat mir alles beigebracht, was ich brauchte, um die Prüfung innert von 3 Wochen zu bestehen! Danke viel mal und wir sehen uns im Frühling für die nächste Kategorie (Motorrad beschränkt).",
+      date: "vor 2 Monaten",
+    },
+    {
+      author: "Mia Numme",
+      text: "Ich kann Merjema als Fahrlehrerin absolut weiterempfehlen. Sie hat sofort erkannt, wo ich noch Verbesserung gebraucht habe, und genau dort angesetzt. Sie erklärt alles so, dass man wirklich versteht, warum man etwas tut und nicht nur wie. Ihre Art ist nicht ruhig, sondern richtig powerful - motivierend, klar und direkt, genau das, was ich gebraucht habe, um schnell Fortschritte zu machen. Jede Fahrstunde war intensiv, lehrreich und hat mir viel Sicherheit gegeben. Dank ihr bin ich bestens vorbereitet in die Prüfung gegangen. Eine Fahrlehrerin, die wirklich etwas bewirkt!",
+      date: "vor 4 Monaten",
+    },
+    {
+      author: "Tahira Leutwiler",
+      text: "Die Fahrschule, sowie meine Fahrlehrerin Merjema Radic haben mir einen sehr positiven Eindruck gemacht. Ich war bei Merjema im Nothelferkurs, welcher ebenfalls sehr hilfreich und umfassend war. Während der Fahrstunden habe ich mich immer sehr wohl gefühlt, da auf meine Bedürfnisse eingegangen wurde und ich in diesem Jahr sehr gefördert wurde. Sie sind alle sehr professionell und bereiten dich zu 100% auf die Fahrprüfung vor. Der VKU war ebenfalls sehr hilfreich und spannend. Merjema ist eine sehr angenehme Fahrlehrerin und weiss wovon sie spricht. Sie geht alles mit Ruhe und Gelassenheit an, was ich sehr wichtig finde. Danke euch allen viel mals für die tollen Kurse, sowie für meine Fahrstunden! :)",
+      date: "vor 2 Monaten",
+    },
+    {
+      author: "Rejana Saciri",
+      text: "Ich möchte meine positive Erfahrung mit der Fahrschule LetZHgo teilen. Besonders bedanken möchte ich mich bei meiner Fahrlehrerin Merjema Radic, die den Unterricht wirklich angenehm gestaltet hat. Wir hatten viel Spass zusammen, konnten lachen und uns gut unterhalten, was die Lernatmosphäre sehr entspannt gemacht hat. Merjema Radic hat mir alles sehr gut erklärt und mir alle wichtigen Aspekte des Fahrens anschaulich gezeigt. Ihre Geduld und Professionalität haben mir geholfen, schnell Fortschritte zu machen und mich sicher hinter das Steuer zu setzen. Insgesamt war es eine tolle Erfahrung, und ich kann LetZHgo nur weiterempfehlen!",
+      date: "vor 5 Monaten",
+    },
+  ];
+  const [visibleCount, setVisibleCount] = useState(3);
+  const [reviewPage, setReviewPage] = useState(0);
+  const [expandedReviews, setExpandedReviews] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      if (window.innerWidth < 768) {
+        setVisibleCount(1);
+        return;
+      }
+      if (window.innerWidth < 1200) {
+        setVisibleCount(2);
+        return;
+      }
+      setVisibleCount(3);
+    };
+
+    updateVisibleCount();
+    window.addEventListener("resize", updateVisibleCount);
+    return () => window.removeEventListener("resize", updateVisibleCount);
+  }, []);
+
+  const totalReviewPages = Math.max(1, reviews.length - visibleCount + 1);
+
+  useEffect(() => {
+    setReviewPage((prev) => Math.min(prev, totalReviewPages - 1));
+  }, [totalReviewPages]);
 
   return (
     <>
@@ -422,110 +485,181 @@ export default function UeberUnsPage() {
       </section>
 
       {/* Bewertungen */}
-      <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+      <section className="relative overflow-hidden bg-[#0b1220]" data-navbar-dark>
+        <div
+          className="pointer-events-none absolute inset-0 opacity-100"
+          aria-hidden
+          style={{
+            background:
+              "radial-gradient(980px 660px at 20% 24%, rgba(30, 99, 255, 0.28), transparent 62%), radial-gradient(900px 620px at 84% 70%, rgba(30, 99, 255, 0.22), transparent 64%), radial-gradient(760px 520px at 52% 16%, rgba(120, 175, 255, 0.16), transparent 60%), linear-gradient(180deg, rgba(13, 22, 42, 0.95), rgba(10, 18, 35, 0.98) 52%, rgba(8, 14, 28, 1) 100%)",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute -left-24 top-16 h-80 w-80 rounded-full bg-accent/30 blur-[120px]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -right-24 bottom-10 h-[26rem] w-[26rem] rounded-full bg-accent-light/32 blur-[125px]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.2]"
+          aria-hidden
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.09) 1px, transparent 0)",
+            backgroundSize: "22px 22px",
+          }}
+        />
+        <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
+            className="relative"
           >
-            <p className="text-sm font-medium uppercase tracking-widest text-accent">
-              Bewertungen
-            </p>
-            <h2 className="mt-4 text-3xl font-bold md:text-4xl">
-              Das sagen unsere Fahrschüler:innen.
-            </h2>
-          </motion.div>
-
-          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                author: "Sarah Gisin",
-                text: "Mario ist wirklich der beste Fahrlehrer! Er nimmt sich die Zeit, ist geduldig und verständnisvoll, bleibt ruhig und motivierend. Er hat mir das Fahren 1A beigebracht – dafür bin ich sehr dankbar!",
-                date: "3. Februar 2025",
-                tall: true,
-              },
-              {
-                author: "Katarina Lischer",
-                text: "Mein Fahrlehrer Gianni ist super geduldig, professionell und erklärt alles klar. Die Atmosphäre war entspannt, und ich habe mich immer gut aufgehoben gefühlt. Prüfung beim ersten Mal bestanden!",
-                date: "18. Dezember 2024",
-                tall: false,
-              },
-              {
-                author: "Bela Borner",
-                text: "Sehr gut organisierter Grundkurs. Hat Spass gemacht und Samir ist ein wirklich guter Lehrer. Habe wichtige Tipps und Tricks gelernt.",
-                date: "17. November 2024",
-                tall: false,
-              },
-              {
-                author: "Leona Zogaj",
-                text: "Mario war ein sehr guter Fahrlehrer, der mir gute Erklärungen geben konnte und mir so weitergeholfen und motiviert hat. Ich habe viel gelernt und er hatte auch viel Geduld.",
-                date: "17. November 2024",
-                tall: false,
-              },
-              {
-                author: "Rebecca Volpini",
-                text: "Gianni hat die Fahrstunden kreativ und abwechslungsreich gestaltet. So hat das Lernen wirklich Spass gemacht. Mit seiner Geduld und seiner motivierenden Art habe ich die Prüfung erfolgreich bestanden!",
-                date: "3. Februar 2025",
-                tall: true,
-              },
-              {
-                author: "Raul B",
-                text: "Vielen Dank an Frau Merjema Radic. Ich konnte sehr viel über das Fahren und allgemein über den Verkehr von ihr lernen und somit im Nu meine Prüfung bestehen.",
-                date: "24. Oktober 2024",
-                tall: false,
-              },
-            ].map((review, i) => (
-              <motion.div
-                key={review.author}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true, margin: "-40px" }}
-                className={`flex flex-col rounded-2xl border border-border/60 bg-[#f7f8fa] p-6 md:p-7 ${review.tall ? "md:row-span-2" : ""}`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/10 text-xs font-bold text-accent">
-                    {review.author.split(" ").map((n) => n[0]).join("")}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">{review.author}</p>
-                    <div className="flex items-center gap-2">
-                      <div className="flex gap-0.5" aria-hidden>
-                        {Array.from({ length: 5 }).map((_, j) => (
-                          <svg key={j} className="h-3 w-3 text-[#f5a623]" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                          </svg>
-                        ))}
-                      </div>
-                      <span className="text-xs text-muted">{review.date}</span>
-                    </div>
-                  </div>
-                </div>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-foreground/75">
-                  &ldquo;{review.text}&rdquo;
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
+                  Bewertungen
                 </p>
-              </motion.div>
-            ))}
-          </div>
+                <h2 className="mt-3 text-3xl font-bold leading-[1.12] tracking-tight text-white md:text-4xl">
+                  Das sagen unsere <span className="text-accent">Fahrschüler:innen</span>.
+                </h2>
+                <p className="mt-3 max-w-2xl text-base text-white/70">
+                  Ehrliches Feedback aus echten Fahrstunden - transparent, direkt und ohne Filter.
+                </p>
+              </div>
 
-          <div className="mt-10 flex justify-center">
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Let%27ZHgo+Fahrschule+Binzm%C3%BChlestrasse+15+8050+Z%C3%BCrich"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-6 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all hover:border-accent/30 hover:text-accent"
-            >
-              <svg className="h-4 w-4" viewBox="0 0 24 24" aria-hidden>
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-              </svg>
-              Alle 417+ Bewertungen auf Google
-            </a>
-          </div>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setReviewPage((prev) => Math.max(0, prev - 1))}
+                  className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-white/92 text-[#3f39c7] shadow-[0_14px_28px_-20px_rgba(52,36,126,0.85)] transition hover:bg-white hover:text-[#2f2ab3] disabled:cursor-not-allowed disabled:opacity-45"
+                  aria-label="Vorherige Bewertungen"
+                  disabled={reviewPage === 0}
+                >
+                  <FiChevronLeft aria-hidden className="h-5 w-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setReviewPage((prev) => Math.min(totalReviewPages - 1, prev + 1))}
+                  className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-[#3f39c7] text-white shadow-[0_16px_32px_-18px_rgba(63,57,199,0.9)] transition hover:bg-[#322ea6] disabled:cursor-not-allowed disabled:opacity-45"
+                  aria-label="Nächste Bewertungen"
+                  disabled={reviewPage >= totalReviewPages - 1}
+                >
+                  <FiChevronRight aria-hidden className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+
+            <div className="mt-10 overflow-hidden">
+              <div
+                className="flex transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                style={{ transform: `translateX(-${reviewPage * (100 / visibleCount)}%)` }}
+              >
+                {reviews.map((review) => (
+                  <div
+                    key={`${review.author}-${review.date}`}
+                    className="shrink-0 px-2.5"
+                    style={{ width: `${100 / visibleCount}%` }}
+                  >
+                    <article className="flex h-full min-h-[21rem] flex-col rounded-2xl bg-white/95 p-6">
+                      <div className="flex items-center justify-between">
+                        <span className="text-4xl leading-none text-[#cbc5ef]" aria-hidden>
+                          &ldquo;
+                        </span>
+                        <div className="flex gap-0.5" aria-hidden>
+                          {Array.from({ length: 5 }).map((_, j) => (
+                            <svg key={j} className="h-4 w-4 text-[#f5a623]" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="mt-3 flex-1">
+                        {(() => {
+                          const reviewId = `${review.author}-${review.date}`;
+                          const isExpanded = Boolean(expandedReviews[reviewId]);
+                          const hasLongText = review.text.length > REVIEW_PREVIEW_CHARS;
+                          const displayedText =
+                            !hasLongText || isExpanded
+                              ? review.text
+                              : `${review.text.slice(0, REVIEW_PREVIEW_CHARS).trimEnd()}...`;
+                          return (
+                            <motion.div layout transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}>
+                              <p className="text-sm leading-relaxed text-foreground/80">
+                                &ldquo;{displayedText}&rdquo;
+                              </p>
+                              {hasLongText && (
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setExpandedReviews((prev) => ({
+                                      ...prev,
+                                      [reviewId]: !prev[reviewId],
+                                    }))
+                                  }
+                                  className="mt-2 inline-flex cursor-pointer text-xs font-semibold text-accent transition hover:text-accent-dark"
+                                >
+                                  {isExpanded ? "Weniger anzeigen" : "Mehr lesen"}
+                                </button>
+                              )}
+                            </motion.div>
+                          );
+                        })()}
+                      </div>
+
+                      <div className="mt-5 flex items-center gap-3 pt-4">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ecebff] text-xs font-bold text-[#4c45db]">
+                          {review.author.split(" ").map((n) => n[0]).join("")}
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-foreground">{review.author}</p>
+                          <p className="text-xs text-muted">{review.date}</p>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8 flex items-center justify-center gap-2" aria-label="Bewertungsseiten">
+              {Array.from({ length: totalReviewPages }).map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setReviewPage(i)}
+                  className={`h-2.5 cursor-pointer rounded-full transition-all ${
+                    reviewPage === i
+                      ? "w-6 bg-[#3f39c7]"
+                      : "w-2.5 bg-[#cbc8e8] hover:bg-[#b2addd]"
+                  }`}
+                  aria-label={`Zur Bewertungsseite ${i + 1}`}
+                />
+              ))}
+            </div>
+
+            <div className="mt-8 flex justify-center">
+              <a
+                href={GOOGLE_REVIEWS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-[#d7d4ec] bg-white px-6 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all hover:border-accent/30 hover:text-accent"
+              >
+                <svg className="h-4 w-4" viewBox="0 0 24 24" aria-hidden>
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                </svg>
+                Alle 417+ Bewertungen auf Google
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
