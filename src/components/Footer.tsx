@@ -82,10 +82,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mx-auto w-full px-6 pb-12 md:px-24 lg:px-32">
-          <address className="mb-6 not-italic text-center text-sm text-white/40 md:text-left">
+        <div className="mx-auto w-full border-t border-white/10 px-6 pb-12 pt-8 md:px-24 lg:px-32">
+          <address className="not-italic text-sm leading-relaxed text-white/40">
             <span className="font-semibold text-white/60">Let&apos;ZHgo Fahrschule</span>
-            {" · "}
+            <br />
             Binzmühlestrasse 15, CH-8050 Zürich
             {" · "}
             <a href="tel:+41433001455" className="transition-colors hover:text-white">
@@ -96,17 +96,9 @@ export default function Footer() {
               {SITE.email}
             </a>
           </address>
-          <div className="grid items-center gap-y-3 text-sm text-white/50 md:grid-cols-[1fr_auto_1fr]">
-            <div className="flex items-center justify-center gap-2 md:justify-start">
-              Kontaktiere uns:{" "}
-              <a
-                href={`mailto:${SITE.email}`}
-                className="font-semibold text-white transition-colors hover:text-accent"
-              >
-                {SITE.email}
-              </a>
-            </div>
-            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-white/60">
+
+          <div className="mt-6 flex flex-col gap-3 text-sm sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-white/60">
               <Link
                 href="/impressum"
                 className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
@@ -130,11 +122,9 @@ export default function Footer() {
                 <span className={`${footerNavLinkUnderline} text-sm`}>AGB</span>
               </Link>
             </div>
-            <div className="flex items-center justify-center md:justify-end">
-              <span className="text-white/40">
-                © {new Date().getFullYear()} | {SITE.name}
-              </span>
-            </div>
+            <span className="text-white/30">
+              © {new Date().getFullYear()} | {SITE.name}
+            </span>
           </div>
         </div>
         <div className="h-[env(safe-area-inset-bottom)]" />
