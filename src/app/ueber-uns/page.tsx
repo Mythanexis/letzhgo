@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { Users, MapPin, ClipboardCheck, GraduationCap, Car, Video } from "lucide-react";
 import UeberUnsCurtainHero from "@/components/UeberUnsCurtainHero";
@@ -53,6 +53,8 @@ export default function UeberUnsPage() {
   const [visibleCount, setVisibleCount] = useState(3);
   const [reviewPage, setReviewPage] = useState(0);
   const [expandedReviews, setExpandedReviews] = useState<Record<string, boolean>>({});
+  const mobileReviewsRef = useRef<HTMLDivElement | null>(null);
+  const mobileScrollSettleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const updateVisibleCount = () => {
@@ -77,6 +79,28 @@ export default function UeberUnsPage() {
   useEffect(() => {
     setReviewPage((prev) => Math.min(prev, totalReviewPages - 1));
   }, [totalReviewPages]);
+
+  useEffect(() => {
+    if (visibleCount !== 1) return;
+    const el = mobileReviewsRef.current;
+    if (!el) return;
+    el.scrollTo({ left: reviewPage * el.clientWidth, behavior: "auto" });
+  }, [reviewPage, visibleCount]);
+
+  useEffect(() => {
+    if (visibleCount === 1) return;
+    const el = mobileReviewsRef.current;
+    if (!el) return;
+    el.scrollLeft = 0;
+  }, [visibleCount]);
+
+  useEffect(() => {
+    return () => {
+      if (mobileScrollSettleTimeoutRef.current) {
+        clearTimeout(mobileScrollSettleTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -528,14 +552,14 @@ export default function UeberUnsPage() {
                   Bewertungen
                 </p>
                 <h2 className="mt-3 text-3xl font-bold leading-[1.12] tracking-tight text-white md:text-4xl">
-                  Das sagen unsere <span className="text-accent">Fahrschüler:innen</span>.
+                  Das sagen unsere <span className="text-accent-light md:text-accent">Fahrschüler:innen</span>.
                 </h2>
                 <p className="mt-3 max-w-2xl text-base text-white/70">
                   Ehrliches Feedback aus echten Fahrstunden - transparent, direkt und ohne Filter.
                 </p>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 self-end md:self-auto">
                 <button
                   type="button"
                   onClick={() => setReviewPage((prev) => Math.max(0, prev - 1))}
@@ -557,15 +581,40 @@ export default function UeberUnsPage() {
               </div>
             </div>
 
-            <div className="mt-10 overflow-hidden">
+            <div
+              ref={mobileReviewsRef}
+              className={`mt-10 overflow-y-hidden ${
+                visibleCount === 1
+                  ? "overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory"
+                  : "overflow-hidden"
+              }`}
+              onScroll={(e) => {
+                if (visibleCount !== 1) return;
+                const el = e.currentTarget;
+                if (mobileScrollSettleTimeoutRef.current) {
+                  clearTimeout(mobileScrollSettleTimeoutRef.current);
+                }
+                mobileScrollSettleTimeoutRef.current = setTimeout(() => {
+                  const nextIndex = Math.round(el.scrollLeft / el.clientWidth);
+                  setReviewPage((prev) => {
+                    const bounded = Math.min(Math.max(0, nextIndex), totalReviewPages - 1);
+                    return prev === bounded ? prev : bounded;
+                  });
+                }, 90);
+              }}
+            >
               <div
-                className="flex transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
-                style={{ transform: `translateX(-${reviewPage * (100 / visibleCount)}%)` }}
+                className="flex md:transition-transform md:duration-500 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
+                style={
+                  visibleCount === 1
+                    ? undefined
+                    : { transform: `translateX(-${reviewPage * (100 / visibleCount)}%)` }
+                }
               >
                 {reviews.map((review) => (
                   <div
                     key={`${review.author}-${review.date}`}
-                    className="shrink-0 px-2.5"
+                    className={`shrink-0 px-2.5 ${visibleCount === 1 ? "snap-start" : ""}`}
                     style={{ width: `${100 / visibleCount}%` }}
                   >
                     <article className="flex h-full min-h-[21rem] flex-col rounded-2xl bg-white/95 p-6">
