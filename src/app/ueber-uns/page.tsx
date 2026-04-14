@@ -362,7 +362,7 @@ export default function UeberUnsPage() {
                   ))}
                 </div>
 
-                <div className="mt-7 flex flex-wrap items-center gap-4">
+                <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
                   <a
                     href="https://app1.edoobox.com/de/LetZHgo/Motorradkurse/?edref=letzhgo"
                     target="_blank"
@@ -403,7 +403,7 @@ export default function UeberUnsPage() {
                 whileInView={{ opacity: 1, scale: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                 viewport={{ once: true }}
-                className="relative"
+                className="relative mt-5 sm:mt-0"
               >
                 <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-white shadow-[0_28px_52px_-28px_rgba(0,0,0,0.32)]">
                   <div className="relative aspect-[4/5] w-full">
