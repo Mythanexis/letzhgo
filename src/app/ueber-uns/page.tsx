@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { Users, MapPin, ClipboardCheck, GraduationCap, Car, Video } from "lucide-react";
@@ -484,6 +484,9 @@ export default function UeberUnsPage() {
         </div>
       </section>
 
+      {/* Stats */}
+      <Stats surface="light" />
+
       {/* Bewertungen */}
       <section className="relative overflow-hidden bg-[#0b1220]" data-navbar-dark>
         <div
@@ -584,15 +587,33 @@ export default function UeberUnsPage() {
                           const reviewId = `${review.author}-${review.date}`;
                           const isExpanded = Boolean(expandedReviews[reviewId]);
                           const hasLongText = review.text.length > REVIEW_PREVIEW_CHARS;
-                          const displayedText =
-                            !hasLongText || isExpanded
-                              ? review.text
-                              : `${review.text.slice(0, REVIEW_PREVIEW_CHARS).trimEnd()}...`;
+                          const previewText = hasLongText
+                            ? review.text.slice(0, REVIEW_PREVIEW_CHARS).trimEnd()
+                            : review.text;
+                          const extraText = hasLongText
+                            ? review.text.slice(REVIEW_PREVIEW_CHARS).trimStart()
+                            : "";
                           return (
-                            <motion.div layout transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}>
+                            <div>
                               <p className="text-sm leading-relaxed text-foreground/80">
-                                &ldquo;{displayedText}&rdquo;
+                                &ldquo;{previewText}
+                                {!isExpanded && hasLongText ? "..." : hasLongText ? "" : "”"}
                               </p>
+                              <AnimatePresence initial={false}>
+                                {hasLongText && isExpanded && (
+                                  <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                                    className="overflow-hidden"
+                                  >
+                                    <p className="text-sm leading-relaxed text-foreground/80">
+                                      {extraText}&rdquo;
+                                    </p>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
                               {hasLongText && (
                                 <button
                                   type="button"
@@ -607,7 +628,7 @@ export default function UeberUnsPage() {
                                   {isExpanded ? "Weniger anzeigen" : "Mehr lesen"}
                                 </button>
                               )}
-                            </motion.div>
+                            </div>
                           );
                         })()}
                       </div>
@@ -662,9 +683,6 @@ export default function UeberUnsPage() {
           </motion.div>
         </div>
       </section>
-
-      {/* Stats */}
-      <Stats surface="light" />
 
       {/* FAQ */}
       <FAQ className="bg-[#f7f8fa]" />
