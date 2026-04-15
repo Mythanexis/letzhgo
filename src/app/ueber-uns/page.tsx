@@ -107,7 +107,7 @@ export default function UeberUnsPage() {
       <UeberUnsCurtainHero />
 
       {/* Über */}
-      <section className="relative overflow-hidden bg-[#f7f8fa]">
+      <section className="relative overflow-hidden bg-background">
         <div
           className="pointer-events-none absolute right-0 top-1/2 h-80 w-80 -translate-y-1/2 translate-x-1/4 rounded-full bg-accent/9 blur-[100px]"
           aria-hidden
@@ -188,7 +188,7 @@ export default function UeberUnsPage() {
       </section>
 
       {/* Warum Let'ZHgo */}
-      <section className="bg-background">
+      <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-6xl px-6 py-28 md:py-36">
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.97 }}
@@ -313,7 +313,7 @@ export default function UeberUnsPage() {
       </section>
 
       {/* Fahrlehrer */}
-      <section className="bg-[#f7f8fa]">
+      <section className="bg-background">
         <div className="mx-auto max-w-7xl px-6 py-24">
           <div className="text-center">
             <p className="text-sm uppercase tracking-widest text-accent">
@@ -337,7 +337,7 @@ export default function UeberUnsPage() {
       </section>
 
       {/* About bottom */}
-      <section className="bg-background">
+      <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-7xl px-6 py-32 md:py-40">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -393,117 +393,6 @@ export default function UeberUnsPage() {
             <p className="mt-10 text-base text-white/75 md:mt-12 md:text-lg">
               — Samir Radič, Gründer Let&apos;ZHgo
             </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Motorrad-Grundkurs Promo */}
-      <section className="relative overflow-hidden bg-[#f7f8fa]">
-        <div
-          className="pointer-events-none absolute -left-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-accent/10 blur-[100px]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute right-0 top-0 h-80 w-80 -translate-y-1/3 translate-x-1/4 rounded-full bg-sky-200/35 blur-[110px]"
-          aria-hidden
-        />
-        <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
-            className="relative z-10 grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center"
-          >
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent/90">
-                  Motorrad-Grundkurs
-                </p>
-                <h2 className="mt-4 text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl">
-                  Bereit für zwei Räder?
-                </h2>
-                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-                  In 12 Stunden wirst du sicherer, ruhiger und souveräner auf dem
-                  Motorrad. Praxisnah, direkt umsetzbar und mit Feedback, das dich
-                  wirklich weiterbringt.
-                </p>
-
-                <div className="mt-8 grid gap-x-8 gap-y-4 text-base text-foreground/85 sm:grid-cols-2">
-                  {[
-                    "12 Stunden auf 3 Halbtage verteilt",
-                    "Für Kategorie A1 und A",
-                    "Übungsmotorräder vorhanden",
-                    "Kleine Gruppen mit direktem Coaching",
-                  ].map((text) => (
-                    <div key={text} className="flex items-start gap-3">
-                      <span
-                        className="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/12 text-accent"
-                        aria-hidden
-                      >
-                        <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M3.5 8.5l3 3 6-7" />
-                        </svg>
-                      </span>
-                      <span>{text}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
-                  <a
-                    href="https://app1.edoobox.com/de/LetZHgo/Motorradkurse/?edref=letzhgo"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white shadow-sm outline-none transition-colors hover:bg-accent-dark focus-visible:ring-2 focus-visible:ring-accent-dark/45 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                  >
-                    <span className="relative z-10 inline-block whitespace-nowrap transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:pointer-events-none group-hover:-translate-x-[calc(100%+2.5rem)] group-focus-visible:pointer-events-none group-focus-visible:-translate-x-[calc(100%+2.5rem)] motion-reduce:group-hover:translate-x-0 motion-reduce:group-focus-visible:translate-x-0">
-                      Jetzt Platz sichern
-                    </span>
-                    <span
-                      className="pointer-events-none absolute inset-0 flex items-center overflow-hidden motion-reduce:hidden"
-                      aria-hidden
-                    >
-                      <span className="flex w-full justify-center transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] translate-x-full group-hover:translate-x-0 group-focus-visible:translate-x-0">
-                        <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M5 12h14M13 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                    </span>
-                  </a>
-                  <Link
-                    href="/services/motorrad"
-                    className="group relative inline-flex items-center gap-2 pb-0.5 text-sm font-semibold text-accent no-underline transition-colors after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-accent-dark after:content-[''] hover:after:scale-x-100"
-                  >
-                    Mehr Infos zum Kurs
-                    <span
-                      aria-hidden
-                      className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"
-                    >
-                      &rarr;
-                    </span>
-                  </Link>
-                </div>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96, x: 18 }}
-                whileInView={{ opacity: 1, scale: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true }}
-                className="relative mt-5 sm:mt-0"
-              >
-                <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-white shadow-[0_28px_52px_-28px_rgba(0,0,0,0.32)]">
-                  <div className="relative aspect-[4/5] w-full">
-                    <Image
-                      src="/images/posters/motorrad-grundkurs.png"
-                      alt="Motorrad-Grundkurs bei Let'ZHgo"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 36vw"
-                    />
-                  </div>
-                </div>
-              </motion.div>
           </motion.div>
         </div>
       </section>
@@ -729,6 +618,117 @@ export default function UeberUnsPage() {
                 Alle 417+ Bewertungen auf Google
               </a>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Motorrad-Grundkurs Promo */}
+      <section className="relative overflow-hidden bg-background">
+        <div
+          className="pointer-events-none absolute -left-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-accent/10 blur-[100px]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute right-0 top-0 h-80 w-80 -translate-y-1/3 translate-x-1/4 rounded-full bg-sky-200/35 blur-[110px]"
+          aria-hidden
+        />
+        <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true }}
+            className="relative z-10 grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center"
+          >
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent/90">
+                  Motorrad-Grundkurs
+                </p>
+                <h2 className="mt-4 text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl">
+                  Bereit für zwei Räder?
+                </h2>
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+                  In 12 Stunden wirst du sicherer, ruhiger und souveräner auf dem
+                  Motorrad. Praxisnah, direkt umsetzbar und mit Feedback, das dich
+                  wirklich weiterbringt.
+                </p>
+
+                <div className="mt-8 grid gap-x-8 gap-y-4 text-base text-foreground/85 sm:grid-cols-2">
+                  {[
+                    "12 Stunden auf 3 Halbtage verteilt",
+                    "Für Kategorie A1 und A",
+                    "Übungsmotorräder vorhanden",
+                    "Kleine Gruppen mit direktem Coaching",
+                  ].map((text) => (
+                    <div key={text} className="flex items-start gap-3">
+                      <span
+                        className="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/12 text-accent"
+                        aria-hidden
+                      >
+                        <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M3.5 8.5l3 3 6-7" />
+                        </svg>
+                      </span>
+                      <span>{text}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+                  <a
+                    href="https://app1.edoobox.com/de/LetZHgo/Motorradkurse/?edref=letzhgo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white shadow-sm outline-none transition-colors hover:bg-accent-dark focus-visible:ring-2 focus-visible:ring-accent-dark/45 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                  >
+                    <span className="relative z-10 inline-block whitespace-nowrap transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:pointer-events-none group-hover:-translate-x-[calc(100%+2.5rem)] group-focus-visible:pointer-events-none group-focus-visible:-translate-x-[calc(100%+2.5rem)] motion-reduce:group-hover:translate-x-0 motion-reduce:group-focus-visible:translate-x-0">
+                      Jetzt Platz sichern
+                    </span>
+                    <span
+                      className="pointer-events-none absolute inset-0 flex items-center overflow-hidden motion-reduce:hidden"
+                      aria-hidden
+                    >
+                      <span className="flex w-full justify-center transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] translate-x-full group-hover:translate-x-0 group-focus-visible:translate-x-0">
+                        <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M5 12h14M13 5l7 7-7 7" />
+                        </svg>
+                      </span>
+                    </span>
+                  </a>
+                  <Link
+                    href="/services/motorrad"
+                    className="group relative inline-flex items-center gap-2 pb-0.5 text-sm font-semibold text-accent no-underline transition-colors after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-accent-dark after:content-[''] hover:after:scale-x-100"
+                  >
+                    Mehr Infos zum Kurs
+                    <span
+                      aria-hidden
+                      className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"
+                    >
+                      &rarr;
+                    </span>
+                  </Link>
+                </div>
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96, x: 18 }}
+                whileInView={{ opacity: 1, scale: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                viewport={{ once: true }}
+                className="relative mt-5 sm:mt-0"
+              >
+                <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-white shadow-[0_28px_52px_-28px_rgba(0,0,0,0.32)]">
+                  <div className="relative aspect-[4/5] w-full">
+                    <Image
+                      src="/images/posters/motorrad-grundkurs.png"
+                      alt="Motorrad-Grundkurs bei Let'ZHgo"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 36vw"
+                    />
+                  </div>
+                </div>
+              </motion.div>
           </motion.div>
         </div>
       </section>
