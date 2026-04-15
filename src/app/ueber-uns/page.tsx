@@ -398,7 +398,7 @@ export default function UeberUnsPage() {
       </section>
 
       {/* Motorrad-Grundkurs Promo */}
-      <section className="relative overflow-hidden bg-background">
+      <section className="relative overflow-hidden bg-[#f7f8fa]">
         <div
           className="pointer-events-none absolute -left-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-accent/10 blur-[100px]"
           aria-hidden
