@@ -3,8 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { useState } from "react";
 import { Users, MapPin, ClipboardCheck, GraduationCap, Car, Video } from "lucide-react";
 import UeberUnsCurtainHero from "@/components/UeberUnsCurtainHero";
 import InstructorCard from "@/components/InstructorCard";
@@ -50,57 +49,7 @@ export default function UeberUnsPage() {
       date: "vor 5 Monaten",
     },
   ];
-  const [visibleCount, setVisibleCount] = useState(3);
-  const [reviewPage, setReviewPage] = useState(0);
   const [expandedReviews, setExpandedReviews] = useState<Record<string, boolean>>({});
-  const mobileReviewsRef = useRef<HTMLDivElement | null>(null);
-  const mobileScrollSettleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    const updateVisibleCount = () => {
-      if (window.innerWidth < 768) {
-        setVisibleCount(1);
-        return;
-      }
-      if (window.innerWidth < 1200) {
-        setVisibleCount(2);
-        return;
-      }
-      setVisibleCount(3);
-    };
-
-    updateVisibleCount();
-    window.addEventListener("resize", updateVisibleCount);
-    return () => window.removeEventListener("resize", updateVisibleCount);
-  }, []);
-
-  const totalReviewPages = Math.max(1, reviews.length - visibleCount + 1);
-
-  useEffect(() => {
-    setReviewPage((prev) => Math.min(prev, totalReviewPages - 1));
-  }, [totalReviewPages]);
-
-  useEffect(() => {
-    if (visibleCount !== 1) return;
-    const el = mobileReviewsRef.current;
-    if (!el) return;
-    el.scrollTo({ left: reviewPage * el.clientWidth, behavior: "auto" });
-  }, [reviewPage, visibleCount]);
-
-  useEffect(() => {
-    if (visibleCount === 1) return;
-    const el = mobileReviewsRef.current;
-    if (!el) return;
-    el.scrollLeft = 0;
-  }, [visibleCount]);
-
-  useEffect(() => {
-    return () => {
-      if (mobileScrollSettleTimeoutRef.current) {
-        clearTimeout(mobileScrollSettleTimeoutRef.current);
-      }
-    };
-  }, []);
 
   return (
     <>
@@ -407,29 +356,29 @@ export default function UeberUnsPage() {
       <Stats surface="light" />
 
       {/* Bewertungen */}
-      <section className="relative overflow-hidden bg-[#0b1220]" data-navbar-dark>
+      <section className="relative overflow-hidden bg-background">
         <div
           className="pointer-events-none absolute inset-0 opacity-100"
           aria-hidden
           style={{
             background:
-              "radial-gradient(980px 660px at 20% 24%, rgba(30, 99, 255, 0.28), transparent 62%), radial-gradient(900px 620px at 84% 70%, rgba(30, 99, 255, 0.22), transparent 64%), radial-gradient(760px 520px at 52% 16%, rgba(120, 175, 255, 0.16), transparent 60%), linear-gradient(180deg, rgba(13, 22, 42, 0.95), rgba(10, 18, 35, 0.98) 52%, rgba(8, 14, 28, 1) 100%)",
+              "radial-gradient(960px 620px at 20% 24%, rgba(30, 99, 255, 0.16), transparent 62%), radial-gradient(900px 620px at 84% 70%, rgba(30, 99, 255, 0.12), transparent 64%), linear-gradient(180deg, rgba(247, 248, 250, 0.9), rgba(255, 255, 255, 1) 52%, rgba(247, 248, 250, 0.9) 100%)",
           }}
         />
         <div
-          className="pointer-events-none absolute -left-24 top-16 h-80 w-80 rounded-full bg-accent/30 blur-[120px]"
+          className="pointer-events-none absolute -left-24 top-16 h-80 w-80 rounded-full bg-accent/18 blur-[120px]"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute -right-24 bottom-10 h-[26rem] w-[26rem] rounded-full bg-accent-light/32 blur-[125px]"
+          className="pointer-events-none absolute -right-24 bottom-10 h-[26rem] w-[26rem] rounded-full bg-accent-light/22 blur-[125px]"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.2]"
+          className="pointer-events-none absolute inset-0 opacity-[0.3]"
           aria-hidden
           style={{
             backgroundImage:
-              "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.09) 1px, transparent 0)",
+              "radial-gradient(circle at 1px 1px, var(--color-border) 1px, transparent 0)",
             backgroundSize: "22px 22px",
           }}
         />
@@ -446,75 +395,31 @@ export default function UeberUnsPage() {
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
                   Bewertungen
                 </p>
-                <h2 className="mt-3 text-3xl font-bold leading-[1.12] tracking-tight text-white md:text-4xl">
-                  Das sagen unsere <span className="text-accent-light md:text-accent">Fahrschüler:innen</span>.
+                <h2 className="mt-3 text-3xl font-bold leading-[1.12] tracking-tight text-foreground md:text-4xl">
+                  Das sagen unsere <span className="text-accent">Fahrschüler:innen</span>.
                 </h2>
-                <p className="mt-3 max-w-2xl text-base text-white/70">
+                <p className="mt-3 max-w-2xl text-base text-muted">
                   Ehrliches Feedback aus echten Fahrstunden - transparent, direkt und ohne Filter.
                 </p>
               </div>
-
-              <div className="flex items-center gap-3 self-end md:self-auto">
-                <button
-                  type="button"
-                  onClick={() => setReviewPage((prev) => Math.max(0, prev - 1))}
-                  className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-white/92 text-[#3f39c7] shadow-[0_14px_28px_-20px_rgba(52,36,126,0.85)] transition hover:bg-white hover:text-[#2f2ab3] disabled:cursor-not-allowed disabled:opacity-45"
-                  aria-label="Vorherige Bewertungen"
-                  disabled={reviewPage === 0}
-                >
-                  <FiChevronLeft aria-hidden className="h-5 w-5" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setReviewPage((prev) => Math.min(totalReviewPages - 1, prev + 1))}
-                  className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-[#3f39c7] text-white shadow-[0_16px_32px_-18px_rgba(63,57,199,0.9)] transition hover:bg-[#322ea6] disabled:cursor-not-allowed disabled:opacity-45"
-                  aria-label="Nächste Bewertungen"
-                  disabled={reviewPage >= totalReviewPages - 1}
-                >
-                  <FiChevronRight aria-hidden className="h-5 w-5" />
-                </button>
-              </div>
             </div>
 
-            <div
-              ref={mobileReviewsRef}
-              className={`mt-10 overflow-y-hidden ${
-                visibleCount === 1
-                  ? "overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory"
-                  : "overflow-hidden"
-              }`}
-              onScroll={(e) => {
-                if (visibleCount !== 1) return;
-                const el = e.currentTarget;
-                if (mobileScrollSettleTimeoutRef.current) {
-                  clearTimeout(mobileScrollSettleTimeoutRef.current);
-                }
-                mobileScrollSettleTimeoutRef.current = setTimeout(() => {
-                  const nextIndex = Math.round(el.scrollLeft / el.clientWidth);
-                  setReviewPage((prev) => {
-                    const bounded = Math.min(Math.max(0, nextIndex), totalReviewPages - 1);
-                    return prev === bounded ? prev : bounded;
-                  });
-                }, 90);
-              }}
-            >
-              <div
-                className="flex md:transition-transform md:duration-500 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
-                style={
-                  visibleCount === 1
-                    ? undefined
-                    : { transform: `translateX(-${reviewPage * (100 / visibleCount)}%)` }
-                }
-              >
-                {reviews.map((review) => (
-                  <div
-                    key={`${review.author}-${review.date}`}
-                    className={`shrink-0 px-2.5 ${visibleCount === 1 ? "snap-start" : ""}`}
-                    style={{ width: `${100 / visibleCount}%` }}
-                  >
-                    <article className="flex h-full min-h-[21rem] flex-col rounded-2xl bg-white/95 p-6">
+            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {reviews.map((review, i) => (
+                <motion.article
+                  key={`${review.author}-${review.date}`}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.65,
+                    delay: Math.min(i * 0.08, 0.35),
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  viewport={{ once: true, margin: "-120px" }}
+                  className="flex h-full min-h-[21rem] flex-col rounded-2xl border border-border/80 bg-[#f7f8fa] p-6 shadow-[0_10px_26px_-18px_rgba(12,22,44,0.28)]"
+                >
                       <div className="flex items-center justify-between">
-                        <span className="text-4xl leading-none text-[#cbc5ef]" aria-hidden>
+                        <span className="text-4xl leading-none text-accent/20" aria-hidden>
                           &ldquo;
                         </span>
                         <div className="flex gap-0.5" aria-hidden>
@@ -578,7 +483,7 @@ export default function UeberUnsPage() {
                       </div>
 
                       <div className="mt-5 flex items-center gap-3 pt-4">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ecebff] text-xs font-bold text-[#4c45db]">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/10 text-xs font-bold text-accent">
                           {review.author.split(" ").map((n) => n[0]).join("")}
                         </div>
                         <div>
@@ -586,25 +491,7 @@ export default function UeberUnsPage() {
                           <p className="text-xs text-muted">{review.date}</p>
                         </div>
                       </div>
-                    </article>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-8 flex items-center justify-center gap-2" aria-label="Bewertungsseiten">
-              {Array.from({ length: totalReviewPages }).map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => setReviewPage(i)}
-                  className={`h-2.5 cursor-pointer rounded-full transition-all ${
-                    reviewPage === i
-                      ? "w-6 bg-[#3f39c7]"
-                      : "w-2.5 bg-[#cbc8e8] hover:bg-[#b2addd]"
-                  }`}
-                  aria-label={`Zur Bewertungsseite ${i + 1}`}
-                />
+                </motion.article>
               ))}
             </div>
 
