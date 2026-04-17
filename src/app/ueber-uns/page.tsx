@@ -262,10 +262,10 @@ export default function UeberUnsPage() {
         />
         <div className="relative z-10 mx-auto max-w-5xl px-6 py-28 md:py-36">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-160px" }}
             className="text-center"
           >
             <span
@@ -315,7 +315,13 @@ export default function UeberUnsPage() {
       {/* Fahrlehrer */}
       <section className="bg-background">
         <div className="mx-auto max-w-7xl px-6 py-24">
-          <div className="text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 34 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-140px" }}
+            className="text-center"
+          >
             <p className="text-sm uppercase tracking-widest text-accent">
               Unsere Fahrlehrer
             </p>
@@ -326,7 +332,7 @@ export default function UeberUnsPage() {
               Unser Team steht für Erfahrung, Geduld und echte Leidenschaft fürs
               Fahren – damit du dich von Anfang an gut aufgehoben fühlst.
             </p>
-          </div>
+          </motion.div>
 
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {instructorsInOrder.map((instructor, i) => (
@@ -340,10 +346,10 @@ export default function UeberUnsPage() {
       <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-7xl px-6 py-32 md:py-40">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 36 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-140px" }}
             className="grid items-center gap-12 lg:grid-cols-2"
           >
             <h2 className="text-3xl font-bold md:text-4xl">
@@ -380,10 +386,10 @@ export default function UeberUnsPage() {
         />
         <div className="relative z-10 mx-auto w-full max-w-7xl">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 36 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-120px" }}
             className="mx-auto max-w-5xl text-center"
           >
             <blockquote className="not-italic text-5xl font-semibold leading-[1.15] tracking-tight text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.35)] md:text-6xl md:leading-[1.12]">
@@ -429,10 +435,10 @@ export default function UeberUnsPage() {
         />
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 34 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-150px" }}
             className="relative"
           >
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
@@ -634,10 +640,10 @@ export default function UeberUnsPage() {
         />
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 36 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-150px" }}
             className="relative z-10 grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center"
           >
               <div>
@@ -711,10 +717,10 @@ export default function UeberUnsPage() {
               </div>
 
               <motion.div
-                initial={{ opacity: 0, scale: 0.96, x: 18 }}
+                initial={{ opacity: 0, scale: 0.94, x: 26 }}
                 whileInView={{ opacity: 1, scale: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true }}
+                transition={{ duration: 0.85, delay: 0.14, ease: [0.16, 1, 0.3, 1] }}
+                viewport={{ once: true, margin: "-140px" }}
                 className="relative mt-5 sm:mt-0"
               >
                 <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-white shadow-[0_28px_52px_-28px_rgba(0,0,0,0.32)]">
