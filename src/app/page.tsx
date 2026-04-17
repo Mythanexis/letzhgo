@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Users, MapPin, ClipboardCheck, GraduationCap, Car, Video } from "lucide-react";
 import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
 import ScrollRevealQuote from "@/components/ScrollRevealQuote";
@@ -29,6 +30,39 @@ import {
 } from "@/lib/constants";
 
 export default function HomePage() {
+  const HOME_BENEFITS = [
+    {
+      title: "Maximale Flexibilität",
+      text: "Mehrere Fahrlehrer:innen – Termine, die in deinen Alltag passen.",
+      Icon: Users,
+    },
+    {
+      title: "Im ganzen Raum Zürich",
+      text: "Oerlikon, Oberglatt und Rümlang – echte Strassen, nicht nur Theorie.",
+      Icon: MapPin,
+    },
+    {
+      title: "Prüfungssimulationen",
+      text: "Realistische Testläufe, damit der Prüfungstag kein Überraschungsmoment wird.",
+      Icon: ClipboardCheck,
+    },
+    {
+      title: "Alles an einem Ort",
+      text: "Nothelfer, VKU, Fahrstunden und Motorradkurse – ohne Hin- und Herrennen.",
+      Icon: GraduationCap,
+    },
+    {
+      title: "Moderne Fahrzeuge",
+      text: "Gepflegte Flotte, bereit für Ausbildung und Prüfung.",
+      Icon: Car,
+    },
+    {
+      title: "Videoanalyse",
+      text: "Aufnahmen anschauen, verstehen, schneller verbessern.",
+      Icon: Video,
+    },
+  ] as const;
+
   return (
     <>
       {/* Hero with full-width background image */}
@@ -41,6 +75,108 @@ export default function HomePage() {
         secondaryCtaHref="/kontakt"
         showImage
       />
+
+      {/* Unsere Vorteile — Home (alternatives Layout) */}
+      <section className="relative overflow-hidden bg-background">
+        <div
+          className="pointer-events-none absolute -left-20 top-12 h-72 w-72 rounded-full bg-accent/10 blur-[90px]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -right-10 bottom-10 h-64 w-64 rounded-full bg-accent-light/20 blur-[90px]"
+          aria-hidden
+        />
+        <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
+          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, margin: "-90px" }}
+            >
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
+                Unsere Vorteile
+              </p>
+              <h2 className="mt-4 text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl">
+                Dein Vorteil:{" "}
+                <span className="text-accent">optimal vorbereitet.</span>
+              </h2>
+              <motion.p
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+                viewport={{ once: true, margin: "-90px" }}
+                className="mt-5 max-w-xl text-lg leading-relaxed text-muted"
+              >
+                Qualität, Flexibilität und moderne Ausbildungsmethoden. Genau die Punkte,
+                die den Unterschied auf dem Weg zur Prüfung machen.
+              </motion.p>
+
+              <div className="relative mt-10">
+                <ul className="list-none space-y-0 p-0">
+                {HOME_BENEFITS.map((item, i) => (
+                  <motion.li
+                    key={item.title}
+                    initial={{ opacity: 0, x: -12 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{
+                      duration: 0.65,
+                      delay: 0.05 + i * 0.07,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="relative flex gap-5 border-b border-border/70 py-5 last:border-b-0 sm:gap-6"
+                  >
+                    <div className="relative z-[1] flex shrink-0 justify-center pt-0.5">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border/80 bg-accent/8 text-accent shadow-sm">
+                        <item.Icon className="h-4.5 w-4.5" strokeWidth={1.9} />
+                      </span>
+                    </div>
+                    <div className="min-w-0 pt-0.5">
+                      <h3 className="text-lg font-bold leading-snug text-foreground">
+                        {item.title}
+                      </h3>
+                      <p className="mt-1.5 max-w-md text-sm leading-relaxed text-muted sm:text-[0.9375rem]">
+                        {item.text}
+                      </p>
+                    </div>
+                  </motion.li>
+                ))}
+                </ul>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, margin: "-90px" }}
+              className="relative min-h-[420px] lg:min-h-[560px]"
+            >
+              <div className="absolute right-0 top-0 z-[1] w-[82%] overflow-hidden rounded-[2rem] shadow-[0_26px_54px_-26px_rgba(8,26,58,0.5)]">
+                <Image
+                  src="/images/letzhgo-autos.jpeg"
+                  alt="Let'ZHgo Fahrzeugflotte"
+                  width={900}
+                  height={1200}
+                  className="h-[330px] w-full object-cover md:h-[420px] lg:h-[480px]"
+                  sizes="(max-width: 1024px) 80vw, 36vw"
+                />
+              </div>
+              <div className="absolute left-[-2%] top-[48%] z-[2] w-[62%] overflow-hidden rounded-[1.6rem] border-4 border-background shadow-[0_22px_48px_-24px_rgba(8,26,58,0.55)]">
+                <Image
+                  src="/images/manoevertraining.jpg"
+                  alt="Motorrad Manövertraining bei Let'ZHgo"
+                  width={760}
+                  height={560}
+                  className="h-[220px] w-full object-cover md:h-[260px] lg:h-[300px]"
+                  sizes="(max-width: 1024px) 60vw, 24vw"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* Services Grid — Anker für Hero-CTA „Mehr erfahren“ (#services) */}
       <section id="services" className="scroll-mt-24 bg-background md:scroll-mt-28">
