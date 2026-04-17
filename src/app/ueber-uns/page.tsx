@@ -375,7 +375,7 @@ export default function UeberUnsPage() {
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/55 via-black/45 to-black/65"
+          className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/18 via-black/10 to-black/24"
           aria-hidden
         />
         <div className="relative z-10 mx-auto w-full max-w-7xl">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useMemo, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -13,28 +13,6 @@ const DEFAULT_CTA = {
   href: "/ueber-uns",
   label: "Über Let'ZHgo",
 } as const;
-
-function Word({
-  word,
-  index,
-  total,
-  scrollYProgress,
-}: {
-  word: string;
-  index: number;
-  total: number;
-  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
-}) {
-  const start = (index / total) * 0.7;
-  const end = start + 0.7 / total;
-  const opacity = useTransform(scrollYProgress, [start, end], [0.15, 1]);
-
-  return (
-    <motion.span style={{ opacity }} className="inline-block mr-[0.3em] will-change-[opacity]">
-      {word}
-    </motion.span>
-  );
-}
 
 export type ScrollRevealQuoteProps = {
   /** Kompletter Fliesstext (ein Block, keine Absätze) – Standard = Homepage-Zitat */
@@ -49,11 +27,7 @@ export default function ScrollRevealQuote({
   cta = DEFAULT_CTA,
 }: ScrollRevealQuoteProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const words = useMemo(
-    () => quote.split(/\s+/).filter(Boolean),
-    [quote],
-  );
+  const words = useMemo(() => quote.split(/\s+/).filter(Boolean), [quote]);
 
   const minHeightClass =
     words.length > 42 ? "min-h-[200vh]" : "min-h-[160vh]";
@@ -87,15 +61,18 @@ export default function ScrollRevealQuote({
             {eyebrow}
           </p>
           <blockquote className="mx-auto mt-8 max-w-4xl text-2xl font-medium leading-relaxed text-white md:text-3xl lg:text-4xl">
-            {words.map((word, i) => (
-              <Word
-                key={i}
-                word={word}
-                index={i}
-                total={words.length}
-                scrollYProgress={scrollYProgress}
-              />
-            ))}
+            {words.map((word, i) => {
+              const start = (i / words.length) * 0.7;
+              const end = start + 0.7 / words.length;
+              const opacity = useTransform(scrollYProgress, [start, end], [0.15, 1]);
+
+              return (
+                <motion.span key={`${i}-${word}`} style={{ opacity }} className="inline">
+                  {word}
+                  {i < words.length - 1 ? " " : ""}
+                </motion.span>
+              );
+            })}
           </blockquote>
           {cta ? (
             <motion.div style={{ opacity: buttonOpacity }}>

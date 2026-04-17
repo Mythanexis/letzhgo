@@ -38,20 +38,15 @@ function CurtainWord({
   scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
   reducedMotion: boolean;
 }) {
-  /** Gleicher Zeitbereich wie Vorhang [0, CURTAIN_END]: harte Slots, kein Sichtbarwerden vor slotStart. */
   const slotStart = (index / total) * CURTAIN_END;
   const slotEnd = ((index + 1) / total) * CURTAIN_END;
-
-  /** Unrevealed: sichtbares helles Grau auf dem dunklen Foto; Reveal blendet zu vollem Weiß (kein opacity:0). */
   const DIM_WHITE_ALPHA = 0.27;
-
   const color = useTransform(scrollYProgress, (p) => {
     let t: number;
     if (reducedMotion) {
       if (p < 0.02) t = 0;
       else if (p >= Math.min(0.09, CURTAIN_END)) t = 1;
-      else
-        t = (p - 0.02) / (Math.min(0.09, CURTAIN_END) - 0.02);
+      else t = (p - 0.02) / (Math.min(0.09, CURTAIN_END) - 0.02);
     } else if (p < slotStart) {
       t = 0;
     } else if (p >= slotEnd) {
@@ -64,11 +59,9 @@ function CurtainWord({
   });
 
   return (
-    <motion.span
-      style={{ color }}
-      className="inline-block mr-[0.3em] will-change-[color]"
-    >
+    <motion.span style={{ color }} className="inline will-change-[color]">
       {word}
+      {index < total - 1 ? " " : ""}
     </motion.span>
   );
 }
@@ -137,16 +130,12 @@ function HeroFullLayer({ reducedMotion }: { reducedMotion: boolean }) {
 export default function UeberUnsCurtainHero() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const words = useMemo(() => QUOTE_TEXT.split(/\s+/).filter(Boolean), []);
 
   const { scrollYProgress } = useScroll({
     target: scrollRef,
     offset: ["start start", "end end"],
   });
-
-  const words = useMemo(
-    () => QUOTE_TEXT.split(/\s+/).filter(Boolean),
-    [],
-  );
 
   const quoteImageScale = useTransform(
     scrollYProgress,
@@ -191,16 +180,16 @@ export default function UeberUnsCurtainHero() {
               src={QUOTE_BG}
               alt=""
               fill
-              className="object-cover object-center brightness-[0.32]"
+              className="object-cover object-center brightness-[0.5]"
               sizes="100vw"
             />
           </motion.div>
           <div
-            className="absolute inset-0 bg-black/45"
+            className="absolute inset-0 bg-black/28"
             aria-hidden
           />
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/35 via-black/45 to-black/55"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-black/28 to-black/36"
             aria-hidden
           />
 
