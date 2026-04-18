@@ -274,114 +274,129 @@ export default function FahrstundenPage() {
             </p>
           </motion.div>
 
-          <div className="mt-14 grid gap-8 md:grid-cols-2">
+          <div className="mt-14 grid gap-8 md:grid-cols-2 md:items-stretch md:gap-10">
             {/* 10er-Abo */}
             <motion.div
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.05, ease: EASE }}
               viewport={{ once: true, margin: "-60px" }}
-              className="group relative overflow-hidden rounded-3xl border border-border bg-white p-8 shadow-sm transition-all hover:shadow-lg md:p-10"
+              className="order-2 flex h-full flex-col rounded-3xl border border-border bg-white p-8 md:order-1 md:p-10"
             >
               <div className="flex items-start justify-between gap-4">
-                <div>
+                <div className="min-w-0">
                   <p className="text-lg font-bold text-foreground">10er-Abo</p>
                   <p className="mt-1 text-sm text-muted">10 Fahrstunden à 45 Min.</p>
                 </div>
-                <span className="shrink-0 rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-bold text-accent">
+                <span className="shrink-0 rounded-full border border-accent/20 bg-accent-light/60 px-3 py-1 text-xs font-bold text-accent">
                   −5 %
                 </span>
               </div>
 
-              <div className="mt-8 flex items-baseline gap-1.5">
-                <span className="text-5xl font-extrabold tracking-tight text-foreground">90</span>
-                <div className="ml-1 flex flex-col">
-                  <span className="text-sm font-semibold text-foreground/60">CHF</span>
-                  <span className="text-xs text-muted">pro Lektion</span>
+              <div className="mt-8">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-5xl font-extrabold tracking-tight text-foreground">90</span>
+                  <div className="ml-1 flex flex-col justify-end pb-1">
+                    <span className="text-sm font-semibold text-foreground/60">CHF</span>
+                    <span className="text-xs text-muted">pro Lektion</span>
+                  </div>
                 </div>
+                <p className="mt-3 text-sm text-muted">
+                  <span className="line-through">CHF 950</span>
+                  <span className="ml-2 text-foreground/80">Total CHF 900</span>
+                </p>
               </div>
-              <p className="mt-2 text-sm text-muted">
-                <span className="line-through">CHF 950</span>
-                <span className="ml-2 text-foreground/70">→ Total CHF 900</span>
-              </p>
 
-              <div className="mt-8 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
-              <ul className="mt-8 space-y-3.5">
+              <ul className="mt-8 flex flex-1 flex-col gap-3 border-t border-border pt-8">
                 {["Flexibel einteilbar", "Auch als Doppellektionen möglich", "Du sparst CHF 50"].map((t) => (
-                  <li key={t} className="flex items-center gap-3 text-sm text-muted">
-                    <svg className="h-4 w-4 shrink-0 text-accent" viewBox="0 0 16 16" fill="none">
+                  <li key={t} className="flex gap-3 text-sm text-muted">
+                    <svg className="mt-0.5 h-4 w-4 shrink-0 text-accent" viewBox="0 0 16 16" fill="none">
                       <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    {t}
+                    <span>{t}</span>
                   </li>
                 ))}
               </ul>
 
               <Link
                 href="/kontakt"
-                className="mt-10 block w-full rounded-full border-2 border-accent bg-white py-3.5 text-center text-sm font-semibold text-accent transition-all hover:bg-accent hover:text-white"
+                className="mt-10 block w-full rounded-full border-2 border-accent bg-white py-3.5 text-center text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white md:mt-auto"
               >
                 10er-Abo anfragen
               </Link>
             </motion.div>
 
-            {/* 20er-Abo */}
+            {/* 20er-Abo — gradient frame + soft glow & hover sheen */}
             <motion.div
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
               viewport={{ once: true, margin: "-60px" }}
-              className="group relative overflow-hidden rounded-3xl border-2 border-accent bg-white p-8 shadow-sm transition-all hover:shadow-lg md:p-10"
+              className="order-1 md:order-2"
             >
-              <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-accent/8 blur-3xl" />
+              <div className="group relative h-full rounded-3xl bg-gradient-to-br from-accent via-accent/50 to-accent-dark p-px shadow-[0_20px_50px_-20px_rgba(1,68,220,0.45)] transition-shadow duration-500 hover:shadow-[0_28px_60px_-22px_rgba(1,68,220,0.5)]">
+                <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(1.5rem-1px)] bg-white p-8 md:p-10">
+                  <div
+                    className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent/12 blur-3xl transition-opacity duration-700 group-hover:bg-accent/18"
+                    aria-hidden
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    aria-hidden
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.07] via-transparent to-transparent" />
+                    <div className="absolute -left-1/2 top-0 h-full w-1/2 skew-x-[-18deg] bg-gradient-to-r from-transparent via-white/50 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-[220%]" />
+                  </div>
 
-              <div className="relative flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-lg font-bold text-foreground">20er-Abo</p>
-                  <p className="mt-1 text-sm text-muted">20 Fahrstunden à 45 Min.</p>
+                  <div className="relative flex items-start justify-between gap-4">
+                    <div className="min-w-0">
+                      <p className="text-lg font-bold text-foreground">20er-Abo</p>
+                      <p className="mt-1 text-sm text-muted">20 Fahrstunden à 45 Min.</p>
+                      <p className="mt-2 text-xs font-medium text-accent">Beliebt für die komplette Ausbildung</p>
+                    </div>
+                    <span className="shrink-0 rounded-full bg-accent px-3 py-1 text-xs font-bold text-white">
+                      Bestseller
+                    </span>
+                  </div>
+
+                  <div className="relative mt-8">
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="text-5xl font-extrabold tracking-tight text-foreground">85</span>
+                      <div className="ml-1 flex flex-col justify-end pb-1">
+                        <span className="text-sm font-semibold text-foreground/60">CHF</span>
+                        <span className="text-xs text-muted">pro Lektion</span>
+                      </div>
+                    </div>
+                    <p className="mt-3 text-sm text-muted">
+                      <span className="line-through">CHF 1&apos;900</span>
+                      <span className="ml-2 font-medium text-foreground">Total CHF 1&apos;700</span>
+                    </p>
+                  </div>
+
+                  <ul className="relative mt-8 flex flex-1 flex-col gap-3 border-t border-border pt-8">
+                    {[
+                      "Bester Preis pro Lektion",
+                      "Auch als Doppellektionen möglich",
+                      "Du sparst CHF 200",
+                      "Ideal für die komplette Ausbildung",
+                    ].map((t) => (
+                      <li key={t} className="flex gap-3 text-sm text-foreground/90">
+                        <svg className="mt-0.5 h-4 w-4 shrink-0 text-accent" viewBox="0 0 16 16" fill="none">
+                          <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <span>{t}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link
+                    href="/kontakt"
+                    className="relative mt-10 block w-full rounded-full bg-accent py-3.5 text-center text-sm font-semibold text-white transition-colors hover:bg-accent-dark md:mt-auto"
+                  >
+                    20er-Abo anfragen
+                  </Link>
                 </div>
-                <span className="shrink-0 rounded-full bg-accent px-3 py-1 text-xs font-bold text-white">
-                  Bestseller
-                </span>
               </div>
-
-              <div className="relative mt-8 flex items-baseline gap-1.5">
-                <span className="text-5xl font-extrabold tracking-tight text-foreground">85</span>
-                <div className="ml-1 flex flex-col">
-                  <span className="text-sm font-semibold text-foreground/60">CHF</span>
-                  <span className="text-xs text-muted">pro Lektion</span>
-                </div>
-              </div>
-              <p className="mt-2 text-sm text-muted">
-                <span className="line-through">CHF 1&apos;900</span>
-                <span className="ml-2 text-foreground/70">→ Total CHF 1&apos;700</span>
-              </p>
-
-              <div className="mt-8 h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent" />
-
-              <ul className="relative mt-8 space-y-3.5">
-                {[
-                  "Bester Preis pro Lektion",
-                  "Auch als Doppellektionen möglich",
-                  "Du sparst CHF 200",
-                  "Ideal für die komplette Ausbildung",
-                ].map((t) => (
-                  <li key={t} className="flex items-center gap-3 text-sm text-muted">
-                    <svg className="h-4 w-4 shrink-0 text-accent" viewBox="0 0 16 16" fill="none">
-                      <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    {t}
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href="/kontakt"
-                className="relative mt-10 block w-full rounded-full bg-accent py-3.5 text-center text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-accent-dark"
-              >
-                20er-Abo anfragen
-              </Link>
             </motion.div>
           </div>
         </div>
