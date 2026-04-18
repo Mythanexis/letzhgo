@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
-import { NAV_LINKS, NAV_SERVICE_DROPDOWN_LINKS, SITE } from "@/lib/constants";
+import { NAV_LINKS, SITE } from "@/lib/constants";
 
 /** Home: oben immer Glass, bis gescrollt (Fallback bevor Layout misst). */
 const TRANSPARENT_AT_TOP_PATHS: readonly string[] = ["/"];
@@ -26,6 +26,11 @@ const DESKTOP_NAV_ALWAYS_VISIBLE_UNTIL_PX = 40;
 /** Min. Scroll-Delta pro Frame, damit Richtung gewechselt wird (weniger Flackern). */
 const DESKTOP_NAV_SCROLL_DELTA_PX = 12;
 
+const NAV_GLASS_SHELL =
+  "border-white/25 bg-white/[0.12] shadow-[0_20px_64px_-12px_rgba(0,0,0,0.28),0_0_0_1px_rgba(255,255,255,0.1)] backdrop-blur-2xl";
+const NAV_SOLID_SHELL =
+  "border-neutral-200/95 bg-white shadow-[0_32px_100px_-24px_rgba(15,23,42,0.10),0_18px_56px_-28px_rgba(15,23,42,0.07),0_0_0_1px_rgba(15,23,42,0.045)] backdrop-blur-2xl";
+
 function isNavbarOverDarkBackdrop(): boolean {
   if (typeof document === "undefined") return false;
   const els = document.querySelectorAll("[data-navbar-dark]");
@@ -45,7 +50,6 @@ export default function Navbar() {
   const [overDarkBackdrop, setOverDarkBackdrop] = useState(false);
   /** Nur ≥ md: weg bei Scroll runter, zurück bei Scroll hoch (Mobile unverändert). */
   const [desktopNavHidden, setDesktopNavHidden] = useState(false);
-  const [servicesMenuOpen, setServicesMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   const headerAboveMobileOverlay = mobileOpen;
@@ -55,7 +59,6 @@ export default function Navbar() {
     lastScrollY.current = window.scrollY;
     setDesktopNavHidden(false);
     setScrolled(window.scrollY > 20);
-    setServicesMenuOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -100,14 +103,6 @@ export default function Navbar() {
     };
   }, [pathname, mobileOpen]);
 
-  useEffect(() => {
-    if (desktopNavHidden) setServicesMenuOpen(false);
-  }, [desktopNavHidden]);
-
-  useEffect(() => {
-    if (mobileOpen) setServicesMenuOpen(false);
-  }, [mobileOpen]);
-
   useLayoutEffect(() => {
     // Synchronous check before first paint — prevents white-navbar flash on dark-hero pages
     setOverDarkBackdrop(isNavbarOverDarkBackdrop());
@@ -145,7 +140,6 @@ export default function Navbar() {
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
-      setServicesMenuOpen(false);
       if (mobileOpen) setMobileOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
@@ -157,9 +151,7 @@ export default function Navbar() {
     (overDarkBackdrop ||
       (TRANSPARENT_AT_TOP_PATHS.includes(pathname) && !scrolled));
 
-  const barShell = glassNav
-    ? "border-white/25 bg-white/[0.12] shadow-[0_20px_64px_-12px_rgba(0,0,0,0.28),0_0_0_1px_rgba(255,255,255,0.1)] backdrop-blur-2xl"
-    : "border-neutral-200/95 bg-white shadow-[0_32px_100px_-24px_rgba(15,23,42,0.10),0_18px_56px_-28px_rgba(15,23,42,0.07),0_0_0_1px_rgba(15,23,42,0.045)] backdrop-blur-2xl";
+  const barShell = glassNav ? NAV_GLASS_SHELL : NAV_SOLID_SHELL;
 
   const desktopNavLinkClass = (href: string) => {
     const active = isNavLinkActive(pathname, href);
@@ -218,63 +210,6 @@ export default function Navbar() {
             >
               {NAV_LINKS.map((link) => {
                 const active = isNavLinkActive(pathname, link.href);
-
-                if (link.href === "/services") {
-                  const servicesPanel =
-                    glassNav
-                      ? "border-white/25 bg-white/[0.14] shadow-[0_24px_48px_-12px_rgba(0,0,0,0.35)] backdrop-blur-2xl"
-                      : "border-neutral-200/95 bg-white shadow-[0_24px_48px_-16px_rgba(15,23,42,0.12)] backdrop-blur-xl";
-                  const subLinkClass = glassNav
-                    ? "text-white/85 hover:bg-white/10 hover:text-white"
-                    : "text-foreground/90 hover:bg-accent/8 hover:text-accent";
-
-                  return (
-                    <div
-                      key={link.href}
-                      className="relative inline-flex"
-                      onMouseEnter={() => setServicesMenuOpen(true)}
-                      onMouseLeave={() => setServicesMenuOpen(false)}
-                    >
-                      <Link
-                        href={link.href}
-                        aria-current={active ? "page" : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={servicesMenuOpen}
-                        className={desktopNavLinkClass(link.href)}
-                      >
-                        {link.label}
-                      </Link>
-
-                      {servicesMenuOpen && (
-                        <div
-                          id="nav-services-menu"
-                          role="menu"
-                          aria-label="Services"
-                          className={`absolute left-1/2 top-full z-[100] w-max min-w-[15.5rem] -translate-x-1/2 pt-2 ${glassNav ? "text-white" : ""}`}
-                        >
-                          <div className={`overflow-hidden rounded-2xl border p-1.5 ${servicesPanel}`}>
-                            {NAV_SERVICE_DROPDOWN_LINKS.map((item) => {
-                              const subActive = pathname === item.href;
-                              return (
-                                <Link
-                                  key={item.href}
-                                  href={item.href}
-                                  role="menuitem"
-                                  className={`block rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors ${subLinkClass} ${
-                                    subActive ? (glassNav ? "bg-white/15 text-white" : "bg-accent/12 text-accent") : ""
-                                  }`}
-                                >
-                                  {item.label}
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-
                 return (
                   <Link
                     key={link.href}
