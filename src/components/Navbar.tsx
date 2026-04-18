@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { NAV_LINKS, NAV_SERVICE_DROPDOWN_LINKS, SITE } from "@/lib/constants";
 
 /** Home: oben immer Glass, bis gescrollt (Fallback bevor Layout misst). */
@@ -42,17 +41,14 @@ function isNavbarOverDarkBackdrop(): boolean {
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  /** True von Menü-Öffnen bis Exit-Animation Ende — Header bleibt über z-[60]-Overlay. */
-  const [mobileMenuStackActive, setMobileMenuStackActive] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [overDarkBackdrop, setOverDarkBackdrop] = useState(false);
   /** Nur ≥ md: weg bei Scroll runter, zurück bei Scroll hoch (Mobile unverändert). */
   const [desktopNavHidden, setDesktopNavHidden] = useState(false);
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [servicesMenuOpen, setServicesMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
 
-  const headerAboveMobileOverlay = mobileOpen || mobileMenuStackActive;
+  const headerAboveMobileOverlay = mobileOpen;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -70,7 +66,7 @@ export default function Navbar() {
       setScrolled(y > 20);
 
       const isMd = mdMq.matches;
-      if (!isMd || mobileOpen || mobileMenuStackActive) {
+      if (!isMd || mobileOpen) {
         setDesktopNavHidden(false);
         lastScrollY.current = y;
         return;
@@ -102,7 +98,7 @@ export default function Navbar() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
     };
-  }, [pathname, mobileOpen, mobileMenuStackActive]);
+  }, [pathname, mobileOpen]);
 
   useEffect(() => {
     if (desktopNavHidden) setServicesMenuOpen(false);
@@ -138,10 +134,6 @@ export default function Navbar() {
   }, [pathname]);
 
   useEffect(() => {
-    if (mobileOpen) setMobileMenuStackActive(true);
-  }, [mobileOpen]);
-
-  useEffect(() => {
     if (!mobileOpen) return;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -169,16 +161,16 @@ export default function Navbar() {
     ? "border-white/25 bg-white/[0.12] shadow-[0_20px_64px_-12px_rgba(0,0,0,0.28),0_0_0_1px_rgba(255,255,255,0.1)] backdrop-blur-2xl"
     : "border-neutral-200/95 bg-white shadow-[0_32px_100px_-24px_rgba(15,23,42,0.10),0_18px_56px_-28px_rgba(15,23,42,0.07),0_0_0_1px_rgba(15,23,42,0.045)] backdrop-blur-2xl";
 
-  const desktopPillText = (href: string) => {
+  const desktopNavLinkClass = (href: string) => {
     const active = isNavLinkActive(pathname, href);
+    const base =
+      "relative rounded-full px-3.5 py-2 text-sm transition-colors duration-200 lg:px-4";
     if (glassNav) {
-      return active
-        ? "font-semibold text-white"
-        : "text-white/75 hover:text-white";
+      if (active) return `${base} bg-white/20 font-semibold text-white shadow-sm`;
+      return `${base} text-white/75 hover:bg-white/10 hover:text-white`;
     }
-    return active
-      ? "font-semibold text-accent"
-      : "text-muted hover:text-foreground";
+    if (active) return `${base} bg-accent/12 font-semibold text-accent`;
+    return `${base} text-muted hover:bg-border/60 hover:text-foreground`;
   };
 
   const burgerLine = glassNav ? "bg-white" : "bg-foreground";
@@ -226,7 +218,6 @@ export default function Navbar() {
             >
               {NAV_LINKS.map((link) => {
                 const active = isNavLinkActive(pathname, link.href);
-                const hovered = hoveredLink === link.href || (link.href === "/services" && servicesMenuOpen);
 
                 if (link.href === "/services") {
                   const servicesPanel =
@@ -241,78 +232,45 @@ export default function Navbar() {
                     <div
                       key={link.href}
                       className="relative inline-flex"
-                      onMouseEnter={() => {
-                        setServicesMenuOpen(true);
-                        setHoveredLink("/services");
-                      }}
-                      onMouseLeave={() => {
-                        setServicesMenuOpen(false);
-                        setHoveredLink(null);
-                      }}
+                      onMouseEnter={() => setServicesMenuOpen(true)}
+                      onMouseLeave={() => setServicesMenuOpen(false)}
                     >
                       <Link
                         href={link.href}
                         aria-current={active ? "page" : undefined}
                         aria-haspopup="true"
                         aria-expanded={servicesMenuOpen}
-                        className={`relative rounded-full px-3.5 py-2 text-sm transition-colors duration-200 lg:px-4 ${desktopPillText(link.href)}`}
+                        className={desktopNavLinkClass(link.href)}
                       >
-                        {!active && (
-                          <AnimatePresence>
-                            {hovered && (
-                              <motion.span
-                                layoutId="navbar-hover-pill"
-                                className={`absolute inset-0 rounded-full ${glassNav ? "bg-white/10" : "bg-border/60"}`}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ type: "spring", bounce: 0.2, duration: 0.35 }}
-                              />
-                            )}
-                          </AnimatePresence>
-                        )}
-                        {active && (
-                          <motion.span
-                            layoutId="navbar-active-pill"
-                            className={`absolute inset-0 rounded-full ${glassNav ? "bg-white/20 shadow-sm" : "bg-accent/12"}`}
-                            transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-                          />
-                        )}
-                        <span className="relative z-10">{link.label}</span>
+                        {link.label}
                       </Link>
 
-                      <AnimatePresence>
-                        {servicesMenuOpen && (
-                          <motion.div
-                            id="nav-services-menu"
-                            role="menu"
-                            aria-label="Services"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                            className={`absolute left-1/2 top-full z-[100] w-max min-w-[15.5rem] -translate-x-1/2 pt-2 ${glassNav ? "text-white" : ""}`}
-                          >
-                            <div className={`overflow-hidden rounded-2xl border p-1.5 ${servicesPanel}`}>
-                              {NAV_SERVICE_DROPDOWN_LINKS.map((item) => {
-                                const subActive = pathname === item.href;
-                                return (
-                                  <Link
-                                    key={item.href}
-                                    href={item.href}
-                                    role="menuitem"
-                                    className={`block rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors ${subLinkClass} ${
-                                      subActive ? (glassNav ? "bg-white/15 text-white" : "bg-accent/12 text-accent") : ""
-                                    }`}
-                                  >
-                                    {item.label}
-                                  </Link>
-                                );
-                              })}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                      {servicesMenuOpen && (
+                        <div
+                          id="nav-services-menu"
+                          role="menu"
+                          aria-label="Services"
+                          className={`absolute left-1/2 top-full z-[100] w-max min-w-[15.5rem] -translate-x-1/2 pt-2 ${glassNav ? "text-white" : ""}`}
+                        >
+                          <div className={`overflow-hidden rounded-2xl border p-1.5 ${servicesPanel}`}>
+                            {NAV_SERVICE_DROPDOWN_LINKS.map((item) => {
+                              const subActive = pathname === item.href;
+                              return (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  role="menuitem"
+                                  className={`block rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors ${subLinkClass} ${
+                                    subActive ? (glassNav ? "bg-white/15 text-white" : "bg-accent/12 text-accent") : ""
+                                  }`}
+                                >
+                                  {item.label}
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   );
                 }
@@ -322,32 +280,9 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     aria-current={active ? "page" : undefined}
-                    onMouseEnter={() => setHoveredLink(link.href)}
-                    onMouseLeave={() => setHoveredLink(null)}
-                    className={`relative rounded-full px-3.5 py-2 text-sm transition-colors duration-200 lg:px-4 ${desktopPillText(link.href)}`}
+                    className={desktopNavLinkClass(link.href)}
                   >
-                    {!active && (
-                      <AnimatePresence>
-                        {hovered && (
-                          <motion.span
-                            layoutId="navbar-hover-pill"
-                            className={`absolute inset-0 rounded-full ${glassNav ? "bg-white/10" : "bg-border/60"}`}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ type: "spring", bounce: 0.2, duration: 0.35 }}
-                          />
-                        )}
-                      </AnimatePresence>
-                    )}
-                    {active && (
-                      <motion.span
-                        layoutId="navbar-active-pill"
-                        className={`absolute inset-0 rounded-full ${glassNav ? "bg-white/20 shadow-sm" : "bg-accent/12"}`}
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-                      />
-                    )}
-                    <span className="relative z-10">{link.label}</span>
+                    {link.label}
                   </Link>
                 );
               })}
@@ -406,58 +341,43 @@ export default function Navbar() {
       </header>
 
       {/* Mobile full-screen menu */}
-      <AnimatePresence
-        onExitComplete={() => setMobileMenuStackActive(false)}
-      >
-        {mobileOpen && (
-          <motion.div
-            id="mobile-menu"
-            className="fixed inset-0 z-[60] bg-background md:hidden"
-            role="dialog"
-            aria-modal="true"
-            style={{ transformOrigin: "top" }}
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
-            exit={{ scaleY: 0 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <motion.div
-              className="mx-auto flex h-full w-full max-w-md flex-col px-8 pb-10 pt-[max(6.5rem,env(safe-area-inset-top)+4.5rem)] text-center"
-              initial={{ y: -8 }}
-              animate={{ y: 0 }}
-              exit={{ y: -8 }}
-              transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="flex flex-1 flex-col items-center justify-center gap-8">
-                {NAV_LINKS.map((link) => {
-                  const active = isNavLinkActive(pathname, link.href);
-                  return (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setMobileOpen(false)}
-                      aria-current={active ? "page" : undefined}
-                      className={`text-2xl font-semibold tracking-tight transition-colors hover:text-accent ${
-                        active ? "text-accent" : "text-foreground"
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  );
-                })}
-              </div>
+      {mobileOpen && (
+        <div
+          id="mobile-menu"
+          className="fixed inset-0 z-[60] bg-background md:hidden"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="mx-auto flex h-full w-full max-w-md flex-col px-8 pb-10 pt-[max(6.5rem,env(safe-area-inset-top)+4.5rem)] text-center">
+            <div className="flex flex-1 flex-col items-center justify-center gap-8">
+              {NAV_LINKS.map((link) => {
+                const active = isNavLinkActive(pathname, link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={`text-2xl font-semibold tracking-tight transition-colors hover:text-accent ${
+                      active ? "text-accent" : "text-foreground"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </div>
 
-              <Link
-                href="/kontakt"
-                onClick={() => setMobileOpen(false)}
-                className="mt-10 w-full rounded-full bg-accent px-7 py-4 text-lg font-semibold text-white transition-colors hover:bg-accent-dark"
-              >
-                Jetzt starten
-              </Link>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <Link
+              href="/kontakt"
+              onClick={() => setMobileOpen(false)}
+              className="mt-10 w-full rounded-full bg-accent px-7 py-4 text-lg font-semibold text-white transition-colors hover:bg-accent-dark"
+            >
+              Jetzt starten
+            </Link>
+          </div>
+        </div>
+      )}
     </>
   );
 }
