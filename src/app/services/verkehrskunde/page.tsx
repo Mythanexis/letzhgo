@@ -24,7 +24,7 @@ export default function VerkehrskundePage() {
     <>
       <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
         <Image
-          src={IMAGES.verkehrskunde}
+          src="/images/vku-popup.png"
           alt="Verkehrskundeunterricht"
           fill
           className="object-cover brightness-[0.35]"

@@ -13,7 +13,7 @@ const SITES = [
     note: "Nothelferkurs & Verkehrskunde – zentral und schnell mit ÖV erreichbar.",
     addressLines: ["Binzmühlestrasse 15", "8050 Zürich"],
     mapsQuery: "Binzmühlestrasse 15, 8050 Zürich",
-    image: "/images/oerlikon.png",
+    image: "/images/oerlikon-letzhgo.png",
     imageAlt: "Standort Zürich-Oerlikon",
   },
   {
@@ -22,7 +22,7 @@ const SITES = [
     note: "Kursraum für Motorrad – in wenigen Minuten bist du am Übungsplatz in Rümlang.",
     addressLines: ["Bahnhofstrasse 10", "8154 Oberglatt"],
     mapsQuery: "Bahnhofstrasse 10, 8154 Oberglatt",
-    image: "/images/oberglatt.png",
+    image: "/images/oberglatt-letzhgo.png",
     imageAlt: "Standort Oberglatt",
   },
   {
@@ -31,8 +31,8 @@ const SITES = [
     note: "LARAG-Areal – Platz fürs Üben, Manöver und Prüfungsvorbereitung.",
     addressLines: ["Riedgrabenstrasse 26", "8153 Rümlang"],
     mapsQuery: "Riedgrabenstrasse 26, 8153 Rümlang",
-    image: "/images/larag-areal.jpg",
-    imageAlt: "Manöverplatz Rümlang",
+    image: "/images/ruemlang-sunset-letzhgo.png",
+    imageAlt: "Standort Rümlang",
   },
 ] as const;
 

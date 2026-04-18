@@ -74,6 +74,7 @@ export default function HomePage() {
         secondaryCtaText="Kontakt"
         secondaryCtaHref="/kontakt"
         showImage
+        imageSrc="/images/letzhgo-hero.png"
       />
 
       {/* Unsere Vorteile — Home (alternatives Layout) */}
@@ -95,7 +96,7 @@ export default function HomePage() {
               viewport={{ once: true, margin: "-90px" }}
             >
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
-                Unsere Vorteile
+                Let&apos;ZHgo Fahrschule
               </p>
               <h2 className="mt-4 text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl">
                 Dein Vorteil:{" "}
