@@ -157,7 +157,7 @@ export const SERVICES_OVERVIEW = [
   {
     title: "Verkehrskundeunterricht",
     description: "Im Verkehrskundekurs lernst du, Gefahren frühzeitig zu erkennen und sicher im Strassenverkehr unterwegs zu sein.",
-    image: IMAGES.verkehrskunde,
+    image: IMAGES.vkuPopup,
     href: "/services/verkehrskunde",
   },
   {
