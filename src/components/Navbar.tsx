@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { NAV_LINKS, SITE } from "@/lib/constants";
+import { NAV_LINKS, NAV_SERVICE_DROPDOWN_LINKS, SITE } from "@/lib/constants";
 
 /** Home: oben immer Glass, bis gescrollt (Fallback bevor Layout misst). */
 const TRANSPARENT_AT_TOP_PATHS: readonly string[] = ["/"];
@@ -49,6 +49,7 @@ export default function Navbar() {
   /** Nur ≥ md: weg bei Scroll runter, zurück bei Scroll hoch (Mobile unverändert). */
   const [desktopNavHidden, setDesktopNavHidden] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [servicesMenuOpen, setServicesMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   const headerAboveMobileOverlay = mobileOpen || mobileMenuStackActive;
@@ -58,6 +59,7 @@ export default function Navbar() {
     lastScrollY.current = window.scrollY;
     setDesktopNavHidden(false);
     setScrolled(window.scrollY > 20);
+    setServicesMenuOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -102,6 +104,14 @@ export default function Navbar() {
     };
   }, [pathname, mobileOpen, mobileMenuStackActive]);
 
+  useEffect(() => {
+    if (desktopNavHidden) setServicesMenuOpen(false);
+  }, [desktopNavHidden]);
+
+  useEffect(() => {
+    if (mobileOpen) setServicesMenuOpen(false);
+  }, [mobileOpen]);
+
   useLayoutEffect(() => {
     // Synchronous check before first paint — prevents white-navbar flash on dark-hero pages
     setOverDarkBackdrop(isNavbarOverDarkBackdrop());
@@ -141,9 +151,10 @@ export default function Navbar() {
   }, [mobileOpen]);
 
   useEffect(() => {
-    if (!mobileOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMobileOpen(false);
+      if (e.key !== "Escape") return;
+      setServicesMenuOpen(false);
+      if (mobileOpen) setMobileOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
@@ -215,7 +226,97 @@ export default function Navbar() {
             >
               {NAV_LINKS.map((link) => {
                 const active = isNavLinkActive(pathname, link.href);
-                const hovered = hoveredLink === link.href;
+                const hovered = hoveredLink === link.href || (link.href === "/services" && servicesMenuOpen);
+
+                if (link.href === "/services") {
+                  const servicesPanel =
+                    glassNav
+                      ? "border-white/25 bg-white/[0.14] shadow-[0_24px_48px_-12px_rgba(0,0,0,0.35)] backdrop-blur-2xl"
+                      : "border-neutral-200/95 bg-white shadow-[0_24px_48px_-16px_rgba(15,23,42,0.12)] backdrop-blur-xl";
+                  const subLinkClass = glassNav
+                    ? "text-white/85 hover:bg-white/10 hover:text-white"
+                    : "text-foreground/90 hover:bg-accent/8 hover:text-accent";
+
+                  return (
+                    <div
+                      key={link.href}
+                      className="relative inline-flex"
+                      onMouseEnter={() => {
+                        setServicesMenuOpen(true);
+                        setHoveredLink("/services");
+                      }}
+                      onMouseLeave={() => {
+                        setServicesMenuOpen(false);
+                        setHoveredLink(null);
+                      }}
+                    >
+                      <Link
+                        href={link.href}
+                        aria-current={active ? "page" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={servicesMenuOpen}
+                        className={`relative rounded-full px-3.5 py-2 text-sm transition-colors duration-200 lg:px-4 ${desktopPillText(link.href)}`}
+                      >
+                        {!active && (
+                          <AnimatePresence>
+                            {hovered && (
+                              <motion.span
+                                layoutId="navbar-hover-pill"
+                                className={`absolute inset-0 rounded-full ${glassNav ? "bg-white/10" : "bg-border/60"}`}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ type: "spring", bounce: 0.2, duration: 0.35 }}
+                              />
+                            )}
+                          </AnimatePresence>
+                        )}
+                        {active && (
+                          <motion.span
+                            layoutId="navbar-active-pill"
+                            className={`absolute inset-0 rounded-full ${glassNav ? "bg-white/20 shadow-sm" : "bg-accent/12"}`}
+                            transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                          />
+                        )}
+                        <span className="relative z-10">{link.label}</span>
+                      </Link>
+
+                      <AnimatePresence>
+                        {servicesMenuOpen && (
+                          <motion.div
+                            id="nav-services-menu"
+                            role="menu"
+                            aria-label="Services"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                            className={`absolute left-1/2 top-full z-[100] w-max min-w-[15.5rem] -translate-x-1/2 pt-2 ${glassNav ? "text-white" : ""}`}
+                          >
+                            <div className={`overflow-hidden rounded-2xl border p-1.5 ${servicesPanel}`}>
+                              {NAV_SERVICE_DROPDOWN_LINKS.map((item) => {
+                                const subActive = pathname === item.href;
+                                return (
+                                  <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    role="menuitem"
+                                    className={`block rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors ${subLinkClass} ${
+                                      subActive ? (glassNav ? "bg-white/15 text-white" : "bg-accent/12 text-accent") : ""
+                                    }`}
+                                  >
+                                    {item.label}
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                }
+
                 return (
                   <Link
                     key={link.href}

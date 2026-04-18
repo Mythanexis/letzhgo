@@ -209,6 +209,12 @@ export const SERVICES_DETAIL = [
   },
 ] as const;
 
+/** Desktop-Navbar: Unterpunkte für Hover-Menü unter „Services“. */
+export const NAV_SERVICE_DROPDOWN_LINKS = SERVICES_DETAIL.map((s) => ({
+  label: s.title,
+  href: `/services/${s.id}`,
+}));
+
 export const PRICING = [
   {
     title: "Nothelferkurs",
