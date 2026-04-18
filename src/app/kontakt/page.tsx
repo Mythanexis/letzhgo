@@ -209,8 +209,18 @@ export default function KontaktPage() {
         </div>
       </section>
 
+      {/* Fahrlehrer */}
+      <InstructorsSection
+        layout="singleGrid"
+        className="bg-background"
+        id="fahrlehrer-kontakt"
+        eyebrow="Dein Team"
+        title="Menschen, die dich auf deinem Weg begleiten"
+        subtitle="Fragen, Zweifel oder einfach mal Hallo — wir freuen uns, von dir zu hören und nehmen uns Zeit für dich. Per Anruf oder WhatsApp."
+      />
+
       {/* Google Maps */}
-      <section className="bg-[#f7f8fa] pb-20 md:pb-28">
+      <section className="bg-[#f7f8fa] py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <p className="mb-4 text-sm font-medium uppercase tracking-widest text-accent">
             Standort
@@ -232,16 +242,6 @@ export default function KontaktPage() {
           </div>
         </div>
       </section>
-
-      {/* Fahrlehrer */}
-      <InstructorsSection
-        layout="singleGrid"
-        className="bg-background"
-        id="fahrlehrer-kontakt"
-        eyebrow="Direkt erreichbar"
-        title="Nimm direkt Kontakt zu unseren Fahrlehrern auf"
-        subtitle="Ruf an oder schreib per WhatsApp — unsere Fahrlehrer helfen dir gerne weiter."
-      />
     </>
   );
 }
