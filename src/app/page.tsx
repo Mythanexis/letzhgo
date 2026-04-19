@@ -78,7 +78,7 @@ export default function HomePage() {
       />
 
       {/* Unsere Vorteile — Home (alternatives Layout) */}
-      <section className="relative overflow-hidden bg-background">
+      <section className="relative -mt-32 overflow-hidden rounded-t-3xl bg-background pt-40 md:mt-0 md:rounded-none md:pt-0">
         <div
           className="pointer-events-none absolute -left-20 top-12 h-72 w-72 rounded-full bg-accent/10 blur-[90px]"
           aria-hidden

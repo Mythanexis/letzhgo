@@ -179,7 +179,7 @@ function HeroSubtitleReveal({
           ? false
           : {
               clipPath: "inset(0 100% 0 0)",
-              filter: "blur(14px)",
+              filter: "blur(4px)",
             }
       }
       animate={
@@ -379,7 +379,7 @@ export default function Hero({
   if (showImage) {
     return (
       <section
-        className="relative flex h-[100svh] overflow-x-clip md:overflow-hidden"
+        className="relative flex min-h-svh overflow-x-clip md:overflow-hidden"
         data-navbar-dark
       >
         <div className="absolute inset-0 overflow-hidden">
@@ -448,7 +448,7 @@ export default function Hero({
         </div>
 
         {/* Mobile layout */}
-        <div className="relative z-10 flex w-full flex-col items-center justify-center px-6 pt-24 text-center md:hidden">
+        <div className="relative z-10 flex w-full flex-col items-center justify-start px-6 pb-16 pt-28 text-center md:hidden">
           <HeroHeadline
             title={title}
             className="text-5xl font-extrabold leading-[1.05] text-white"
@@ -493,7 +493,7 @@ export default function Hero({
               delay: HERO_BOOKING_START_MOBILE,
               ease: SNAP,
             }}
-            className="mt-8 translate-y-32"
+            className="mt-8 w-full"
           >
             <BookingPanel />
           </motion.div>
