@@ -4,6 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import InstructorDetailPhotos, {
+  InstructorDetailPhotosDesktop,
+} from "@/components/InstructorDetailPhotos";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const WERDEGANG = [
@@ -33,6 +36,11 @@ const WERDEGANG = [
   { year: "1991", text: "Chauffeur Lehre bei Eberhard Bau AG" },
 ];
 
+const PHOTOS = [
+  { src: "/images/gianni-portrait.png", alt: "Gianni Sebestin am Auto" },
+  { src: "/images/gianni-moto.png", alt: "Gianni Sebestin mit Motorrad" },
+];
+
 export default function GianniPage() {
   const anim = useScrollAnim();
   return (
@@ -46,8 +54,12 @@ export default function GianniPage() {
       </div>
 
       <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
-        {/* Left: Content */}
         <div className="lg:col-span-3">
+          <div className="lg:hidden">
+            <InstructorDetailPhotos images={PHOTOS} />
+          </div>
+
+          <div className="mt-10 md:mt-12 lg:mt-0">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }}>
             <h1 className="text-4xl font-bold text-foreground md:text-5xl">Gianni Sebestin</h1>
             <p className="mt-3 text-lg text-muted">Fahrlehrer für Auto, Motorrad und Anhänger, Fahrlehrer-Ausbildner</p>
@@ -109,19 +121,10 @@ export default function GianniPage() {
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
             Zurück zur Übersicht
           </Link>
+          </div>
         </div>
 
-        {/* Right: Sticky images */}
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.3 }} className="lg:col-span-2">
-          <div className="lg:sticky lg:top-28 space-y-5">
-            <div className="overflow-hidden rounded-2xl">
-              <Image src="/images/gianni-portrait.png" alt="Gianni Sebestin am Auto" width={600} height={400} className="w-full object-cover" priority />
-            </div>
-            <div className="overflow-hidden rounded-2xl">
-              <Image src="/images/gianni-moto.png" alt="Gianni Sebestin mit Motorrad" width={600} height={400} className="w-full object-cover" priority />
-            </div>
-          </div>
-        </motion.div>
+        <InstructorDetailPhotosDesktop images={PHOTOS} />
       </div>
     </section>
   );

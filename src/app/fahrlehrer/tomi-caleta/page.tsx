@@ -4,6 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import InstructorDetailPhotos, {
+  InstructorDetailPhotosDesktop,
+} from "@/components/InstructorDetailPhotos";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const WERDEGANG = [
@@ -12,6 +15,11 @@ const WERDEGANG = [
   { year: "2015", text: "ASTRA-zertifizierter Nothilfeinstruktor" },
   { year: "2011", text: "Kundendienstberater" },
   { year: "2009", text: "Ausbildung zum Automechaniker" },
+];
+
+const PHOTOS = [
+  { src: "/images/tomi-portrait.png", alt: "Tomi Caleta am Auto" },
+  { src: "/images/tomi-moto.png", alt: "Tomi Caleta mit Motorrad" },
 ];
 
 export default function TomiPage() {
@@ -28,6 +36,11 @@ export default function TomiPage() {
 
       <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
         <div className="lg:col-span-3">
+          <div className="lg:hidden">
+            <InstructorDetailPhotos images={PHOTOS} />
+          </div>
+
+          <div className="mt-10 md:mt-12 lg:mt-0">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }}>
             <h1 className="text-4xl font-bold text-foreground md:text-5xl">Tomi Caleta</h1>
             <p className="mt-3 text-lg text-muted">Fahrlehrer für Auto, Motorrad und Anhänger, Theorielehrer für Verkehrskunde und Nothelfer</p>
@@ -89,18 +102,10 @@ export default function TomiPage() {
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
             Zurück zur Übersicht
           </Link>
+          </div>
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.3 }} className="lg:col-span-2">
-          <div className="lg:sticky lg:top-28 space-y-5">
-            <div className="overflow-hidden rounded-2xl">
-              <Image src="/images/tomi-portrait.png" alt="Tomi Caleta am Auto" width={600} height={400} className="w-full object-cover" priority />
-            </div>
-            <div className="overflow-hidden rounded-2xl">
-              <Image src="/images/tomi-moto.png" alt="Tomi Caleta mit Motorrad" width={600} height={400} className="w-full object-cover" priority />
-            </div>
-          </div>
-        </motion.div>
+        <InstructorDetailPhotosDesktop images={PHOTOS} />
       </div>
     </section>
   );
