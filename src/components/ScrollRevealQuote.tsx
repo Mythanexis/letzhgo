@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { IMAGES } from "@/lib/constants";
-import { useCoarsePointer } from "@/hooks/useScrollAnim";
 
 const QUOTE_TEXT =
   "Die Freude am Fahren bleibt nicht weiter ein Traum, sondern wird pure Wirklichkeit. Du wirst erstaunt sein, wie viel Vertrauen Du in Dich und ins Fahrzeug nach diesen Lektionen haben wirst.";
@@ -20,48 +19,6 @@ export type ScrollRevealQuoteProps = {
   eyebrow?: string;
   cta?: { href: string; label: string } | null;
 };
-
-function ScrollRevealQuoteStatic({
-  quote,
-  eyebrow,
-  cta,
-}: {
-  quote: string;
-  eyebrow: string;
-  cta: { href: string; label: string } | null;
-}) {
-  return (
-    <section
-      data-navbar-dark
-      className="relative min-h-[100svh] w-full overflow-hidden"
-    >
-      <div className="absolute inset-0">
-        <Image
-          src={IMAGES.quoteBg}
-          alt=""
-          fill
-          className="object-cover brightness-[0.25]"
-          sizes="100vw"
-          priority
-        />
-      </div>
-      <div className="relative z-[1] flex min-h-[100svh] flex-col items-center justify-center px-6 py-24 text-center md:px-16">
-        <p className="text-sm uppercase tracking-widest text-accent">{eyebrow}</p>
-        <blockquote className="mx-auto mt-8 max-w-4xl text-2xl font-medium leading-relaxed text-white md:text-3xl lg:text-4xl">
-          {quote}
-        </blockquote>
-        {cta ? (
-          <Link
-            href={cta.href}
-            className="mt-10 inline-block rounded-full border border-white/30 px-6 py-3 text-sm text-white transition-colors hover:bg-white/10"
-          >
-            {cta.label}
-          </Link>
-        ) : null}
-      </div>
-    </section>
-  );
-}
 
 function QuoteWord({
   word,
@@ -160,12 +117,6 @@ export default function ScrollRevealQuote({
   eyebrow = "Unsere Philosophie",
   cta = DEFAULT_CTA,
 }: ScrollRevealQuoteProps) {
-  const coarse = useCoarsePointer();
-  if (coarse) {
-    return (
-      <ScrollRevealQuoteStatic quote={quote} eyebrow={eyebrow} cta={cta} />
-    );
-  }
   return (
     <ScrollRevealQuoteScroll quote={quote} eyebrow={eyebrow} cta={cta} />
   );

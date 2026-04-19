@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 
 /** Home: oben immer Glass, bis gescrollt (Fallback bevor Layout misst). */
@@ -45,6 +46,7 @@ function isNavbarOverDarkBackdrop(): boolean {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const reduceMotion = useReducedMotion();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [overDarkBackdrop, setOverDarkBackdrop] = useState(false);
@@ -167,6 +169,10 @@ export default function Navbar() {
 
   const burgerLine = glassNav ? "bg-white" : "bg-foreground";
 
+  const mobileMenuTransition = reduceMotion
+    ? { duration: 0.15 }
+    : { duration: 0.38, ease: [0.16, 1, 0.3, 1] as const };
+
   return (
     <>
       <header
@@ -276,43 +282,125 @@ export default function Navbar() {
       </header>
 
       {/* Mobile full-screen menu */}
-      {mobileOpen && (
-        <div
-          id="mobile-menu"
-          className="fixed inset-0 z-[60] bg-background md:hidden"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="mx-auto flex h-full w-full max-w-md flex-col px-8 pb-10 pt-[max(6.5rem,env(safe-area-inset-top)+4.5rem)] text-center">
-            <div className="flex flex-1 flex-col items-center justify-center gap-8">
-              {NAV_LINKS.map((link) => {
-                const active = isNavLinkActive(pathname, link.href);
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    aria-current={active ? "page" : undefined}
-                    className={`text-2xl font-semibold tracking-tight transition-colors hover:text-accent ${
-                      active ? "text-accent" : "text-foreground"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-            </div>
-
-            <Link
-              href="/kontakt"
-              onClick={() => setMobileOpen(false)}
-              className="mt-10 w-full rounded-full bg-accent px-7 py-4 text-lg font-semibold text-white transition-colors hover:bg-accent-dark"
+      <AnimatePresence mode="sync">
+        {mobileOpen && (
+          <motion.div
+            id="mobile-menu"
+            key="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            className="fixed inset-0 z-[60] bg-background md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={mobileMenuTransition}
+          >
+            <motion.div
+              className="mx-auto flex h-full w-full max-w-md flex-col px-8 pb-10 pt-[max(6.5rem,env(safe-area-inset-top)+4.5rem)] text-center"
+              initial={reduceMotion ? false : { opacity: 0, y: 32 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={
+                reduceMotion
+                  ? { duration: 0.15 }
+                  : {
+                      duration: 0.45,
+                      ease: [0.16, 1, 0.3, 1],
+                      delay: 0.05,
+                    }
+              }
             >
-              Jetzt starten
-            </Link>
-          </div>
-        </div>
-      )}
+              {reduceMotion ? (
+                <div className="flex flex-1 flex-col items-center justify-center gap-8">
+                  {NAV_LINKS.map((link) => {
+                    const active = isNavLinkActive(pathname, link.href);
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setMobileOpen(false)}
+                        aria-current={active ? "page" : undefined}
+                        className={`block text-2xl font-semibold tracking-tight transition-colors hover:text-accent ${
+                          active ? "text-accent" : "text-foreground"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : (
+                <motion.div
+                  className="flex flex-1 flex-col items-center justify-center gap-8"
+                  initial="hidden"
+                  animate="show"
+                  variants={{
+                    hidden: {},
+                    show: {
+                      transition: {
+                        staggerChildren: 0.055,
+                        delayChildren: 0.08,
+                      },
+                    },
+                  }}
+                >
+                  {NAV_LINKS.map((link) => {
+                    const active = isNavLinkActive(pathname, link.href);
+                    return (
+                      <motion.div
+                        key={link.href}
+                        variants={{
+                          hidden: { opacity: 0, y: 18 },
+                          show: {
+                            opacity: 1,
+                            y: 0,
+                            transition: {
+                              duration: 0.38,
+                              ease: [0.16, 1, 0.3, 1],
+                            },
+                          },
+                        }}
+                      >
+                        <Link
+                          href={link.href}
+                          onClick={() => setMobileOpen(false)}
+                          aria-current={active ? "page" : undefined}
+                          className={`block text-2xl font-semibold tracking-tight transition-colors hover:text-accent ${
+                            active ? "text-accent" : "text-foreground"
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
+              )}
+
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={
+                  reduceMotion
+                    ? { duration: 0.15 }
+                    : {
+                        duration: 0.4,
+                        ease: [0.16, 1, 0.3, 1],
+                        delay: 0.14,
+                      }
+                }
+              >
+                <Link
+                  href="/kontakt"
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-10 flex w-full justify-center rounded-full bg-accent px-7 py-4 text-lg font-semibold text-white transition-colors hover:bg-accent-dark"
+                >
+                  Jetzt starten
+                </Link>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

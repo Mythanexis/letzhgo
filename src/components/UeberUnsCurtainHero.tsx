@@ -8,8 +8,6 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { useCoarsePointer } from "@/hooks/useScrollAnim";
-
 const QUOTE_BG = "/images/ueber-uns/quote-road.jpg";
 
 const QUOTE_EYEBROW = "So bilden wir aus";
@@ -128,41 +126,6 @@ function HeroFullLayer({ reducedMotion }: { reducedMotion: boolean }) {
   );
 }
 
-function UeberUnsCurtainHeroStatic() {
-  return (
-    <>
-      <HeroFullLayer reducedMotion />
-      <section
-        className="relative overflow-hidden bg-[#0a0f1e] py-20 md:py-28"
-        data-navbar-dark
-      >
-        <div className="absolute inset-0">
-          <Image
-            src={QUOTE_BG}
-            alt=""
-            fill
-            className="object-cover object-center brightness-[0.5]"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-black/28" aria-hidden />
-          <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-black/28 to-black/36"
-            aria-hidden
-          />
-        </div>
-        <div className="relative z-[1] mx-auto max-w-4xl px-6 text-center md:px-16">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
-            {QUOTE_EYEBROW}
-          </p>
-          <blockquote className="mx-auto mt-8 text-2xl font-medium leading-relaxed text-white md:text-3xl lg:text-4xl">
-            {QUOTE_TEXT}
-          </blockquote>
-        </div>
-      </section>
-    </>
-  );
-}
-
 function UeberUnsCurtainHeroScroll() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -250,7 +213,5 @@ function UeberUnsCurtainHeroScroll() {
 }
 
 export default function UeberUnsCurtainHero() {
-  const coarse = useCoarsePointer();
-  if (coarse) return <UeberUnsCurtainHeroStatic />;
   return <UeberUnsCurtainHeroScroll />;
 }
