@@ -65,8 +65,8 @@ export default function ScrollSteps() {
           </motion.p>
         </div>
 
-        {/* Step number – mobile only, centered */}
-        <div className="relative flex h-24 items-center justify-center overflow-hidden md:hidden">
+        {/* Step number – mobile only, left-aligned */}
+        <div className="relative h-44 flex-shrink-0 overflow-hidden md:hidden">
           {STEPS.map((step, i) => (
             <motion.span
               key={step.number}
@@ -75,7 +75,7 @@ export default function ScrollSteps() {
                 y: activeIndex === i ? 0 : activeIndex > i ? -40 : 40,
               }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute text-9xl font-bold leading-none text-accent/10 will-change-transform"
+              className="absolute bottom-0 left-6 text-9xl font-bold leading-none text-accent/10 will-change-transform sm:left-10"
             >
               {step.number}
             </motion.span>
