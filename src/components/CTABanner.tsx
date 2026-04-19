@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const AVATAR_IMAGES = [
   "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face",
@@ -12,18 +13,13 @@ const AVATAR_IMAGES = [
 ];
 
 export default function CTABanner() {
+  const anim = useScrollAnim();
   return (
     <section className="bg-background">
       <div className="px-6 py-24 md:px-16 md:py-32 lg:px-24 xl:px-32">
         <div className="flex flex-col justify-between gap-16 lg:flex-row lg:items-center">
           {/* Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="lg:flex-1"
-          >
+          <motion.div {...anim({ y: 30, delay: 0.1, duration: 1 })} className="lg:flex-1">
             <h2 className="text-4xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
               Bereit für
               <br />
@@ -45,10 +41,7 @@ export default function CTABanner() {
 
           {/* Right */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-80px" }}
+            {...anim({ y: 30, delay: 0.25, duration: 1 })}
             className="space-y-8 lg:mr-16 lg:max-w-xs lg:shrink-0"
           >
             {/* Reviews */}

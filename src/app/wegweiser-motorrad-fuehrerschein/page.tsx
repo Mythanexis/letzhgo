@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { EDOOBOX_LINKS, WEGWEISER_MOTORRAD_IMAGES } from "@/lib/constants";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { useCoarsePointer } from "@/hooks/useScrollAnim";
 
 interface StepContent {
   id: string;
@@ -129,7 +130,40 @@ const slideInRight = {
   },
 };
 
+const fadeUpCoarse = {
+  hidden: { opacity: 1, y: 0 },
+  visible: (_delay: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0 },
+  }),
+};
+
+const slideInLeftCoarse = {
+  hidden: { opacity: 1, x: 0 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0 },
+  },
+};
+
+const slideInRightCoarse = {
+  hidden: { opacity: 1, x: 0, scale: 1 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: { duration: 0 },
+  },
+};
+
 export default function WegweiserMotorradFuehrerscheinPage() {
+  const coarse = useCoarsePointer();
+  const fadeUpV = coarse ? fadeUpCoarse : fadeUp;
+  const slideInLeftV = coarse ? slideInLeftCoarse : slideInLeft;
+  const slideInRightV = coarse ? slideInRightCoarse : slideInRight;
+
   return (
     <>
       {/* Hero */}
@@ -191,34 +225,38 @@ export default function WegweiserMotorradFuehrerscheinPage() {
           {STEPS.map((step, index) => (
             <motion.article
               key={step.id}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              initial={coarse ? "visible" : "hidden"}
+              {...(coarse
+                ? {}
+                : {
+                    whileInView: "visible" as const,
+                    viewport: { once: true, margin: "-100px" },
+                  })}
               className={`grid w-full grid-cols-1 lg:grid-cols-2 lg:min-h-[min(520px,75vh)] ${
                 index % 2 === 0 ? "bg-background" : "bg-[#f7f8fa]"
               }`}
             >
               {/* Text column – always left */}
               <motion.div
-                variants={slideInLeft}
+                variants={slideInLeftV}
                 className="flex flex-col justify-center px-6 py-10 sm:px-10 md:px-14 lg:order-1 lg:py-14 xl:px-20"
               >
                 <motion.p
-                  variants={fadeUp}
+                  variants={fadeUpV}
                   custom={0.1}
                   className="text-sm font-semibold uppercase tracking-widest text-accent"
                 >
                   Schritt {step.id}
                 </motion.p>
                 <motion.h2
-                  variants={fadeUp}
+                  variants={fadeUpV}
                   custom={0.15}
                   className="mt-3 text-2xl font-bold text-foreground md:text-3xl"
                 >
                   {step.title}
                 </motion.h2>
 
-                <motion.div variants={fadeUp} custom={0.25} className="mt-5 space-y-4">
+                <motion.div variants={fadeUpV} custom={0.25} className="mt-5 space-y-4">
                   {step.description.map((paragraph, pIdx) => (
                     <p
                       key={pIdx}
@@ -231,7 +269,7 @@ export default function WegweiserMotorradFuehrerscheinPage() {
 
                 {step.note && (
                   <motion.p
-                    variants={fadeUp}
+                    variants={fadeUpV}
                     custom={0.35}
                     className="mt-5 rounded-xl border border-accent/20 bg-accent/5 px-5 py-3 text-sm font-medium text-accent"
                   >
@@ -240,7 +278,7 @@ export default function WegweiserMotorradFuehrerscheinPage() {
                 )}
 
                 {step.cta && (
-                  <motion.div variants={fadeUp} custom={0.4} className="mt-8">
+                  <motion.div variants={fadeUpV} custom={0.4} className="mt-8">
                     <Link
                       href={step.cta.href}
                       target={step.cta.href.startsWith("http") ? "_blank" : undefined}
@@ -259,7 +297,7 @@ export default function WegweiserMotorradFuehrerscheinPage() {
 
               {/* Image column – always right */}
               <motion.div
-                variants={slideInRight}
+                variants={slideInRightV}
                 className="relative h-full min-h-[260px] w-full lg:order-2 lg:min-h-0"
               >
                 <Image

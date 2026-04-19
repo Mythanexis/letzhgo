@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 /** Deep-Link zur Google-Maps-Suche (Unternehmensprofil inkl. Bewertungen). */
 const GOOGLE_REVIEWS_URL =
@@ -123,6 +124,7 @@ function GoogleIcon({ className }: { className?: string }) {
 const REVIEW_COLLAPSED_H_PX = 158;
 
 function ReviewCard({ review, index }: { review: Review; index: number }) {
+  const anim = useScrollAnim();
   const reduceMotion = useReducedMotion();
   const [expanded, setExpanded] = useState(false);
   const [fullHeightPx, setFullHeightPx] = useState<number | null>(null);
@@ -155,10 +157,7 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.75, delay: 0.08 + index * 0.06, ease: [0.16, 1, 0.3, 1] }}
-      viewport={{ once: true, margin: "-40px" }}
+      {...anim({ y: 24, delay: 0.08 + index * 0.06, duration: 0.75 })}
       whileHover={{ y: -3, transition: { duration: 0.22, ease: "easeOut" } }}
       className="flex h-full flex-col rounded-2xl border border-border bg-white p-7 shadow-sm transition-shadow duration-300 hover:shadow-md md:p-8"
     >
@@ -252,6 +251,7 @@ const aggregateRatingSchema = {
 };
 
 export default function GoogleReviewsSection() {
+  const anim = useScrollAnim();
   return (
     <section className="bg-[#f7f8fa]" aria-labelledby="google-reviews-heading">
       <script
@@ -259,13 +259,7 @@ export default function GoogleReviewsSection() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingSchema) }}
       />
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-80px" }}
-          className="mx-auto max-w-4xl text-center"
-        >
+        <motion.div {...anim({ y: 28, duration: 0.9 })} className="mx-auto max-w-4xl text-center">
           <h2
             id="google-reviews-heading"
             className="text-4xl font-extrabold leading-[1.08] tracking-tight text-foreground md:text-5xl lg:text-6xl"

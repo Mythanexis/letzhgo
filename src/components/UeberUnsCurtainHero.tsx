@@ -8,6 +8,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
+import { useCoarsePointer } from "@/hooks/useScrollAnim";
 
 const QUOTE_BG = "/images/ueber-uns/quote-road.jpg";
 
@@ -127,7 +128,42 @@ function HeroFullLayer({ reducedMotion }: { reducedMotion: boolean }) {
   );
 }
 
-export default function UeberUnsCurtainHero() {
+function UeberUnsCurtainHeroStatic() {
+  return (
+    <>
+      <HeroFullLayer reducedMotion />
+      <section
+        className="relative overflow-hidden bg-[#0a0f1e] py-20 md:py-28"
+        data-navbar-dark
+      >
+        <div className="absolute inset-0">
+          <Image
+            src={QUOTE_BG}
+            alt=""
+            fill
+            className="object-cover object-center brightness-[0.5]"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-black/28" aria-hidden />
+          <div
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-black/28 to-black/36"
+            aria-hidden
+          />
+        </div>
+        <div className="relative z-[1] mx-auto max-w-4xl px-6 text-center md:px-16">
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
+            {QUOTE_EYEBROW}
+          </p>
+          <blockquote className="mx-auto mt-8 text-2xl font-medium leading-relaxed text-white md:text-3xl lg:text-4xl">
+            {QUOTE_TEXT}
+          </blockquote>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function UeberUnsCurtainHeroScroll() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const words = useMemo(() => QUOTE_TEXT.split(/\s+/).filter(Boolean), []);
@@ -143,7 +179,6 @@ export default function UeberUnsCurtainHero() {
     [1.06, 1],
   );
 
-  /** Zitat-Ebene über statischem Hero; Öffnung = „Vorhang“ (Hero bewegt sich nicht mit). */
   const quoteClipPath = useTransform(scrollYProgress, (p) => {
     if (prefersReducedMotion) {
       const t = Math.min(1, p / 0.06);
@@ -162,12 +197,10 @@ export default function UeberUnsCurtainHero() {
       style={{ height: `${SCROLL_TRACK_VH}vh` }}
     >
       <div className="sticky top-0 isolate flex h-[100svh] min-h-[100svh] w-full flex-col overflow-hidden md:h-[100dvh] md:min-h-[100dvh]">
-        {/* Hero: eine Ebene, kein translateY — bleibt stabil während Scroll/Clip */}
         <div className="absolute inset-0 z-[1] overflow-hidden">
           <HeroFullLayer reducedMotion={!!prefersReducedMotion} />
         </div>
 
-        {/* Zitat + Road: darüber, sichtbarer Bereich wächst mit Scroll (ersetzt die alten bewegten Vorhang-Hälften) */}
         <motion.div
           className="pointer-events-none absolute inset-0 z-[2] overflow-hidden"
           style={{ clipPath: quoteClipPath }}
@@ -214,4 +247,10 @@ export default function UeberUnsCurtainHero() {
       </div>
     </div>
   );
+}
+
+export default function UeberUnsCurtainHero() {
+  const coarse = useCoarsePointer();
+  if (coarse) return <UeberUnsCurtainHeroStatic />;
+  return <UeberUnsCurtainHeroScroll />;
 }

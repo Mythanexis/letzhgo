@@ -3,12 +3,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FAQ_ITEMS } from "@/lib/constants";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 type FAQProps = {
   className?: string;
 };
 
 export default function FAQ({ className }: FAQProps) {
+  const anim = useScrollAnim();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const faqSchema = {
@@ -32,12 +34,7 @@ export default function FAQ({ className }: FAQProps) {
       />
       <div className="mx-auto max-w-7xl px-6 py-24">
       <div className="grid gap-12 lg:grid-cols-[1fr_1.5fr]">
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-80px" }}
-        >
+        <motion.div {...anim({ x: -40, delay: 0.15, duration: 1 })}>
           <h2 className="text-3xl font-bold text-foreground md:text-4xl">
             Deine Fragen.
             <br />
@@ -51,10 +48,7 @@ export default function FAQ({ className }: FAQProps) {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-80px" }}
+          {...anim({ x: 40, delay: 0.35, duration: 1 })}
           className="space-y-0 divide-y divide-border"
         >
           {FAQ_ITEMS.map((item, i) => (

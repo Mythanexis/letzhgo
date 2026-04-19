@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const COURSE_HIGHLIGHTS = [
   "Verkehrsregeln vertieft verstehen",
@@ -20,6 +21,7 @@ const COURSE_HIGHLIGHTS = [
 ];
 
 export default function VerkehrskundePage() {
+  const anim = useScrollAnim();
   return (
     <>
       <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
@@ -62,12 +64,7 @@ export default function VerkehrskundePage() {
         </div>
         <div className="grid gap-16 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <motion.div {...anim({ y: 20, duration: 0.6 })}>
               <h2 className="text-2xl font-bold text-foreground md:text-3xl">
                 Über den Kurs
               </h2>
@@ -125,13 +122,7 @@ export default function VerkehrskundePage() {
             </Link>
           </div>
 
-          <motion.aside
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="flex flex-col gap-6"
-          >
+          <motion.aside {...anim({ y: 20, delay: 0.2, duration: 0.6 })} className="flex flex-col gap-6">
             <div className="rounded-2xl border border-border bg-card p-8">
               <p className="text-sm font-medium uppercase tracking-widest text-accent">
                 Details

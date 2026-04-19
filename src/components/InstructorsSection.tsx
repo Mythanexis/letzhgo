@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { INSTRUCTORS, INSTRUCTORS_HOMEPAGE_ORDER, LOCATIONS } from "@/lib/constants";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 function getInstructor(name: string) {
   return INSTRUCTORS.find((i) => i.name === name);
@@ -82,6 +83,7 @@ export default function InstructorsSection({
   subtitle,
   id = "fahrlehrer",
 }: InstructorsSectionProps) {
+  const anim = useScrollAnim();
   const defaultSubtitle =
     layout === "singleGrid"
       ? "Unser Team im Überblick – Details und Standorte findest du auf den Profilseiten."
@@ -91,10 +93,7 @@ export default function InstructorsSection({
     <section id={id} className={className}>
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-80px" }}
+          {...anim({ y: 30, delay: 0.1, duration: 1.2 })}
           className="mb-16 text-center md:mb-20"
         >
           <p className="text-sm font-medium uppercase tracking-widest text-accent">
@@ -116,14 +115,7 @@ export default function InstructorsSection({
               return (
                 <motion.div
                   key={name}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 1,
-                    delay: 0.15 + i * 0.08,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  viewport={{ once: true, margin: "-60px" }}
+                  {...anim({ y: 30, delay: 0.15 + i * 0.08, duration: 1 })}
                 >
                   <InstructorCard instructor={instructor} />
                 </motion.div>
@@ -135,14 +127,7 @@ export default function InstructorsSection({
           {LOCATIONS.map((location, locIdx) => (
             <motion.div
               key={location.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 1,
-                delay: 0.15,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              viewport={{ once: true, margin: "-80px" }}
+              {...anim({ y: 40, delay: 0.15, duration: 1 })}
             >
               <div className="mb-12 flex flex-col items-center gap-3 text-center">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10">
@@ -178,14 +163,7 @@ export default function InstructorsSection({
                   return (
                     <motion.div
                       key={`${location.name}-${name}`}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{
-                        duration: 1,
-                        delay: 0.2 + i * 0.1,
-                        ease: [0.16, 1, 0.3, 1],
-                      }}
-                      viewport={{ once: true, margin: "-60px" }}
+                      {...anim({ y: 30, delay: 0.2 + i * 0.1, duration: 1 })}
                     >
                       <InstructorCard instructor={instructor} />
                     </motion.div>

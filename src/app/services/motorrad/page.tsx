@@ -5,8 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
 import Breadcrumbs from "@/components/Breadcrumbs";
-
-const EASE = [0.16, 1, 0.3, 1] as const;
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const COURSE_CONTENT = [
   "Grundlagen und Funktionsweise des Motorrads",
@@ -71,6 +70,7 @@ function DetailIcon({ type }: { type: string }) {
 }
 
 export default function MotorradPage() {
+  const anim = useScrollAnim();
   return (
     <>
       <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
@@ -114,12 +114,7 @@ export default function MotorradPage() {
         </div>
         <div className="grid gap-16 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <motion.div {...anim({ y: 20, duration: 0.6 })}>
               <h2 className="text-2xl font-bold text-foreground md:text-3xl">
                 Motorrad-Grundkurs
               </h2>
@@ -198,13 +193,7 @@ export default function MotorradPage() {
             </Link>
           </div>
 
-          <motion.aside
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="flex flex-col gap-6"
-          >
+          <motion.aside {...anim({ y: 20, delay: 0.2, duration: 0.6 })} className="flex flex-col gap-6">
             <div className="rounded-2xl border border-border bg-card p-8">
               <p className="text-sm font-medium uppercase tracking-widest text-accent">
                 Details
@@ -290,12 +279,7 @@ export default function MotorradPage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Image */}
-            <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, ease: EASE }}
-              viewport={{ once: true, margin: "-80px" }}
-            >
+            <motion.div {...anim({ x: -24, duration: 0.7 })}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
                 <Image
                   src="/images/motorrad-fahrstunden.png"
@@ -308,12 +292,7 @@ export default function MotorradPage() {
             </motion.div>
 
             {/* Content */}
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-              viewport={{ once: true, margin: "-80px" }}
-            >
+            <motion.div {...anim({ x: 24, delay: 0.1, duration: 0.7 })}>
               <p className="text-sm font-medium uppercase tracking-widest text-accent">
                 Individuelle Fahrstunden
               </p>
@@ -373,12 +352,7 @@ export default function MotorradPage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, ease: EASE }}
-              viewport={{ once: true, margin: "-80px" }}
-            >
+            <motion.div {...anim({ x: -24, duration: 0.7 })}>
               <p className="text-sm font-medium uppercase tracking-widest text-accent">
                 Kein eigenes Motorrad?
               </p>
@@ -426,12 +400,7 @@ export default function MotorradPage() {
             </motion.div>
 
             {/* Image */}
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-              viewport={{ once: true, margin: "-80px" }}
-            >
+            <motion.div {...anim({ x: 24, delay: 0.1, duration: 0.7 })}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
                 <Image
                   src="/images/partner-hostettler-zuerich-nord.png"

@@ -5,8 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { IMAGES } from "@/lib/constants";
 import Breadcrumbs from "@/components/Breadcrumbs";
-
-const EASE = [0.16, 1, 0.3, 1] as const;
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const HIGHLIGHTS = [
   "Individuelle Fahrstunden in deinem Tempo",
@@ -72,6 +71,7 @@ function DetailIcon({ type }: { type: string }) {
 }
 
 export default function FahrstundenPage() {
+  const anim = useScrollAnim();
   return (
     <>
       {/* Hero */}
@@ -116,12 +116,7 @@ export default function FahrstundenPage() {
         </div>
         <div className="grid gap-16 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <motion.div {...anim({ y: 20, duration: 0.6 })}>
               <h2 className="text-2xl font-bold text-foreground md:text-3xl">
                 Deine Fahrstunden
               </h2>
@@ -193,13 +188,7 @@ export default function FahrstundenPage() {
             </Link>
           </div>
 
-          <motion.aside
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="flex flex-col gap-6"
-          >
+          <motion.aside {...anim({ y: 20, delay: 0.2, duration: 0.6 })} className="flex flex-col gap-6">
             <div className="rounded-2xl border border-border bg-card p-8">
               <p className="text-sm font-medium uppercase tracking-widest text-accent">
                 Kontakt aufnehmen
@@ -255,13 +244,7 @@ export default function FahrstundenPage() {
       {/* Abo-Angebote */}
       <section className="bg-[#f7f8fa] py-24 md:py-32">
         <div className="mx-auto max-w-5xl px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: EASE }}
-            viewport={{ once: true, margin: "-60px" }}
-            className="text-center"
-          >
+          <motion.div {...anim({ y: 20, duration: 0.7 })} className="text-center">
             <p className="text-sm font-medium uppercase tracking-widest text-accent">
               Spare mit einem Abo
             </p>
@@ -277,10 +260,7 @@ export default function FahrstundenPage() {
           <div className="mt-14 grid gap-8 md:grid-cols-2 md:items-stretch md:gap-10">
             {/* 10er-Abo */}
             <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.05, ease: EASE }}
-              viewport={{ once: true, margin: "-60px" }}
+              {...anim({ y: 28, delay: 0.05, duration: 0.6 })}
               className="order-2 flex h-full flex-col rounded-3xl border border-border bg-white p-8 md:order-1 md:p-10"
             >
               <div className="flex items-start justify-between gap-4">
@@ -327,13 +307,7 @@ export default function FahrstundenPage() {
             </motion.div>
 
             {/* 20er-Abo — gradient frame + soft glow & hover sheen */}
-            <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
-              viewport={{ once: true, margin: "-60px" }}
-              className="order-1 md:order-2"
-            >
+            <motion.div {...anim({ y: 28, delay: 0.15, duration: 0.6 })} className="order-1 md:order-2">
               <div className="group relative h-full rounded-3xl bg-gradient-to-br from-accent via-accent/50 to-accent-dark p-px shadow-[0_20px_50px_-20px_rgba(1,68,220,0.45)] transition-shadow duration-500 hover:shadow-[0_28px_60px_-22px_rgba(1,68,220,0.5)]">
                 <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(1.5rem-1px)] bg-white p-8 md:p-10">
                   <div
@@ -406,13 +380,7 @@ export default function FahrstundenPage() {
       <section className="bg-background">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* Bild */}
-          <motion.div
-            initial={{ opacity: 0, scale: 1.04 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: EASE }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="relative min-h-[360px] lg:min-h-[600px]"
-          >
+          <motion.div {...anim({ scale: 1.04, duration: 1 })} className="relative min-h-[360px] lg:min-h-[600px]">
             <Image
               src="/images/anhaenger-gianni.png"
               alt="Gianni Sebestin mit Let'ZHgo Anhänger"
@@ -425,12 +393,7 @@ export default function FahrstundenPage() {
 
           {/* Content */}
           <div className="flex flex-col justify-center px-8 py-16 md:px-16 lg:py-20 xl:px-24">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: EASE }}
-              viewport={{ once: true, margin: "-80px" }}
-            >
+            <motion.div {...anim({ y: 24, duration: 0.7 })}>
               <p className="text-sm font-medium uppercase tracking-widest text-accent">
                 Kategorie B/E
               </p>
@@ -448,13 +411,7 @@ export default function FahrstundenPage() {
               </p>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
-              viewport={{ once: true, margin: "-80px" }}
-              className="mt-10 space-y-4"
-            >
+            <motion.div {...anim({ y: 20, delay: 0.15, duration: 0.6 })} className="mt-10 space-y-4">
               {ANHAENGER_DETAILS.map((d) => (
                 <div key={d.label} className="flex items-start gap-3.5">
                   <div className="mt-0.5">
@@ -468,13 +425,7 @@ export default function FahrstundenPage() {
               ))}
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25, ease: EASE }}
-              viewport={{ once: true, margin: "-80px" }}
-              className="mt-10 flex flex-wrap gap-4"
-            >
+            <motion.div {...anim({ y: 18, delay: 0.25, duration: 0.6 })} className="mt-10 flex flex-wrap gap-4">
               <a
                 href="tel:+41794340966"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-accent-dark"
@@ -493,13 +444,7 @@ export default function FahrstundenPage() {
             </motion.div>
 
             {/* Gianni Fact */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
-              viewport={{ once: true, margin: "-80px" }}
-              className="mt-10 rounded-2xl border border-border bg-[#f7f8fa] p-6"
-            >
+            <motion.div {...anim({ y: 16, delay: 0.3, duration: 0.6 })} className="mt-10 rounded-2xl border border-border bg-[#f7f8fa] p-6">
               <p className="text-sm font-semibold text-foreground">
                 Gianni Sebestin — Anhänger-Spezialist
               </p>

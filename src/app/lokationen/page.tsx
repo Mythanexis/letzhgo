@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-const EASE = [0.16, 1, 0.3, 1] as const;
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
-const INVIEW = { once: true, margin: "-80px" } as const;
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 const SITES = [
   {
@@ -72,6 +72,7 @@ function PinIcon({ className }: { className?: string }) {
 }
 
 export default function LokationenPage() {
+  const anim = useScrollAnim();
   return (
     <>
       {/* Hero — gradient, klare Hierarchie, keine Langeweile */}
@@ -156,13 +157,7 @@ export default function LokationenPage() {
           aria-hidden
         />
         <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, ease: EASE }}
-            viewport={INVIEW}
-          >
+          <motion.div {...anim({ y: 24, duration: 0.65 })} className="text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">
               Standorte
             </p>
@@ -181,14 +176,7 @@ export default function LokationenPage() {
               return (
                 <motion.article
                   key={site.title}
-                  initial={{ opacity: 0, y: 32 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.08,
-                    ease: EASE,
-                  }}
-                  viewport={INVIEW}
+                  {...anim({ y: 32, delay: i * 0.08, duration: 0.7 })}
                   className="grid items-center gap-10 border-t border-border py-14 first:border-t-0 first:pt-0 md:gap-14 md:py-20 lg:grid-cols-2 lg:gap-16"
                 >
                   <div
@@ -267,13 +255,7 @@ export default function LokationenPage() {
             aria-hidden
           />
           <div className="relative px-6 py-16 md:px-10 md:py-20 lg:px-16 lg:py-24">
-            <motion.div
-              className="mx-auto max-w-3xl text-center"
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: EASE }}
-              viewport={INVIEW}
-            >
+            <motion.div {...anim({ y: 28, duration: 0.7 })} className="mx-auto max-w-3xl text-center">
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-accent">
                 Motorrad-Grundkurs
               </p>
@@ -295,17 +277,7 @@ export default function LokationenPage() {
 
             <div className="mx-auto mt-12 grid max-w-7xl gap-12 md:grid-cols-2 md:gap-10 lg:gap-16">
               {MOTO_PARTNERS.map((p, i) => (
-                <motion.div
-                  key={p.name}
-                  initial={{ opacity: 0, y: 36 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.14,
-                    ease: EASE,
-                  }}
-                  viewport={INVIEW}
-                >
+                <motion.div key={p.name} {...anim({ y: 36, delay: i * 0.14, duration: 0.7 })}>
                   <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-white/[0.06] ring-1 ring-white/[0.1]">
                     <Image
                       src={p.image}

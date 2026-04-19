@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useCoarsePointer } from "@/hooks/useScrollAnim";
 import PricingCard from "@/components/PricingCard";
 import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
@@ -11,7 +12,68 @@ import { SERVICES_DETAIL, PRICING } from "@/lib/constants";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-function ServiceSection({
+function ServiceSectionStatic({
+  service,
+  index,
+  total,
+}: {
+  service: (typeof SERVICES_DETAIL)[number];
+  index: number;
+  total: number;
+}) {
+  return (
+    <section
+      data-navbar-dark
+      className="relative flex min-h-[88svh] snap-start flex-col justify-end overflow-hidden"
+    >
+      <div className="absolute inset-0">
+        <Image
+          src={service.image}
+          alt={service.title}
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority={index === 0}
+        />
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
+      <div className="relative z-10 max-w-3xl px-8 pb-20 pt-28 md:px-16 md:pb-28 lg:px-24">
+        <span className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
+          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+        </span>
+        <h2 className="mt-4 text-4xl font-bold text-white md:text-6xl lg:text-7xl">
+          {service.title}
+        </h2>
+        <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
+          {service.description}
+        </p>
+        <Link
+          href={`/services/${service.id}`}
+          className="group mt-8 inline-flex items-center gap-3 rounded-full border border-white/25 px-8 py-4 text-lg font-medium text-white backdrop-blur-sm transition-all hover:border-white/50 hover:bg-white/10"
+        >
+          Mehr erfahren
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 16 16"
+            fill="none"
+            className="transition-transform group-hover:translate-x-1"
+          >
+            <path
+              d="M4 8h8M9 4l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+function ServiceSectionScroll({
   service,
   index,
   total,
@@ -106,7 +168,20 @@ function ServiceSection({
   );
 }
 
+function ServiceSection(
+  props: {
+    service: (typeof SERVICES_DETAIL)[number];
+    index: number;
+    total: number;
+  },
+) {
+  const coarse = useCoarsePointer();
+  if (coarse) return <ServiceSectionStatic {...props} />;
+  return <ServiceSectionScroll {...props} />;
+}
+
 export default function ServicesPage() {
+  const coarse = useCoarsePointer();
   return (
     <>
       {/* Hero Header */}
@@ -231,7 +306,10 @@ export default function ServicesPage() {
         </motion.div>
       </section>
 
-      <div id="services" className="snap-y snap-mandatory">
+      <div
+        id="services"
+        className={coarse ? "flex flex-col" : "snap-y snap-mandatory"}
+      >
         {SERVICES_DETAIL.map((service, i) => (
           <ServiceSection
             key={service.id}

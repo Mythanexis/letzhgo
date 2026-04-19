@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useCoarsePointer, useScrollAnim } from "@/hooks/useScrollAnim";
 
 const COHORTS = [
   {
@@ -53,7 +54,29 @@ const item = {
   },
 };
 
+const containerStatic = {
+  hidden: { opacity: 1 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0, delayChildren: 0 },
+  },
+};
+
+const itemStatic = {
+  hidden: { opacity: 1, y: 0 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0 },
+  },
+};
+
 export default function AutofahrenAb17Section() {
+  const coarse = useCoarsePointer();
+  const anim = useScrollAnim();
+  const containerVariants = coarse ? containerStatic : container;
+  const itemVariants = coarse ? itemStatic : item;
+
   return (
     <section
       className="relative overflow-hidden bg-[#f7f8fa] py-24 md:py-36"
@@ -82,13 +105,7 @@ export default function AutofahrenAb17Section() {
       />
 
       <div className="relative mx-auto max-w-7xl px-6">
-        <motion.header
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-60px" }}
-          className="mx-auto max-w-3xl text-center"
-        >
+        <motion.header {...anim({ y: 20, duration: 0.7 })} className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-white/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent shadow-sm backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-40" />
@@ -108,16 +125,17 @@ export default function AutofahrenAb17Section() {
         </motion.header>
 
         <motion.div
-          variants={container}
+          variants={containerVariants}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-40px" }}
+          {...(coarse
+            ? { animate: "show" as const }
+            : { whileInView: "show" as const, viewport: { once: true, margin: "-40px" } })}
           className="mt-14 grid gap-6 md:mt-20 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
         >
           {COHORTS.map((cohort) => (
             <motion.article
               key={cohort.yearKey}
-              variants={item}
+              variants={itemVariants}
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
               className="group relative"

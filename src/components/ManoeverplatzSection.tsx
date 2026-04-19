@@ -2,19 +2,16 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 export default function ManoeverplatzSection() {
+  const anim = useScrollAnim();
   return (
     <section className="bg-background">
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
           {/* Image left */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-80px" }}
-          >
+          <motion.div {...anim({ x: -30, duration: 0.8 })}>
             <div className="relative aspect-[16/10] overflow-hidden rounded-3xl shadow-xl">
               <Image
                 src="/images/larag-areal.jpg"
@@ -27,12 +24,7 @@ export default function ManoeverplatzSection() {
           </motion.div>
 
           {/* Content right */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-80px" }}
-          >
+          <motion.div {...anim({ x: 30, delay: 0.1, duration: 0.8 })}>
             <div className="inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-green-700">
               <span className="inline-block h-2 w-2 rounded-full bg-green-500" />
               Wieder eröffnet

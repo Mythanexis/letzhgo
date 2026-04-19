@@ -6,10 +6,12 @@ import { motion } from "framer-motion";
 import ContactForm from "@/components/ContactForm";
 import InstructorsSection from "@/components/InstructorsSection";
 import { SITE } from "@/lib/constants";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function KontaktPage() {
+  const anim = useScrollAnim();
   return (
     <>
       {/* Split Hero — dunkel mit Teamfoto */}
@@ -127,12 +129,7 @@ export default function KontaktPage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-16 lg:grid-cols-[1fr_1.3fr] lg:items-start">
             {/* Links — Inhalt */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: EASE }}
-              viewport={{ once: true, margin: "-80px" }}
-            >
+            <motion.div {...anim({ y: 24, duration: 0.7 })}>
               <p className="text-sm font-medium uppercase tracking-widest text-accent">
                 Kontaktformular
               </p>
@@ -197,10 +194,7 @@ export default function KontaktPage() {
 
             {/* Rechts — Formular */}
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-              viewport={{ once: true, margin: "-80px" }}
+              {...anim({ y: 24, delay: 0.1, duration: 0.7 })}
               className="rounded-3xl bg-white p-6 shadow-lg shadow-black/[0.04] ring-1 ring-black/[0.06] md:p-10"
             >
               <ContactForm />

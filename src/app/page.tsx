@@ -23,13 +23,11 @@ import InstagramSection from "@/components/InstagramSection";
 import TikTokSection from "@/components/TikTokSection";
 import AutofahrenAb17Section from "@/components/AutofahrenAb17Section";
 import BlogHomeSection from "@/components/BlogHomeSection";
-import {
-  SERVICES_OVERVIEW,
-  PRICING,
-  IMAGES,
-} from "@/lib/constants";
+import { SERVICES_OVERVIEW, PRICING } from "@/lib/constants";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 export default function HomePage() {
+  const anim = useScrollAnim();
   const HOME_BENEFITS = [
     {
       title: "Maximale Flexibilität",
@@ -89,12 +87,7 @@ export default function HomePage() {
         />
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
           <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-            <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true, margin: "-90px" }}
-            >
+            <motion.div {...anim({ y: 28, duration: 0.8 })}>
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
                 Let&apos;ZHgo Fahrschule
               </p>
@@ -103,10 +96,7 @@ export default function HomePage() {
                 <span className="text-accent">optimal vorbereitet.</span>
               </h2>
               <motion.p
-                initial={{ opacity: 0, y: 22 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true, margin: "-90px" }}
+                {...anim({ y: 22, delay: 0.12, duration: 0.8 })}
                 className="mt-5 max-w-xl text-lg leading-relaxed text-muted"
               >
                 Qualität, Flexibilität und moderne Ausbildungsmethoden. Genau die Punkte,
@@ -118,14 +108,7 @@ export default function HomePage() {
                 {HOME_BENEFITS.map((item, i) => (
                   <motion.li
                     key={item.title}
-                    initial={{ opacity: 0, x: -12 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{
-                      duration: 0.65,
-                      delay: 0.05 + i * 0.07,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    viewport={{ once: true, margin: "-100px" }}
+                    {...anim({ x: -12, delay: 0.05 + i * 0.07, duration: 0.65 })}
                     className="relative flex gap-5 border-b border-border/70 py-5 last:border-b-0 sm:gap-6"
                   >
                     <div className="relative z-[1] flex shrink-0 justify-center pt-0.5">
@@ -148,10 +131,7 @@ export default function HomePage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true, margin: "-90px" }}
+              {...anim({ x: 24, delay: 0.1, duration: 0.9 })}
               className="relative min-h-[420px] lg:min-h-[560px]"
             >
               <div className="absolute right-0 top-0 z-[1] w-[82%] overflow-hidden rounded-[2rem] shadow-[0_26px_54px_-26px_rgba(8,26,58,0.5)]">
@@ -182,13 +162,7 @@ export default function HomePage() {
       {/* Services Grid — Anker für Hero-CTA „Mehr erfahren“ (#services) */}
       <section id="services" className="scroll-mt-24 bg-[#f7f8fa] md:scroll-mt-28">
         <div className="mx-auto max-w-7xl px-6 py-32 md:py-40">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-80px" }}
-          className="mb-12 text-center"
-        >
+        <motion.div {...anim({ y: 30, delay: 0.1, duration: 1 })} className="mb-12 text-center">
           <p className="text-sm font-medium uppercase tracking-widest text-accent">Was wir anbieten</p>
           <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl">Unsere Services</h2>
         </motion.div>
@@ -204,13 +178,7 @@ export default function HomePage() {
             />
           ))}
         </div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-40px" }}
-          className="mt-12 text-center"
-        >
+        <motion.div {...anim({ y: 20, delay: 0.3, duration: 1 })} className="mt-12 text-center">
           <Link
             href="/services"
             className="group relative inline-flex items-center gap-2 pb-0.5 text-base font-semibold text-accent no-underline transition-colors after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-accent-dark after:content-[''] hover:after:scale-x-100"
@@ -239,13 +207,7 @@ export default function HomePage() {
       {/* Preise */}
       <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-7xl px-6 py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="text-center"
-          >
+          <motion.div {...anim({ y: 30, delay: 0.1, duration: 1 })} className="text-center">
             <p className="text-sm font-medium uppercase tracking-widest text-accent">
               Unsere Preise
             </p>
@@ -269,24 +231,13 @@ export default function HomePage() {
       <section className="bg-background">
         <div className="mx-auto max-w-7xl px-6 py-24">
           <div className="grid items-start gap-12 lg:grid-cols-2">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true, margin: "-80px" }}
-            >
+            <motion.div {...anim({ y: 30, delay: 0.15, duration: 1 })}>
               <h2 className="text-4xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
                 Erfahrung, Klarheit und Ausbildung mit System –{" "}
                 <span className="text-accent">Für sichere Fahrer:innen.</span>
               </h2>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true, margin: "-80px" }}
-              className="lg:pt-4"
-            >
+            <motion.div {...anim({ y: 30, delay: 0.35, duration: 1 })} className="lg:pt-4">
               <p className="text-lg leading-relaxed text-muted">
                 Unsere Fahrstunden schaffen die Grundlage für nachhaltige Sicherheit
                 im Strassenverkehr. Wir nehmen uns Zeit für deine Fragen, geben dir
@@ -318,12 +269,7 @@ export default function HomePage() {
 
         <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-24">
           <div className="grid items-start gap-12 lg:grid-cols-[1.4fr_minmax(0,1fr)]">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true, margin: "-80px" }}
-            >
+            <motion.div {...anim({ y: 30, delay: 0.15, duration: 1 })}>
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-red-700">
                 Schnupperkurs Motorrad
               </p>
@@ -338,12 +284,7 @@ export default function HomePage() {
               </p>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true, margin: "-80px" }}
-            >
+            <motion.div {...anim({ y: 30, delay: 0.3, duration: 1 })}>
               <div className="rounded-3xl bg-white/95 p-6 shadow-xl backdrop-blur-sm md:p-8">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
@@ -404,13 +345,7 @@ export default function HomePage() {
       {/* Bericht von 20 Minuten – Trust / PR */}
       <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-7xl px-6 py-24 md:py-28">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="text-center"
-          >
+          <motion.div {...anim({ y: 30, delay: 0.1, duration: 1 })} className="text-center">
             <h2 className="flex flex-wrap items-center justify-center gap-3 text-2xl font-extrabold tracking-wide text-foreground md:gap-4 md:text-3xl">
               <span className="uppercase">Bericht von</span>
               <span className="inline-flex items-center rounded-full bg-accent px-5 py-2 text-sm font-bold uppercase tracking-[0.18em] text-white md:px-6 md:text-base">
@@ -423,10 +358,7 @@ export default function HomePage() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-80px" }}
+            {...anim({ y: 30, delay: 0.3, duration: 1 })}
             className="mt-12 grid gap-10 lg:grid-cols-2 lg:items-start"
           >
             {/* Link zum 20-Minuten-Artikel */}
@@ -517,12 +449,7 @@ export default function HomePage() {
       <section className="bg-background">
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr]">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-80px" }}
-          >
+          <motion.div {...anim({ x: -30, delay: 0.15, duration: 1 })}>
             <p className="text-sm font-medium uppercase tracking-widest text-accent">
               Kontakt
             </p>
@@ -571,12 +498,7 @@ export default function HomePage() {
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-80px" }}
-          >
+          <motion.div {...anim({ x: 30, delay: 0.35, duration: 1 })}>
             <ContactForm />
           </motion.div>
         </div>

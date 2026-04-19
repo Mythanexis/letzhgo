@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 interface PricingCardProps {
   title: string;
@@ -19,12 +20,10 @@ export default function PricingCard({
   link,
   index,
 }: PricingCardProps) {
+  const anim = useScrollAnim();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 1, delay: 0.15 + index * 0.2, ease: [0.16, 1, 0.3, 1] }}
-      viewport={{ once: true, margin: "-80px" }}
+      {...anim({ y: 50, scale: 0.95, delay: 0.15 + index * 0.2, duration: 1 })}
       whileHover={{ y: -4, transition: { duration: 0.2, ease: "easeOut" } }}
       className="flex flex-col rounded-2xl border border-border bg-white p-8 shadow-sm transition-shadow duration-200 hover:shadow-lg"
     >
@@ -37,10 +36,7 @@ export default function PricingCard({
         {features.map((feature, i) => (
           <motion.li
             key={i}
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 + index * 0.2 + i * 0.08 }}
-            viewport={{ once: true }}
+            {...anim({ x: -10, delay: 0.3 + index * 0.2 + i * 0.08, duration: 0.6 })}
             className="flex items-start gap-3 text-sm text-muted"
           >
             <svg

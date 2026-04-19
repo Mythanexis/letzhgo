@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 interface ServiceCardProps {
   title: string;
@@ -18,12 +19,10 @@ export default function ServiceCard({
   href,
   index,
 }: ServiceCardProps) {
+  const anim = useScrollAnim();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60, scale: 0.92 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 1, delay: 0.15 + index * 0.18, ease: [0.16, 1, 0.3, 1] }}
-      viewport={{ once: true, margin: "-80px" }}
+      {...anim({ y: 60, scale: 0.92, delay: 0.15 + index * 0.18, duration: 1 })}
     >
       <Link href={href} className="group relative block h-[420px] overflow-hidden rounded-2xl shadow-lg transition-all duration-200 ease-out hover:scale-[1.03] hover:shadow-2xl">
         <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.08]">

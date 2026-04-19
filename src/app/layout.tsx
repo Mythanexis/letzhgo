@@ -5,6 +5,7 @@ import PromoPopup from "@/components/PromoPopup";
 import PosterPopup from "@/components/PosterPopup";
 import ScrollToTopOnNavigate from "@/components/ScrollToTopOnNavigate";
 import SmoothScroll from "@/components/SmoothScroll";
+import { ScrollAnimProvider } from "@/hooks/useScrollAnim";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -123,7 +124,9 @@ export default function RootLayout({
         <ScrollToTopOnNavigate />
         <SmoothScroll />
         <Navbar />
-        <main className="flex-1 overflow-x-clip">{children}</main>
+        <main className="flex-1 overflow-x-clip">
+          <ScrollAnimProvider>{children}</ScrollAnimProvider>
+        </main>
         <Footer />
         <PromoPopup />
         <PosterPopup />

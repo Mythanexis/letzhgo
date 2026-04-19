@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const TIKTOK_PROFILE = "https://www.tiktok.com/@letzhgofahrschule";
 
@@ -24,6 +25,7 @@ function TikTokIcon({ className }: { className?: string }) {
 }
 
 export default function TikTokSection() {
+  const anim = useScrollAnim();
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   const closeModal = useCallback(() => setActiveVideo(null), []);
@@ -33,10 +35,7 @@ export default function TikTokSection() {
       <section className="relative overflow-hidden bg-[#f7f8fa]">
         <motion.div
           className="pointer-events-none absolute left-12 top-10 hidden md:block"
-          initial={{ opacity: 0, y: -16, rotate: -4 }}
-          whileInView={{ opacity: 1, y: 0, rotate: -10 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-80px" }}
+          {...anim({ y: -16, rotateFrom: -4, rotateTo: -10, duration: 0.8 })}
         >
           <div className="relative h-24 w-24">
             <Image
@@ -50,10 +49,7 @@ export default function TikTokSection() {
         </motion.div>
         <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-80px" }}
+            {...anim({ y: 30, delay: 0.1, duration: 1.2 })}
             className="mb-14 flex flex-col items-center text-center"
           >
             <div className="flex items-center gap-3">
@@ -76,14 +72,7 @@ export default function TikTokSection() {
             {VIDEOS.map((video, i) => (
               <motion.div
                 key={video.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{
-                  duration: 0.5,
-                  delay: i * 0.07,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                viewport={{ once: true, margin: "-40px" }}
+                {...anim({ scale: 0.95, delay: i * 0.07, duration: 0.5 })}
               >
                 <button
                   type="button"
@@ -110,13 +99,7 @@ export default function TikTokSection() {
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
-            className="mt-12 text-center"
-          >
+          <motion.div {...anim({ y: 20, delay: 0.3, duration: 0.8 })} className="mt-12 text-center">
             <a
               href={TIKTOK_PROFILE}
               target="_blank"

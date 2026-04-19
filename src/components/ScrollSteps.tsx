@@ -3,8 +3,47 @@
 import { useRef, useState, useCallback } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { STEPS } from "@/lib/constants";
+import { useCoarsePointer } from "@/hooks/useScrollAnim";
 
-export default function ScrollSteps() {
+function ScrollStepsStatic() {
+  return (
+    <section className="bg-[#f7f8fa] py-16 md:py-24">
+      <div className="mx-auto max-w-4xl px-6">
+        <p className="text-center text-sm font-medium uppercase tracking-[0.2em] text-accent">
+          Dein Weg zum Führerschein
+        </p>
+        <h2 className="mt-5 text-center text-4xl font-bold text-foreground md:text-5xl lg:text-6xl">
+          So läufts bei uns
+        </h2>
+        <p className="mx-auto mt-6 max-w-2xl text-center text-lg text-muted">
+          Dein Start zum Führerschein ist einfacher, als du denkst. Schritt für
+          Schritt begleiten wir dich sicher durch Theorie, Praxis und Prüfung –
+          entspannt und gut vorbereitet.
+        </p>
+      </div>
+      <div className="mx-auto mt-14 max-w-4xl space-y-12 px-6 pb-8">
+        {STEPS.map((step) => (
+          <div
+            key={step.number}
+            className="border-b border-border/70 pb-10 last:border-b-0"
+          >
+            <span className="text-7xl font-bold leading-none text-accent/15 md:text-8xl">
+              {step.number}
+            </span>
+            <h3 className="mt-4 text-2xl font-bold text-foreground md:text-3xl">
+              {step.title}
+            </h3>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
+              {step.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ScrollStepsInteractive() {
   const stepsRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const lastIndex = useRef(0);
@@ -32,7 +71,6 @@ export default function ScrollSteps() {
       className="relative will-change-transform"
     >
       <div className="sticky top-0 flex h-dvh w-full flex-col justify-between bg-[#f7f8fa]">
-        {/* Header */}
         <div className="mx-auto max-w-4xl px-6 pt-32 text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -65,7 +103,6 @@ export default function ScrollSteps() {
           </motion.p>
         </div>
 
-        {/* Step number – mobile only, left-aligned */}
         <div className="relative h-44 flex-shrink-0 overflow-hidden md:hidden">
           {STEPS.map((step, i) => (
             <motion.span
@@ -82,7 +119,6 @@ export default function ScrollSteps() {
           ))}
         </div>
 
-        {/* Steps content */}
         <div className="flex w-full items-end justify-between px-6 pb-16 sm:px-10 md:px-20 md:pb-28 lg:px-32 xl:px-40">
           <div className="max-w-2xl flex-1">
             <div className="relative h-[220px]">
@@ -136,4 +172,10 @@ export default function ScrollSteps() {
       </div>
     </section>
   );
+}
+
+export default function ScrollSteps() {
+  const coarse = useCoarsePointer();
+  if (coarse) return <ScrollStepsStatic />;
+  return <ScrollStepsInteractive />;
 }

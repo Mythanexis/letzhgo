@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { STATS } from "@/lib/constants";
+import { useCoarsePointer, useScrollAnim } from "@/hooks/useScrollAnim";
 
 function parseValue(value: string): { num: number; prefix: string; suffix: string } {
   const match = value.match(/^([^\d]*)(\d[\d']*\.?\d*)(.*)$/);
@@ -53,15 +54,15 @@ function CountingNumber({ value, isInView }: { value: string; isInView: boolean 
 
 function AnimatedStat({ value, label, index }: { value: string; label: string; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const coarse = useCoarsePointer();
+  const inViewHook = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = coarse || inViewHook;
+  const anim = useScrollAnim();
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 0.15 + index * 0.2, ease: [0.16, 1, 0.3, 1] }}
-      viewport={{ once: true, margin: "-80px" }}
+      {...anim({ y: 30, delay: 0.15 + index * 0.2, duration: 1 })}
     >
       <motion.p
         className="text-5xl font-bold text-accent md:text-6xl lg:text-7xl"
@@ -89,6 +90,7 @@ type StatsProps = {
 };
 
 export default function Stats({ surface = "muted" }: StatsProps) {
+  const anim = useScrollAnim();
   return (
     <section
       className={surface === "light" ? "bg-background" : "bg-[#f7f8fa]"}
@@ -96,24 +98,13 @@ export default function Stats({ surface = "muted" }: StatsProps) {
       <div className="mx-auto px-6 py-40 md:px-16 md:py-52 lg:px-24 xl:px-32">
         {/* Top: Title left, description right */}
         <div className="grid items-start gap-16 lg:grid-cols-[1fr_0.55fr]">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-80px" }}
-          >
+          <motion.div {...anim({ y: 30, delay: 0.1, duration: 1 })}>
             <h2 className="text-3xl font-bold leading-tight text-foreground md:text-4xl lg:text-5xl">
               Vom ersten Fahrversuch bis zur bestandenen Prüfung.{" "}
               <span className="text-accent">Zahlen, die Vertrauen schaffen.</span>
             </h2>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="lg:pt-2"
-          >
+          <motion.div {...anim({ y: 30, delay: 0.3, duration: 1 })} className="lg:pt-2">
             <p className="text-lg leading-relaxed text-muted">
               Hinter jeder Zahl steckt eine Erfolgsgeschichte. Diese Meilensteine
               zeigen die Erfahrung, das Engagement und die Qualität unserer

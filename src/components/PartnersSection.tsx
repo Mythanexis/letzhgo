@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { IMAGES } from "@/lib/constants";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const PARTNERS = [
   { name: "TCS", logo: "/images/partners/partner-1.png", href: "https://www.tcs.ch" },
@@ -16,6 +17,7 @@ const PARTNERS = [
 const MARQUEE_DURATION = 30;
 
 export default function PartnersSection() {
+  const anim = useScrollAnim();
   const logos = [...PARTNERS, ...PARTNERS];
 
   return (
@@ -34,10 +36,7 @@ export default function PartnersSection() {
 
       <div className="relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-80px" }}
+          {...anim({ y: 24, duration: 0.8 })}
           className="mx-auto max-w-7xl px-6 text-center"
         >
           <h2 className="text-3xl font-extrabold uppercase tracking-wide text-white md:text-4xl">

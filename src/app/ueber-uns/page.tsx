@@ -10,8 +10,11 @@ import InstructorCard from "@/components/InstructorCard";
 import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
 import { INSTRUCTORS, INSTRUCTORS_HOMEPAGE_ORDER } from "@/lib/constants";
+import { useCoarsePointer, useScrollAnim } from "@/hooks/useScrollAnim";
 
 export default function UeberUnsPage() {
+  const anim = useScrollAnim();
+  const coarse = useCoarsePointer();
   const GOOGLE_REVIEWS_URL = "https://www.google.com/maps/search/?api=1&query=Let%27ZHgo+Fahrschule+Binzm%C3%BChlestrasse+15+8050+Z%C3%BCrich";
   const REVIEW_PREVIEW_CHARS = 200;
   const instructorsInOrder = INSTRUCTORS_HOMEPAGE_ORDER.map((name) =>
@@ -64,13 +67,7 @@ export default function UeberUnsPage() {
 
         <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28">
           <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
-            <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true, margin: "-60px" }}
-              className="order-2 lg:order-1"
-            >
+            <motion.div {...anim({ y: 28, duration: 0.7 })} className="order-2 lg:order-1">
               <p className="text-sm font-medium uppercase tracking-widest text-accent">
                 Über uns
               </p>
@@ -107,13 +104,7 @@ export default function UeberUnsPage() {
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true, margin: "-60px" }}
-              className="order-1 lg:order-2"
-            >
+            <motion.div {...anim({ y: 28, delay: 0.12, duration: 0.7 })} className="order-1 lg:order-2">
               <div className="relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none">
                 <div
                   className="pointer-events-none absolute -inset-3 rounded-[32px] bg-linear-to-br from-accent/15 via-transparent to-accent/10 blur-2xl"
@@ -139,28 +130,11 @@ export default function UeberUnsPage() {
       {/* Warum Let'ZHgo */}
       <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-6xl px-6 py-28 md:py-36">
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.97 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
-          >
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true }}
-              className="text-5xl font-bold leading-[1.1] tracking-tight text-foreground md:text-6xl"
-            >
+          <motion.div {...anim({ y: 30, scale: 0.97, duration: 0.8 })}>
+            <motion.h2 {...anim({ y: 20, delay: 0.1, duration: 0.7 })} className="text-5xl font-bold leading-[1.1] tracking-tight text-foreground md:text-6xl">
               Unsere <span className="text-accent">Vorteile</span>
             </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true }}
-              className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl"
-            >
+            <motion.p {...anim({ y: 16, delay: 0.25, duration: 0.7 })} className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
               Eine moderne Fahrschule, die mit der Zeit geht –
               mit Qualität, Flexibilität und individueller Betreuung.
             </motion.p>
@@ -175,18 +149,26 @@ export default function UeberUnsPage() {
               { title: "Moderne Fahrzeuge", text: "Aktuelle Flotte, gepflegt und für die Ausbildung ausgestattet.", Icon: Car },
               { title: "Videoanalyse", text: "Fahrten per Video analysieren – Fehler erkennen, schneller Fortschritte machen.", Icon: Video },
             ].map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true, margin: "-60px" }}
-              >
+              <motion.div key={item.title} {...anim({ y: 30, delay: 0.1 + i * 0.1, duration: 0.6 })}>
                 <motion.div
-                  initial={{ scale: 0, rotate: -20 }}
-                  whileInView={{ scale: 1, rotate: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 + i * 0.1, type: "spring", stiffness: 200, damping: 15 }}
-                  viewport={{ once: true, margin: "-60px" }}
+                  {...(coarse
+                    ? {
+                        initial: false,
+                        animate: { opacity: 1, scale: 1, rotate: 0 },
+                        transition: { duration: 0 },
+                      }
+                    : {
+                        initial: { scale: 0, rotate: -20 },
+                        whileInView: { scale: 1, rotate: 0 },
+                        transition: {
+                          duration: 0.5,
+                          delay: 0.2 + i * 0.1,
+                          type: "spring" as const,
+                          stiffness: 200,
+                          damping: 15,
+                        },
+                        viewport: { once: true, margin: "-60px" },
+                      })}
                   className="w-fit"
                 >
                   <item.Icon className="h-14 w-14 text-accent" strokeWidth={1.2} />
@@ -210,13 +192,7 @@ export default function UeberUnsPage() {
           aria-hidden
         />
         <div className="relative z-10 mx-auto max-w-5xl px-6 py-28 md:py-36">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-160px" }}
-            className="text-center"
-          >
+          <motion.div {...anim({ y: 40, duration: 0.9 })} className="text-center">
             <span
               className="pointer-events-none select-none font-serif text-[8rem] leading-none text-white/6 md:text-[12rem]"
               aria-hidden
@@ -264,13 +240,7 @@ export default function UeberUnsPage() {
       {/* Fahrlehrer */}
       <section className="bg-background">
         <div className="mx-auto max-w-7xl px-6 py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 34 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-140px" }}
-            className="text-center"
-          >
+          <motion.div {...anim({ y: 34, duration: 0.8 })} className="text-center">
             <p className="text-sm uppercase tracking-widest text-accent">
               Unsere Fahrlehrer
             </p>
@@ -294,13 +264,7 @@ export default function UeberUnsPage() {
       {/* About bottom */}
       <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-7xl px-6 py-32 md:py-40">
-          <motion.div
-            initial={{ opacity: 0, y: 36 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-140px" }}
-            className="grid items-center gap-12 lg:grid-cols-2"
-          >
+          <motion.div {...anim({ y: 36, duration: 0.8 })} className="grid items-center gap-12 lg:grid-cols-2">
             <h2 className="text-3xl font-bold md:text-4xl">
               Ausbildung mit Erfahrung, geführt von Klarheit –{" "}
               <span className="text-accent">für nachhaltige Sicherheit.</span>
@@ -334,13 +298,7 @@ export default function UeberUnsPage() {
           aria-hidden
         />
         <div className="relative z-10 mx-auto w-full max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 36 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-120px" }}
-            className="mx-auto max-w-5xl text-center"
-          >
+          <motion.div {...anim({ y: 36, duration: 0.8 })} className="mx-auto max-w-5xl text-center">
             <blockquote className="not-italic text-5xl font-semibold leading-[1.15] tracking-tight text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.35)] md:text-6xl md:leading-[1.12]">
               &ldquo;Jede Fahrt beginnt mit dem ersten Gang – entscheidend ist,
               dass du losfährst.&rdquo;
@@ -383,13 +341,7 @@ export default function UeberUnsPage() {
           }}
         />
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <motion.div
-            initial={{ opacity: 0, y: 34 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-150px" }}
-            className="relative"
-          >
+          <motion.div {...anim({ y: 34, duration: 0.85 })} className="relative">
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
@@ -408,14 +360,11 @@ export default function UeberUnsPage() {
               {reviews.map((review, i) => (
                 <motion.article
                   key={`${review.author}-${review.date}`}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.65,
+                  {...anim({
+                    y: 24,
                     delay: Math.min(i * 0.08, 0.35),
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  viewport={{ once: true, margin: "-120px" }}
+                    duration: 0.65,
+                  })}
                   className="flex h-full min-h-[21rem] flex-col rounded-2xl border border-border/80 bg-[#f7f8fa] p-6 shadow-[0_10px_26px_-18px_rgba(12,22,44,0.28)]"
                 >
                       <div className="flex items-center justify-between">
@@ -526,13 +475,7 @@ export default function UeberUnsPage() {
           aria-hidden
         />
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <motion.div
-            initial={{ opacity: 0, y: 36 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true, margin: "-150px" }}
-            className="relative z-10 grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center"
-          >
+          <motion.div {...anim({ y: 36, duration: 0.85 })} className="relative z-10 grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent/90">
                   Motorrad-Grundkurs
@@ -604,10 +547,7 @@ export default function UeberUnsPage() {
               </div>
 
               <motion.div
-                initial={{ opacity: 0, scale: 0.94, x: 26 }}
-                whileInView={{ opacity: 1, scale: 1, x: 0 }}
-                transition={{ duration: 0.85, delay: 0.14, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true, margin: "-140px" }}
+                {...anim({ x: 26, scale: 0.94, delay: 0.14, duration: 0.85 })}
                 className="relative mt-5 sm:mt-0"
               >
                 <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-white shadow-[0_28px_52px_-28px_rgba(0,0,0,0.32)]">

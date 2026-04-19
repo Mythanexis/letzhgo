@@ -6,6 +6,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import { getBlogBySlug, BLOG_POSTS, formatDate } from "@/lib/blog-data";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -18,6 +19,8 @@ export default function BlogDetailPage({
   const post = getBlogBySlug(slug);
 
   if (!post) notFound();
+
+  const anim = useScrollAnim();
 
   const related = BLOG_POSTS.filter((p) => p.slug !== post.slug)
     .sort(
@@ -96,10 +99,7 @@ export default function BlogDetailPage({
           {post.sections.map((section, i) => (
             <motion.div
               key={section.heading}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease }}
-              viewport={{ once: true, margin: "-40px" }}
+              {...anim({ y: 24, delay: 0.1, duration: 0.8 })}
               className={i > 0 ? "mt-14" : ""}
             >
               <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
@@ -113,10 +113,7 @@ export default function BlogDetailPage({
 
           {/* Contextual CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease }}
-            viewport={{ once: true }}
+            {...anim({ y: 24, delay: 0.1, duration: 0.8 })}
             className="mt-20 overflow-hidden rounded-2xl border border-accent/10 bg-accent/4"
           >
             <div className="p-8 md:p-10">
@@ -152,12 +149,7 @@ export default function BlogDetailPage({
       {/* Related posts */}
       <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease }}
-            viewport={{ once: true, margin: "-60px" }}
-          >
+          <motion.div {...anim({ y: 24, delay: 0.1, duration: 0.8 })}>
             <h2 className="text-2xl font-bold text-foreground md:text-3xl">
               Weitere Beiträge
             </h2>
@@ -167,10 +159,7 @@ export default function BlogDetailPage({
             {related.map((rel, i) => (
               <motion.div
                 key={rel.slug}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.15 + i * 0.1, ease }}
-                viewport={{ once: true, margin: "-40px" }}
+                {...anim({ y: 30, delay: 0.15 + i * 0.1, duration: 0.8 })}
               >
                 <Link
                   href={`/blogs/${rel.slug}`}

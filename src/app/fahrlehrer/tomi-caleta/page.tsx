@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const WERDEGANG = [
   { year: "2020", text: "Ausbildung zum Motorradfahrlehrer" },
@@ -14,6 +15,7 @@ const WERDEGANG = [
 ];
 
 export default function TomiPage() {
+  const anim = useScrollAnim();
   return (
     <section className="mx-auto max-w-7xl px-6 pt-32 pb-20 md:px-16">
       <div className="mb-10">
@@ -61,7 +63,7 @@ export default function TomiPage() {
             </a>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} viewport={{ once: true }} className="mt-16">
+          <motion.div {...anim({ y: 30, duration: 1 })} className="mt-16">
             <h2 className="text-2xl font-bold text-foreground md:text-3xl">Werdegang</h2>
             <div className="mt-8 space-y-0 border-l-2 border-accent/20 pl-8">
               {WERDEGANG.map((item, i) => (

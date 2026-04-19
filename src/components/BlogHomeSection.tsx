@@ -4,10 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { getLatestPosts, formatDate } from "@/lib/blog-data";
-
-const ease = [0.16, 1, 0.3, 1] as const;
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 export default function BlogHomeSection() {
+  const anim = useScrollAnim();
   const posts = getLatestPosts(3);
   const [featured, ...side] = posts;
 
@@ -33,13 +33,7 @@ export default function BlogHomeSection() {
 
       <div className="relative mx-auto max-w-7xl px-6 py-24 md:py-32">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.1, ease }}
-          viewport={{ once: true, margin: "-80px" }}
-          className="flex items-end justify-between"
-        >
+        <motion.div {...anim({ y: 30, delay: 0.1, duration: 1 })} className="flex items-end justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-accent">
               Blog
@@ -65,13 +59,7 @@ export default function BlogHomeSection() {
         {/* Grid: featured left (2 rows) + 2 stacked right */}
         <div className="mt-12 grid gap-5 lg:grid-cols-[1.3fr_1fr] lg:grid-rows-2">
           {/* Featured post — spans both rows */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="lg:row-span-2"
-          >
+          <motion.div {...anim({ y: 40, delay: 0.2, duration: 1 })} className="lg:row-span-2">
             <Link
               href={`/blogs/${featured.slug}`}
               className="group relative block h-full overflow-hidden rounded-2xl"
@@ -107,13 +95,7 @@ export default function BlogHomeSection() {
 
           {/* Side posts — each with image, stacked */}
           {side.map((post, i) => (
-            <motion.div
-              key={post.slug}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 + i * 0.15, ease }}
-              viewport={{ once: true, margin: "-60px" }}
-            >
+            <motion.div key={post.slug} {...anim({ y: 30, delay: 0.3 + i * 0.15, duration: 1 })}>
               <Link
                 href={`/blogs/${post.slug}`}
                 className="group relative block h-full overflow-hidden rounded-2xl"
@@ -152,13 +134,7 @@ export default function BlogHomeSection() {
         </div>
 
         {/* Mobile: "Alle Beiträge" link */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5, ease }}
-          viewport={{ once: true }}
-          className="mt-8 text-center sm:hidden"
-        >
+        <motion.div {...anim({ delay: 0.5, duration: 0.8 })} className="mt-8 text-center sm:hidden">
           <Link
             href="/blogs"
             className="inline-flex items-center gap-2 text-sm font-semibold text-white/60 transition-colors hover:text-white"

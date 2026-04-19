@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const INSTAGRAM_PROFILE = "https://www.instagram.com/letzhgo/";
 
@@ -15,14 +16,12 @@ const POSTS = [
 ];
 
 export default function InstagramSection() {
+  const anim = useScrollAnim();
   return (
     <section className="relative overflow-hidden bg-background">
       <motion.div
         className="pointer-events-none absolute right-12 top-10 hidden md:block"
-        initial={{ opacity: 0, y: -16, rotate: 4 }}
-        whileInView={{ opacity: 1, y: 0, rotate: 10 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        viewport={{ once: true, margin: "-80px" }}
+        {...anim({ y: -16, rotateFrom: 4, rotateTo: 10, duration: 0.8 })}
       >
         <div className="relative h-24 w-24">
           <Image
@@ -35,13 +34,7 @@ export default function InstagramSection() {
         </div>
       </motion.div>
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: "-80px" }}
-          className="text-center"
-        >
+        <motion.div {...anim({ y: 24, duration: 0.8 })} className="text-center">
           <p className="text-sm font-medium uppercase tracking-widest text-accent">
             Social Media
           </p>
@@ -58,14 +51,7 @@ export default function InstagramSection() {
           {POSTS.map((post, i) => (
             <motion.div
               key={post.href}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 0.5,
-                delay: i * 0.07,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              viewport={{ once: true, margin: "-40px" }}
+              {...anim({ scale: 0.95, delay: i * 0.07, duration: 0.5 })}
             >
               <a
                 href={post.href}
@@ -101,13 +87,7 @@ export default function InstagramSection() {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="mt-14 text-center"
-        >
+        <motion.div {...anim({ y: 16, delay: 0.2, duration: 0.6 })} className="mt-14 text-center">
           <a
             href={INSTAGRAM_PROFILE}
             target="_blank"

@@ -6,10 +6,12 @@ import Stats from "@/components/Stats";
 import CTABanner from "@/components/CTABanner";
 import PartnersSection from "@/components/PartnersSection";
 import { AWARD_ITEMS } from "@/lib/constants";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function AuszeichnungenPage() {
+  const anim = useScrollAnim();
   return (
     <>
       {/* Hero — Services-Optik (Radial + Raster), zentriert, kompakt (kein Vollbild) */}
@@ -83,14 +85,7 @@ export default function AuszeichnungenPage() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.72,
-                    delay: 0.05 * i,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  viewport={{ once: true, margin: "-50px" }}
+                  {...anim({ y: 22, delay: 0.05 * i, duration: 0.72 })}
                   className="group block overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                 >
                   <div className="relative bg-white p-4 md:p-8">
