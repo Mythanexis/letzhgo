@@ -35,7 +35,7 @@ function ServiceSectionStatic({
           sizes="100vw"
           priority={index === 0}
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-linear-to-tr from-black/90 via-black/55 to-black/10" />
       </div>
       <div className="relative z-10 max-w-3xl px-8 pb-20 pt-28 md:px-16 md:pb-28 lg:px-24">
         <span className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
@@ -115,7 +115,7 @@ function ServiceSectionScroll({
           sizes="100vw"
           priority={index === 0}
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-linear-to-tr from-black/90 via-black/55 to-black/10" />
       </motion.div>
 
       <div className="absolute left-8 top-1/2 -translate-y-1/2 hidden flex-col gap-2 lg:flex">
