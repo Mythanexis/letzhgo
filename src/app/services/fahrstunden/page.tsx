@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { IMAGES } from "@/lib/constants";
-import { useScrollAnim } from "@/hooks/useScrollAnim";
+import { useScrollAnim, useCoarsePointer } from "@/hooks/useScrollAnim";
+import { Users, MapPin, ClipboardCheck, GraduationCap, Car, Video } from "lucide-react";
 
 const HIGHLIGHTS = [
   "Individuelle Fahrstunden in deinem Tempo",
@@ -71,6 +72,7 @@ function DetailIcon({ type }: { type: string }) {
 
 export default function FahrstundenPage() {
   const anim = useScrollAnim();
+  const coarse = useCoarsePointer();
   return (
     <>
       {/* Hero */}
@@ -463,48 +465,52 @@ export default function FahrstundenPage() {
         </div>
       </section>
 
-      {/* Direkt kontaktieren */}
-      <section className="bg-card">
-        <div className="mx-auto max-w-7xl px-6 py-24 md:px-16 md:py-32 lg:px-24">
-          <div className="grid gap-16 lg:grid-cols-2 lg:items-start">
-            <div>
-              <p className="text-sm font-medium uppercase tracking-widest text-accent">Dein Team</p>
-              <h2 className="mt-4 text-4xl font-bold leading-tight text-foreground md:text-5xl">
-                Ruf uns an oder schreib uns.
-              </h2>
-              <p className="mt-6 max-w-sm text-lg leading-relaxed text-muted">
-                Alle Fahrlehrer sind direkt erreichbar – per Telefon oder WhatsApp. Kein Umweg, kein Formular.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-border bg-background p-8">
-              <ul className="divide-y divide-border">
-                {INSTRUCTORS.map((inst) => (
-                  <li key={inst.name} className="flex items-center justify-between gap-6 py-4 first:pt-0 last:pb-0">
-                    <div className="min-w-0">
-                      <p className="font-medium text-foreground">{inst.name}</p>
-                      <a
-                        href={`tel:${inst.phone.replace(/\s/g, "")}`}
-                        className="mt-0.5 block text-sm text-muted transition-colors hover:text-accent"
-                      >
-                        {inst.phone}
-                      </a>
-                    </div>
-                    <a
-                      href={inst.whatsapp}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`WhatsApp ${inst.name}`}
-                      className="shrink-0 rounded-full bg-[#25D366] p-2.5 text-white transition-opacity hover:opacity-85"
-                    >
-                      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.685-1.244A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.39-1.583l-.376-.228-2.786.74.754-2.704-.25-.39A9.94 9.94 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
-                      </svg>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      {/* Vorteile */}
+      <section className="bg-[#f7f8fa]">
+        <div className="mx-auto max-w-6xl px-6 py-28 md:py-36">
+          <motion.div {...anim({ y: 30, scale: 0.97, duration: 0.8 })}>
+            <motion.h2
+              {...anim({ y: 20, delay: 0.1, duration: 0.7 })}
+              className="text-5xl font-bold leading-[1.1] tracking-tight text-foreground md:text-6xl"
+            >
+              Unsere <span className="text-accent">Vorteile</span>
+            </motion.h2>
+            <motion.p
+              {...anim({ y: 16, delay: 0.25, duration: 0.7 })}
+              className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl"
+            >
+              Eine moderne Fahrschule, die mit der Zeit geht –
+              mit Qualität, Flexibilität und individueller Betreuung.
+            </motion.p>
+          </motion.div>
+
+          <div className="mt-20 grid gap-x-16 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { title: "Maximale Flexibilität", text: "Mehrere Fahrlehrer:innen im Team – du findest immer einen Termin, der passt.", Icon: Users },
+              { title: "Im ganzen Raum Zürich", text: "Mehrere Standorte: Oerlikon, Oberglatt und Rümlang.", Icon: MapPin },
+              { title: "Prüfungssimulationen", text: "Realistische Testläufe, damit du am Prüfungstag ruhig bleibst.", Icon: ClipboardCheck },
+              { title: "Alles an einem Ort", text: "Nothelfer, VKU, Fahrstunden und Motorradkurse aus einer Hand.", Icon: GraduationCap },
+              { title: "Moderne Fahrzeuge", text: "Aktuelle Flotte, gepflegt und für die Ausbildung ausgestattet.", Icon: Car },
+              { title: "Videoanalyse", text: "Fahrten per Video analysieren – Fehler erkennen, schneller Fortschritte machen.", Icon: Video },
+            ].map((item, i) => (
+              <motion.div key={item.title} {...anim({ y: 30, delay: 0.1 + i * 0.1, duration: 0.6 })}>
+                <motion.div
+                  {...(coarse
+                    ? { initial: false, animate: { opacity: 1, scale: 1, rotate: 0 }, transition: { duration: 0 } }
+                    : {
+                        initial: { scale: 0, rotate: -20 },
+                        whileInView: { scale: 1, rotate: 0 },
+                        transition: { duration: 0.5, delay: 0.2 + i * 0.1, type: "spring" as const, stiffness: 200, damping: 15 },
+                        viewport: { once: true, margin: "-60px" },
+                      })}
+                  className="w-fit"
+                >
+                  <item.Icon className="h-14 w-14 text-accent" strokeWidth={1.2} />
+                </motion.div>
+                <h3 className="mt-6 text-2xl font-bold text-foreground">{item.title}</h3>
+                <p className="mt-3 text-lg leading-relaxed text-muted">{item.text}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
