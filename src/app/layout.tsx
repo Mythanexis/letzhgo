@@ -130,6 +130,13 @@ const localBusinessSchema = {
     },
   ],
   priceRange: "CHF 90–570",
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    bestRating: "5",
+    worstRating: "1",
+    reviewCount: "417",
+  },
   image: "https://letzhgo.ch/images/letzhgo-hero.jpg",
   logo: "https://letzhgo.ch/images/logo.png",
   sameAs: [
