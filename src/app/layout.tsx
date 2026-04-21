@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PromoPopup from "@/components/PromoPopup";
 import PosterPopup from "@/components/PosterPopup";
-import ScrollToTopOnNavigate from "@/components/ScrollToTopOnNavigate";
 import SmoothScroll from "@/components/SmoothScroll";
 import { ScrollAnimProvider } from "@/hooks/useScrollAnim";
 import "./globals.css";
@@ -201,7 +200,6 @@ export default function RootLayout({
         >
           Zum Inhalt springen
         </a>
-        <ScrollToTopOnNavigate />
         <SmoothScroll />
         <Navbar />
         <main id="main" className="flex-1 overflow-x-clip">
