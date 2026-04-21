@@ -31,6 +31,7 @@ export default function Footer() {
       <Image
         src={IMAGES.footerBg}
         alt=""
+        aria-hidden="true"
         fill
         className="object-cover brightness-[0.3]"
         sizes="100vw"

@@ -5,27 +5,33 @@ import { INSTRUCTORS } from "@/lib/constants";
 const BASE = "https://letzhgo.ch";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+  const latestBlogDate = BLOG_POSTS
+    .map((p) => new Date(p.publishedAt).getTime())
+    .sort((a, b) => b - a)[0];
+  const blogIndexLastMod = latestBlogDate ? new Date(latestBlogDate) : now;
+
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: BASE, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
-    { url: `${BASE}/ueber-uns`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${BASE}/services/fahrstunden`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/services/nothelferkurs`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/services/verkehrskunde`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/services/motorrad`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/lokationen`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE}/kontakt`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/auszeichnungen`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.5 },
-    { url: `${BASE}/wegweiser-motorrad-fuehrerschein`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE}/blogs`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
-    { url: `${BASE}/impressum`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
-    { url: `${BASE}/datenschutzerklaerung`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
-    { url: `${BASE}/agb`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
+    { url: BASE, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
+    { url: `${BASE}/ueber-uns`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/services`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/services/fahrstunden`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/services/nothelferkurs`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/services/verkehrskunde`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/services/motorrad`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/lokationen`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}/kontakt`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/auszeichnungen`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
+    { url: `${BASE}/wegweiser-motorrad-fuehrerschein`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}/blogs`, lastModified: blogIndexLastMod, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE}/impressum`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${BASE}/datenschutzerklaerung`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${BASE}/agb`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
   ];
 
   const instructorRoutes: MetadataRoute.Sitemap = INSTRUCTORS.map((i) => ({
     url: `${BASE}/fahrlehrer/${i.slug}`,
-    lastModified: new Date(),
+    lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));

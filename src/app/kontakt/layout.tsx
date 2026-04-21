@@ -7,10 +7,27 @@ export const metadata: Metadata = {
   alternates: { canonical: "/kontakt" },
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://letzhgo.ch/" },
+    { "@type": "ListItem", position: 2, name: "Kontakt", item: "https://letzhgo.ch/kontakt" },
+  ],
+};
+
 export default function KontaktLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {children}
+    </>
+  );
 }

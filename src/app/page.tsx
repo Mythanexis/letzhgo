@@ -61,8 +61,106 @@ export default function HomePage() {
     },
   ] as const;
 
+  const schnupperkursEventSchema = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "@id": "https://letzhgo.ch/#event-schnupperkurs-2026-05",
+    name: "Motorrad Schnupperkurs bei Let'ZHgo",
+    description:
+      "Zwei-stündiger Schnupperkurs Motorrad bei Let'ZHgo. Ideal für alle, die das Motorradfahren ausprobieren möchten. Minderjährige müssen in Begleitung eines Elternteils sein.",
+    startDate: "2026-05-09T13:00+02:00",
+    endDate: "2026-05-09T15:00+02:00",
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    location: {
+      "@type": "Place",
+      name: "hostettler moto ag Zürich Nord",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Klotenerstrasse 10",
+        addressLocality: "Rümlang",
+        postalCode: "8153",
+        addressCountry: "CH",
+      },
+    },
+    image: "https://letzhgo.ch/images/schnupperkurs.png",
+    offers: {
+      "@type": "Offer",
+      price: "50",
+      priceCurrency: "CHF",
+      availability: "https://schema.org/InStock",
+      url: "https://app1.edoobox.com/de/LetZHgo/Schnupperkurs?edref=letzhgo",
+      validFrom: "2026-01-01T00:00+01:00",
+    },
+    organizer: {
+      "@type": "Organization",
+      name: "Let'ZHgo Fahrschule",
+      url: "https://letzhgo.ch",
+    },
+    performer: {
+      "@type": "Organization",
+      name: "Let'ZHgo Fahrschule",
+    },
+  };
+
+  const manoeverplatzEventSchema = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "@id": "https://letzhgo.ch/#event-manoeverplatz",
+    name: "Manöverplatz Rümlang – freies Motorrad-Training",
+    description:
+      "Jeden Mittwoch Abend kannst Du auf dem LARAG-Areal in Rümlang deine Motorrad-Manöver trainieren – ganz ohne Anmeldung.",
+    eventSchedule: {
+      "@type": "Schedule",
+      repeatFrequency: "P1W",
+      byDay: "https://schema.org/Wednesday",
+      startTime: "19:00:00",
+      endTime: "21:00:00",
+      startDate: "2026-03-25",
+      scheduleTimezone: "Europe/Zurich",
+    },
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    location: {
+      "@type": "Place",
+      name: "LARAG-Areal Rümlang",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Riedgrabenstrasse 26",
+        addressLocality: "Rümlang",
+        postalCode: "8153",
+        addressCountry: "CH",
+      },
+    },
+    image: "https://letzhgo.ch/images/larag-areal.jpg",
+    offers: {
+      "@type": "Offer",
+      price: "50",
+      priceCurrency: "CHF",
+      availability: "https://schema.org/InStock",
+      url: "https://letzhgo.ch/#manoeverplatz",
+    },
+    organizer: {
+      "@type": "Organization",
+      name: "Let'ZHgo Fahrschule",
+      url: "https://letzhgo.ch",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schnupperkursEventSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(manoeverplatzEventSchema),
+        }}
+      />
       {/* Hero with full-width background image */}
       <Hero
         title="Deine Fahrschule in Zürich."
@@ -318,7 +416,7 @@ export default function HomePage() {
                   <Link
                     href="https://app1.edoobox.com/de/LetZHgo/Schnupperkurs?edref=letzhgo"
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="nofollow noopener noreferrer"
                     className="inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:scale-[1.02] hover:bg-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                   >
                     Klick hier, wenn du dich anmelden möchtest
@@ -365,7 +463,7 @@ export default function HomePage() {
             <Link
               href="https://cp.lifestyle.20min.ch/de/stories/7786-motorrad-power-und-die-schonheit-der-schweiz"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="nofollow noopener noreferrer"
               className="group flex h-full max-w-xl flex-col rounded-[32px] bg-white p-4 shadow-xl transition-transform hover:-translate-y-1 hover:shadow-2xl lg:ml-auto"
             >
               <div className="relative overflow-hidden rounded-3xl bg-black">

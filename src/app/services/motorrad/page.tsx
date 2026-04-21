@@ -224,7 +224,7 @@ export default function MotorradPage() {
               <a
                 href={EDOOBOX_LINKS.motorrad}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="nofollow noopener noreferrer"
                 className="mt-8 block w-full rounded-full bg-accent py-3 text-center font-medium text-white transition-colors hover:bg-accent-dark"
               >
                 Jetzt anmelden
@@ -261,7 +261,7 @@ export default function MotorradPage() {
               <a
                 href={EDOOBOX_LINKS.motorrad}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="nofollow noopener noreferrer"
                 className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent-dark"
               >
                 Termine ansehen
@@ -388,7 +388,7 @@ export default function MotorradPage() {
                 <Link
                   href="https://www.hostettler-moto.ch/zuerich-nord/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-all hover:border-accent/30 hover:text-accent"
                 >
                   hostettler Webseite

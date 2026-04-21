@@ -514,7 +514,7 @@ export default function UeberUnsPage() {
                   <a
                     href="https://app1.edoobox.com/de/LetZHgo/Motorradkurse/?edref=letzhgo"
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="nofollow noopener noreferrer"
                     className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white shadow-sm outline-none transition-colors hover:bg-accent-dark focus-visible:ring-2 focus-visible:ring-accent-dark/45 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                   >
                     <span className="relative z-10 inline-block whitespace-nowrap transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:pointer-events-none group-hover:-translate-x-[calc(100%+2.5rem)] group-focus-visible:pointer-events-none group-focus-visible:-translate-x-[calc(100%+2.5rem)] motion-reduce:group-hover:translate-x-0 motion-reduce:group-focus-visible:translate-x-0">

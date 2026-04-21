@@ -175,6 +175,7 @@ function UeberUnsCurtainHeroScroll() {
             <Image
               src={QUOTE_BG}
               alt=""
+              aria-hidden="true"
               fill
               className="object-cover object-center brightness-[0.5]"
               sizes="100vw"

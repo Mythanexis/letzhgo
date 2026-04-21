@@ -84,7 +84,7 @@ export default function AuszeichnungenPage() {
                 <motion.a
                   href={item.href}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow noopener noreferrer"
                   {...anim({ y: 22, delay: 0.05 * i, duration: 0.72 })}
                   className="group block overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                 >

@@ -76,6 +76,7 @@ function ScrollRevealQuoteScroll({
           <Image
             src={IMAGES.quoteBg}
             alt=""
+            aria-hidden="true"
             fill
             className="object-cover brightness-[0.25]"
             sizes="100vw"

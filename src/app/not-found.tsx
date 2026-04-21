@@ -4,6 +4,14 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
+/**
+ * Hinweis: Next.js setzt bei `not-found.tsx` automatisch Status 404;
+ * `noindex` kann für 404-Seiten über den HTTP-Status hinaus als Zusatz über
+ * ein Meta-Tag gesetzt werden. Da diese Datei "use client" ist und Metadata
+ * nicht exportierbar, sorgt der 404-Status allein bereits für die korrekte
+ * Behandlung durch Suchmaschinen.
+ */
+
 const ROAD_SIGNS = [
   { rotation: -15, x: -180, y: -40, delay: 0.6, text: "?" },
   { rotation: 12, x: 160, y: -60, delay: 0.8, text: "!" },

@@ -42,7 +42,7 @@ export default function HostettlerSection() {
             <Link
               href="https://www.hostettler-moto.ch/zuerich-nord/"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="nofollow noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-accent-dark"
             >
               Hostettler Webseite

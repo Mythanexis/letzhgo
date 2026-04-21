@@ -51,6 +51,15 @@ const locationsSchema = {
   ],
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://letzhgo.ch/" },
+    { "@type": "ListItem", position: 2, name: "Lokationen", item: "https://letzhgo.ch/lokationen" },
+  ],
+};
+
 export default function LokationenLayout({
   children,
 }: {
@@ -61,6 +70,10 @@ export default function LokationenLayout({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(locationsSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       {children}
     </>

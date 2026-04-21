@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import { getBlogBySlug, BLOG_POSTS, formatDate } from "@/lib/blog-data";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
+import ShareButtons from "@/components/ShareButtons";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -52,19 +53,27 @@ export default function BlogDetailPage({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.1, ease }}
           >
-            {/* Back link */}
-            <Link
-              href="/blogs"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-white/40 transition-colors hover:text-white"
+            {/* Breadcrumbs */}
+            <nav
+              aria-label="Breadcrumb"
+              className="flex flex-wrap items-center gap-2 text-sm text-white/50"
             >
-              <span
-                aria-hidden
-                className="transition-transform duration-300 group-hover:-translate-x-1"
-              >
-                ←
+              <Link href="/" className="transition-colors hover:text-white">
+                Home
+              </Link>
+              <span aria-hidden className="text-white/25">
+                /
               </span>
-              Zurück zum Blog
-            </Link>
+              <Link href="/blogs" className="transition-colors hover:text-white">
+                Blog
+              </Link>
+              <span aria-hidden className="text-white/25">
+                /
+              </span>
+              <span className="text-white/80" aria-current="page">
+                {post.title}
+              </span>
+            </nav>
 
             {/* Meta */}
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -111,6 +120,17 @@ export default function BlogDetailPage({
             </motion.div>
           ))}
 
+          {/* Share */}
+          <motion.div
+            {...anim({ y: 24, delay: 0.1, duration: 0.8 })}
+            className="mt-16 border-t border-border pt-8"
+          >
+            <ShareButtons
+              url={`https://letzhgo.ch/blogs/${post.slug}`}
+              title={post.title}
+            />
+          </motion.div>
+
           {/* Contextual CTA */}
           <motion.div
             {...anim({ y: 24, delay: 0.1, duration: 0.8 })}
@@ -133,7 +153,7 @@ export default function BlogDetailPage({
                 <Link
                   href={post.cta?.href ?? "/kontakt"}
                   {...(post.cta?.external
-                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    ? { target: "_blank", rel: "nofollow noopener noreferrer" }
                     : {})}
                   className="inline-flex shrink-0 items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-accent-dark"
                 >

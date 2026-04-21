@@ -35,6 +35,7 @@ export default function TikTokSection() {
       <section className="relative overflow-hidden bg-[#f7f8fa]">
         <motion.div
           className="pointer-events-none absolute left-12 top-10 hidden md:block"
+          aria-hidden="true"
           {...anim({ y: -16, rotateFrom: -4, rotateTo: -10, duration: 0.8 })}
         >
           <div className="relative h-24 w-24">

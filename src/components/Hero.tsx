@@ -57,7 +57,7 @@ function BookingPanel() {
               key={item.label}
               href={item.href}
               target={item.external ? "_blank" : undefined}
-              rel={item.external ? "noopener noreferrer" : undefined}
+              rel={item.external ? "nofollow noopener noreferrer" : undefined}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.72, delay: 2.1 + i * 0.14, ease: SNAP }}
@@ -453,7 +453,7 @@ export default function Hero({
             title={title}
             className="text-5xl font-extrabold leading-[1.05] text-white"
             headlineStartDelay={HERO_BOOKING_START_MOBILE}
-            as="p"
+            as="h1"
           />
           <HeroSubtitleReveal
             className="mx-auto mt-4 max-w-sm text-base text-white/80"

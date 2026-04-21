@@ -34,13 +34,43 @@ export default function PosterPopup() {
   useEffect(() => {
     const shuffled = POSTERS.map((_, i) => i).sort(() => Math.random() - 0.5);
     setOrder(shuffled);
-    timerRef.current = setTimeout(tryOpen, INITIAL_DELAY_MS);
 
     const unsubscribe = onRelease(() => {
       if (pendingRef.current) {
         timerRef.current = setTimeout(tryOpen, RETRY_DELAY_MS);
       }
     });
+
+    // Auf Mobile (< md) kein Auto-Trigger beim Landing – erst nach User-Interaktion
+    // öffnen. Googles Intrusive-Interstitials-Richtlinie straft sofort einblendende
+    // Overlays auf Mobile ab.
+    const isMobile =
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 767px)").matches;
+
+    if (isMobile) {
+      let armed = false;
+      const schedule = () => {
+        if (armed) return;
+        armed = true;
+        timerRef.current = setTimeout(tryOpen, INITIAL_DELAY_MS);
+      };
+      const onScroll = () => {
+        if (window.scrollY > 200) schedule();
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("pointerdown", schedule, { once: true });
+      window.addEventListener("keydown", schedule, { once: true });
+      return () => {
+        if (timerRef.current) clearTimeout(timerRef.current);
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("pointerdown", schedule);
+        window.removeEventListener("keydown", schedule);
+        unsubscribe();
+      };
+    }
+
+    timerRef.current = setTimeout(tryOpen, INITIAL_DELAY_MS);
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);

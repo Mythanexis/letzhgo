@@ -10,6 +10,8 @@ import "./globals.css";
 
 export const viewport: Viewport = {
   viewportFit: "cover",
+  themeColor: "#0144DC",
+  colorScheme: "light",
 };
 
 export const metadata: Metadata = {
@@ -20,6 +22,10 @@ export const metadata: Metadata = {
   },
   description:
     "Deine Fahrschule in Zürich: Fahrstunden, Nothelferkurs, Verkehrskunde und Motorrad-Grundkurs. Professionelle Ausbildung mit erfahrenen Fahrlehrern. Jetzt anmelden!",
+  applicationName: "Let'ZHgo",
+  authors: [{ name: "Let'ZHgo Fahrschule", url: "https://letzhgo.ch" }],
+  creator: "Let'ZHgo Fahrschule",
+  publisher: "Let'ZHgo Fahrschule",
   keywords: [
     "Fahrschule Zürich",
     "Fahrschule",
@@ -32,6 +38,26 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/",
+    languages: {
+      "de-CH": "/",
+      "x-default": "/",
+    },
+  },
+  formatDetection: {
+    telephone: true,
+    address: true,
+    email: true,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   openGraph: {
     title: "Fahrschule Zürich | Let'ZHgo",
@@ -57,12 +83,20 @@ export const metadata: Metadata = {
       "Deine Fahrschule in Zürich: Fahrstunden, Nothelferkurs, Verkehrskunde und Motorrad-Grundkurs. Jetzt anmelden!",
     images: ["https://letzhgo.ch/images/og-image.webp"],
   },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
+  category: "education",
 };
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "DrivingSchool",
+  "@id": "https://letzhgo.ch/#organization",
   name: "Let'ZHgo",
+  alternateName: "Let'ZHgo Fahrschule",
   description:
     "Deine Fahrschule in Zürich: Fahrstunden, Nothelferkurs, Verkehrskunde und Motorrad-Grundkurs.",
   url: "https://letzhgo.ch",
@@ -97,6 +131,7 @@ const localBusinessSchema = {
   ],
   priceRange: "CHF 90–570",
   image: "https://letzhgo.ch/images/letzhgo-hero.jpg",
+  logo: "https://letzhgo.ch/images/logo.png",
   sameAs: [
     "https://www.instagram.com/letzhgo_fahrschule/",
     "https://www.tiktok.com/@letzhgo",
@@ -107,13 +142,31 @@ const localBusinessSchema = {
   },
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://letzhgo.ch/#website",
+  url: "https://letzhgo.ch",
+  name: "Let'ZHgo",
+  inLanguage: "de-CH",
+  publisher: { "@id": "https://letzhgo.ch/#organization" },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://letzhgo.ch/blogs?q={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className="antialiased">
+    <html lang="de-CH" className="antialiased">
       <body className="flex min-h-dvh flex-col bg-background text-foreground">
         <script
           type="application/ld+json"
@@ -121,10 +174,22 @@ export default function RootLayout({
             __html: JSON.stringify(localBusinessSchema),
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-accent"
+        >
+          Zum Inhalt springen
+        </a>
         <ScrollToTopOnNavigate />
         <SmoothScroll />
         <Navbar />
-        <main className="flex-1 overflow-x-clip">
+        <main id="main" className="flex-1 overflow-x-clip">
           <ScrollAnimProvider>{children}</ScrollAnimProvider>
         </main>
         <Footer />

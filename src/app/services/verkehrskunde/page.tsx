@@ -146,7 +146,7 @@ export default function VerkehrskundePage() {
               <a
                 href={EDOOBOX_LINKS.verkehrskunde}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="nofollow noopener noreferrer"
                 className="mt-8 block w-full rounded-full bg-accent py-3 text-center font-medium text-white transition-colors hover:bg-accent-dark"
               >
                 Jetzt anmelden
@@ -164,7 +164,7 @@ export default function VerkehrskundePage() {
               <a
                 href={EDOOBOX_LINKS.verkehrskunde}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="nofollow noopener noreferrer"
                 className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent-dark"
               >
                 Termine ansehen
