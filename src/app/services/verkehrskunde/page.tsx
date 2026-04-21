@@ -182,46 +182,54 @@ export default function VerkehrskundePage() {
         </div>
       </section>
 
-      {/* Direkt anmelden */}
-      <section className="bg-card">
+      {/* Ohne VKU keine Prüfung */}
+      <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-7xl px-6 py-24 md:px-16 md:py-32 lg:px-24">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
-            <div>
-              <p className="text-sm font-medium uppercase tracking-widest text-accent">
-                Nächster Schritt
-              </p>
-              <h2 className="mt-4 text-4xl font-bold leading-tight text-foreground md:text-5xl">
-                Melde dich jetzt für den Verkehrskundekurs an.
+          <motion.div {...anim({ y: 28, duration: 0.8 })}>
+
+            {/* Headline + description */}
+            <div className="max-w-2xl">
+              <span className="inline-block rounded-full border border-border px-3 py-1 text-xs font-semibold uppercase tracking-widest text-muted">
+                Art. 18 VZV · Gesetzliche Pflicht
+              </span>
+              <h2 className="mt-5 text-5xl font-black leading-[1.05] tracking-tight text-foreground md:text-6xl lg:text-7xl">
+                Ohne VKU<br />keine Prüfung.
               </h2>
-              <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">
-                Die Anmeldung erfolgt direkt über unsere Kursplattform. Du siehst dort alle verfügbaren Termine und kannst sofort buchen.
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+                Der VKU-Nachweis ist Pflichtvoraussetzung für die Anmeldung zur praktischen Fahrprüfung. Wer ihn nicht vorlegen kann, erhält vom Strassenverkehrsamt keinen Prüfungstermin — unabhängig davon, wie viele Fahrstunden bereits absolviert wurden.
               </p>
             </div>
-            <div className="rounded-2xl border border-border bg-background p-8">
-              <p className="text-sm font-medium uppercase tracking-widest text-accent">Kursdaten</p>
-              <dl className="mt-6 space-y-4">
-                {[
-                  { label: "Dauer", value: "4 Abende (je ca. 3 Std.)" },
-                  { label: "Preis", value: "CHF 150.–" },
-                  { label: "Ort", value: "Zürich-Oerlikon" },
-                  { label: "Sprache", value: "Deutsch" },
-                ].map((item) => (
-                  <div key={item.label} className="border-t border-border pt-4 first:border-t-0 first:pt-0">
-                    <dt className="text-sm text-muted">{item.label}</dt>
-                    <dd className="mt-1 font-semibold text-foreground">{item.value}</dd>
-                  </div>
-                ))}
-              </dl>
+
+            {/* Facts strip */}
+            <div className="mt-12 overflow-hidden rounded-2xl border border-border bg-white sm:grid sm:grid-cols-3 sm:divide-x sm:divide-border">
+              {[
+                { label: "Pflicht für", value: "Kat. A, A1, B, B1" },
+                { label: "Kurs", value: "2 Abende · 8 Lektionen" },
+                { label: "Gültigkeit", value: "Unbeschränkt" },
+              ].map((f) => (
+                <div key={f.label} className="border-b border-border px-6 py-5 last:border-b-0 sm:border-b-0">
+                  <p className="text-xs font-medium uppercase tracking-widest text-muted">{f.label}</p>
+                  <p className="mt-1.5 font-semibold text-foreground">{f.value}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA below strip */}
+            <div className="mt-8 flex flex-col items-start gap-2">
               <a
                 href={EDOOBOX_LINKS.verkehrskunde}
                 target="_blank"
                 rel="nofollow noopener noreferrer"
-                className="mt-8 block w-full rounded-full bg-accent py-3 text-center font-medium text-white transition-colors hover:bg-accent-dark"
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-dark"
               >
                 Termine ansehen & anmelden
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+                  <path d="M4 8h8M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </a>
             </div>
-          </div>
+
+          </motion.div>
         </div>
       </section>
     </>
