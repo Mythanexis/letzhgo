@@ -186,6 +186,45 @@ export default function MotorradPage() {
                 Den Motorrad-Grundkurs bieten wir bei hostettler moto ag,
                 Klotenerstrasse 10, 8153 Rümlang an.
               </p>
+
+              <h3 className="mt-12 text-xl font-semibold text-foreground">
+                Preise
+              </h3>
+              <div className="mt-6 overflow-hidden rounded-2xl border border-border">
+                <table className="w-full text-left text-sm">
+                  <thead>
+                    <tr className="border-b border-border bg-[#f7f8fa]">
+                      <th className="px-5 py-3 font-semibold text-foreground">Angebot</th>
+                      <th className="px-5 py-3 text-right font-semibold text-foreground">Preis</th>
+                      <th className="hidden px-5 py-3 text-right font-semibold text-foreground sm:table-cell">Dauer</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border">
+                    <tr>
+                      <td className="px-5 py-3.5 text-foreground">
+                        Motorrad-Grundkurs
+                        <span className="ml-2 text-muted">(12 Stunden, 3 Kursteile)</span>
+                      </td>
+                      <td className="px-5 py-3.5 text-right font-semibold text-foreground">CHF 570</td>
+                      <td className="hidden px-5 py-3.5 text-right text-muted sm:table-cell">12 Std.</td>
+                    </tr>
+                    <tr>
+                      <td className="px-5 py-3.5 text-foreground">Motorrad-Fahrstunde</td>
+                      <td className="px-5 py-3.5 text-right font-semibold text-foreground">CHF 95</td>
+                      <td className="hidden px-5 py-3.5 text-right text-muted sm:table-cell">45 Min.</td>
+                    </tr>
+                    <tr>
+                      <td className="px-5 py-3.5 text-foreground">Schnupperkurs</td>
+                      <td className="px-5 py-3.5 text-right font-semibold text-foreground">CHF 50</td>
+                      <td className="hidden px-5 py-3.5 text-right text-muted sm:table-cell">4 Std.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-3 text-xs text-muted">
+                Fahrstunden sind auch als Doppellektionen (90 Minuten) buchbar.
+              </p>
+
             </motion.div>
             <Link
               href="/services"
@@ -210,11 +249,6 @@ export default function MotorradPage() {
                     CHF 570
                   </dd>
                   <dd className="text-xs text-muted">12 Stunden (3 Kursteile)</dd>
-                  <dt className="mt-4 text-sm text-muted">Motorrad-Fahrstunde</dt>
-                  <dd className="mt-1 text-lg font-semibold text-foreground">
-                    CHF 95
-                  </dd>
-                  <dd className="text-xs text-muted">45 Minuten</dd>
                 </div>
                 <div className="border-t border-border pt-4">
                   <dt className="text-sm text-muted">Dauer</dt>
