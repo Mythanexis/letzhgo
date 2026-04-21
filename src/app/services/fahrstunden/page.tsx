@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { IMAGES } from "@/lib/constants";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const HIGHLIGHTS = [
@@ -86,10 +85,23 @@ export default function FahrstundenPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="relative z-10 max-w-4xl px-8 pb-12 md:px-16 md:pb-20">
+          <motion.nav
+            aria-label="Breadcrumb"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-5 flex flex-wrap items-center gap-2 text-sm text-white/50"
+          >
+            <Link href="/" className="transition-colors hover:text-white">Home</Link>
+            <span aria-hidden className="text-white/25">/</span>
+            <Link href="/services" className="transition-colors hover:text-white">Services</Link>
+            <span aria-hidden className="text-white/25">/</span>
+            <span className="text-white/80" aria-current="page">Fahrstunden</span>
+          </motion.nav>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.05 }}
             className="text-sm font-medium uppercase tracking-widest text-accent"
           >
             Kursangebot
@@ -107,13 +119,6 @@ export default function FahrstundenPage() {
 
       {/* Inhalt */}
       <section className="mx-auto max-w-7xl px-6 py-20 md:px-16">
-        <div className="mb-10">
-          <Breadcrumbs items={[
-            { label: "Home", href: "/" },
-            { label: "Services", href: "/services" },
-            { label: "Fahrstunden" },
-          ]} />
-        </div>
         <div className="grid gap-16 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <motion.div {...anim({ y: 20, duration: 0.6 })}>

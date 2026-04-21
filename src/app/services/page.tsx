@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import ScrollThread from "@/components/ScrollThread";
 import { useCoarsePointer } from "@/hooks/useScrollAnim";
 import PricingCard from "@/components/PricingCard";
 import Stats from "@/components/Stats";
@@ -182,6 +183,7 @@ function ServiceSection(
 
 export default function ServicesPage() {
   const coarse = useCoarsePointer();
+  const servicesRef = useRef<HTMLDivElement>(null);
   return (
     <>
       {/* Hero Header */}
@@ -307,9 +309,11 @@ export default function ServicesPage() {
       </section>
 
       <div
+        ref={servicesRef}
         id="services"
-        className={coarse ? "flex flex-col" : "snap-y snap-mandatory"}
+        className={`relative ${coarse ? "flex flex-col" : "snap-y snap-mandatory"}`}
       >
+        {!coarse && <ScrollThread containerRef={servicesRef} />}
         {SERVICES_DETAIL.map((service, i) => (
           <ServiceSection
             key={service.id}
