@@ -174,6 +174,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de-CH" className="antialiased">
+      <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVK0S8VVX8" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NVK0S8VVX8');`,
+          }}
+        />
+      </head>
       <body className="flex min-h-dvh flex-col bg-background text-foreground">
         <script
           type="application/ld+json"
