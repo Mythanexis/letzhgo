@@ -176,6 +176,49 @@ export default function VerkehrskundePage() {
           </motion.aside>
         </div>
       </section>
+
+      {/* Direkt anmelden */}
+      <section className="bg-card">
+        <div className="mx-auto max-w-7xl px-6 py-24 md:px-16 md:py-32 lg:px-24">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+            <div>
+              <p className="text-sm font-medium uppercase tracking-widest text-accent">
+                Nächster Schritt
+              </p>
+              <h2 className="mt-4 text-4xl font-bold leading-tight text-foreground md:text-5xl">
+                Melde dich jetzt für den Verkehrskundekurs an.
+              </h2>
+              <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">
+                Die Anmeldung erfolgt direkt über unsere Kursplattform. Du siehst dort alle verfügbaren Termine und kannst sofort buchen.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-background p-8">
+              <p className="text-sm font-medium uppercase tracking-widest text-accent">Kursdaten</p>
+              <dl className="mt-6 space-y-4">
+                {[
+                  { label: "Dauer", value: "4 Abende (je ca. 3 Std.)" },
+                  { label: "Preis", value: "CHF 150.–" },
+                  { label: "Ort", value: "Zürich-Oerlikon" },
+                  { label: "Sprache", value: "Deutsch" },
+                ].map((item) => (
+                  <div key={item.label} className="border-t border-border pt-4 first:border-t-0 first:pt-0">
+                    <dt className="text-sm text-muted">{item.label}</dt>
+                    <dd className="mt-1 font-semibold text-foreground">{item.value}</dd>
+                  </div>
+                ))}
+              </dl>
+              <a
+                href={EDOOBOX_LINKS.verkehrskunde}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                className="mt-8 block w-full rounded-full bg-accent py-3 text-center font-medium text-white transition-colors hover:bg-accent-dark"
+              >
+                Termine ansehen & anmelden
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

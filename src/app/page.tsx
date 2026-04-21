@@ -406,7 +406,7 @@ export default function HomePage() {
                     Hostettler Moto AG | Zürich Nord
                   </p>
                   <p className="text-sm text-muted">
-                    Klotenserstrasse 10
+                    Klotenerstrasse 10
                     <br />
                     8153 Rümlang
                   </p>

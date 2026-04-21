@@ -9,6 +9,7 @@ import UeberUnsCurtainHero from "@/components/UeberUnsCurtainHero";
 import InstructorCard from "@/components/InstructorCard";
 import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
+import ContactForm from "@/components/ContactForm";
 import { INSTRUCTORS, INSTRUCTORS_HOMEPAGE_ORDER } from "@/lib/constants";
 import { useCoarsePointer, useScrollAnim } from "@/hooks/useScrollAnim";
 
@@ -568,6 +569,26 @@ export default function UeberUnsPage() {
 
       {/* FAQ */}
       <FAQ className="bg-[#f7f8fa]" />
+
+      {/* Kontakt */}
+      <section className="bg-background">
+        <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+              Direkt ansprechen
+            </p>
+            <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl">
+              Noch Fragen? Schreib uns einfach.
+            </h2>
+            <p className="mx-auto mt-4 max-w-lg text-muted">
+              Egal ob Kursdetails, Preisfragen oder du möchtest einfach mal schauen – wir melden uns schnell.
+            </p>
+          </div>
+          <div className="mx-auto mt-12 max-w-2xl">
+            <ContactForm />
+          </div>
+        </div>
+      </section>
     </>
   );
 }

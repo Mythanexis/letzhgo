@@ -15,6 +15,7 @@ const SITES = [
     mapsQuery: "Binzmühlestrasse 15, 8050 Zürich",
     image: "/images/oerlikon-letzhgo.png",
     imageAlt: "Standort Zürich-Oerlikon",
+    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2700.5!2d8.548077!3d47.413689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47900a849b623bb1%3A0xc5c7ea7b2839c868!2sFahrschule%20LetZHgo!5e0!3m2!1sde!2sch!4v1700000000000",
   },
   {
     title: "Oberglatt",
@@ -24,6 +25,7 @@ const SITES = [
     mapsQuery: "Bahnhofstrasse 10, 8154 Oberglatt",
     image: "/images/oberglatt-letzhgo.png",
     imageAlt: "Standort Oberglatt",
+    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2695.5!2d8.517!3d47.474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4790130000000000%3A0x0!2sBahnhofstrasse%2010%2C%208154%20Oberglatt!5e0!3m2!1sde!2sch!4v1700000000001",
   },
   {
     title: "Rümlang",
@@ -33,6 +35,7 @@ const SITES = [
     mapsQuery: "Riedgrabenstrasse 26, 8153 Rümlang",
     image: "/images/ruemlang-sunset-letzhgo.png",
     imageAlt: "Standort Rümlang",
+    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2697.5!2d8.524!3d47.450!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4790150000000000%3A0x0!2sRiedgrabenstrasse%2026%2C%208153%20R%C3%BCmlang!5e0!3m2!1sde!2sch!4v1700000000002",
   },
 ] as const;
 
@@ -229,6 +232,19 @@ export default function LokationenPage() {
                         →
                       </span>
                     </a>
+
+                    <div className="mt-8 overflow-hidden rounded-2xl shadow-sm ring-1 ring-black/[0.06]">
+                      <iframe
+                        src={site.mapsEmbed}
+                        width="100%"
+                        height="260"
+                        style={{ border: 0, display: "block" }}
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        title={`Karte ${site.title}`}
+                      />
+                    </div>
                   </div>
                 </motion.article>
               );

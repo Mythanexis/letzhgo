@@ -7,6 +7,7 @@ import { BLOG_POSTS, formatDate } from "@/lib/blog-data";
 import type { BlogPost } from "@/lib/blog-data";
 import { useState } from "react";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
+import ContactStrip from "@/components/ContactStrip";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -253,6 +254,8 @@ export default function BlogsPage() {
           )}
         </div>
       </section>
+
+      <ContactStrip />
     </>
   );
 }

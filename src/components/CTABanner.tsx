@@ -12,10 +12,10 @@ const AVATAR_IMAGES = [
   "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=face",
 ];
 
-export default function CTABanner() {
+export default function CTABanner({ className }: { className?: string }) {
   const anim = useScrollAnim();
   return (
-    <section className="bg-background">
+    <section className={className ?? "bg-background"}>
       <div className="px-6 py-24 md:px-16 md:py-32 lg:px-24 xl:px-32">
         <div className="flex flex-col justify-between gap-16 lg:flex-row lg:items-center">
           {/* Left */}
@@ -52,7 +52,7 @@ export default function CTABanner() {
                   {AVATAR_IMAGES.map((src, i) => (
                     <div
                       key={i}
-                      className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-[#f7f8fa]"
+                      className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-background"
                     >
                       <Image
                         src={src}
@@ -63,7 +63,7 @@ export default function CTABanner() {
                       />
                     </div>
                   ))}
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#f7f8fa] bg-foreground text-[10px] font-semibold text-white">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-background bg-foreground text-[10px] font-semibold text-white">
                     +450
                   </div>
                 </div>

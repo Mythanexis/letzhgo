@@ -205,6 +205,68 @@ export default function NothelferkursPage() {
           </motion.aside>
         </div>
       </section>
+
+      {/* Über uns Teaser */}
+      <section className="border-t border-border bg-background">
+        <div className="mx-auto max-w-4xl px-6 py-24 text-center md:px-16 md:py-32">
+          <p className="mx-auto max-w-2xl text-2xl font-light leading-snug text-foreground md:text-3xl">
+            &ldquo;Wir sind selbst gefahren, haben selbst gelernt – und wissen, was gute Begleitung bedeutet.&rdquo;
+          </p>
+          <p className="mt-5 text-sm text-muted">Gianni Sebestin · Fahrlehrer-Ausbildner, LetZHgo</p>
+          <Link
+            href="/ueber-uns"
+            className="mt-8 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent-dark"
+          >
+            Lern unser Team kennen
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+              <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+        </div>
+      </section>
+
+      {/* Direkt anmelden */}
+      <section className="bg-card">
+        <div className="mx-auto max-w-7xl px-6 py-24 md:px-16 md:py-32 lg:px-24">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+            <div>
+              <p className="text-sm font-medium uppercase tracking-widest text-accent">
+                Nächster Schritt
+              </p>
+              <h2 className="mt-4 text-4xl font-bold leading-tight text-foreground md:text-5xl">
+                Melde dich jetzt für den Nothelferkurs an.
+              </h2>
+              <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">
+                Die Anmeldung erfolgt direkt über unsere Kursplattform. Du siehst dort alle verfügbaren Termine und kannst sofort buchen.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-background p-8">
+              <p className="text-sm font-medium uppercase tracking-widest text-accent">Kursdaten</p>
+              <dl className="mt-6 space-y-4">
+                {[
+                  { label: "Dauer", value: "1 Tag (ca. 10 Std.)" },
+                  { label: "Preis", value: "CHF 130.–" },
+                  { label: "Ort", value: "Binzmühlestrasse 15, Zürich" },
+                  { label: "Sprache", value: "Deutsch" },
+                ].map((item) => (
+                  <div key={item.label} className="border-t border-border pt-4 first:border-t-0 first:pt-0">
+                    <dt className="text-sm text-muted">{item.label}</dt>
+                    <dd className="mt-1 font-semibold text-foreground">{item.value}</dd>
+                  </div>
+                ))}
+              </dl>
+              <a
+                href={EDOOBOX_LINKS.nothelferkurs}
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                className="mt-8 block w-full rounded-full bg-accent py-3 text-center font-medium text-white transition-colors hover:bg-accent-dark"
+              >
+                Termine ansehen & anmelden
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

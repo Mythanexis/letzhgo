@@ -7,6 +7,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import InstructorDetailPhotos, {
   InstructorDetailPhotosDesktop,
 } from "@/components/InstructorDetailPhotos";
+import InstructorPageFooter from "@/components/InstructorPageFooter";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const WERDEGANG = [
@@ -26,6 +27,7 @@ const PHOTOS = [
 export default function SamirPage() {
   const anim = useScrollAnim();
   return (
+    <>
     <section className="mx-auto max-w-7xl px-6 pt-32 pb-20 md:px-16">
       <div className="mb-10">
         <Breadcrumbs items={[
@@ -109,5 +111,8 @@ export default function SamirPage() {
         <InstructorDetailPhotosDesktop images={PHOTOS} />
       </div>
     </section>
+
+    <InstructorPageFooter />
+    </>
   );
 }
