@@ -206,6 +206,7 @@ export default function KontaktPage() {
       {/* Fahrlehrer */}
       <InstructorsSection
         layout="singleGrid"
+        showFilters
         className="bg-background"
         id="fahrlehrer-kontakt"
         eyebrow="Dein Team"

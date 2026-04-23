@@ -82,7 +82,7 @@ export default function MotorradPage() {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-        <div className="relative z-10 max-w-4xl px-8 pb-12 md:px-16 md:pb-20">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-12 md:px-16 md:pb-20">
           <motion.nav
             aria-label="Breadcrumb"
             initial={{ opacity: 0, y: 10 }}

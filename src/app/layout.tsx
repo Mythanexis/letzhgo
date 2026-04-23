@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PromoPopup from "@/components/PromoPopup";
@@ -6,6 +7,8 @@ import PosterPopup from "@/components/PosterPopup";
 import SmoothScroll from "@/components/SmoothScroll";
 import { ScrollAnimProvider } from "@/hooks/useScrollAnim";
 import "./globals.css";
+
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 export const viewport: Viewport = {
   viewportFit: "cover",
@@ -180,6 +183,13 @@ export default function RootLayout({
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NVK0S8VVX8');`,
           }}
         />
+        {RECAPTCHA_SITE_KEY && (
+          <Script
+            id="recaptcha-v3"
+            src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`}
+            strategy="afterInteractive"
+          />
+        )}
       </head>
       <body className="flex min-h-dvh flex-col bg-background text-foreground">
         <script

@@ -4,28 +4,42 @@ import { useState, useEffect, useCallback, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SITE } from "@/lib/constants";
 
-const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
+const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-function loadRecaptcha(): Promise<void> {
-  return new Promise((resolve) => {
-    if (typeof window === "undefined") return;
-    if (document.getElementById("recaptcha-script")) {
-      resolve();
-      return;
-    }
-    const script = document.createElement("script");
-    script.id = "recaptcha-script";
-    script.src = `https://www.google.com/recaptcha/api.js?render=${SITE_KEY}`;
-    script.onload = () => resolve();
-    document.head.appendChild(script);
+/**
+ * Waits until grecaptcha is available on the window. The script is loaded
+ * globally via next/script in the root layout (strategy="afterInteractive"),
+ * so on a slow connection it may not yet be ready when the user submits.
+ */
+function waitForRecaptcha(timeoutMs = 10_000): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const start = Date.now();
+    const tick = () => {
+      if (typeof window !== "undefined" && typeof window.grecaptcha?.execute === "function") {
+        resolve();
+        return;
+      }
+      if (Date.now() - start > timeoutMs) {
+        reject(new Error("reCAPTCHA script timed out"));
+        return;
+      }
+      setTimeout(tick, 100);
+    };
+    tick();
   });
 }
 
 async function getRecaptchaToken(action: string): Promise<string> {
-  await loadRecaptcha();
-  return new Promise((resolve) => {
-    window.grecaptcha.ready(() => {
-      window.grecaptcha.execute(SITE_KEY, { action }).then(resolve);
+  if (!SITE_KEY) throw new Error("NEXT_PUBLIC_RECAPTCHA_SITE_KEY is not set");
+  await waitForRecaptcha();
+  return new Promise((resolve, reject) => {
+    window.grecaptcha.ready(async () => {
+      try {
+        const token = await window.grecaptcha.execute(SITE_KEY, { action });
+        resolve(token);
+      } catch (err) {
+        reject(err);
+      }
     });
   });
 }
@@ -116,24 +130,22 @@ function SuccessPopup({ onClose }: { onClose: () => void }) {
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  useEffect(() => {
-    loadRecaptcha();
-  }, []);
-
   const handleSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("loading");
 
     const form = e.currentTarget;
-    const data = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-      recaptchaToken: await getRecaptchaToken("contact_form"),
-    };
 
     try {
+      const recaptchaToken = await getRecaptchaToken("contact_form");
+      const data = {
+        name: (form.elements.namedItem("name") as HTMLInputElement).value,
+        email: (form.elements.namedItem("email") as HTMLInputElement).value,
+        phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
+        message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+        recaptchaToken,
+      };
+
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

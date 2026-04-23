@@ -1,6 +1,54 @@
 import { NextRequest, NextResponse } from "next/server";
 import { SITE } from "@/lib/constants";
 
+const EXPECTED_ACTION = "contact_form";
+const MIN_SCORE = 0.5;
+
+type SiteverifyResponse = {
+  success: boolean;
+  score?: number;
+  action?: string;
+  challenge_ts?: string;
+  hostname?: string;
+  "error-codes"?: string[];
+};
+
+/**
+ * Verifies a classic reCAPTCHA v3 token via the siteverify endpoint.
+ * Requires: RECAPTCHA_SECRET_KEY.
+ * Docs: https://developers.google.com/recaptcha/docs/verify
+ */
+async function verifyRecaptchaV3(
+  token: string,
+  secretKey: string
+): Promise<{ ok: true; score: number } | { ok: false; reason: string }> {
+  const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(token)}`,
+  });
+
+  const data = (await res.json()) as SiteverifyResponse;
+
+  if (!data.success) {
+    console.warn("[reCAPTCHA v3] Verification failed:", data["error-codes"]);
+    return { ok: false, reason: `invalid:${(data["error-codes"] ?? []).join(",")}` };
+  }
+
+  if (data.action !== EXPECTED_ACTION) {
+    console.warn("[reCAPTCHA v3] Action mismatch:", data.action);
+    return { ok: false, reason: "action_mismatch" };
+  }
+
+  const score = data.score ?? 0;
+  if (score < MIN_SCORE) {
+    console.warn("[reCAPTCHA v3] Low score:", score);
+    return { ok: false, reason: `low_score:${score}` };
+  }
+
+  return { ok: true, score };
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -13,7 +61,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify reCAPTCHA token
+    // reCAPTCHA v3 verification (only enforced if secret is configured)
     const secretKey = process.env.RECAPTCHA_SECRET_KEY;
     if (secretKey) {
       if (!recaptchaToken) {
@@ -22,18 +70,8 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         );
       }
-      const verifyRes = await fetch(
-        `https://www.google.com/recaptcha/api/siteverify`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: `secret=${secretKey}&response=${recaptchaToken}`,
-        }
-      );
-      const verifyData = await verifyRes.json() as { success: boolean; score: number; action: string };
-      console.log("[reCAPTCHA]", { success: verifyData.success, score: verifyData.score, action: verifyData.action });
-      // Reject if score below 0.5 (likely bot)
-      if (!verifyData.success || verifyData.score < 0.5) {
+      const result = await verifyRecaptchaV3(recaptchaToken, secretKey);
+      if (!result.ok) {
         return NextResponse.json(
           { error: "reCAPTCHA-Verifizierung fehlgeschlagen." },
           { status: 400 }
