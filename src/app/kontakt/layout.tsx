@@ -5,6 +5,13 @@ export const metadata: Metadata = {
   description:
     "Kontaktiere Let'ZHgo – deine Fahrschule in Zürich. Ruf an, schreib uns oder buche direkt online. Wir beraten dich gerne!",
   alternates: { canonical: "/kontakt" },
+  openGraph: {
+    title: "Kontakt – Fahrschule Let'ZHgo Zürich",
+    description:
+      "Kontaktiere Let'ZHgo – Anruf, E-Mail oder Online-Buchung.",
+    url: "https://letzhgo.ch/kontakt",
+    type: "website",
+  },
 };
 
 const breadcrumbSchema = {

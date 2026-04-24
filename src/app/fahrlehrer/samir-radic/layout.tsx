@@ -1,10 +1,46 @@
 import type { Metadata } from "next";
 
+const SLUG = "samir-radic";
+const NAME = "Samir Radič";
+const ROLE = "Fahrlehrer für Auto und Motorrad, Theorielehrer Verkehrskunde";
+const IMAGE = "https://letzhgo.ch/images/samir.png";
+const TEL = "+41788888899";
+const URL = `https://letzhgo.ch/fahrlehrer/${SLUG}`;
+
 export const metadata: Metadata = {
-  title: "Fahrlehrer Samir Radič – Auto & Motorrad",
-  description:
-    "Samir Radič – Fahrlehrer für Auto und Motorrad bei Let'ZHgo Zürich. Theorielehrer für Verkehrskunde.",
-  alternates: { canonical: "/fahrlehrer/samir-radic" },
+  title: `Fahrlehrer ${NAME} – Auto & Motorrad`,
+  description: `${NAME} – ${ROLE} bei Let'ZHgo Zürich.`,
+  alternates: { canonical: `/fahrlehrer/${SLUG}` },
+  openGraph: {
+    title: `${NAME} – Fahrlehrer bei Let'ZHgo Zürich`,
+    description: ROLE,
+    url: URL,
+    type: "profile",
+    images: [{ url: IMAGE, alt: NAME }],
+  },
+};
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${URL}#person`,
+  name: NAME,
+  jobTitle: ROLE,
+  image: IMAGE,
+  url: URL,
+  telephone: TEL,
+  knowsLanguage: ["Deutsch", "Kroatisch", "Englisch"],
+  worksFor: { "@id": "https://letzhgo.ch/#organization" },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://letzhgo.ch/" },
+    { "@type": "ListItem", position: 2, name: "Über uns", item: "https://letzhgo.ch/ueber-uns" },
+    { "@type": "ListItem", position: 3, name: NAME, item: URL },
+  ],
 };
 
 export default function SamirLayout({
@@ -12,5 +48,17 @@ export default function SamirLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {children}
+    </>
+  );
 }

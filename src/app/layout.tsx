@@ -28,16 +28,6 @@ export const metadata: Metadata = {
   authors: [{ name: "Let'ZHgo Fahrschule", url: "https://letzhgo.ch" }],
   creator: "Let'ZHgo Fahrschule",
   publisher: "Let'ZHgo Fahrschule",
-  keywords: [
-    "Fahrschule Zürich",
-    "Fahrschule",
-    "Führerschein",
-    "Nothelferkurs",
-    "Verkehrskunde",
-    "Motorrad Grundkurs",
-    "Fahrstunden Zürich",
-    "Let'ZHgo",
-  ],
   alternates: {
     canonical: "/",
     languages: {
@@ -132,6 +122,9 @@ const localBusinessSchema = {
     },
   ],
   priceRange: "CHF 90–570",
+  currenciesAccepted: "CHF",
+  paymentAccepted: "Cash, Credit Card, TWINT, Bank Transfer",
+  hasMap: "https://www.google.com/maps/place/Binzm%C3%BChlestrasse+15,+8050+Z%C3%BCrich",
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "5.0",
@@ -168,6 +161,7 @@ const websiteSchema = {
     "query-input": "required name=search_term_string",
   },
 };
+
 
 export default function RootLayout({
   children,

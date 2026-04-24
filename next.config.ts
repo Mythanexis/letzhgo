@@ -41,9 +41,13 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["192.168.1.108"],
   poweredByHeader: false,
   compress: true,
+  // Keep trailing-slash OFF → consistent with canonicals like "/kontakt"
+  trailingSlash: false,
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 365,
+    deviceSizes: [360, 640, 768, 1024, 1280, 1536, 1920, 2560],
+    imageSizes: [48, 64, 96, 128, 192, 256, 384],
     remotePatterns: [
       {
         protocol: "https",

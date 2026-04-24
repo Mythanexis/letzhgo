@@ -5,6 +5,23 @@ export const metadata: Metadata = {
   description:
     "Motorrad-Grundkurs und Fahrstunden in Zürich: Sicher Motorradfahren lernen mit professioneller Begleitung. Kategorien A1 und A.",
   alternates: { canonical: "/services/motorrad" },
+  openGraph: {
+    title: "Motorrad-Grundkurs & Fahrstunden Zürich | Let'ZHgo",
+    description:
+      "Motorrad-Grundkurs und Fahrstunden in Zürich: Kategorien A1 und A.",
+    url: "https://letzhgo.ch/services/motorrad",
+    type: "website",
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://letzhgo.ch/" },
+    { "@type": "ListItem", position: 2, name: "Services", item: "https://letzhgo.ch/services" },
+    { "@type": "ListItem", position: 3, name: "Motorrad", item: "https://letzhgo.ch/services/motorrad" },
+  ],
 };
 
 const courseSchema = {
@@ -62,6 +79,10 @@ export default function MotorradLayout({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       {children}
     </>

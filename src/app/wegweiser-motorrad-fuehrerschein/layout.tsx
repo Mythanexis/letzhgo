@@ -5,6 +5,13 @@ export const metadata: Metadata = {
   description:
     "Alle Schritte zum Motorradführerschein – von Nothelferkurs und Theorie bis Grundkurs und Prüfung.",
   alternates: { canonical: "/wegweiser-motorrad-fuehrerschein" },
+  openGraph: {
+    title: "Wegweiser Motorrad-Führerschein | Let'ZHgo",
+    description:
+      "Schritt-für-Schritt zum Motorradführerschein in der Schweiz.",
+    url: "https://letzhgo.ch/wegweiser-motorrad-fuehrerschein",
+    type: "article",
+  },
 };
 
 const PAGE_URL = "https://letzhgo.ch/wegweiser-motorrad-fuehrerschein";

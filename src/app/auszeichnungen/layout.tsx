@@ -5,6 +5,13 @@ export const metadata: Metadata = {
   description:
     "Mehrfach ausgezeichnete Fahrschule in Zürich: SuperFahrlehrer, Top-Fahrlehrer & Certificate of Excellence – unabhängig bewertet durch Fahrschüler:innen. Überzeug dich selbst!",
   alternates: { canonical: "/auszeichnungen" },
+  openGraph: {
+    title: "Auszeichnungen – Fahrschule Let'ZHgo Zürich",
+    description:
+      "SuperFahrlehrer, Top-Fahrlehrer & Certificate of Excellence – ausgezeichnete Fahrschule in Zürich.",
+    url: "https://letzhgo.ch/auszeichnungen",
+    type: "website",
+  },
 };
 
 const breadcrumbSchema = {

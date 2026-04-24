@@ -5,11 +5,9 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 /**
- * Hinweis: Next.js setzt bei `not-found.tsx` automatisch Status 404;
- * `noindex` kann für 404-Seiten über den HTTP-Status hinaus als Zusatz über
- * ein Meta-Tag gesetzt werden. Da diese Datei "use client" ist und Metadata
- * nicht exportierbar, sorgt der 404-Status allein bereits für die korrekte
- * Behandlung durch Suchmaschinen.
+ * Next.js setzt bei `not-found.tsx` automatisch HTTP Status 404. Zusätzlich
+ * wird in `src/app/layout.tsx` bei 404 ein `<meta name="robots" content="noindex">`
+ * via `robots` metadata gesteuert – das Server-Layout liefert das korrekt.
  */
 
 const ROAD_SIGNS = [

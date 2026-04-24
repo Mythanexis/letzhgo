@@ -5,6 +5,13 @@ export const metadata: Metadata = {
   description:
     "Lerne das Team von Let'ZHgo kennen: Erfahrene Fahrlehrer:innen in Zürich für Auto, Motorrad und Anhänger. Über 30 Jahre Erfahrung in der Fahrausbildung.",
   alternates: { canonical: "/ueber-uns" },
+  openGraph: {
+    title: "Über uns – Fahrlehrer-Team Zürich | Let'ZHgo",
+    description:
+      "Erfahrene Fahrlehrer:innen in Zürich für Auto, Motorrad und Anhänger.",
+    url: "https://letzhgo.ch/ueber-uns",
+    type: "website",
+  },
 };
 
 const breadcrumbSchema = {

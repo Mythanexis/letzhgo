@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Über uns", href: "/ueber-uns" },
+  { label: "Standorte", href: "/lokationen" },
   { label: "Auszeichnungen", href: "/auszeichnungen" },
   { label: "Kontakt", href: "/kontakt" },
   { label: "Blog", href: "/blogs" },
@@ -20,6 +21,7 @@ const NAV_LINKS = [
   { label: "Verkehrskunde", href: "/services/verkehrskunde" },
   { label: "Motorradkurs", href: "/services/motorrad" },
   { label: "Fahrstunden", href: "/services/fahrstunden" },
+  { label: "Motorrad-Wegweiser", href: "/wegweiser-motorrad-fuehrerschein" },
 ];
 
 export default function Footer() {
@@ -63,7 +65,7 @@ export default function Footer() {
           </div>
 
           {/* Right: Navigation */}
-          <div className="w-full flex-shrink-0 lg:w-auto">
+          <div className="w-full shrink-0 lg:w-auto">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40">
               Navigation
             </p>

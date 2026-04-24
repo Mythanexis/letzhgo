@@ -5,6 +5,23 @@ export const metadata: Metadata = {
   description:
     "Obligatorischer Verkehrskundeunterricht in Zürich: 4 Abende, praxisnah und interaktiv. Gefahrenerkennung und vorausschauendes Fahren lernen.",
   alternates: { canonical: "/services/verkehrskunde" },
+  openGraph: {
+    title: "Verkehrskundeunterricht (VKU) Zürich | Let'ZHgo",
+    description:
+      "Obligatorischer VKU in Zürich: 4 Abende – Gefahrenerkennung & vorausschauendes Fahren.",
+    url: "https://letzhgo.ch/services/verkehrskunde",
+    type: "website",
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://letzhgo.ch/" },
+    { "@type": "ListItem", position: 2, name: "Services", item: "https://letzhgo.ch/services" },
+    { "@type": "ListItem", position: 3, name: "Verkehrskunde", item: "https://letzhgo.ch/services/verkehrskunde" },
+  ],
 };
 
 const courseSchema = {
@@ -63,6 +80,10 @@ export default function VerkehrskundeLayout({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       {children}
     </>

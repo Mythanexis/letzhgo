@@ -175,6 +175,7 @@ export default function ContactForm() {
               id="name"
               name="name"
               type="text"
+              autoComplete="name"
               required
               className="w-full rounded-xl border border-border bg-white px-4 py-3 text-foreground placeholder:text-muted/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
               placeholder="Dein Name"
@@ -188,6 +189,8 @@ export default function ContactForm() {
               id="email"
               name="email"
               type="email"
+              autoComplete="email"
+              inputMode="email"
               required
               className="w-full rounded-xl border border-border bg-white px-4 py-3 text-foreground placeholder:text-muted/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
               placeholder="deine@email.ch"
@@ -203,6 +206,8 @@ export default function ContactForm() {
             id="phone"
             name="phone"
             type="tel"
+            autoComplete="tel"
+            inputMode="tel"
             className="w-full rounded-xl border border-border bg-white px-4 py-3 text-foreground placeholder:text-muted/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             placeholder="+41 79 000 00 00"
           />
