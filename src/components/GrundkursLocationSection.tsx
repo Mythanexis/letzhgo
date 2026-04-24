@@ -101,13 +101,13 @@ export default function GrundkursLocationSection() {
 
           {/* Floating badge */}
           <div className="absolute right-5 top-5 lg:right-8 lg:top-8">
-            <div className="overflow-hidden rounded-2xl bg-white/10 p-3 backdrop-blur-md">
+            <div className="overflow-hidden rounded-xl bg-white px-4 py-3 shadow-lg">
               <Image
                 src="/images/partner-hostettler-zuerich-nord.png"
                 alt="Hostettler Moto AG Zürich Nord"
                 width={110}
-                height={48}
-                className="object-contain brightness-0 invert"
+                height={44}
+                className="object-contain"
               />
             </div>
           </div>
