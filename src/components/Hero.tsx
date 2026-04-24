@@ -399,6 +399,7 @@ export default function Hero({
           <div className="max-w-3xl text-left text-white">
             <HeroHeadline
               title={title}
+              as="p"
               className="text-6xl font-extrabold leading-[1.05] lg:text-7xl"
               headlineStartDelay={HERO_BOOKING_START_DESKTOP}
             />

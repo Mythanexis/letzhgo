@@ -112,8 +112,7 @@ export default function VerkehrskundePage() {
                 Kursort
               </h3>
               <p className="mt-4 leading-relaxed text-muted">
-                Den VKU bieten wir in unseren Schulungsräumen Oerlikon &amp;
-                Oberglatt an.
+                Den VKU bieten wir in unserem Schulungsraum in Oerlikon an.
               </p>
             </motion.div>
             <Link

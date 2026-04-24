@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Standorte Zürich-Oerlikon, Oberglatt & Rümlang",
+  title: "Standorte Zürich-Oerlikon & Rümlang",
   description:
-    "Fahrschule Let'ZHgo Standorte: Theorie in Zürich-Oerlikon, Motorrad in Oberglatt, Manövertraining in Rümlang. Kurze Wege, klare Anlaufstellen.",
+    "Fahrschule Let'ZHgo Standorte: Theorie in Zürich-Oerlikon, Manövertraining in Rümlang. Kurze Wege, klare Anlaufstellen.",
   alternates: { canonical: "/lokationen" },
 };
 
@@ -23,17 +23,6 @@ const locationsSchema = {
         streetAddress: "Binzmühlestrasse 15",
         addressLocality: "Zürich",
         postalCode: "8050",
-        addressCountry: "CH",
-      },
-    },
-    {
-      "@type": "Place",
-      name: "Let'ZHgo – Oberglatt (Motorrad-Theorie)",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Bahnhofstrasse 10",
-        addressLocality: "Oberglatt",
-        postalCode: "8154",
         addressCountry: "CH",
       },
     },

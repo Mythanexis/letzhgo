@@ -18,6 +18,7 @@ import ContactForm from "@/components/ContactForm";
 import WegweiserHomeTeaser from "@/components/WegweiserHomeTeaser";
 import PartnersSection from "@/components/PartnersSection";
 import HostettlerSection from "@/components/HostettlerSection";
+import GrundkursLocationSection from "@/components/GrundkursLocationSection";
 import ManoeverplatzSection from "@/components/ManoeverplatzSection";
 import InstagramSection from "@/components/InstagramSection";
 import TikTokSection from "@/components/TikTokSection";
@@ -36,7 +37,7 @@ export default function HomePage() {
     },
     {
       title: "Im ganzen Raum Zürich",
-      text: "Oerlikon, Oberglatt und Rümlang – echte Strassen, nicht nur Theorie.",
+      text: "Oerlikon und Rümlang – echte Strassen, nicht nur Theorie.",
       Icon: MapPin,
     },
     {
@@ -433,6 +434,9 @@ export default function HomePage() {
 
       {/* Manöverplatz */}
       <ManoeverplatzSection />
+
+      {/* Grundkurs bei Hostettler Moto Rümlang */}
+      <GrundkursLocationSection />
 
       {/* Fahrlehrer:innen (nach Orten gruppiert) */}
       <InstructorsSection className="bg-[#f7f8fa]" />

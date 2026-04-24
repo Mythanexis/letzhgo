@@ -487,7 +487,7 @@ export default function FahrstundenPage() {
           <div className="mt-20 grid gap-x-16 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
             {[
               { title: "Maximale Flexibilität", text: "Mehrere Fahrlehrer:innen im Team – du findest immer einen Termin, der passt.", Icon: Users },
-              { title: "Im ganzen Raum Zürich", text: "Mehrere Standorte: Oerlikon, Oberglatt und Rümlang.", Icon: MapPin },
+              { title: "Im ganzen Raum Zürich", text: "Mehrere Standorte: Oerlikon und Rümlang.", Icon: MapPin },
               { title: "Prüfungssimulationen", text: "Realistische Testläufe, damit du am Prüfungstag ruhig bleibst.", Icon: ClipboardCheck },
               { title: "Alles an einem Ort", text: "Nothelfer, VKU, Fahrstunden und Motorradkurse aus einer Hand.", Icon: GraduationCap },
               { title: "Moderne Fahrzeuge", text: "Aktuelle Flotte, gepflegt und für die Ausbildung ausgestattet.", Icon: Car },

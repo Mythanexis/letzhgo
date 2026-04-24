@@ -18,16 +18,6 @@ const SITES = [
     mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2700.5!2d8.548077!3d47.413689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47900a849b623bb1%3A0xc5c7ea7b2839c868!2sFahrschule%20LetZHgo!5e0!3m2!1sde!2sch!4v1700000000000",
   },
   {
-    title: "Oberglatt",
-    tag: "Motorrad-Theorie",
-    note: "Kursraum für Motorrad – in wenigen Minuten bist du am Übungsplatz in Rümlang.",
-    addressLines: ["Bahnhofstrasse 10", "8154 Oberglatt"],
-    mapsQuery: "Bahnhofstrasse 10, 8154 Oberglatt",
-    image: "/images/oberglatt-letzhgo.png",
-    imageAlt: "Standort Oberglatt",
-    mapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2695.5!2d8.517!3d47.474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4790130000000000%3A0x0!2sBahnhofstrasse%2010%2C%208154%20Oberglatt!5e0!3m2!1sde!2sch!4v1700000000001",
-  },
-  {
     title: "Rümlang",
     tag: "Manövertraining",
     note: "LARAG-Areal – Platz fürs Üben, Manöver und Prüfungsvorbereitung.",
@@ -119,15 +109,14 @@ export default function LokationenPage() {
             transition={{ duration: 0.6, delay: 0.18, ease: EASE }}
             className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl"
           >
-            Theorie in Oerlikon, Motorrad in Oberglatt, Training in Rümlang. Klare
+            Theorie in Oerlikon, Manövertraining in Rümlang. Klare
             Anlaufstellen, kurze Wege, null Chaos.
           </motion.p>
 
           <div className="mt-10 flex flex-wrap gap-3">
             {[
               { l: "Oerlikon", s: "VKU & Nothelfer" },
-              { l: "Oberglatt", s: "Motorrad" },
-              { l: "Rümlang", s: "Manöver" },
+              { l: "Rümlang", s: "Manöver & Motorrad" },
             ].map((x, i) => (
               <motion.div
                 key={x.l}

@@ -183,7 +183,7 @@ export default function MotorradPage() {
                 Kursort
               </h3>
               <p className="mt-4 leading-relaxed text-muted">
-                Den Motorrad-Grundkurs bieten wir bei hostettler moto ag,
+                Den Motorrad-Grundkurs bieten wir bei Hostettler Moto AG,
                 Klotenerstrasse 10, 8153 Rümlang an.
               </p>
 

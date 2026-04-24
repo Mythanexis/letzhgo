@@ -108,7 +108,7 @@ export default function AuszeichnungenPage() {
 
       <Stats surface="light" />
 
-      <CTABanner />
+      <CTABanner className="bg-[#f7f8fa]" />
 
       <PartnersSection />
     </>
