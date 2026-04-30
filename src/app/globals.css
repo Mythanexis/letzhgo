@@ -27,3 +27,10 @@ body {
   background: var(--color-accent);
   color: #ffffff;
 }
+
+/* Keep reCAPTCHA badge visible and above sticky UI */
+.grecaptcha-badge {
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 60 !important;
+}

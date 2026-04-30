@@ -171,8 +171,14 @@ export default function RootLayout({
   return (
     <html lang="de-CH" className="antialiased">
       <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVK0S8VVX8" />
-        <script
+        <Script
+          id="gtag-lib"
+          src="https://www.googletagmanager.com/gtag/js?id=G-NVK0S8VVX8"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NVK0S8VVX8');`,
           }}
@@ -186,13 +192,15 @@ export default function RootLayout({
         )}
       </head>
       <body className="flex min-h-dvh flex-col bg-background text-foreground">
-        <script
+        <Script
+          id="schema-local-business"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(localBusinessSchema),
           }}
         />
-        <script
+        <Script
+          id="schema-website"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(websiteSchema),

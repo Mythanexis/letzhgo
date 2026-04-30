@@ -15,7 +15,7 @@ function parseValue(value: string): { num: number; prefix: string; suffix: strin
 function formatNumber(n: number, original: string): string {
   if (original.includes("'")) {
     const rounded = Math.round(n);
-    return rounded.toLocaleString("de-CH");
+    return rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
   }
   if (original.includes(".")) return n.toFixed(0);
   return Math.round(n).toString();
