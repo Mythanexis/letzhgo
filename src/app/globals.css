@@ -28,9 +28,9 @@ body {
   color: #ffffff;
 }
 
-/* Keep reCAPTCHA badge visible and above sticky UI */
+/* Hide reCAPTCHA badge while keeping v3 active */
 .grecaptcha-badge {
-  visibility: visible !important;
-  opacity: 1 !important;
-  z-index: 60 !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
