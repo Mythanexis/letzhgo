@@ -75,11 +75,6 @@ export const metadata: Metadata = {
       "Deine Fahrschule in Zürich: Fahrstunden, Nothelferkurs, Verkehrskunde und Motorrad-Grundkurs. Jetzt anmelden!",
     images: ["https://letzhgo.ch/images/og-image.webp"],
   },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
   category: "education",
 };
 

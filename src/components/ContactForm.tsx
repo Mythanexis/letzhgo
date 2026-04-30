@@ -32,10 +32,12 @@ function waitForRecaptcha(timeoutMs = 10_000): Promise<void> {
 async function getRecaptchaToken(action: string): Promise<string> {
   if (!SITE_KEY) throw new Error("NEXT_PUBLIC_RECAPTCHA_SITE_KEY is not set");
   await waitForRecaptcha();
+  const g = window.grecaptcha;
+  if (!g) throw new Error("reCAPTCHA not available");
   return new Promise((resolve, reject) => {
-    window.grecaptcha.ready(async () => {
+    g.ready(async () => {
       try {
-        const token = await window.grecaptcha.execute(SITE_KEY, { action });
+        const token = await g.execute(SITE_KEY, { action });
         resolve(token);
       } catch (err) {
         reject(err);
