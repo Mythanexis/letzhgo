@@ -168,12 +168,12 @@ export default function FahrstundenPage() {
                   <tbody className="divide-y divide-border">
                     <tr>
                       <td className="px-5 py-3.5 text-foreground">Einzellektion</td>
-                      <td className="px-5 py-3.5 text-right font-semibold text-foreground">CHF 95</td>
+                      <td className="px-5 py-3.5 text-right font-semibold text-foreground whitespace-nowrap">CHF 95</td>
                       <td className="hidden px-5 py-3.5 text-right text-muted sm:table-cell">45 Min.</td>
                     </tr>
                     <tr>
                       <td className="px-5 py-3.5 text-foreground">BPT <span className="text-muted">(Berufsmässiger Personentransport)</span></td>
-                      <td className="px-5 py-3.5 text-right font-semibold text-foreground">CHF 95</td>
+                      <td className="px-5 py-3.5 text-right font-semibold text-foreground whitespace-nowrap">CHF 95</td>
                       <td className="hidden px-5 py-3.5 text-right text-muted sm:table-cell">45 Min.</td>
                     </tr>
                   </tbody>

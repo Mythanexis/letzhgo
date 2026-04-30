@@ -203,19 +203,19 @@ export default function MotorradPage() {
                     <tr>
                       <td className="px-5 py-3.5 text-foreground">
                         Motorrad-Grundkurs
-                        <span className="ml-2 text-muted">(12 Stunden, 3 Kursteile)</span>
+                        <span className="block text-xs text-muted mt-0.5">(12 Stunden, 3 Kursteile)</span>
                       </td>
-                      <td className="px-5 py-3.5 text-right font-semibold text-foreground">CHF 570</td>
+                      <td className="px-5 py-3.5 text-right font-semibold text-foreground whitespace-nowrap">CHF 570</td>
                       <td className="hidden px-5 py-3.5 text-right text-muted sm:table-cell">12 Std.</td>
                     </tr>
                     <tr>
                       <td className="px-5 py-3.5 text-foreground">Motorrad-Fahrstunde</td>
-                      <td className="px-5 py-3.5 text-right font-semibold text-foreground">CHF 95</td>
+                      <td className="px-5 py-3.5 text-right font-semibold text-foreground whitespace-nowrap">CHF 95</td>
                       <td className="hidden px-5 py-3.5 text-right text-muted sm:table-cell">45 Min.</td>
                     </tr>
                     <tr>
                       <td className="px-5 py-3.5 text-foreground">Schnupperkurs</td>
-                      <td className="px-5 py-3.5 text-right font-semibold text-foreground">CHF 50</td>
+                      <td className="px-5 py-3.5 text-right font-semibold text-foreground whitespace-nowrap">CHF 50</td>
                       <td className="hidden px-5 py-3.5 text-right text-muted sm:table-cell">4 Std.</td>
                     </tr>
                   </tbody>

@@ -25,7 +25,7 @@ function ServiceSectionStatic({
   return (
     <section
       data-navbar-dark
-      className="relative flex min-h-[88svh] snap-start flex-col justify-end overflow-hidden"
+      className="relative flex min-h-svh snap-start flex-col justify-end overflow-hidden"
     >
       <div className="absolute inset-0">
         <Image
@@ -50,7 +50,7 @@ function ServiceSectionStatic({
         </p>
         <Link
           href={`/services/${service.id}`}
-          className="group mt-8 inline-flex items-center gap-3 rounded-full border border-white/25 px-8 py-4 text-lg font-medium text-white backdrop-blur-sm transition-all hover:border-white/50 hover:bg-white/10"
+          className="group mt-8 inline-flex items-center gap-3 rounded-full border border-white/25 px-6 py-3 text-base font-medium text-white backdrop-blur-sm transition-all hover:border-white/50 hover:bg-white/10"
         >
           Mehr erfahren
           <svg
@@ -145,7 +145,7 @@ function ServiceSectionScroll({
         </p>
         <Link
           href={`/services/${service.id}`}
-          className="group mt-8 inline-flex items-center gap-3 rounded-full border border-white/25 px-8 py-4 text-lg font-medium text-white backdrop-blur-sm transition-all hover:border-white/50 hover:bg-white/10"
+          className="group mt-8 inline-flex items-center gap-3 rounded-full border border-white/25 px-6 py-3 text-base font-medium text-white backdrop-blur-sm transition-all hover:border-white/50 hover:bg-white/10"
         >
           Mehr erfahren
           <svg

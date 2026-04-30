@@ -266,7 +266,7 @@ export default function GoogleReviewsSection() {
           >
             Was andere{" "}
             <span className="text-accent">wirklich</span>
-            <br className="hidden sm:block" />
+            <br />
             <span>über uns sagen.</span>
           </h2>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-muted">

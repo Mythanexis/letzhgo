@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { STATS } from "@/lib/constants";
-import { useCoarsePointer, useScrollAnim } from "@/hooks/useScrollAnim";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 function parseValue(value: string): { num: number; prefix: string; suffix: string } {
   const match = value.match(/^([^\d]*)(\d[\d']*\.?\d*)(.*)$/);
@@ -54,9 +54,7 @@ function CountingNumber({ value, isInView }: { value: string; isInView: boolean 
 
 function AnimatedStat({ value, label, index }: { value: string; label: string; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const coarse = useCoarsePointer();
-  const inViewHook = useInView(ref, { once: true, margin: "-80px" });
-  const isInView = coarse || inViewHook;
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const anim = useScrollAnim();
 
   return (
@@ -67,7 +65,7 @@ function AnimatedStat({ value, label, index }: { value: string; label: string; i
       <motion.p
         className="text-5xl font-bold text-accent md:text-6xl lg:text-7xl"
         initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 1, delay: 0.15 + index * 0.2, ease: [0.16, 1, 0.3, 1] }}
       >
         <CountingNumber value={value} isInView={isInView} />
@@ -75,7 +73,7 @@ function AnimatedStat({ value, label, index }: { value: string; label: string; i
       <motion.p
         className="mt-4 text-sm text-muted"
         initial={{ opacity: 0, y: 10 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
         transition={{ duration: 0.8, delay: 0.4 + index * 0.2 }}
       >
         {label}
@@ -114,7 +112,7 @@ export default function Stats({ surface = "muted" }: StatsProps) {
         </div>
 
         {/* Bottom: Numbers full-width */}
-        <div className="mt-32 grid grid-cols-2 gap-8 md:mt-40 md:grid-cols-4 md:gap-20">
+        <div className="mt-32 grid grid-cols-1 gap-10 md:mt-40 md:grid-cols-4 md:gap-20">
           {STATS.map((stat, i) => (
             <AnimatedStat key={i} value={stat.value} label={stat.label} index={i} />
           ))}

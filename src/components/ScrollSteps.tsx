@@ -64,6 +64,7 @@ function ScrollStepsInteractive() {
           </motion.p>
         </div>
 
+        <div className="w-full">
         <div className="relative h-44 flex-shrink-0 overflow-hidden md:hidden">
           {STEPS.map((step, i) => (
             <motion.span
@@ -129,6 +130,7 @@ function ScrollStepsInteractive() {
               </motion.span>
             ))}
           </div>
+        </div>
         </div>
       </div>
     </section>
