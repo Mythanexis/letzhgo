@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
           Authorization: `Bearer ${resendApiKey}`,
         },
         body: JSON.stringify({
-          from: "Let'ZHgo Website <onboarding@resend.dev>",
+          from: "Let'ZHgo Website <noreply@send.letzhgo.ch>",
           to: [SITE.email],
           subject: `Neue Kontaktanfrage von ${name}`,
           html: `

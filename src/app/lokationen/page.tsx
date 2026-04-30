@@ -207,21 +207,6 @@ export default function LokationenPage() {
                       <br />
                       {site.addressLines[1]}
                     </p>
-                    <a
-                      href={mapsHref(site.mapsQuery)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative mt-6 inline-flex items-center gap-2 pb-0.5 text-base font-semibold text-accent no-underline transition-colors after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-accent-dark after:content-[''] hover:after:scale-x-100"
-                    >
-                      In Google Maps öffnen
-                      <span
-                        aria-hidden
-                        className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"
-                      >
-                        →
-                      </span>
-                    </a>
-
                     <div className="mt-8 overflow-hidden rounded-2xl shadow-sm ring-1 ring-black/[0.06]">
                       <iframe
                         src={site.mapsEmbed}

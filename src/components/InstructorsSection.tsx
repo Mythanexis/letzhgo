@@ -110,41 +110,65 @@ function CheckboxGroup<T extends string>({
 }) {
   return (
     <div>
-      <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-muted/70">
+      <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-muted">
         {label}
       </p>
-      <ul>
+      <ul className="-mx-2">
         {options.map((opt) => {
           const count = countFn(opt);
           const isActive = active.has(opt);
-          const disabled = count === 0;
+          const disabled = count === 0 && !isActive;
           return (
             <li key={opt}>
               <button
                 type="button"
                 disabled={disabled}
                 onClick={() => onToggle(opt)}
-                className={`group flex w-full items-center justify-between gap-3 py-3 text-left transition-colors ${
-                  disabled ? "cursor-not-allowed opacity-30" : "cursor-pointer"
+                className={`group flex w-full items-center justify-between gap-3 rounded-lg px-2 py-2.5 text-left transition-colors ${
+                  disabled
+                    ? "cursor-not-allowed opacity-40"
+                    : isActive
+                      ? "cursor-pointer bg-accent/8 hover:bg-accent/12"
+                      : "cursor-pointer hover:bg-black/3"
                 }`}
               >
                 <span className="flex items-center gap-3">
-                  <span className={`flex h-[15px] w-[15px] shrink-0 items-center justify-center rounded-sm border transition-all ${
-                    isActive
-                      ? "border-accent bg-accent"
-                      : "border-border group-hover:border-accent/50"
-                  }`}>
+                  <span
+                    className={`flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-md border-[1.5px] transition-all ${
+                      isActive
+                        ? "border-accent bg-accent"
+                        : "border-border group-hover:border-accent/60"
+                    }`}
+                  >
                     {isActive && (
-                      <svg className="h-2.5 w-2.5 text-white" viewBox="0 0 10 10" fill="none">
-                        <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                      <svg className="h-3 w-3 text-white" viewBox="0 0 10 10" fill="none">
+                        <path
+                          d="M2 5l2.5 2.5L8 3"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                     )}
                   </span>
-                  <span className={`text-sm transition-colors ${isActive ? "font-medium text-accent" : "text-foreground group-hover:text-accent"}`}>
+                  <span
+                    className={`text-[15px] transition-colors ${
+                      isActive
+                        ? "font-semibold text-accent"
+                        : "font-medium text-foreground group-hover:text-accent"
+                    }`}
+                  >
                     {opt}
                   </span>
                 </span>
-                <span className="text-xs tabular-nums text-muted">{count}</span>
+                <span
+                  className={`text-xs tabular-nums transition-colors ${
+                    isActive ? "text-accent/70" : "text-muted/70"
+                  }`}
+                >
+                  {count}
+                </span>
               </button>
             </li>
           );
@@ -231,9 +255,9 @@ export default function InstructorsSection({
 
             {/* ── Mobile: native dropdowns (hidden on lg+) ── */}
             <div className="flex flex-wrap gap-3 lg:hidden">
-              <div className="relative">
+              <div className="relative flex-1 min-w-[160px]">
                 <select
-                  className="cursor-pointer appearance-none rounded-xl border border-border bg-white py-2.5 pl-4 pr-9 text-sm font-medium text-foreground focus:border-accent focus:outline-none"
+                  className="w-full cursor-pointer appearance-none rounded-xl border border-border bg-white py-3 pl-4 pr-10 text-[15px] font-medium text-foreground shadow-[0_1px_2px_rgba(0,0,0,0.03)] focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                   value={[...activeCategories][0] ?? ""}
                   onChange={(e) => {
                     setActiveCategories(e.target.value ? new Set([e.target.value as Category]) : new Set());
@@ -242,11 +266,11 @@ export default function InstructorsSection({
                   <option value="">Alle Kategorien</option>
                   {ALL_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
-                <svg className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"><path d="M4 6l4 4 4-4" /></svg>
+                <svg className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M4 6l4 4 4-4" /></svg>
               </div>
-              <div className="relative">
+              <div className="relative flex-1 min-w-[160px]">
                 <select
-                  className="cursor-pointer appearance-none rounded-xl border border-border bg-white py-2.5 pl-4 pr-9 text-sm font-medium text-foreground focus:border-accent focus:outline-none"
+                  className="w-full cursor-pointer appearance-none rounded-xl border border-border bg-white py-3 pl-4 pr-10 text-[15px] font-medium text-foreground shadow-[0_1px_2px_rgba(0,0,0,0.03)] focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                   value={[...activeLocations][0] ?? ""}
                   onChange={(e) => {
                     setActiveLocations(e.target.value ? new Set([e.target.value as LocationName]) : new Set());
@@ -255,28 +279,45 @@ export default function InstructorsSection({
                   <option value="">Alle Standorte</option>
                   {locationNames.map((l) => <option key={l} value={l}>{l}</option>)}
                 </select>
-                <svg className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"><path d="M4 6l4 4 4-4" /></svg>
+                <svg className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M4 6l4 4 4-4" /></svg>
               </div>
             </div>
 
             {/* ── Desktop: checkbox sidebar — absolute so cards can center over full width ── */}
             <motion.aside
               {...anim({ y: 20, delay: 0.15, duration: 0.7 })}
-              className="hidden lg:block lg:w-64 lg:shrink-0 lg:sticky lg:top-28"
+              className="hidden lg:block lg:w-72 lg:shrink-0 lg:sticky lg:top-28"
             >
-              <div className="rounded-lg bg-white px-5 py-5 shadow-sm">
-                <div className="flex items-center justify-between border-b border-border pb-4">
-                  <p className="text-sm font-semibold text-foreground">
-                    Filter
-                  </p>
+              <div className="rounded-2xl border border-border/60 bg-white px-6 py-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
+                <div className="flex items-center justify-between gap-4 border-b border-border pb-5">
+                  <div className="flex items-center gap-2.5">
+                    <svg
+                      className="h-4 w-4 text-accent"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden
+                    >
+                      <path d="M3 6h18M6 12h12M10 18h4" />
+                    </svg>
+                    <p className="text-base font-bold tracking-tight text-foreground">
+                      Filter
+                    </p>
+                  </div>
                   <AnimatePresence>
                     {hasActiveFilter && (
                       <motion.button
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        onClick={() => { setActiveCategories(new Set()); setActiveLocations(new Set()); }}
-                        className="cursor-pointer text-xs text-muted transition-colors hover:text-accent"
+                        onClick={() => {
+                          setActiveCategories(new Set());
+                          setActiveLocations(new Set());
+                        }}
+                        className="cursor-pointer text-xs font-medium text-muted transition-colors hover:text-accent"
                       >
                         Zurücksetzen
                       </motion.button>
@@ -284,7 +325,7 @@ export default function InstructorsSection({
                   </AnimatePresence>
                 </div>
 
-                <div className="mt-5">
+                <div className="mt-6">
                   <CheckboxGroup
                     label="Kategorie"
                     options={ALL_CATEGORIES}
@@ -294,7 +335,7 @@ export default function InstructorsSection({
                   />
                 </div>
 
-                <div className="my-5 border-t border-border" />
+                <div className="my-6 border-t border-border" />
 
                 <CheckboxGroup
                   label="Standort"
@@ -304,12 +345,14 @@ export default function InstructorsSection({
                   countFn={(loc) => countByLocation(loc as LocationName, activeCategories)}
                 />
 
-                <p className="mt-5 border-t border-border pt-4 text-xs text-muted">
-                  <span className="font-semibold text-foreground">{filteredInstructors.length}</span>
-                  {" "}von{" "}
-                  <span className="font-semibold text-foreground">{INSTRUCTORS.length}</span>
-                  {" "}Fahrlehrer:innen
-                </p>
+                <div className="mt-6 flex items-baseline gap-1.5 border-t border-border pt-5">
+                  <span className="text-2xl font-bold tabular-nums text-foreground">
+                    {filteredInstructors.length}
+                  </span>
+                  <span className="text-sm text-muted">
+                    von {INSTRUCTORS.length} Fahrlehrer:innen
+                  </span>
+                </div>
               </div>
             </motion.aside>
 
