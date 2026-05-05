@@ -3,36 +3,35 @@
 import { motion } from "framer-motion";
 import { useCoarsePointer, useScrollAnim } from "@/hooks/useScrollAnim";
 
-const COHORTS = [
+const AGE_RULES = [
   {
-    yearKey: "2002",
-    year: "Jahrgang 2002",
-    subtitle: null as string | null,
+    ageKey: "17",
+    title: "Ab 17 Jahren",
+    subtitle: "Lernphase startet",
     points: [
-      "Fahren ab 17 Jahren nicht möglich",
-      "können ab 18 Jahren den Lernfahrausweis erwerben",
-      "LFA vor 01.01.2021 = keine oblig. Lernphase von 12 Monate",
-      "LFA ab 01.01.2021 = oblig. Lernphase von 12 Monate",
+      "Lernfahrausweis Kategorie B kann beantragt werden",
+      "Lernfahrten sind nur mit Begleitperson erlaubt",
+      "Die praktische Prüfung ist frühestens mit 18 möglich",
     ],
   },
   {
-    yearKey: "2003",
-    year: "Jahrgang 2003",
-    subtitle: null,
+    ageKey: "18",
+    title: "Ab 18 Jahren",
+    subtitle: "Selbstständig fahren",
     points: [
-      "Fahren ab 17 Jahren möglich",
-      "können ab 01.01.2021 den Lernfahrausweis erwerben",
-      "LFA vor 01.01.2022 = keine oblig. Lernphase von 12 Monate",
-      "LFA ab 01.01.2022 = oblig. Lernphase von 12 Monate",
+      "Praktische Fahrprüfung kann abgelegt werden",
+      "Nach bestandener Prüfung darfst du alleine fahren",
+      "Wer den Lernfahrausweis vor 20 beantragt, braucht 12 Monate Lernphase",
     ],
   },
   {
-    yearKey: "2004",
-    year: "Jahrgang 2004",
-    subtitle: "Neues Gesetz",
+    ageKey: "20",
+    title: "Ab 20 Jahren",
+    subtitle: "Schneller zur Prüfung",
     points: [
-      "Fahren ab 17 Jahren möglich",
-      "durchlaufen die obligatorische Lernphase von 12 Monate",
+      "Lernfahrausweis Kategorie B kann weiterhin beantragt werden",
+      "Die obligatorische Lernphase von 12 Monaten entfällt",
+      "Die praktische Prüfung ist ohne Mindestdauer der Lernphase möglich",
     ],
   },
 ] as const;
@@ -120,7 +119,7 @@ export default function AutofahrenAb17Section() {
             Autofahren ab 17 Jahren
           </h2>
           <p className="mt-4 text-base text-muted md:text-lg">
-            Regeln nach Geburtsjahrgang – schnell vergleichen, was für dich gilt.
+            Regeln nach Alter - schnell vergleichen, was für dich gilt.
           </p>
         </motion.header>
 
@@ -132,9 +131,9 @@ export default function AutofahrenAb17Section() {
             : { whileInView: "show" as const, viewport: { once: true, margin: "-40px" } })}
           className="mt-14 grid gap-6 md:mt-20 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
         >
-          {COHORTS.map((cohort) => (
+          {AGE_RULES.map((rule) => (
             <motion.article
-              key={cohort.yearKey}
+              key={rule.ageKey}
               variants={itemVariants}
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
@@ -148,21 +147,21 @@ export default function AutofahrenAb17Section() {
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="inline-flex font-black tabular-nums text-accent/90">
                     <span className="text-4xl leading-none tracking-tight transition-transform duration-300 group-hover:scale-105 md:text-5xl">
-                      {cohort.yearKey}
+                      {rule.ageKey}
                     </span>
                   </span>
-                  {cohort.subtitle && (
+                  {rule.subtitle && (
                     <span className="rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
-                      {cohort.subtitle}
+                      {rule.subtitle}
                     </span>
                   )}
                 </div>
                 <h3 className="mt-4 text-lg font-bold text-foreground">
-                  {cohort.year}
+                  {rule.title}
                 </h3>
                 <div className="mt-3 h-px w-12 bg-gradient-to-r from-accent to-transparent" />
                 <ul className="mt-5 flex flex-1 flex-col gap-3.5 text-sm leading-relaxed text-muted md:text-[0.9375rem]">
-                  {cohort.points.map((point) => (
+                  {rule.points.map((point) => (
                     <li
                       key={point}
                       className="flex gap-3 rounded-lg py-0.5 transition-colors duration-200 group-hover:text-foreground/90"
