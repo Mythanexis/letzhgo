@@ -5,7 +5,15 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/constants";
+
+const SERVICE_NAV_LINKS = [
+  { label: "Fahrstunden", description: "Auto fahren lernen", href: "/services/fahrstunden" },
+  { label: "Motorrad", description: "Grundkurs & Fahrstunden", href: "/services/motorrad" },
+  { label: "VKU", description: "Verkehrskundeunterricht", href: "/services/verkehrskunde" },
+  { label: "Nothelfer", description: "Kompakter Nothelferkurs", href: "/services/nothelferkurs" },
+] as const;
 
 /** Home: oben immer Glass, bis gescrollt (Fallback bevor Layout misst). */
 const TRANSPARENT_AT_TOP_PATHS: readonly string[] = ["/"];
@@ -48,11 +56,18 @@ export default function Navbar() {
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileMenuView, setMobileMenuView] = useState<"main" | "services">("main");
+  const [servicesPopoverPosition, setServicesPopoverPosition] = useState({ left: 0, top: 0 });
   const [scrolled, setScrolled] = useState(false);
   const [overDarkBackdrop, setOverDarkBackdrop] = useState(false);
   /** Nur ≥ md: weg bei Scroll runter, zurück bei Scroll hoch (Mobile unverändert). */
   const [desktopNavHidden, setDesktopNavHidden] = useState(false);
   const lastScrollY = useRef(0);
+  const servicesOpenTimer = useRef<number | null>(null);
+  const servicesCloseTimer = useRef<number | null>(null);
+  const servicesTriggerRef = useRef<HTMLDivElement>(null);
+  const servicesPopoverRef = useRef<HTMLDivElement>(null);
 
   const headerAboveMobileOverlay = mobileOpen;
 
@@ -61,7 +76,16 @@ export default function Navbar() {
     lastScrollY.current = window.scrollY;
     setDesktopNavHidden(false);
     setScrolled(window.scrollY > 20);
+    setServicesOpen(false);
+    setMobileMenuView("main");
   }, [pathname]);
+
+  useEffect(() => {
+    return () => {
+      if (servicesOpenTimer.current) window.clearTimeout(servicesOpenTimer.current);
+      if (servicesCloseTimer.current) window.clearTimeout(servicesCloseTimer.current);
+    };
+  }, []);
 
   useEffect(() => {
     const mdMq = window.matchMedia("(min-width: 768px)");
@@ -143,10 +167,48 @@ export default function Navbar() {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
       if (mobileOpen) setMobileOpen(false);
+      if (servicesOpen) setServicesOpen(false);
+      setMobileMenuView("main");
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [mobileOpen]);
+  }, [mobileOpen, servicesOpen]);
+
+  const updateServicesPopoverPosition = () => {
+    const trigger = servicesTriggerRef.current;
+    if (!trigger) return;
+    const rect = trigger.getBoundingClientRect();
+    setServicesPopoverPosition({
+      left: rect.left + rect.width / 2,
+      top: rect.bottom + 12,
+    });
+  };
+
+  const openServicesMenu = (delay = 150) => {
+    if (servicesCloseTimer.current) window.clearTimeout(servicesCloseTimer.current);
+    if (servicesOpenTimer.current) window.clearTimeout(servicesOpenTimer.current);
+    servicesOpenTimer.current = window.setTimeout(() => {
+      updateServicesPopoverPosition();
+      setServicesOpen(true);
+    }, delay);
+  };
+
+  const closeServicesMenu = (delay = 100) => {
+    if (servicesOpenTimer.current) window.clearTimeout(servicesOpenTimer.current);
+    if (servicesCloseTimer.current) window.clearTimeout(servicesCloseTimer.current);
+    servicesCloseTimer.current = window.setTimeout(() => setServicesOpen(false), delay);
+  };
+
+  useEffect(() => {
+    if (!servicesOpen) return;
+    updateServicesPopoverPosition();
+    window.addEventListener("resize", updateServicesPopoverPosition);
+    window.addEventListener("scroll", updateServicesPopoverPosition, { passive: true });
+    return () => {
+      window.removeEventListener("resize", updateServicesPopoverPosition);
+      window.removeEventListener("scroll", updateServicesPopoverPosition);
+    };
+  }, [servicesOpen]);
 
   const glassNav =
     !mobileOpen &&
@@ -166,6 +228,14 @@ export default function Navbar() {
     if (active) return `${base} bg-accent/12 font-semibold text-accent`;
     return `${base} text-muted hover:bg-border/60 hover:text-foreground`;
   };
+
+  const servicesPopoverShell = glassNav
+    ? "border-white/22 bg-white/[0.08] text-white shadow-[0_20px_64px_-12px_rgba(0,0,0,0.28),0_0_0_1px_rgba(255,255,255,0.08)] backdrop-blur-xl"
+    : "border-neutral-200/90 bg-white text-foreground shadow-[0_28px_90px_-30px_rgba(15,23,42,0.24),0_12px_34px_-24px_rgba(15,23,42,0.18)]";
+  const servicesPopoverItem = glassNav
+    ? "hover:bg-white/10 hover:text-white"
+    : "hover:bg-neutral-100 hover:text-accent";
+  const servicesPopoverDescription = glassNav ? "text-white/50" : "text-muted";
 
   const burgerLine = glassNav ? "bg-white" : "bg-foreground";
 
@@ -221,6 +291,37 @@ export default function Navbar() {
             >
               {NAV_LINKS.map((link) => {
                 const active = isNavLinkActive(pathname, link.href);
+                const isServices = link.href === "/services";
+                if (isServices) {
+                  return (
+                    <div
+                      key={link.href}
+                      ref={servicesTriggerRef}
+                      className="relative"
+                      onMouseEnter={() => openServicesMenu()}
+                      onMouseLeave={() => closeServicesMenu()}
+                      onFocus={() => openServicesMenu(0)}
+                      onBlur={(event) => {
+                        if (
+                          !event.currentTarget.contains(event.relatedTarget) &&
+                          !servicesPopoverRef.current?.contains(event.relatedTarget)
+                        ) {
+                          closeServicesMenu(80);
+                        }
+                      }}
+                    >
+                      <Link
+                        href={link.href}
+                        aria-current={active ? "page" : undefined}
+                        aria-haspopup="menu"
+                        aria-expanded={servicesOpen}
+                        className={desktopNavLinkClass(link.href)}
+                      >
+                        {link.label}
+                      </Link>
+                    </div>
+                  );
+                }
                 return (
                   <Link
                     key={link.href}
@@ -250,7 +351,6 @@ export default function Navbar() {
 
             <button
               type="button"
-              onClick={() => setMobileOpen(!mobileOpen)}
               className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border transition-[background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${
                 glassNav
                   ? "border-white/30 bg-white/10 hover:bg-white/20"
@@ -259,6 +359,10 @@ export default function Navbar() {
               aria-label={mobileOpen ? "Menu schließen" : "Menu öffnen"}
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
+              onClick={() => {
+                if (mobileOpen) setMobileMenuView("main");
+                setMobileOpen(!mobileOpen);
+              }}
             >
               <span className="relative block h-5 w-5 shrink-0" aria-hidden>
                 <span
@@ -285,6 +389,65 @@ export default function Navbar() {
           </div>
         </nav>
       </header>
+
+      <AnimatePresence>
+        {servicesOpen && (
+          <motion.div
+            ref={servicesPopoverRef}
+            key="services-popover"
+            role="menu"
+            onMouseEnter={() => openServicesMenu(0)}
+            onMouseLeave={() => closeServicesMenu()}
+            onFocus={() => openServicesMenu(0)}
+            onBlur={(event) => {
+              if (
+                !event.currentTarget.contains(event.relatedTarget) &&
+                !servicesTriggerRef.current?.contains(event.relatedTarget)
+              ) {
+                closeServicesMenu(80);
+              }
+            }}
+            initial={reduceMotion ? false : { opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={
+              reduceMotion
+                ? { duration: 0.12 }
+                : { duration: 0.18, ease: [0.16, 1, 0.3, 1] }
+            }
+            style={{
+              left: servicesPopoverPosition.left,
+              top: servicesPopoverPosition.top,
+            }}
+            className={`fixed z-[55] hidden w-64 -translate-x-1/2 rounded-3xl border p-2 before:absolute before:-top-3 before:left-0 before:h-3 before:w-full before:content-[''] md:block ${servicesPopoverShell}`}
+          >
+            <div className="grid gap-1">
+              {SERVICE_NAV_LINKS.map((service) => {
+                const serviceActive = isNavLinkActive(pathname, service.href);
+                return (
+                  <Link
+                    key={service.href}
+                    href={service.href}
+                    role="menuitem"
+                    className={`group block rounded-2xl px-3 py-2.5 text-sm transition-colors ${
+                      serviceActive
+                        ? glassNav
+                          ? "bg-white/14 text-white"
+                          : "bg-accent/10 text-accent"
+                        : servicesPopoverItem
+                    }`}
+                  >
+                    <span className="block font-semibold">{service.label}</span>
+                    <span className={`mt-0.5 block text-xs ${servicesPopoverDescription}`}>
+                      {service.description}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Mobile full-screen menu */}
       <AnimatePresence mode="sync">
@@ -314,94 +477,131 @@ export default function Navbar() {
                     }
               }
             >
-              {reduceMotion ? (
-                <div className="flex flex-1 flex-col items-center justify-center gap-8">
-                  {NAV_LINKS.map((link) => {
-                    const active = isNavLinkActive(pathname, link.href);
-                    return (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        onClick={() => setMobileOpen(false)}
-                        aria-current={active ? "page" : undefined}
-                        className={`block text-2xl font-semibold tracking-tight transition-colors hover:text-accent ${
-                          active ? "text-accent" : "text-foreground"
-                        }`}
+              <div className="relative flex flex-1 items-center justify-center overflow-hidden">
+                <AnimatePresence initial={false}>
+                  {mobileMenuView === "main" ? (
+                    <motion.div
+                      key="mobile-main-menu"
+                      className="absolute inset-0 flex w-full flex-col items-center justify-center gap-8"
+                      initial={reduceMotion ? false : { opacity: 0, x: -18 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: -18 }}
+                      transition={
+                        reduceMotion
+                          ? { duration: 0.12 }
+                          : { duration: 0.22, ease: [0.16, 1, 0.3, 1] }
+                      }
+                    >
+                      {NAV_LINKS.map((link) => {
+                        const active = isNavLinkActive(pathname, link.href);
+                        if (link.href === "/services") {
+                          return (
+                            <button
+                              key={link.href}
+                              type="button"
+                              onClick={() => setMobileMenuView("services")}
+                              aria-current={active ? "page" : undefined}
+                              className={`relative text-2xl font-semibold leading-none tracking-tight transition-colors hover:text-accent ${
+                                active ? "text-accent" : "text-foreground"
+                              }`}
+                            >
+                              {link.label}
+                              <ChevronRight
+                                className="absolute left-full top-1/2 ml-2.5 h-6 w-6 -translate-y-1/2"
+                                aria-hidden
+                                strokeWidth={2.75}
+                              />
+                            </button>
+                          );
+                        }
+                        return (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={() => setMobileOpen(false)}
+                            aria-current={active ? "page" : undefined}
+                            className={`block text-2xl font-semibold tracking-tight transition-colors hover:text-accent ${
+                              active ? "text-accent" : "text-foreground"
+                            }`}
+                          >
+                            {link.label}
+                          </Link>
+                        );
+                      })}
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="mobile-services-menu"
+                      className="absolute inset-0 flex w-full flex-col items-center justify-center gap-8"
+                      initial={reduceMotion ? false : { opacity: 0, x: 18 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: 18 }}
+                      transition={
+                        reduceMotion
+                          ? { duration: 0.12 }
+                          : { duration: 0.22, ease: [0.16, 1, 0.3, 1] }
+                      }
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setMobileMenuView("main")}
+                        className="inline-flex items-center gap-2 text-base font-semibold text-muted transition-colors hover:text-accent"
                       >
-                        {link.label}
-                      </Link>
-                    );
-                  })}
-                </div>
-              ) : (
-                <motion.div
-                  className="flex flex-1 flex-col items-center justify-center gap-8"
-                  initial="hidden"
-                  animate="show"
-                  variants={{
-                    hidden: {},
-                    show: {
-                      transition: {
-                        staggerChildren: 0.055,
-                        delayChildren: 0.08,
-                      },
-                    },
-                  }}
-                >
-                  {NAV_LINKS.map((link) => {
-                    const active = isNavLinkActive(pathname, link.href);
-                    return (
-                      <motion.div
-                        key={link.href}
-                        variants={{
-                          hidden: { opacity: 0, y: 18 },
-                          show: {
-                            opacity: 1,
-                            y: 0,
-                            transition: {
-                              duration: 0.38,
-                              ease: [0.16, 1, 0.3, 1],
-                            },
-                          },
-                        }}
-                      >
+                        <ChevronLeft className="h-4 w-4" aria-hidden strokeWidth={2.5} />
+                        Zurück
+                      </button>
+
+                      {SERVICE_NAV_LINKS.map((service) => (
                         <Link
-                          href={link.href}
-                          onClick={() => setMobileOpen(false)}
-                          aria-current={active ? "page" : undefined}
+                          key={service.href}
+                          href={service.href}
+                          onClick={() => {
+                            setMobileMenuView("main");
+                            setMobileOpen(false);
+                          }}
+                          aria-current={isNavLinkActive(pathname, service.href) ? "page" : undefined}
                           className={`block text-2xl font-semibold tracking-tight transition-colors hover:text-accent ${
-                            active ? "text-accent" : "text-foreground"
+                            isNavLinkActive(pathname, service.href)
+                              ? "text-accent"
+                              : "text-foreground"
                           }`}
                         >
-                          {link.label}
+                          {service.label}
                         </Link>
-                      </motion.div>
-                    );
-                  })}
-                </motion.div>
-              )}
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
-              <motion.div
-                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={
-                  reduceMotion
-                    ? { duration: 0.15 }
-                    : {
-                        duration: 0.4,
-                        ease: [0.16, 1, 0.3, 1],
-                        delay: 0.14,
+              <div className="h-[6.25rem] w-full">
+                <AnimatePresence initial={false}>
+                  {mobileMenuView === "main" && (
+                    <motion.div
+                      key="mobile-menu-cta"
+                      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+                      transition={
+                        reduceMotion
+                          ? { duration: 0.15 }
+                          : {
+                              duration: 0.28,
+                              ease: [0.16, 1, 0.3, 1],
+                            }
                       }
-                }
-              >
-                <Link
-                  href="/kontakt"
-                  onClick={() => setMobileOpen(false)}
-                  className="mt-10 flex w-full justify-center rounded-full bg-accent px-7 py-4 text-lg font-semibold text-white transition-colors hover:bg-accent-dark"
-                >
-                  Jetzt starten
-                </Link>
-              </motion.div>
+                    >
+                      <Link
+                        href="/kontakt"
+                        onClick={() => setMobileOpen(false)}
+                        className="mt-10 flex w-full justify-center rounded-full bg-accent px-7 py-4 text-lg font-semibold text-white transition-colors hover:bg-accent-dark"
+                      >
+                        Jetzt starten
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </motion.div>
           </motion.div>
         )}
