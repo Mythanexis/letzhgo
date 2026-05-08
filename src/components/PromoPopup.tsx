@@ -39,7 +39,7 @@ export default function PromoPopup() {
     },
     {
       id: "schnupperkurs",
-      image: "/images/schnupperkurs.png",
+      image: "/images/schnupperkurs.webp",
       alt: "Motorrad Schnupperkurs bei Let'ZHgo",
       badge: "Neu",
       title: "Schnupperkurs Motorrad",

@@ -38,7 +38,7 @@ export const AWARD_ITEMS = [
 ] as const;
 
 export const IMAGES = {
-  hero: "/images/letzhgo-hero.jpg",
+  hero: "/images/letzhgo-hero.webp",
   autoFahrstunden: "/images/auto-fahrstunden.png",
   nothelferkurs: "/images/nothelferkurs.png",
   verkehrskunde: "/images/verkehrskunde.png",

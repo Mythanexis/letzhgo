@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, type FormEvent } from "react";
+import Script from "next/script";
 import { motion, AnimatePresence } from "framer-motion";
 import { SITE } from "@/lib/constants";
 
@@ -8,8 +9,7 @@ const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 /**
  * Waits until grecaptcha is available on the window. The script is loaded
- * globally via next/script in the root layout (strategy="afterInteractive"),
- * so on a slow connection it may not yet be ready when the user submits.
+ * via next/script in this component (strategy="lazyOnload").
  */
 function waitForRecaptcha(timeoutMs = 10_000): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -167,6 +167,13 @@ export default function ContactForm() {
 
   return (
     <>
+      {SITE_KEY && (
+        <Script
+          id="recaptcha-v3-contact"
+          src={`https://www.google.com/recaptcha/api.js?render=${SITE_KEY}`}
+          strategy="lazyOnload"
+        />
+      )}
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid gap-6 md:grid-cols-2">
           <div>
