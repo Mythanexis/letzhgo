@@ -7,6 +7,13 @@ import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 
+const SERVICE_NAV_LINKS = [
+  { label: "Fahrstunden", description: "Auto fahren lernen", href: "/services/fahrstunden" },
+  { label: "Motorrad", description: "Grundkurs & Fahrstunden", href: "/services/motorrad" },
+  { label: "VKU", description: "Verkehrskundeunterricht", href: "/services/verkehrskunde" },
+  { label: "Nothelfer", description: "Kompakter Nothelferkurs", href: "/services/nothelferkurs" },
+] as const;
+
 /** Home: oben immer Glass, bis gescrollt (Fallback bevor Layout misst). */
 const TRANSPARENT_AT_TOP_PATHS: readonly string[] = ["/"];
 
@@ -48,11 +55,14 @@ export default function Navbar() {
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [overDarkBackdrop, setOverDarkBackdrop] = useState(false);
   /** Nur ≥ md: weg bei Scroll runter, zurück bei Scroll hoch (Mobile unverändert). */
   const [desktopNavHidden, setDesktopNavHidden] = useState(false);
   const lastScrollY = useRef(0);
+  const servicesOpenTimer = useRef<ReturnType<typeof window.setTimeout> | null>(null);
+  const servicesCloseTimer = useRef<ReturnType<typeof window.setTimeout> | null>(null);
 
   const headerAboveMobileOverlay = mobileOpen;
 
@@ -61,7 +71,15 @@ export default function Navbar() {
     lastScrollY.current = window.scrollY;
     setDesktopNavHidden(false);
     setScrolled(window.scrollY > 20);
+    setServicesOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    return () => {
+      if (servicesOpenTimer.current) window.clearTimeout(servicesOpenTimer.current);
+      if (servicesCloseTimer.current) window.clearTimeout(servicesCloseTimer.current);
+    };
+  }, []);
 
   useEffect(() => {
     const mdMq = window.matchMedia("(min-width: 768px)");
@@ -143,10 +161,23 @@ export default function Navbar() {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
       if (mobileOpen) setMobileOpen(false);
+      if (servicesOpen) setServicesOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [mobileOpen]);
+  }, [mobileOpen, servicesOpen]);
+
+  const openServicesMenu = (delay = 150) => {
+    if (servicesCloseTimer.current) window.clearTimeout(servicesCloseTimer.current);
+    if (servicesOpenTimer.current) window.clearTimeout(servicesOpenTimer.current);
+    servicesOpenTimer.current = window.setTimeout(() => setServicesOpen(true), delay);
+  };
+
+  const closeServicesMenu = (delay = 100) => {
+    if (servicesOpenTimer.current) window.clearTimeout(servicesOpenTimer.current);
+    if (servicesCloseTimer.current) window.clearTimeout(servicesCloseTimer.current);
+    servicesCloseTimer.current = window.setTimeout(() => setServicesOpen(false), delay);
+  };
 
   const glassNav =
     !mobileOpen &&
@@ -166,6 +197,14 @@ export default function Navbar() {
     if (active) return `${base} bg-accent/12 font-semibold text-accent`;
     return `${base} text-muted hover:bg-border/60 hover:text-foreground`;
   };
+
+  const servicesPopoverShell = glassNav
+    ? "border-white/20 bg-neutral-950/75 text-white shadow-[0_24px_80px_-28px_rgba(0,0,0,0.55)] backdrop-blur-2xl"
+    : "border-neutral-200/90 bg-white text-foreground shadow-[0_28px_90px_-30px_rgba(15,23,42,0.24),0_12px_34px_-24px_rgba(15,23,42,0.18)]";
+  const servicesPopoverItem = glassNav
+    ? "hover:bg-white/10 hover:text-white"
+    : "hover:bg-neutral-100 hover:text-accent";
+  const servicesPopoverDescription = glassNav ? "text-white/50" : "text-muted";
 
   const burgerLine = glassNav ? "bg-white" : "bg-foreground";
 
@@ -216,6 +255,76 @@ export default function Navbar() {
             >
               {NAV_LINKS.map((link) => {
                 const active = isNavLinkActive(pathname, link.href);
+                const isServices = link.href === "/services";
+                if (isServices) {
+                  return (
+                    <div
+                      key={link.href}
+                      className="relative"
+                      onMouseEnter={() => openServicesMenu()}
+                      onMouseLeave={() => closeServicesMenu()}
+                      onFocus={() => openServicesMenu(0)}
+                      onBlur={(event) => {
+                        if (!event.currentTarget.contains(event.relatedTarget)) {
+                          closeServicesMenu(80);
+                        }
+                      }}
+                    >
+                      <Link
+                        href={link.href}
+                        aria-current={active ? "page" : undefined}
+                        aria-haspopup="menu"
+                        aria-expanded={servicesOpen}
+                        className={desktopNavLinkClass(link.href)}
+                      >
+                        {link.label}
+                      </Link>
+
+                      <AnimatePresence>
+                        {servicesOpen && (
+                          <motion.div
+                            key="services-popover"
+                            role="menu"
+                            initial={reduceMotion ? false : { opacity: 0, scale: 0.98 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.98 }}
+                            transition={
+                              reduceMotion
+                                ? { duration: 0.12 }
+                                : { duration: 0.18, ease: [0.16, 1, 0.3, 1] }
+                            }
+                            className={`absolute left-1/2 top-full z-50 mt-3 w-64 -translate-x-1/2 rounded-3xl border p-2 before:absolute before:-top-3 before:left-0 before:h-3 before:w-full before:content-[''] ${servicesPopoverShell}`}
+                          >
+                            <div className="grid gap-1">
+                              {SERVICE_NAV_LINKS.map((service) => {
+                                const serviceActive = isNavLinkActive(pathname, service.href);
+                                return (
+                                  <Link
+                                    key={service.href}
+                                    href={service.href}
+                                    role="menuitem"
+                                    className={`group block rounded-2xl px-3 py-2.5 text-sm transition-colors ${
+                                      serviceActive
+                                        ? glassNav
+                                          ? "bg-white/14 text-white"
+                                          : "bg-accent/10 text-accent"
+                                        : servicesPopoverItem
+                                    }`}
+                                  >
+                                    <span className="block font-semibold">{service.label}</span>
+                                    <span className={`mt-0.5 block text-xs ${servicesPopoverDescription}`}>
+                                      {service.description}
+                                    </span>
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                }
                 return (
                   <Link
                     key={link.href}
@@ -314,17 +423,36 @@ export default function Navbar() {
                   {NAV_LINKS.map((link) => {
                     const active = isNavLinkActive(pathname, link.href);
                     return (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        onClick={() => setMobileOpen(false)}
-                        aria-current={active ? "page" : undefined}
-                        className={`block text-2xl font-semibold tracking-tight transition-colors hover:text-accent ${
-                          active ? "text-accent" : "text-foreground"
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
+                      <div key={link.href} className="text-center">
+                        <Link
+                          href={link.href}
+                          onClick={() => setMobileOpen(false)}
+                          aria-current={active ? "page" : undefined}
+                          className={`block text-2xl font-semibold tracking-tight transition-colors hover:text-accent ${
+                            active ? "text-accent" : "text-foreground"
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                        {link.href === "/services" && (
+                          <div className="mt-4 grid gap-2">
+                            {SERVICE_NAV_LINKS.map((service) => (
+                              <Link
+                                key={service.href}
+                                href={service.href}
+                                onClick={() => setMobileOpen(false)}
+                                className={`text-base font-medium transition-colors hover:text-accent ${
+                                  isNavLinkActive(pathname, service.href)
+                                    ? "text-accent"
+                                    : "text-muted"
+                                }`}
+                              >
+                                {service.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     );
                   })}
                 </div>
@@ -370,6 +498,24 @@ export default function Navbar() {
                         >
                           {link.label}
                         </Link>
+                        {link.href === "/services" && (
+                          <div className="mt-4 grid gap-2 text-center">
+                            {SERVICE_NAV_LINKS.map((service) => (
+                              <Link
+                                key={service.href}
+                                href={service.href}
+                                onClick={() => setMobileOpen(false)}
+                                className={`block text-base font-medium transition-colors hover:text-accent ${
+                                  isNavLinkActive(pathname, service.href)
+                                    ? "text-accent"
+                                    : "text-muted"
+                                }`}
+                              >
+                                {service.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
                       </motion.div>
                     );
                   })}
