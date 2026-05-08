@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
@@ -11,22 +12,23 @@ import ScrollRevealQuote from "@/components/ScrollRevealQuote";
 import PricingCard from "@/components/PricingCard";
 import ScrollSteps from "@/components/ScrollSteps";
 import CTABanner from "@/components/CTABanner";
-import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import InstructorsSection from "@/components/InstructorsSection";
 import Stats from "@/components/Stats";
-import FAQ from "@/components/FAQ";
-import ContactForm from "@/components/ContactForm";
 import WegweiserHomeTeaser from "@/components/WegweiserHomeTeaser";
 import PartnersSection from "@/components/PartnersSection";
 import HostettlerSection from "@/components/HostettlerSection";
 import GrundkursLocationSection from "@/components/GrundkursLocationSection";
 import ManoeverplatzSection from "@/components/ManoeverplatzSection";
-import InstagramSection from "@/components/InstagramSection";
-import TikTokSection from "@/components/TikTokSection";
 import AutofahrenAb17Section from "@/components/AutofahrenAb17Section";
-import BlogHomeSection from "@/components/BlogHomeSection";
 import { SERVICES_OVERVIEW, PRICING } from "@/lib/constants";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
+
+const GoogleReviewsSection = dynamic(() => import("@/components/GoogleReviewsSection"));
+const InstagramSection = dynamic(() => import("@/components/InstagramSection"));
+const TikTokSection = dynamic(() => import("@/components/TikTokSection"));
+const FAQ = dynamic(() => import("@/components/FAQ"));
+const BlogHomeSection = dynamic(() => import("@/components/BlogHomeSection"));
+const ContactForm = dynamic(() => import("@/components/ContactForm"));
 
 export default function HomePage() {
   const anim = useScrollAnim();
@@ -85,7 +87,7 @@ export default function HomePage() {
         addressCountry: "CH",
       },
     },
-    image: "https://letzhgo.ch/images/schnupperkurs.png",
+    image: "https://letzhgo.ch/images/schnupperkurs.webp",
     offers: {
       "@type": "Offer",
       price: "50",
@@ -174,7 +176,7 @@ export default function HomePage() {
         secondaryCtaText="Kontakt"
         secondaryCtaHref="/kontakt"
         showImage
-        imageSrc="/images/letzhgo-hero.png"
+        imageSrc="/images/letzhgo-hero.webp"
       />
 
       {/* Unsere Vorteile — Home (alternatives Layout) */}
@@ -360,10 +362,9 @@ export default function HomePage() {
         {/* Hintergrundbild */}
         <div className="pointer-events-none absolute inset-0">
           <Image
-            src="/images/schnupperkurs.png"
+            src="/images/schnupperkurs.webp"
             alt="Motorrad Schnupperkurs bei Let'ZHgo"
             fill
-            priority
             className="object-cover"
             sizes="100vw"
           />
@@ -516,6 +517,8 @@ export default function HomePage() {
                 <video
                   className="h-full w-full rounded-[32px] object-cover"
                   controls
+                  preload="none"
+                  poster="/images/bericht-20-min.png"
                 >
                   <source src="/videos/20-minuten-lifestyle-video.mp4" type="video/mp4" />
                   Dein Browser unterstützt das Abspielen dieses Videos nicht.

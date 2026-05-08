@@ -8,8 +8,6 @@ import SmoothScroll from "@/components/SmoothScroll";
 import { ScrollAnimProvider } from "@/hooks/useScrollAnim";
 import "./globals.css";
 
-const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-
 export const viewport: Viewport = {
   viewportFit: "cover",
   themeColor: "#0144DC",
@@ -132,7 +130,7 @@ const localBusinessSchema = {
     worstRating: "1",
     reviewCount: "417",
   },
-  image: "https://letzhgo.ch/images/letzhgo-hero.jpg",
+  image: "https://letzhgo.ch/images/letzhgo-hero.webp",
   logo: "https://letzhgo.ch/images/logo.png",
   sameAs: [
     "https://www.instagram.com/letzhgo_fahrschule/",
@@ -171,6 +169,11 @@ export default function RootLayout({
   return (
     <html lang="de-CH" className="antialiased">
       <head>
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.google.com" />
+        <link rel="dns-prefetch" href="https://app1.edoobox.com" />
         <Script
           id="gtag-lib"
           src="https://www.googletagmanager.com/gtag/js?id=G-NVK0S8VVX8"
@@ -183,13 +186,6 @@ export default function RootLayout({
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NVK0S8VVX8');`,
           }}
         />
-        {RECAPTCHA_SITE_KEY && (
-          <Script
-            id="recaptcha-v3"
-            src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`}
-            strategy="afterInteractive"
-          />
-        )}
       </head>
       <body className="flex min-h-dvh flex-col bg-background text-foreground">
         <Script

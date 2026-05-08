@@ -458,7 +458,7 @@ export default function MotorradPage() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0">
           <Image
-            src="/images/schnupperkurs.png"
+            src="/images/schnupperkurs.webp"
             alt="Motorrad Schnupperkurs bei Let'ZHgo"
             fill
             className="object-cover"

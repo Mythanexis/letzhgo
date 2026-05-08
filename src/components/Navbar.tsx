@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/constants";
@@ -39,18 +39,6 @@ const NAV_GLASS_SHELL =
   "border-white/25 bg-white/[0.12] shadow-[0_20px_64px_-12px_rgba(0,0,0,0.28),0_0_0_1px_rgba(255,255,255,0.1)] backdrop-blur-2xl";
 const NAV_SOLID_SHELL =
   "border-neutral-200/95 bg-white shadow-[0_32px_100px_-24px_rgba(15,23,42,0.10),0_18px_56px_-28px_rgba(15,23,42,0.07),0_0_0_1px_rgba(15,23,42,0.045)] backdrop-blur-2xl";
-
-function isNavbarOverDarkBackdrop(): boolean {
-  if (typeof document === "undefined") return false;
-  const els = document.querySelectorAll("[data-navbar-dark]");
-  const band = NAV_OVERLAP_BAND_PX;
-  for (const el of els) {
-    const r = el.getBoundingClientRect();
-    const overlap = Math.min(r.bottom, band) - Math.max(r.top, 0);
-    if (overlap >= NAV_DARK_MIN_OVERLAP_PX) return true;
-  }
-  return false;
-}
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -129,28 +117,47 @@ export default function Navbar() {
     };
   }, [pathname, mobileOpen]);
 
-  useLayoutEffect(() => {
-    // Synchronous check before first paint — prevents white-navbar flash on dark-hero pages
-    setOverDarkBackdrop(isNavbarOverDarkBackdrop());
+  useEffect(() => {
+    const band = NAV_OVERLAP_BAND_PX;
+    const minOverlap = NAV_DARK_MIN_OVERLAP_PX;
+    const qualifying = new Set<Element>();
+    let observer: IntersectionObserver | null = null;
 
-    let ticking = false;
-    const update = () => {
-      ticking = false;
-      setOverDarkBackdrop(isNavbarOverDarkBackdrop());
+    const syncDark = () => {
+      setOverDarkBackdrop(qualifying.size > 0);
     };
-    const schedule = () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(update);
-      }
+
+    const setup = () => {
+      observer?.disconnect();
+      qualifying.clear();
+      syncDark();
+
+      const bottomMargin = band - window.innerHeight;
+      const rootMargin = `0px 0px ${bottomMargin}px 0px`;
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            const ok =
+              entry.isIntersecting && entry.intersectionRect.height >= minOverlap;
+            if (ok) qualifying.add(entry.target);
+            else qualifying.delete(entry.target);
+          }
+          syncDark();
+        },
+        { root: null, rootMargin, threshold: 0 },
+      );
+
+      document.querySelectorAll("[data-navbar-dark]").forEach((el) => {
+        observer!.observe(el);
+      });
     };
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule, { passive: true });
-    const t = window.setTimeout(schedule, 0);
+
+    setup();
+    window.addEventListener("resize", setup);
     return () => {
-      window.clearTimeout(t);
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
+      window.removeEventListener("resize", setup);
+      observer?.disconnect();
+      qualifying.clear();
     };
   }, [pathname]);
 

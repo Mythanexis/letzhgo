@@ -389,6 +389,7 @@ export default function Hero({
             fill
             className="object-cover brightness-[0.4]"
             priority
+            quality={75}
             sizes="100vw"
           />
         </div>
