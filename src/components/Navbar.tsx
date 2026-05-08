@@ -261,6 +261,11 @@ export default function Navbar() {
           {/* Brand */}
           <Link
             href="/"
+            onClick={(event) => {
+              if (pathname !== "/") return;
+              event.preventDefault();
+              window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+            }}
             className="group relative flex shrink-0 items-center gap-3 rounded-xl py-1 pr-1"
           >
             <span className="relative block h-9 w-36 sm:h-10 sm:w-40">
@@ -268,7 +273,7 @@ export default function Navbar() {
                 src="/images/logo.png"
                 alt={SITE.name}
                 fill
-                className={`object-contain object-left transition-[filter,transform] duration-300 group-hover:scale-[1.02] ${
+                className={`object-contain object-left transition-[filter] duration-300 ${
                   glassNav ? "brightness-0 invert drop-shadow-md" : ""
                 }`}
                 priority
