@@ -396,14 +396,14 @@ export default function MotorradPage() {
                 Kein eigenes Motorrad?
               </p>
               <h2 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
-                Motorrad mieten bei hostettler
+                Miete ein Motorrad bei Hostettler!
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-muted">
-                Bei hostettler moto ag kannst Du ein Motorrad für die gesamte
-                Ausbildung oder tageweise mieten — jeweils mit 35 KW oder offen.
+                Bei Hostettler Moto AG kannst Du ein Motorrad für die gesamte
+                Ausbildung oder tageweise mieten — jeweils mit 125er, 35 KW oder offen.
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-2">
+              <div className="mt-8 flex flex-wrap items-center gap-2">
                 {RENTAL_BIKES.map((bike) => (
                   <span
                     key={bike}
@@ -412,6 +412,7 @@ export default function MotorradPage() {
                     {bike}
                   </span>
                 ))}
+                <span className="text-sm text-muted">und noch so viel mehr..</span>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -448,6 +449,93 @@ export default function MotorradPage() {
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gianni: Video & Ausrüstungs-Checkliste */}
+      <section className="bg-[#f7f8fa] py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            <motion.div {...anim({ x: -24, duration: 0.7 })}>
+              <p className="text-sm font-medium uppercase tracking-widest text-accent">
+                Direkt vom Fahrlehrer
+              </p>
+              <h2 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
+                Bereit für die Prüfung?
+              </h2>
+              <p className="mt-5 leading-relaxed text-muted">
+                Gianni zeigt dir im Video, worauf es wirklich ankommt. Der offizielle
+                Flyer des Kantons Zürich listet zudem die Schutzausrüstung, die du
+                für die Motorrad-Prüfung tragen musst – Helm, Jacke, Handschuhe,
+                Hose und Stiefel.
+              </p>
+              <Link
+                href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/mobilitaet/fuehrerausweis-fahren-lernen/fahrschulen/Flyer_Motorrad.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 hidden items-center gap-2 rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white shadow-md transition-all hover:scale-[1.02] hover:bg-accent-dark lg:inline-flex"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Ausrüstungs-Flyer herunterladen
+              </Link>
+              <p className="mt-3 text-xs text-muted">
+                Quelle: Kanton Zürich, Strassenverkehrsamt –{" "}
+                <Link
+                  href="https://www.zh.ch/de/mobilitaet/fuehrerausweis-fahren-lernen/fahrschulen.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-accent"
+                >
+                  zh.ch
+                </Link>
+              </p>
+            </motion.div>
+
+            <motion.div {...anim({ x: 24, delay: 0.1, duration: 0.7 })} className="flex flex-col gap-8 md:flex-row md:items-start">
+              {/* Video */}
+              <div className="w-full overflow-hidden rounded-2xl shadow-lg md:flex-1">
+                <video
+                  className="w-full rounded-2xl"
+                  controls
+                  preload="metadata"
+                  poster="/images/gianni-video-poster.jpg"
+                >
+                  <source src="/videos/gianni-motorrad-tipps.mp4" type="video/mp4" />
+                </video>
+              </div>
+              {/* Bild + Button als eigene Einheit */}
+              <div className="flex flex-col items-center md:w-[45%] md:shrink-0 md:items-start">
+                <Link
+                  href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/mobilitaet/fuehrerausweis-fahren-lernen/fahrschulen/Flyer_Motorrad.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block w-3/4 overflow-hidden rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl md:w-full"
+                >
+                  <Image
+                    src="/images/ausruestung-motorrad-pruefung.png"
+                    alt="Ist deine Ausrüstung bereit für die Prüfung? – Kanton Zürich"
+                    width={600}
+                    height={900}
+                    className="w-full"
+                    sizes="(max-width: 768px) 75vw, (max-width: 1024px) 45vw, 20vw"
+                  />
+                </Link>
+                <Link
+                  href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/mobilitaet/fuehrerausweis-fahren-lernen/fahrschulen/Flyer_Motorrad.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white shadow-md transition-all hover:scale-[1.02] hover:bg-accent-dark lg:hidden"
+                >
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Ausrüstungs-Flyer herunterladen
+                </Link>
               </div>
             </motion.div>
           </div>
