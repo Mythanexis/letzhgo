@@ -37,11 +37,12 @@ export default function PruefungsvorbereitungSection() {
   const anim = useScrollAnim();
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden" aria-label="Tageskurs Motorrad Prüfungsvorbereitung">
       <div className="pointer-events-none absolute inset-0">
         <Image
           src="/images/pruefungsvorbereitung-bg.webp"
-          alt="Tageskurs Motorrad Prüfungsvorbereitung bei Let'ZHgo"
+          alt=""
+          role="presentation"
           fill
           className="object-cover blur-[2px] scale-105"
           sizes="100vw"

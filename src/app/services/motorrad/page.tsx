@@ -559,8 +559,8 @@ export default function MotorradPage() {
           />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-16 md:py-24 lg:px-24">
-          <div className="grid items-start gap-12 lg:grid-cols-[1.4fr_minmax(0,1fr)]">
+        <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-8 md:py-24">
+          <div className="grid items-start gap-12 lg:grid-cols-[1fr_480px]">
             <motion.div {...anim({ y: 30, delay: 0.15, duration: 1 })}>
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-red-700">
                 Schnupperkurs Motorrad
