@@ -18,6 +18,7 @@ import WegweiserHomeTeaser from "@/components/WegweiserHomeTeaser";
 import PartnersSection from "@/components/PartnersSection";
 import HostettlerSection from "@/components/HostettlerSection";
 import GrundkursLocationSection from "@/components/GrundkursLocationSection";
+import PruefungsvorbereitungSection from "@/components/PruefungsvorbereitungSection";
 import ManoeverplatzSection from "@/components/ManoeverplatzSection";
 import AutofahrenAb17Section from "@/components/AutofahrenAb17Section";
 import { SERVICES_OVERVIEW, PRICING } from "@/lib/constants";
@@ -441,6 +442,9 @@ export default function HomePage() {
 
       {/* Grundkurs bei Hostettler Moto Rümlang */}
       <GrundkursLocationSection />
+
+      {/* Tageskurs Prüfungsvorbereitung Motorrad */}
+      <PruefungsvorbereitungSection />
 
       {/* Fahrlehrer:innen (nach Orten gruppiert) */}
       <InstructorsSection className="bg-[#f7f8fa]" />

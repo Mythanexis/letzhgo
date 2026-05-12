@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
+import PruefungsvorbereitungSection from "@/components/PruefungsvorbereitungSection";
 
 const COURSE_CONTENT = [
   "Grundlagen und Funktionsweise des Motorrads",
@@ -454,6 +455,10 @@ export default function MotorradPage() {
           </div>
         </div>
       </section>
+
+      {/* Tageskurs Prüfungsvorbereitung Motorrad */}
+      <PruefungsvorbereitungSection/>
+
 
       {/* Gianni: Video & Ausrüstungs-Checkliste */}
       <section className="bg-[#f7f8fa] py-20 md:py-28">
