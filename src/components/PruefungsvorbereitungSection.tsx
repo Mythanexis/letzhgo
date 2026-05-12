@@ -40,7 +40,7 @@ export default function PruefungsvorbereitungSection() {
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
         <Image
-          src="/images/pruefungsvorbereitung-bg.png"
+          src="/images/pruefungsvorbereitung-bg.webp"
           alt="Tageskurs Motorrad Prüfungsvorbereitung bei Let'ZHgo"
           fill
           className="object-cover blur-[2px] scale-105"
