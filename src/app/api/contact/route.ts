@@ -52,7 +52,7 @@ async function verifyRecaptchaV3(
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, phone, message, recaptchaToken } = body;
+    const { name, email, phone, message, tags, recaptchaToken } = body;
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
         body: JSON.stringify({
           from: "Let'ZHgo Website <noreply@send.letzhgo.ch>",
           to: [SITE.email],
-          subject: `Neue Kontaktanfrage von ${name}`,
+          subject: `Neue Kontaktanfrage von ${name}${Array.isArray(tags) && tags.length > 0 ? ` – ${tags[0]}` : ""}`,
           html: `
             <h2>Neue Kontaktanfrage</h2>
             <p><strong>Name:</strong> ${name}</p>
@@ -116,6 +116,7 @@ export async function POST(request: NextRequest) {
         name,
         email,
         phone,
+        tags,
         message,
       });
     }
