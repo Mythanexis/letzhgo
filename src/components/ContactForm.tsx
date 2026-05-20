@@ -129,8 +129,15 @@ function SuccessPopup({ onClose }: { onClose: () => void }) {
   );
 }
 
+const TAGS = ["Auto", "Motorrad", "VKU", "Nothelferkurs"] as const;
+
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+
+  const toggleTag = useCallback((tag: string) => {
+    setSelectedTag((prev) => (prev === tag ? null : tag));
+  }, []);
 
   const handleSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -145,6 +152,7 @@ export default function ContactForm() {
         email: (form.elements.namedItem("email") as HTMLInputElement).value,
         phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
         message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+        tags: selectedTag ? [selectedTag] : [],
         recaptchaToken,
       };
 
@@ -157,13 +165,14 @@ export default function ContactForm() {
       if (res.ok) {
         setStatus("success");
         form.reset();
+        setSelectedTag(null);
       } else {
         setStatus("error");
       }
     } catch {
       setStatus("error");
     }
-  }, []);
+  }, [selectedTag]);
 
   return (
     <>
@@ -175,6 +184,26 @@ export default function ContactForm() {
         />
       )}
       <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="flex flex-wrap gap-2">
+            {TAGS.map((tag) => {
+              const active = selectedTag === tag;
+              return (
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() => toggleTag(tag)}
+                  className={`cursor-pointer rounded-full border px-5 py-2 text-sm font-medium transition-colors ${
+                    active
+                      ? "border-accent bg-accent text-white"
+                      : "border-border bg-white text-foreground hover:border-accent hover:text-accent"
+                  }`}
+                >
+                  {tag}
+                </button>
+              );
+            })}
+        </div>
+
         <div className="grid gap-6 md:grid-cols-2">
           <div>
             <label htmlFor="name" className="mb-2 block text-sm font-medium text-foreground">
@@ -238,7 +267,7 @@ export default function ContactForm() {
 
         <button
           type="submit"
-          disabled={status === "loading"}
+          disabled={status === "loading" || !selectedTag}
           className="w-full rounded-full bg-accent py-4 font-medium text-white transition-colors hover:bg-accent-dark disabled:opacity-50"
         >
           {status === "loading" ? "Wird gesendet..." : "Nachricht senden"}
