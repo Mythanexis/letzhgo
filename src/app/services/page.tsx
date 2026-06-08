@@ -224,7 +224,7 @@ export default function ServicesPage() {
             <div className="relative h-[420px] w-[320px] -rotate-[10deg] overflow-hidden rounded-[28px] border border-border/70 bg-transparent shadow-[0_40px_100px_-60px_rgba(0,0,0,0.35)]">
               <Image
                 src="/images/motorrad-grundkurs-2.jpg"
-                alt=""
+                alt="Schüler beim Motorrad-Grundkurs bei Let'ZHgo"
                 fill
                 sizes="320px"
                 className="object-cover opacity-[0.86]"
@@ -241,7 +241,7 @@ export default function ServicesPage() {
             <div className="relative h-[360px] w-[300px] rotate-[8deg] overflow-hidden rounded-[26px] border border-border/70 bg-transparent shadow-[0_40px_100px_-60px_rgba(0,0,0,0.35)]">
               <Image
                 src="/images/vku-popup.png"
-                alt=""
+                alt="Verkehrskundeunterricht bei Let'ZHgo"
                 fill
                 sizes="300px"
                 className="object-cover opacity-[0.84]"

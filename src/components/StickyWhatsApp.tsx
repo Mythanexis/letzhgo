@@ -129,7 +129,7 @@ export default function StickyWhatsApp() {
                       <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-neutral-100 ring-2 ring-transparent transition-all group-hover:ring-accent/30">
                         <Image
                           src={inst.image}
-                          alt=""
+                          alt={inst.name}
                           fill
                           sizes="44px"
                           className="object-cover"
