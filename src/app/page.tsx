@@ -73,7 +73,7 @@ export default function HomePage() {
     description:
       "Zwei-stündiger Schnupperkurs Motorrad bei Let'ZHgo. Ideal für alle, die das Motorradfahren ausprobieren möchten. Minderjährige müssen in Begleitung eines Elternteils sein.",
     startDate: "2026-05-09T13:00+02:00",
-    endDate: "2026-05-09T15:00+02:00",
+    endDate: "2026-05-09T17:00+02:00",
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: {

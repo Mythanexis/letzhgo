@@ -123,11 +123,11 @@ export default function StandortPageContent({ slug }: { slug: StandortSlug }) {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.2, ease: EASE }}
-                className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-4 sm:mt-14 sm:gap-x-7"
+                className="mt-10 flex flex-col gap-4 sm:mt-14 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-7 sm:gap-y-4"
               >
                 <Link
                   href="/kontakt"
-                  className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-accent-dark"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-accent-dark sm:w-auto sm:justify-start"
                 >
                   Buche jetzt deine Lektion
                   <svg
@@ -144,7 +144,7 @@ export default function StandortPageContent({ slug }: { slug: StandortSlug }) {
                 </Link>
                 <a
                   href="tel:+41433001455"
-                  className="group inline-flex items-center gap-2.5 text-base font-semibold text-foreground transition-colors hover:text-accent"
+                  className="group inline-flex items-center justify-center gap-2.5 text-base font-semibold text-foreground transition-colors hover:text-accent sm:justify-start"
                 >
                   <svg
                     className="h-4 w-4 text-muted transition-colors group-hover:text-accent"
@@ -611,6 +611,19 @@ export default function StandortPageContent({ slug }: { slug: StandortSlug }) {
 
       {/* CTA Banner — Bild | Card | Bild */}
       <section className="relative overflow-hidden bg-foreground">
+        {/* Hintergrundbild Mobile — volle Fläche */}
+        <div className="absolute inset-0 lg:hidden">
+          <Image
+            src="/images/letzhgo-autos.jpeg"
+            alt=""
+            fill
+            className="object-cover opacity-40"
+            sizes="100vw"
+            aria-hidden
+          />
+          <div className="absolute inset-0 bg-foreground/55" />
+        </div>
+
         {/* Bild links — absolute Hälfte */}
         <div className="absolute inset-y-0 left-0 hidden w-1/2 lg:block">
           <Image
@@ -654,7 +667,7 @@ export default function StandortPageContent({ slug }: { slug: StandortSlug }) {
                 transform="translate(102.65 101.6)"
               />
             </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-16 py-16 text-center">
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-8 py-8 text-center sm:px-12 sm:py-12 md:px-16 md:py-16">
               <h2 className="text-lg font-bold leading-tight text-white md:text-xl lg:text-2xl">
                 Deine Fahrstunde in {standort.name}.
               </h2>

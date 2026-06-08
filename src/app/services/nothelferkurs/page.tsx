@@ -304,7 +304,7 @@ export default function NothelferkursPage() {
               <dl className="mt-6 space-y-4">
                 {[
                   { label: "Dauer", value: "1 Tag (ca. 10 Std.)" },
-                  { label: "Preis", value: "CHF 130.–" },
+                  { label: "Preis", value: "CHF 120.–" },
                   { label: "Ort", value: "Binzmühlestrasse 15, Zürich" },
                   { label: "Sprache", value: "Deutsch" },
                 ].map((item) => (
