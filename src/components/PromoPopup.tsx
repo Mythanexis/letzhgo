@@ -34,7 +34,7 @@ export default function PromoPopup() {
       price: "CHF 150.–",
       oldPrice: "CHF 200.–",
       discount: "–25%",
-      ctaText: "Jetzt buchen",
+      ctaText: "Bestehe deine Theorie",
       href: EDOOBOX_LINKS.verkehrskunde,
     },
     {
@@ -47,7 +47,7 @@ export default function PromoPopup() {
         "Wir bieten dir auch wieder ab 9. Mai 2026 einen Schnupperkurs an. Minderjährige müssen in Begleitung eines Elternteils sein.",
       price: "CHF 50.–",
       detail: "Samstag, 9. Mai 2026 · 13:00 – 15:00",
-      ctaText: "Jetzt anmelden",
+      ctaText: "Probier's aus",
       href: EDOOBOX_LINKS.schnupperkurs,
     },
     {

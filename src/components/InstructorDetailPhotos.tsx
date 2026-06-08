@@ -17,9 +17,9 @@ export function InstructorDetailPhotosDesktop({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1.2, delay: 0.3 }}
+      transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
       className="hidden lg:col-span-2 lg:block"
     >
       <div className="lg:sticky lg:top-28 space-y-5">

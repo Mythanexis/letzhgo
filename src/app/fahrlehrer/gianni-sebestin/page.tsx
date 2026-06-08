@@ -62,12 +62,12 @@ export default function GianniPage() {
           </div>
 
           <div className="mt-10 md:mt-12 lg:mt-0">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }}>
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
             <h1 className="text-4xl font-bold text-foreground md:text-5xl">Gianni Sebestin</h1>
             <p className="mt-3 text-lg text-muted">Fahrlehrer für Auto, Motorrad und Anhänger, Fahrlehrer-Ausbildner</p>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }} className="mt-10">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.1, ease: [0.16, 1, 0.3, 1] }} className="mt-10">
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
                 <p className="text-sm font-medium uppercase tracking-widest text-accent">Fachgebiet</p>
@@ -97,7 +97,7 @@ export default function GianniPage() {
             </a>
           </motion.div>
 
-          <motion.div {...anim({ y: 30, duration: 1 })} className="mt-16">
+          <motion.div {...anim({ y: 20, duration: 0.6 })} className="mt-16">
             <h2 className="text-2xl font-bold text-foreground md:text-3xl">Werdegang</h2>
             <div className="mt-8 space-y-0 border-l-2 border-accent/20 pl-8">
               {WERDEGANG.map((item, i) => (

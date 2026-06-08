@@ -43,13 +43,13 @@ function BookingPanel() {
     <div className="w-full max-w-sm overflow-hidden rounded-2xl shadow-2xl">
       <div className="bg-accent px-7 py-5">
         <h3 className="text-2xl font-extrabold text-white">
-          Jetzt buchen!
+          Starte diese Woche.
         </h3>
       </div>
 
       <div className="bg-white px-5 pb-5 pt-4 md:px-7 md:pb-7 md:pt-5">
         <p className="mb-3 text-sm font-semibold text-foreground md:mb-4">
-          Dein Führerschein wartet – worauf noch?
+          Schluss mit Theorie – Zeit fürs Steuer.
         </p>
         <div className="flex flex-col gap-2">
           {BOOKING_ITEMS.map((item, i) => (

@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 const COURSE_CONTENT = [
   "Grundlagen und Funktionsweise des Motorrads",
   "Korrektes Verhalten in Gefahrensituationen",
@@ -85,9 +87,9 @@ export default function MotorradPage() {
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-12 md:px-16 md:pb-20">
           <motion.nav
             aria-label="Breadcrumb"
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6, ease: EASE }}
             className="mb-5 flex flex-wrap items-center gap-2 text-sm text-white/50"
           >
             <Link href="/" className="transition-colors hover:text-white">Home</Link>
@@ -97,17 +99,17 @@ export default function MotorradPage() {
             <span className="text-white/80" aria-current="page">Motorrad</span>
           </motion.nav>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.05 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
             className="text-sm font-medium uppercase tracking-widest text-accent"
           >
             Kursangebot
           </motion.p>
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            transition={{ duration: 0.75, delay: 0.22, ease: EASE }}
             className="mt-3 text-4xl font-bold text-white md:text-6xl"
           >
             Motorrad
@@ -266,7 +268,7 @@ export default function MotorradPage() {
                 rel="nofollow noopener noreferrer"
                 className="mt-8 block w-full rounded-full bg-accent py-3 text-center font-medium text-white transition-colors hover:bg-accent-dark"
               >
-                Jetzt anmelden
+                Werde Motorradfahrer:in
               </a>
             </div>
 

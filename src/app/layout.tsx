@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import PromoPopup from "@/components/PromoPopup";
 import PosterPopup from "@/components/PosterPopup";
 import SmoothScroll from "@/components/SmoothScroll";
+import StickyWhatsApp from "@/components/StickyWhatsApp";
 import { ScrollAnimProvider } from "@/hooks/useScrollAnim";
 import "./globals.css";
 
@@ -214,6 +215,7 @@ export default function RootLayout({
           <ScrollAnimProvider>{children}</ScrollAnimProvider>
         </main>
         <Footer />
+        <StickyWhatsApp />
         <PromoPopup />
         <PosterPopup />
       </body>
