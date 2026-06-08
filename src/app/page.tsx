@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import Script from "next/script";
 import { motion } from "framer-motion";
 import { Users, MapPin, ClipboardCheck, GraduationCap, Car, Video } from "lucide-react";
 import Hero from "@/components/Hero";
@@ -66,59 +65,8 @@ export default function HomePage() {
     },
   ] as const;
 
-  const manoeverplatzEventSchema = {
-    "@context": "https://schema.org",
-    "@type": "Event",
-    "@id": "https://letzhgo.ch/#event-manoeverplatz",
-    name: "Manöverplatz Rümlang – freies Motorrad-Training",
-    description:
-      "Jeden Mittwoch Abend kannst Du auf dem LARAG-Areal in Rümlang deine Motorrad-Manöver trainieren – ganz ohne Anmeldung.",
-    eventSchedule: {
-      "@type": "Schedule",
-      repeatFrequency: "P1W",
-      byDay: "https://schema.org/Wednesday",
-      startTime: "19:00:00",
-      endTime: "21:00:00",
-      startDate: "2026-03-25",
-      scheduleTimezone: "Europe/Zurich",
-    },
-    eventStatus: "https://schema.org/EventScheduled",
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    location: {
-      "@type": "Place",
-      name: "LARAG-Areal Rümlang",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Riedgrabenstrasse 26",
-        addressLocality: "Rümlang",
-        postalCode: "8153",
-        addressCountry: "CH",
-      },
-    },
-    image: "https://letzhgo.ch/images/larag-areal.jpg",
-    offers: {
-      "@type": "Offer",
-      price: "50",
-      priceCurrency: "CHF",
-      availability: "https://schema.org/InStock",
-      url: "https://letzhgo.ch/#manoeverplatz",
-    },
-    organizer: {
-      "@type": "Organization",
-      name: "Let'ZHgo Fahrschule",
-      url: "https://letzhgo.ch",
-    },
-  };
-
   return (
     <>
-      <Script
-        id="schema-manoeverplatz"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(manoeverplatzEventSchema),
-        }}
-      />
       {/* Hero with full-width background image */}
       <Hero
         title="Deine Fahrschule in Zürich."

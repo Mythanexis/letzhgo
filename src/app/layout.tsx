@@ -80,7 +80,7 @@ export const metadata: Metadata = {
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["DrivingSchool", "EducationalOrganization"],
+  "@type": "DrivingSchool",
   "@id": "https://letzhgo.ch/#organization",
   name: "Let'ZHgo",
   alternateName: "Let'ZHgo Fahrschule",
