@@ -29,7 +29,7 @@ const serviceSchema = {
   offers: {
     "@type": "Offer",
     priceCurrency: "CHF",
-    price: "120",
+    price: "95",
     url: "https://letzhgo.ch/services/fahrstunden",
   },
 };

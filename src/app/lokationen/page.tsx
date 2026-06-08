@@ -227,7 +227,7 @@ export default function LokationenPage() {
         </div>
 
         {/* Motorrad-Partner — dunkel, Hero-ähnliche Blobs + Gradient */}
-        <div className="relative w-full overflow-hidden border-t border-white/10 bg-[#0c0d0f] text-white">
+        <div className="relative w-full overflow-hidden border-t border-white/10 bg-[#0c0d0f] text-white" data-navbar-dark>
           <div
             className="pointer-events-none absolute -left-28 top-0 h-80 w-80 rounded-full bg-accent/25 blur-[100px]"
             aria-hidden

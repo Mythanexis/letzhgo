@@ -12,6 +12,18 @@ interface PricingCardProps {
   index: number;
 }
 
+/** Emotionalere CTAs statt generischem „Anmelden". */
+function ctaLabel(title: string): string {
+  const t = title.toLowerCase();
+  if (t.includes("nothelfer")) return "Lerne Leben retten";
+  if (t.includes("verkehr")) return "Bestehe deine Theorie";
+  if (t.includes("grundkurs") || t.includes("motorrad"))
+    return "Werde Motorradfahrer:in";
+  if (t.includes("anhänger")) return "Anhänger-Termin holen";
+  if (t.includes("fahrstunde")) return "Erste Lektion sichern";
+  return "Sicher zur Prüfung";
+}
+
 export default function PricingCard({
   title,
   subtitle,
@@ -66,7 +78,7 @@ export default function PricingCard({
         whileTap={{ scale: 0.97 }}
         className="mt-8 block rounded-full bg-accent py-3 text-center font-medium text-white transition-colors hover:bg-accent-dark"
       >
-        Anmelden
+        {ctaLabel(title)}
       </motion.a>
     </motion.div>
   );

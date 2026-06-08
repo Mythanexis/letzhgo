@@ -35,7 +35,7 @@ export default function CTABanner({ className }: { className?: string }) {
               href="/kontakt"
               className="mt-10 inline-block rounded-full bg-accent px-8 py-4 text-lg font-medium text-white transition-all hover:bg-accent-dark hover:scale-105"
             >
-              Jetzt starten
+              Starte diese Woche
             </Link>
           </motion.div>
 

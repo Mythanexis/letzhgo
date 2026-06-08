@@ -6,11 +6,12 @@ export const SITE = {
 };
 
 export const NAV_LINKS = [
-  { label: "Home", href: "/" },
+  { label: "Auto", href: "/services/fahrstunden" },
+  { label: "Motorrad", href: "/services/motorrad" },
+  { label: "VKU", href: "/services/verkehrskunde" },
+  { label: "Nothelferkurse", href: "/services/nothelferkurs" },
   { label: "Über uns", href: "/ueber-uns" },
-  { label: "Services", href: "/services" },
-  { label: "Lokationen", href: "/lokationen" },
-  { label: "Auszeichnungen", href: "/auszeichnungen" },
+  { label: "Weiteres", href: "#" },
 ] as const;
 
 /** Qualitätsauszeichnungen – verlinken zu den jeweiligen Plattformen. */

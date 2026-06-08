@@ -9,10 +9,10 @@ export default function InstructorPageFooter() {
           {/* Left: CTA */}
           <div className="min-w-0">
             <p className="text-lg font-bold text-foreground">
-              Jetzt anmelden und loslegen.
+              Keine Lust mehr auf Prüfungsstress?
             </p>
             <p className="mt-1.5 max-w-sm text-sm text-muted">
-              Melde dich direkt – wir finden zusammen den passenden Kurs für dich.
+              Schreib uns – wir finden zusammen den Weg, damit du sicher hinter dem Steuer sitzt.
             </p>
             <div className="mt-5 flex flex-wrap items-center gap-3">
               <Link

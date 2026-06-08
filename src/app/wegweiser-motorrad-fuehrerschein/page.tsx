@@ -25,7 +25,7 @@ const STEPS_RAW: StepContent[] = [
       "Bevor Du das Lernfahrgesuch beim Strassenverkehrsamt einreichen kannst, musst Du unter anderem einen Nothilfekurs absolvieren. Falls Du bereits im Besitz eines Nothelferausweises bist, ist dieser ab Ausstellungsdatum 6 Jahre gültig.",
     ],
     note: "Nicht notwendig für Inhaber der Kategorie B (Auto), weiter mit Schritt 2",
-    cta: { label: "Jetzt anmelden", href: EDOOBOX_LINKS.nothelferkurs },
+    cta: { label: "Lerne Leben retten", href: EDOOBOX_LINKS.nothelferkurs },
   },
   {
     id: "02",

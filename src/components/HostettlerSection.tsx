@@ -8,7 +8,7 @@ import { useScrollAnim } from "@/hooks/useScrollAnim";
 export default function HostettlerSection() {
   const anim = useScrollAnim();
   return (
-    <section className="relative overflow-hidden bg-[#0a0a0a]">
+    <section className="relative overflow-hidden bg-[#0a0a0a]" data-navbar-dark>
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[560px]">
         {/* Text */}
         <div className="relative z-10 flex flex-col justify-center px-8 py-16 md:px-16 lg:py-20 xl:px-24">

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import PromoPopup from "@/components/PromoPopup";
 import PosterPopup from "@/components/PosterPopup";
 import SmoothScroll from "@/components/SmoothScroll";
+import StickyWhatsApp from "@/components/StickyWhatsApp";
 import { ScrollAnimProvider } from "@/hooks/useScrollAnim";
 import "./globals.css";
 
@@ -97,8 +98,8 @@ const localBusinessSchema = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 47.4111,
-    longitude: 8.5438,
+    latitude: 47.4125,
+    longitude: 8.5439,
   },
   openingHoursSpecification: [
     {
@@ -123,7 +124,7 @@ const localBusinessSchema = {
     ratingValue: "5.0",
     bestRating: "5",
     worstRating: "1",
-    reviewCount: "417",
+    reviewCount: 417,
   },
   image: "https://letzhgo.ch/images/letzhgo-hero.webp",
   logo: "https://letzhgo.ch/images/logo.png",
@@ -131,10 +132,14 @@ const localBusinessSchema = {
     "https://www.instagram.com/letzhgo_fahrschule/",
     "https://www.tiktok.com/@letzhgo",
   ],
-  areaServed: {
-    "@type": "City",
-    name: "Zürich",
-  },
+  areaServed: [
+    { "@type": "City", name: "Zürich" },
+    { "@type": "City", name: "Oerlikon" },
+    { "@type": "City", name: "Rümlang" },
+    { "@type": "City", name: "Bülach" },
+    { "@type": "City", name: "Horgen" },
+    { "@type": "City", name: "Regensdorf" },
+  ],
 };
 
 const websiteSchema = {
@@ -209,6 +214,7 @@ export default function RootLayout({
           <ScrollAnimProvider>{children}</ScrollAnimProvider>
         </main>
         <Footer />
+        <StickyWhatsApp />
         <PromoPopup />
         <PosterPopup />
       </body>

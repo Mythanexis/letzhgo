@@ -73,6 +73,16 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    // Alte Standort-URLs auf die neue `/fahrschule-<slug>` Konvention umleiten.
+    return [
+      {
+        source: "/fahrstunden-in/:slug",
+        destination: "/fahrschule-:slug",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

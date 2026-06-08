@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { BLOG_POSTS } from "@/lib/blog-data";
 import { INSTRUCTORS } from "@/lib/constants";
+import { STANDORTE } from "@/lib/standorte-data";
 
 const BASE = "https://letzhgo.ch";
 
@@ -36,6 +37,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  const standortRoutes: MetadataRoute.Sitemap = STANDORTE.map((s) => ({
+    url: `${BASE}/fahrschule-${s.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
+
   const blogRoutes: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
     url: `${BASE}/blogs/${post.slug}`,
     lastModified: new Date(post.publishedAt),
@@ -43,5 +51,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...instructorRoutes, ...blogRoutes];
+  return [...staticRoutes, ...standortRoutes, ...instructorRoutes, ...blogRoutes];
 }

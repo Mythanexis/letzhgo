@@ -38,6 +38,32 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/api/"],
       },
+      // AI crawlers — explizit erlauben damit sie priorisiert indexieren
+      {
+        userAgent: "GPTBot",
+        allow: "/",
+        disallow: ["/api/"],
+      },
+      {
+        userAgent: "ChatGPT-User",
+        allow: "/",
+        disallow: ["/api/"],
+      },
+      {
+        userAgent: "PerplexityBot",
+        allow: "/",
+        disallow: ["/api/"],
+      },
+      {
+        userAgent: "ClaudeBot",
+        allow: "/",
+        disallow: ["/api/"],
+      },
+      {
+        userAgent: "anthropic-ai",
+        allow: "/",
+        disallow: ["/api/"],
+      },
     ],
     sitemap: "https://letzhgo.ch/sitemap.xml",
     host: "https://letzhgo.ch",

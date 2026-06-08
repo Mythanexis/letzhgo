@@ -12,7 +12,7 @@ export default function BlogHomeSection() {
   const [featured, ...side] = posts;
 
   return (
-    <section className="relative overflow-hidden bg-[#0a0a0a]">
+    <section className="relative overflow-hidden bg-[#0a0a0a]" data-navbar-dark>
       {/* Gradient blobs */}
       <div
         className="pointer-events-none absolute -left-28 top-0 h-80 w-80 rounded-full bg-accent/20 blur-[100px]"

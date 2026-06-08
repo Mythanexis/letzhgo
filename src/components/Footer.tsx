@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SITE, IMAGES } from "@/lib/constants";
+import { STANDORTE } from "@/lib/standorte-data";
 
 /**
  * Unterstreichung nur so breit wie der Text: Effekt sitzt auf inline-block span,
@@ -57,7 +58,7 @@ export default function Footer() {
               href="/kontakt"
               className="mt-10 inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-lg font-medium text-white transition-colors hover:bg-accent-dark"
             >
-              Anmelden
+              Werde endlich Autofahrer:in
               <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
                 <path d="M4 8h8M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -78,6 +79,23 @@ export default function Footer() {
                 >
                   <span className={`${footerNavLinkUnderline} text-lg`}>
                     {link.label}
+                  </span>
+                </Link>
+              ))}
+            </nav>
+
+            <p className="mt-12 text-sm font-semibold uppercase tracking-[0.2em] text-white/40">
+              Fahrschule in
+            </p>
+            <nav className="mt-6 grid grid-cols-2 gap-y-4 lg:gap-x-20 lg:gap-y-5">
+              {STANDORTE.map((s) => (
+                <Link
+                  key={s.slug}
+                  href={`/fahrschule-${s.slug}`}
+                  className="justify-self-start rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                >
+                  <span className={`${footerNavLinkUnderline} text-base`}>
+                    {s.fullName}
                   </span>
                 </Link>
               ))}

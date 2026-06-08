@@ -10,7 +10,7 @@ export default function GrundkursLocationSection() {
   const anim = useScrollAnim();
 
   return (
-    <section className="relative overflow-hidden bg-[#060d1a]">
+    <section className="relative overflow-hidden bg-[#060d1a]" data-navbar-dark>
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[580px]">
 
         {/* ── Text side ── */}
@@ -68,7 +68,7 @@ export default function GrundkursLocationSection() {
               href="/services/motorrad"
               className="inline-flex items-center justify-center rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-accent-dark"
             >
-              Grundkurs buchen
+              Werde Motorradfahrer:in
             </Link>
             <Link
               href="https://www.hostettler-moto.ch/zuerich-nord/"
