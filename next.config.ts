@@ -74,8 +74,13 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
-    // Alte Standort-URLs auf die neue `/fahrschule-<slug>` Konvention umleiten.
     return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.letzhgo.ch" }],
+        destination: "https://letzhgo.ch/:path*",
+        permanent: true,
+      },
       {
         source: "/fahrstunden-in/:slug",
         destination: "/fahrschule-:slug",

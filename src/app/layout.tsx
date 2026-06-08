@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import Navbar from "@/components/Navbar";
+import { FAQ_ITEMS } from "@/lib/constants";
 import Footer from "@/components/Footer";
 import PromoPopup from "@/components/PromoPopup";
 import PosterPopup from "@/components/PosterPopup";
@@ -79,7 +80,7 @@ export const metadata: Metadata = {
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "DrivingSchool",
+  "@type": ["DrivingSchool", "EducationalOrganization"],
   "@id": "https://letzhgo.ch/#organization",
   name: "Let'ZHgo",
   alternateName: "Let'ZHgo Fahrschule",
@@ -160,6 +161,16 @@ const websiteSchema = {
   },
 };
 
+const faqPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+
 
 export default function RootLayout({
   children,
@@ -200,6 +211,13 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(websiteSchema),
+          }}
+        />
+        <Script
+          id="schema-faq"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqPageSchema),
           }}
         />
         <a

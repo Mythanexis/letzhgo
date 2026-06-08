@@ -66,48 +66,6 @@ export default function HomePage() {
     },
   ] as const;
 
-  const schnupperkursEventSchema = {
-    "@context": "https://schema.org",
-    "@type": "Event",
-    "@id": "https://letzhgo.ch/#event-schnupperkurs-2026-05",
-    name: "Motorrad Schnupperkurs bei Let'ZHgo",
-    description:
-      "Zwei-stündiger Schnupperkurs Motorrad bei Let'ZHgo. Ideal für alle, die das Motorradfahren ausprobieren möchten. Minderjährige müssen in Begleitung eines Elternteils sein.",
-    startDate: "2026-05-09T13:00+02:00",
-    endDate: "2026-05-09T17:00+02:00",
-    eventStatus: "https://schema.org/EventScheduled",
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    location: {
-      "@type": "Place",
-      name: "hostettler moto ag Zürich Nord",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Klotenerstrasse 10",
-        addressLocality: "Rümlang",
-        postalCode: "8153",
-        addressCountry: "CH",
-      },
-    },
-    image: "https://letzhgo.ch/images/schnupperkurs.webp",
-    offers: {
-      "@type": "Offer",
-      price: "50",
-      priceCurrency: "CHF",
-      availability: "https://schema.org/InStock",
-      url: "https://app1.edoobox.com/de/LetZHgo/Schnupperkurs?edref=letzhgo",
-      validFrom: "2026-01-01T00:00+01:00",
-    },
-    organizer: {
-      "@type": "Organization",
-      name: "Let'ZHgo Fahrschule",
-      url: "https://letzhgo.ch",
-    },
-    performer: {
-      "@type": "Organization",
-      name: "Let'ZHgo Fahrschule",
-    },
-  };
-
   const manoeverplatzEventSchema = {
     "@context": "https://schema.org",
     "@type": "Event",
@@ -154,13 +112,6 @@ export default function HomePage() {
 
   return (
     <>
-      <Script
-        id="schema-schnupperkurs"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schnupperkursEventSchema),
-        }}
-      />
       <Script
         id="schema-manoeverplatz"
         type="application/ld+json"
