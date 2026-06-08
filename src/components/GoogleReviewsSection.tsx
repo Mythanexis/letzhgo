@@ -236,28 +236,10 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
   );
 }
 
-const aggregateRatingSchema = {
-  "@context": "https://schema.org",
-  "@type": "DrivingSchool",
-  name: "Let'ZHgo",
-  url: "https://letzhgo.ch",
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "5.0",
-    reviewCount: REVIEW_COUNT,
-    bestRating: "5",
-    worstRating: "1",
-  },
-};
-
 export default function GoogleReviewsSection() {
   const anim = useScrollAnim();
   return (
     <section className="bg-[#f7f8fa]" aria-labelledby="google-reviews-heading">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingSchema) }}
-      />
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <motion.div {...anim({ y: 28, duration: 0.9 })} className="mx-auto max-w-4xl text-center">
           <h2
