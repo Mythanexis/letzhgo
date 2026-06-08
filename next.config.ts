@@ -76,12 +76,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.letzhgo.ch" }],
-        destination: "https://letzhgo.ch/:path*",
-        permanent: true,
-      },
-      {
         source: "/fahrstunden-in/:slug",
         destination: "/fahrschule-:slug",
         permanent: true,
