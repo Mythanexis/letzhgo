@@ -18,7 +18,7 @@ export default function GrundkursLocationSection() {
 
           <motion.p
             {...anim({ y: 16, duration: 0.6 })}
-            className="text-sm font-semibold uppercase tracking-[0.2em] text-accent"
+            className="text-sm font-semibold uppercase tracking-[0.2em] text-[#60a5fa]"
           >
             Motorrad-Grundkurs
           </motion.p>
@@ -28,7 +28,7 @@ export default function GrundkursLocationSection() {
             className="mt-4 text-3xl font-extrabold leading-tight text-white md:text-4xl lg:text-5xl"
           >
             Grundkurs direkt bei&nbsp;
-            <span className="text-accent">Hostettler&nbsp;Moto</span>
+            <span className="text-[#60a5fa]">Hostettler&nbsp;Moto</span>
             {" "}in&nbsp;Rümlang.
           </motion.h2>
 
@@ -46,11 +46,11 @@ export default function GrundkursLocationSection() {
             {...anim({ y: 18, delay: 0.28, duration: 0.65 })}
             className="mt-8 inline-flex w-fit items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-sm"
           >
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/20 text-[#60a5fa]">
               <MapPin className="h-4 w-4" />
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-white/40">
+              <p className="text-xs font-semibold uppercase tracking-widest text-white/60">
                 Kursstandort
               </p>
               <p className="mt-0.5 text-sm font-semibold text-white">

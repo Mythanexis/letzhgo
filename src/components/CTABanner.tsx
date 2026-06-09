@@ -83,7 +83,7 @@ export default function CTABanner({ className }: { className?: string }) {
             <div>
               <p className="text-sm text-muted">
                 Fragen?{" "}
-                <Link href="/kontakt" className="text-accent hover:text-accent-dark">
+                <Link href="/kontakt" className="text-accent underline decoration-current underline-offset-2 hover:text-accent-dark">
                   Schreib uns
                 </Link>{" "}
                 oder folge uns auf Social Media – wir helfen dir gerne weiter.

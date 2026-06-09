@@ -75,6 +75,7 @@ function ScrollStepsInteractive() {
               }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="absolute bottom-0 left-6 text-9xl font-bold leading-none text-accent/10 will-change-transform sm:left-10"
+              aria-hidden="true"
             >
               {step.number}
             </motion.span>
@@ -125,6 +126,7 @@ function ScrollStepsInteractive() {
                 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="absolute bottom-0 right-0 text-[16rem] font-bold leading-none text-accent/10 will-change-transform lg:text-[20rem]"
+                aria-hidden="true"
               >
                 {step.number}
               </motion.span>

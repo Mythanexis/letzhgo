@@ -38,11 +38,97 @@ function CloseIcon({ className }: { className?: string }) {
   );
 }
 
+function PanelContent({ onClose }: { onClose: () => void }) {
+  return (
+    <>
+      <div className="flex items-center gap-3 bg-[#075E54] px-5 py-4 text-white">
+        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15">
+          <WhatsAppIcon className="h-5 w-5" />
+        </span>
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-semibold leading-tight">
+            Schreib uns direkt
+          </p>
+          <p className="mt-0.5 text-xs text-white/70">
+            Wir antworten meist in &lt; 1 Stunde.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+          aria-label="Schliessen"
+        >
+          <CloseIcon className="h-4 w-4" />
+        </button>
+      </div>
+
+      <ul className="max-h-[60vh] overflow-y-auto py-2">
+        {INSTRUCTORS.map((inst) => (
+          <li key={inst.slug}>
+            <a
+              href={inst.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onClose}
+              className="group flex items-center gap-3 px-4 py-3 transition-colors hover:bg-accent-light"
+            >
+              <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-neutral-100 ring-2 ring-transparent transition-all group-hover:ring-accent/30">
+                <Image
+                  src={inst.image}
+                  alt={inst.name}
+                  fill
+                  sizes="44px"
+                  className="object-cover"
+                />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block truncate text-sm font-bold text-foreground">
+                  {inst.name}
+                </span>
+                <span className="mt-0.5 block truncate text-xs text-muted">
+                  {inst.tags.slice(0, 3).join(" · ")}
+                </span>
+              </span>
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white transition-transform group-hover:scale-110">
+                <WhatsAppIcon className="h-4 w-4" />
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <p className="border-t border-border px-5 py-3 text-center text-[11px] text-muted">
+        Antwortzeiten Mo–Sa, 08:00–20:00
+      </p>
+    </>
+  );
+}
+
 export default function StickyWhatsApp() {
   const [open, setOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const reduceMotion = useReducedMotion();
   const panelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  // Prevent background scroll when mobile modal is open
+  useEffect(() => {
+    if (open && isMobile) {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+  }, [open, isMobile]);
 
   useEffect(() => {
     if (!open) return;
@@ -65,155 +151,138 @@ export default function StickyWhatsApp() {
   }, [open]);
 
   return (
-    <div
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-end p-4 md:p-6"
-      style={{
-        paddingBottom:
-          "calc(env(safe-area-inset-bottom, 0px) + 1rem)",
-      }}
-    >
-      <div className="pointer-events-auto relative flex flex-col items-end gap-3">
-        {/* Expanded panel */}
-        <AnimatePresence>
-          {open && (
+    <>
+      {/* Mobile: centered modal with backdrop — only on <768px */}
+      <AnimatePresence>
+        {open && isMobile && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center px-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            onClick={() => setOpen(false)}
+          >
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
             <motion.div
               ref={panelRef}
               role="dialog"
               aria-label="WhatsApp – Fahrlehrer:in auswählen"
               initial={
-                reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.96 }
+                reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95, y: 28 }
               }
               animate={
-                reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }
+                reduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }
               }
               exit={
-                reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.97 }
+                reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95, y: 20 }
               }
               transition={{ duration: 0.32, ease: EASE }}
-              className="w-[min(92vw,360px)] origin-bottom-right overflow-hidden rounded-2xl border border-black/6 bg-white shadow-[0_24px_80px_-12px_rgba(0,0,0,0.25),0_0_0_1px_rgba(0,0,0,0.04)]"
+              className="relative z-10 w-full max-w-sm overflow-hidden rounded-2xl border border-black/6 bg-white shadow-[0_24px_80px_-12px_rgba(0,0,0,0.35),0_0_0_1px_rgba(0,0,0,0.04)]"
+              onClick={(e) => e.stopPropagation()}
             >
-              {/* Header */}
-              <div className="flex items-center gap-3 bg-[#075E54] px-5 py-4 text-white">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15">
-                  <WhatsAppIcon className="h-5 w-5" />
-                </span>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold leading-tight">
-                    Schreib uns direkt
-                  </p>
-                  <p className="mt-0.5 text-xs text-white/70">
-                    Wir antworten meist in &lt; 1 Stunde.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-                  aria-label="Schliessen"
-                >
-                  <CloseIcon className="h-4 w-4" />
-                </button>
-              </div>
-
-              {/* Instructor list */}
-              <ul className="max-h-[60vh] overflow-y-auto py-2">
-                {INSTRUCTORS.map((inst) => (
-                  <li key={inst.slug}>
-                    <a
-                      href={inst.whatsapp}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setOpen(false)}
-                      className="group flex items-center gap-3 px-4 py-3 transition-colors hover:bg-accent-light"
-                    >
-                      <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-neutral-100 ring-2 ring-transparent transition-all group-hover:ring-accent/30">
-                        <Image
-                          src={inst.image}
-                          alt={inst.name}
-                          fill
-                          sizes="44px"
-                          className="object-cover"
-                        />
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate text-sm font-bold text-foreground">
-                          {inst.name}
-                        </span>
-                        <span className="mt-0.5 block truncate text-xs text-muted">
-                          {inst.tags.slice(0, 3).join(" · ")}
-                        </span>
-                      </span>
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white transition-transform group-hover:scale-110">
-                        <WhatsAppIcon className="h-4 w-4" />
-                      </span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-
-              <p className="border-t border-border px-5 py-3 text-center text-[11px] text-muted">
-                Antwortzeiten Mo–Sa, 08:00–20:00
-              </p>
+              <PanelContent onClose={() => setOpen(false)} />
             </motion.div>
-          )}
-        </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        {/* Floating Trigger Button */}
-        <button
-          ref={buttonRef}
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={
-            open
-              ? "WhatsApp Menü schliessen"
-              : "Fahrlehrer:in auf WhatsApp kontaktieren"
-          }
-          aria-expanded={open}
-          className="group relative flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.7),0_4px_14px_-2px_rgba(0,0,0,0.2)] outline-none transition-all duration-300 hover:scale-105 hover:bg-[#1fb855] focus-visible:ring-4 focus-visible:ring-[#25D366]/30 md:h-16 md:w-16"
-        >
-          {/* Pulse ring – sichtbar nur wenn nicht offen */}
-          {!open && (
-            <span
-              aria-hidden
-              className="absolute inset-0 -z-10 rounded-full bg-[#25D366]/40 motion-safe:animate-ping"
-              style={{ animationDuration: "2.4s" }}
-            />
-          )}
-          <AnimatePresence mode="wait" initial={false}>
-            {open ? (
-              <motion.span
-                key="x"
+      {/* FAB + desktop panel */}
+      <div
+        className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-end p-4 md:p-6"
+        style={{
+          paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)",
+        }}
+      >
+        <div className="pointer-events-auto relative flex flex-col items-end gap-3">
+          {/* Desktop panel — only on ≥768px */}
+          <AnimatePresence>
+            {open && !isMobile && (
+              <motion.div
+                ref={panelRef}
+                role="dialog"
+                aria-label="WhatsApp – Fahrlehrer:in auswählen"
                 initial={
-                  reduceMotion ? { opacity: 0 } : { rotate: -90, opacity: 0 }
+                  reduceMotion
+                    ? { opacity: 0 }
+                    : { opacity: 0, y: 12, scale: 0.96 }
                 }
                 animate={
-                  reduceMotion ? { opacity: 1 } : { rotate: 0, opacity: 1 }
-                }
-                exit={reduceMotion ? { opacity: 0 } : { rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.22, ease: EASE }}
-              >
-                <CloseIcon className="h-6 w-6 md:h-7 md:w-7" />
-              </motion.span>
-            ) : (
-              <motion.span
-                key="wa"
-                initial={
-                  reduceMotion ? { opacity: 0 } : { rotate: 90, opacity: 0 }
-                }
-                animate={
-                  reduceMotion ? { opacity: 1 } : { rotate: 0, opacity: 1 }
+                  reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }
                 }
                 exit={
-                  reduceMotion ? { opacity: 0 } : { rotate: -90, opacity: 0 }
+                  reduceMotion
+                    ? { opacity: 0 }
+                    : { opacity: 0, y: 12, scale: 0.97 }
                 }
-                transition={{ duration: 0.22, ease: EASE }}
+                transition={{ duration: 0.32, ease: EASE }}
+                className="w-[min(92vw,360px)] origin-bottom-right overflow-hidden rounded-2xl border border-black/6 bg-white shadow-[0_24px_80px_-12px_rgba(0,0,0,0.25),0_0_0_1px_rgba(0,0,0,0.04)]"
               >
-                <WhatsAppIcon className="h-7 w-7 md:h-8 md:w-8" />
-              </motion.span>
+                <PanelContent onClose={() => setOpen(false)} />
+              </motion.div>
             )}
           </AnimatePresence>
-        </button>
+
+          {/* Floating trigger button */}
+          <button
+            ref={buttonRef}
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={
+              open
+                ? "WhatsApp Menü schliessen"
+                : "Fahrlehrer:in auf WhatsApp kontaktieren"
+            }
+            aria-expanded={open}
+            className="group relative flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.7),0_4px_14px_-2px_rgba(0,0,0,0.2)] outline-none transition-all duration-300 hover:scale-105 hover:bg-[#1fb855] focus-visible:ring-4 focus-visible:ring-[#25D366]/30 md:h-16 md:w-16"
+          >
+            {!open && (
+              <span
+                aria-hidden
+                className="absolute inset-0 -z-10 rounded-full bg-[#25D366]/40 motion-safe:animate-ping"
+                style={{ animationDuration: "2.4s" }}
+              />
+            )}
+            <AnimatePresence mode="wait" initial={false}>
+              {open ? (
+                <motion.span
+                  key="x"
+                  initial={
+                    reduceMotion ? { opacity: 0 } : { rotate: -90, opacity: 0 }
+                  }
+                  animate={
+                    reduceMotion ? { opacity: 1 } : { rotate: 0, opacity: 1 }
+                  }
+                  exit={
+                    reduceMotion ? { opacity: 0 } : { rotate: 90, opacity: 0 }
+                  }
+                  transition={{ duration: 0.22, ease: EASE }}
+                >
+                  <CloseIcon className="h-6 w-6 md:h-7 md:w-7" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="wa"
+                  initial={
+                    reduceMotion ? { opacity: 0 } : { rotate: 90, opacity: 0 }
+                  }
+                  animate={
+                    reduceMotion ? { opacity: 1 } : { rotate: 0, opacity: 1 }
+                  }
+                  exit={
+                    reduceMotion
+                      ? { opacity: 0 }
+                      : { rotate: -90, opacity: 0 }
+                  }
+                  transition={{ duration: 0.22, ease: EASE }}
+                >
+                  <WhatsAppIcon className="h-7 w-7 md:h-8 md:w-8" />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
