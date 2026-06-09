@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
@@ -135,7 +135,7 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
     if (el) setFullHeightPx(el.scrollHeight);
   }, [review.text]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     measureHeight();
   }, [measureHeight]);
 
