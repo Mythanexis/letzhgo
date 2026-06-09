@@ -134,6 +134,7 @@ const TAGS = ["Auto", "Motorrad", "VKU", "Nothelferkurs"] as const;
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [recaptchaTriggered, setRecaptchaTriggered] = useState(false);
 
   const toggleTag = useCallback((tag: string) => {
     setSelectedTag((prev) => (prev === tag ? null : tag));
@@ -176,14 +177,14 @@ export default function ContactForm() {
 
   return (
     <>
-      {SITE_KEY && (
+      {SITE_KEY && recaptchaTriggered && (
         <Script
           id="recaptcha-v3-contact"
           src={`https://www.google.com/recaptcha/api.js?render=${SITE_KEY}`}
-          strategy="lazyOnload"
+          strategy="afterInteractive"
         />
       )}
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} onFocus={() => setRecaptchaTriggered(true)} className="space-y-6">
         <div className="flex flex-wrap gap-2">
             {TAGS.map((tag) => {
               const active = selectedTag === tag;

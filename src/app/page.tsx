@@ -9,7 +9,6 @@ import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
 import ScrollRevealQuote from "@/components/ScrollRevealQuote";
 import PricingCard from "@/components/PricingCard";
-import ScrollSteps from "@/components/ScrollSteps";
 import CTABanner from "@/components/CTABanner";
 import InstructorsSection from "@/components/InstructorsSection";
 import Stats from "@/components/Stats";
@@ -23,6 +22,7 @@ import AutofahrenAb17Section from "@/components/AutofahrenAb17Section";
 import { SERVICES_OVERVIEW, PRICING } from "@/lib/constants";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
 
+const ScrollSteps = dynamic(() => import("@/components/ScrollSteps"));
 const GoogleReviewsSection = dynamic(() => import("@/components/GoogleReviewsSection"));
 const InstagramSection = dynamic(() => import("@/components/InstagramSection"));
 const TikTokSection = dynamic(() => import("@/components/TikTokSection"));
