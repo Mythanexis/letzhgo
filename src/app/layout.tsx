@@ -182,9 +182,9 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.google.com" />
         <link rel="dns-prefetch" href="https://app1.edoobox.com" />
+        <link rel="preload" as="image" href="/images/logo.png" fetchPriority="high" />
         <Script
           id="gtag-lib"
           src="https://www.googletagmanager.com/gtag/js?id=G-NVK0S8VVX8"

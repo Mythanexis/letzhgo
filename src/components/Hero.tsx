@@ -42,9 +42,9 @@ function BookingPanel() {
   return (
     <div className="w-full max-w-sm overflow-hidden rounded-2xl shadow-2xl">
       <div className="bg-accent px-7 py-5">
-        <h3 className="text-2xl font-extrabold text-white">
+        <p className="text-2xl font-extrabold text-white">
           Starte diese Woche.
-        </h3>
+        </p>
       </div>
 
       <div className="bg-white px-5 pb-5 pt-4 md:px-7 md:pb-7 md:pt-5">
