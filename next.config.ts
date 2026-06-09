@@ -38,6 +38,9 @@ const SECURITY_HEADERS = [
 ];
 
 const nextConfig: NextConfig = {
+  experimental: {
+    inlineCss: true,
+  },
   allowedDevOrigins: ["192.168.1.108"],
   poweredByHeader: false,
   compress: true,
