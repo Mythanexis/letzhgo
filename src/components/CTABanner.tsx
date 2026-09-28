@@ -1,16 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
-
-const AVATAR_IMAGES = [
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=80&h=80&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=face",
-];
 
 export default function CTABanner({ className }: { className?: string }) {
   const anim = useScrollAnim();
@@ -46,37 +38,19 @@ export default function CTABanner({ className }: { className?: string }) {
           >
             {/* Reviews */}
             <div>
-              <p className="text-sm text-muted">450+ zufriedene Schüler</p>
-              <div className="mt-3 flex items-center">
-                <div className="flex -space-x-3">
-                  {AVATAR_IMAGES.map((src, i) => (
-                    <div
-                      key={i}
-                      className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-background"
-                    >
-                      <Image
-                        src={src}
-                        alt=""
-                        fill
-                        className="object-cover"
-                        sizes="40px"
-                      />
-                    </div>
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl font-bold text-foreground">5.0</span>
+                <div className="flex gap-0.5" aria-hidden>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <svg key={i} className="h-4 w-4 text-[#f5a623]" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
                   ))}
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-background bg-foreground text-[10px] font-semibold text-white">
-                    +450
-                  </div>
                 </div>
               </div>
-              <div className="mt-4 flex items-center gap-2">
-                <span className="text-sm font-semibold text-foreground">
-                  Excellente 5 von 5
-                </span>
-                <svg className="h-4 w-4 text-[#f5a623]" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <span className="text-sm font-semibold text-foreground">Trustindex</span>
-              </div>
+              <p className="mt-2 text-sm text-muted">
+                450+ zufriedene Schüler:innen auf Google & Trustindex
+              </p>
             </div>
 
             {/* Contact & Social */}
