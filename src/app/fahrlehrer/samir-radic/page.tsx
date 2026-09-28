@@ -20,7 +20,7 @@ const WERDEGANG = [
 ];
 
 const PHOTOS = [
-  { src: "/images/samir-portrait.png", alt: "Samir Radič am Auto" },
+  { src: "/images/samir-portrait.jpg", alt: "Samir Radič am Auto" },
   { src: "/images/samir-moto.png", alt: "Samir Radič mit Motorrad" },
 ];
 

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 const SLUG = "doma-caleta";
 const NAME = "Doma Caleta";
 const ROLE = "Fahrlehrer für Auto, Verkehrskundelehrer";
-const IMAGE = "https://letzhgo.ch/images/doma.png";
+const IMAGE = "https://letzhgo.ch/images/doma.jpg";
 const TEL = "+41793388032";
 const URL = `https://letzhgo.ch/fahrlehrer/${SLUG}`;
 

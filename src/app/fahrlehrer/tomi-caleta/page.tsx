@@ -19,7 +19,7 @@ const WERDEGANG = [
 ];
 
 const PHOTOS = [
-  { src: "/images/tomi-portrait.png", alt: "Tomi Caleta am Auto" },
+  { src: "/images/tomi-portrait.jpg", alt: "Tomi Caleta am Auto" },
   { src: "/images/tomi-moto.png", alt: "Tomi Caleta mit Motorrad" },
 ];
 

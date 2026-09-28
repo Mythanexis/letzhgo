@@ -38,7 +38,7 @@ const WERDEGANG = [
 ];
 
 const PHOTOS = [
-  { src: "/images/gianni-portrait.png", alt: "Gianni Sebestin am Auto" },
+  { src: "/images/gianni-portrait.jpg", alt: "Gianni Sebestin am Auto" },
   { src: "/images/gianni-moto.png", alt: "Gianni Sebestin mit Motorrad" },
 ];
 

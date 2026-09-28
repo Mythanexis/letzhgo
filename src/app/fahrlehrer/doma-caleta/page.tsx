@@ -20,7 +20,7 @@ const WERDEGANG = [
   { year: "2006 – 2008", text: "United School of Sports, Zürich" },
 ];
 
-const PHOTOS = [{ src: "/images/doma-portrait.png", alt: "Doma Caleta" }];
+const PHOTOS = [{ src: "/images/doma-portrait.jpg", alt: "Doma Caleta" }];
 
 export default function DomaPage() {
   const anim = useScrollAnim();

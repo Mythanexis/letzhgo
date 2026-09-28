@@ -55,7 +55,7 @@ export const INSTRUCTORS = [
     tags: ["Auto", "Motorrad", "Anhänger", "Ausbildner"],
     languages: ["Deutsch", "Englisch"],
     whatsapp: "https://wa.me/41794340966",
-    image: "/images/gianni.png",
+    image: "/images/gianni-card.jpg",
     slug: "gianni-sebestin",
   },
   {
@@ -64,7 +64,7 @@ export const INSTRUCTORS = [
     tags: ["Auto", "Nothelferkurs", "VKU"],
     languages: ["Deutsch", "Kroatisch", "Englisch"],
     whatsapp: "https://wa.me/41768156688",
-    image: "/images/merjema.png",
+    image: "/images/merjema.jpg",
     slug: "merjema-radic",
   },
   {
@@ -73,7 +73,7 @@ export const INSTRUCTORS = [
     tags: ["Auto", "Motorrad", "Anhänger", "VKU", "Nothelferkurs"],
     languages: ["Deutsch", "Kroatisch", "Englisch"],
     whatsapp: "https://wa.me/41764303101",
-    image: "/images/tomi.png",
+    image: "/images/tomi.jpg",
     slug: "tomi-caleta",
   },
   {
@@ -82,7 +82,7 @@ export const INSTRUCTORS = [
     tags: ["Auto", "VKU"],
     languages: ["Deutsch", "Kroatisch", "Englisch"],
     whatsapp: "https://wa.me/41793388032",
-    image: "/images/doma.png",
+    image: "/images/doma.jpg",
     slug: "doma-caleta",
   },
   {
@@ -91,7 +91,7 @@ export const INSTRUCTORS = [
     tags: ["Auto", "Motorrad", "VKU"],
     languages: ["Deutsch", "Kroatisch", "Englisch"],
     whatsapp: "https://wa.me/41788888899",
-    image: "/images/samir.png",
+    image: "/images/samir-card.jpg",
     slug: "samir-radic",
   },
 ] as const;

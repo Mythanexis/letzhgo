@@ -16,7 +16,7 @@ const WERDEGANG = [
   { year: "2018", text: "Kaufmännische Ausbildung" },
 ];
 
-const PHOTOS = [{ src: "/images/merjema-portrait.png", alt: "Merjema Secli-Radič" }];
+const PHOTOS = [{ src: "/images/merjema-portrait.jpg", alt: "Merjema Secli-Radič" }];
 
 export default function MerjemaPage() {
   const anim = useScrollAnim();

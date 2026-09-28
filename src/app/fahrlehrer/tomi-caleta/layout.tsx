@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 const SLUG = "tomi-caleta";
 const NAME = "Tomi Caleta";
 const ROLE = "Fahrlehrer für Auto, Motorrad und Anhänger, Lehrer Theorie Verkehrskunde und Nothelfer";
-const IMAGE = "https://letzhgo.ch/images/tomi.png";
+const IMAGE = "https://letzhgo.ch/images/tomi.jpg";
 const TEL = "+41764303101";
 const URL = `https://letzhgo.ch/fahrlehrer/${SLUG}`;
 
