@@ -176,7 +176,32 @@ export default function HomePage() {
         secondaryCtaText="Kontakt"
         secondaryCtaHref="/kontakt"
         showImage
-        imageSrc="/images/letzhgo-hero.webp"
+        images={[
+          {
+            src: "/images/hero/hero-1.jpg",
+            alt: "Das Let'ZHgo Team mit der Fahrzeugflotte auf dem Übungsplatz",
+          },
+          {
+            src: "/images/hero/hero-3.jpg",
+            alt: "Let'ZHgo Fahrschulautos unterwegs",
+          },
+          {
+            src: "/images/hero/hero-2.jpg",
+            alt: "Das Let'ZHgo Team vor dem Kursanhänger",
+          },
+          {
+            src: "/images/hero/hero-4.jpg",
+            alt: "Let'ZHgo VW ID Buzz mit Kursanhänger",
+          },
+          {
+            src: "/images/hero/hero-5.jpg",
+            alt: "Let'ZHgo Fahrschulauto auf dem Übungsplatz",
+          },
+          {
+            src: "/images/hero/hero-6.jpg",
+            alt: "Let'ZHgo Motorrad im Kursanhänger",
+          },
+        ]}
       />
 
       {/* Unsere Vorteile — Home (alternatives Layout) */}
