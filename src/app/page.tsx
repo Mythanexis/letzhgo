@@ -76,7 +76,50 @@ export default function HomePage() {
         secondaryCtaText="Kontakt"
         secondaryCtaHref="/kontakt"
         showImage
-        imageSrc="/images/letzhgo-hero.webp"
+        images={[
+          {
+            src: "/images/hero/hero-1.jpg",
+            alt: "Das Let'ZHgo Team mit der Fahrzeugflotte auf dem Übungsplatz",
+          },
+          {
+            src: "/images/hero/hero-3.jpg",
+            alt: "Let'ZHgo Fahrschulautos unterwegs",
+          },
+          {
+            src: "/images/hero/hero-2.jpg",
+            alt: "Das Let'ZHgo Team vor dem Kursanhänger",
+          },
+          {
+            src: "/images/hero/hero-4.jpg",
+            alt: "Let'ZHgo VW ID Buzz mit Kursanhänger",
+          },
+          {
+            src: "/images/hero/hero-5.jpg",
+            alt: "Let'ZHgo Fahrschulauto auf dem Übungsplatz",
+          },
+          {
+            src: "/images/hero/hero-6.jpg",
+            alt: "Let'ZHgo Motorrad im Kursanhänger",
+          },
+        ]}
+        mobileImages={[
+          {
+            src: "/images/hero/mobile-1.jpg",
+            alt: "Das Let'ZHgo Team mit der Fahrzeugflotte auf dem Übungsplatz",
+          },
+          {
+            src: "/images/hero/mobile-2.jpg",
+            alt: "Let'ZHgo Fahrschule – Standort mit Kontaktdaten der Fahrlehrer",
+          },
+          {
+            src: "/images/hero/mobile-3.jpg",
+            alt: "Verkehrskundeunterricht bei Let'ZHgo",
+          },
+          {
+            src: "/images/hero/mobile-4.jpg",
+            alt: "Let'ZHgo Motorrad-Ausrüstung",
+          },
+        ]}
       />
 
       {/* Unsere Vorteile — Home (alternatives Layout) */}
@@ -140,8 +183,8 @@ export default function HomePage() {
             >
               <div className="absolute right-0 top-0 z-[1] w-[82%] overflow-hidden rounded-[2rem] shadow-[0_26px_54px_-26px_rgba(8,26,58,0.5)]">
                 <Image
-                  src="/images/letzhgo-autos.jpeg"
-                  alt="Let'ZHgo Fahrzeugflotte"
+                  src="/images/theorie-1.jpg"
+                  alt="Theorieunterricht bei Let'ZHgo"
                   width={900}
                   height={1200}
                   className="h-[330px] w-full object-cover md:h-[420px] lg:h-[480px]"
@@ -150,8 +193,8 @@ export default function HomePage() {
               </div>
               <div className="absolute left-[-2%] top-[48%] z-[2] w-[62%] overflow-hidden rounded-[1.6rem] border-4 border-background shadow-[0_22px_48px_-24px_rgba(8,26,58,0.55)]">
                 <Image
-                  src="/images/manoevertraining.jpg"
-                  alt="Motorrad Manövertraining bei Let'ZHgo"
+                  src="/images/theorie-3.jpg"
+                  alt="Let'ZHgo Team mit Motorrad"
                   width={760}
                   height={560}
                   className="h-[220px] w-full object-cover md:h-[260px] lg:h-[300px]"
@@ -384,6 +427,7 @@ export default function HomePage() {
                   width={900}
                   height={600}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 <div className="absolute left-4 top-4 rounded-full bg-black/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">

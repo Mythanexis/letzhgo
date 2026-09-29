@@ -28,10 +28,10 @@ export default function ServiceCard({
         <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.08]">
           <Image
             src={image}
-            alt={title}
+            alt={`${title} bei Let'ZHgo`}
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, 25vw"
+            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 25vw"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:from-black/90" />

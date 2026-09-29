@@ -41,14 +41,12 @@ export default function GrundkursLocationSection() {
             unseren Fahrlehrern.
           </motion.p>
 
-          {/* Location pill */}
+          {/* Location */}
           <motion.div
             {...anim({ y: 18, delay: 0.28, duration: 0.65 })}
-            className="mt-8 inline-flex w-fit items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-sm"
+            className="mt-8 flex items-start gap-3 border-l-2 border-accent/40 pl-4"
           >
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/20 text-[#60a5fa]">
-              <MapPin className="h-4 w-4" />
-            </div>
+            <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-white/60">
                 Kursstandort
@@ -74,7 +72,7 @@ export default function GrundkursLocationSection() {
               href="https://www.hostettler-moto.ch/zuerich-nord/"
               target="_blank"
               rel="nofollow noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white/80 backdrop-blur-sm transition-all hover:bg-white/10 hover:text-white"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white/80 transition-all hover:border-white/40 hover:text-white"
             >
               Hostettler Moto
               <ExternalLink className="h-3.5 w-3.5" />

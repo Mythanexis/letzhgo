@@ -1,10 +1,95 @@
 "use client";
 
 import type { MouseEvent, ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
+
+export interface HeroSlide {
+  src: string;
+  alt: string;
+}
+
+/** Sekunden, die ein Bild voll sichtbar bleibt (inkl. Überblendung). */
+const HERO_SLIDE_DURATION_S = 6.4;
+/** Dauer der Crossfade-Überblendung zwischen zwei Bildern. */
+const HERO_SLIDE_FADE_S = 1.6;
+
+/** Slideshow im Hero-Hintergrund: Crossfade + alternierender Ken-Burns-Zoom/Pan. */
+function HeroSlideshow({
+  slides,
+  className,
+}: {
+  slides: HeroSlide[];
+  className?: string;
+}) {
+  const [index, setIndex] = useState(0);
+  const reduceMotion = useReducedMotion();
+  /** Wird nach dem allerersten Mount auf false gesetzt — verhindert, dass die
+   *  Slideshow beim späteren Zurück-Loopen auf Slide 0 das Fade-in überspringt. */
+  const isFirstMount = useRef(true);
+  useEffect(() => {
+    isFirstMount.current = false;
+  }, []);
+
+  useEffect(() => {
+    if (slides.length <= 1 || reduceMotion) return;
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % slides.length);
+    }, HERO_SLIDE_DURATION_S * 1000);
+    return () => clearInterval(id);
+  }, [slides.length, reduceMotion]);
+
+  const slide = slides[index];
+  const panLeft = index % 2 === 0;
+  const skipInitialFade = index === 0 && isFirstMount.current;
+
+  return (
+    <div className={`absolute inset-0 overflow-hidden bg-black ${className ?? ""}`}>
+      <AnimatePresence>
+        <motion.div
+          key={index}
+          className="absolute inset-0"
+          initial={{ opacity: skipInitialFade ? 1 : 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: HERO_SLIDE_FADE_S, ease: SNAP }}
+        >
+          <motion.div
+            className="absolute inset-0"
+            initial={
+              reduceMotion
+                ? undefined
+                : { scale: panLeft ? 1 : 1.07, x: panLeft ? "-1.5%" : "1.5%" }
+            }
+            animate={
+              reduceMotion
+                ? undefined
+                : { scale: panLeft ? 1.07 : 1, x: panLeft ? "1.5%" : "-1.5%" }
+            }
+            transition={{
+              duration: HERO_SLIDE_DURATION_S + HERO_SLIDE_FADE_S,
+              ease: "linear",
+            }}
+          >
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              className="object-cover brightness-[0.4]"
+              priority={index === 0}
+              loading={index === 0 ? undefined : "eager"}
+              quality={75}
+              sizes="100vw"
+            />
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
 
 const BOOKING_ITEMS = [
   { label: "Autofahrstunden", href: "/services/fahrstunden", external: false, iconType: "car" as const },
@@ -364,6 +449,11 @@ interface HeroProps {
   secondaryCtaHref?: string;
   showImage?: boolean;
   imageSrc?: string;
+  images?: HeroSlide[];
+  /** Eigene Bilder für Mobile (unter `md`) — z. B. Hochformat-Fotos statt
+   *  der zugeschnittenen Querformat-Bilder von `images`. Wenn nicht gesetzt,
+   *  läuft überall dieselbe Slideshow wie in `images`. */
+  mobileImages?: HeroSlide[];
 }
 
 export default function Hero({
@@ -375,6 +465,8 @@ export default function Hero({
   secondaryCtaHref,
   showImage = false,
   imageSrc,
+  images,
+  mobileImages,
 }: HeroProps) {
   if (showImage) {
     return (
@@ -382,17 +474,28 @@ export default function Hero({
         className="relative flex min-h-svh overflow-x-clip md:overflow-hidden"
         data-navbar-dark
       >
-        <div className="absolute inset-0 overflow-hidden">
-          <Image
-            src={imageSrc ?? IMAGES.hero}
-            alt="Let'ZHgo Team"
-            fill
-            className="object-cover brightness-[0.4]"
-            priority
-            quality={75}
-            sizes="100vw"
-          />
-        </div>
+        {images && images.length > 0 ? (
+          mobileImages && mobileImages.length > 0 ? (
+            <>
+              <HeroSlideshow slides={mobileImages} className="md:hidden" />
+              <HeroSlideshow slides={images} className="hidden md:block" />
+            </>
+          ) : (
+            <HeroSlideshow slides={images} />
+          )
+        ) : (
+          <div className="absolute inset-0 overflow-hidden">
+            <Image
+              src={imageSrc ?? IMAGES.hero}
+              alt="Let'ZHgo Team"
+              fill
+              className="object-cover brightness-[0.4]"
+              priority
+              quality={75}
+              sizes="100vw"
+            />
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
         {/* Desktop layout */}
@@ -495,7 +598,7 @@ export default function Hero({
               delay: HERO_BOOKING_START_MOBILE,
               ease: SNAP,
             }}
-            className="mt-8 w-full"
+            className="mt-20 w-full"
           >
             <BookingPanel />
           </motion.div>

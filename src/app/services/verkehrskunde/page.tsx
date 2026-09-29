@@ -27,8 +27,8 @@ export default function VerkehrskundePage() {
     <>
       <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
         <Image
-          src="/images/vku-popup.png"
-          alt="Verkehrskundeunterricht"
+          src="/images/service-hero-verkehrskunde.jpg"
+          alt="Fahrlehrerin erklärt die Grundregel im Verkehrskundeunterricht"
           fill
           className="object-cover brightness-[0.35]"
           priority
@@ -186,52 +186,61 @@ export default function VerkehrskundePage() {
 
       {/* Ohne VKU keine Prüfung */}
       <section className="bg-[#f7f8fa]">
-        <div className="mx-auto max-w-7xl px-6 py-24 md:px-16 md:py-32 lg:px-24">
-          <motion.div {...anim({ y: 28, duration: 0.8 })}>
+        <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Image */}
+            <motion.div {...anim({ x: -30, duration: 0.8 })}>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+                <Image
+                  src="/images/service-vku-unterricht.jpg"
+                  alt="VKU-Unterricht bei Let'ZHgo"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </motion.div>
 
-            {/* Headline + description */}
-            <div className="max-w-2xl">
-              <span className="inline-block rounded-full border border-border px-3 py-1 text-xs font-semibold uppercase tracking-widest text-muted">
+            {/* Content */}
+            <motion.div {...anim({ x: 30, delay: 0.1, duration: 0.8 })}>
+              <p className="text-xs font-bold uppercase tracking-widest text-muted">
                 Art. 18 VZV · Gesetzliche Pflicht
-              </span>
-              <h2 className="mt-5 text-5xl font-black leading-[1.05] tracking-tight text-foreground md:text-6xl lg:text-7xl">
-                Ohne VKU<br />keine Prüfung.
+              </p>
+              <h2 className="mt-4 text-4xl font-bold leading-tight text-foreground md:text-5xl">
+                Ohne VKU <span className="text-accent">keine Prüfung.</span>
               </h2>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+              <p className="mt-5 text-lg leading-relaxed text-muted">
                 Der VKU-Nachweis ist Pflichtvoraussetzung für die Anmeldung zur praktischen Fahrprüfung. Wer ihn nicht vorlegen kann, erhält vom Strassenverkehrsamt keinen Prüfungstermin — unabhängig davon, wie viele Fahrstunden bereits absolviert wurden.
               </p>
-            </div>
 
-            {/* Facts strip */}
-            <div className="mt-12 overflow-hidden rounded-2xl border border-border bg-white sm:grid sm:grid-cols-3 sm:divide-x sm:divide-border">
-              {[
-                { label: "Pflicht für", value: "Kat. A, A1, B, B1" },
-                { label: "Kurs", value: "2 Abende · 8 Lektionen" },
-                { label: "Gültigkeit", value: "Unbeschränkt" },
-              ].map((f) => (
-                <div key={f.label} className="border-b border-border px-6 py-5 last:border-b-0 sm:border-b-0">
-                  <p className="text-xs font-medium uppercase tracking-widest text-muted">{f.label}</p>
-                  <p className="mt-1.5 font-semibold text-foreground">{f.value}</p>
+              <div className="mt-8 space-y-5 border-l-2 border-accent pl-6">
+                <div>
+                  <p className="text-sm text-muted">Pflicht für</p>
+                  <p className="text-base font-semibold text-foreground">Kat. A, A1, B, B1</p>
                 </div>
-              ))}
-            </div>
+                <div>
+                  <p className="text-sm text-muted">Kurs</p>
+                  <p className="text-base font-semibold text-foreground">2 Abende · 8 Lektionen</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted">Gültigkeit</p>
+                  <p className="text-base font-semibold text-foreground">Unbeschränkt</p>
+                </div>
+              </div>
 
-            {/* CTA below strip */}
-            <div className="mt-8 flex flex-col items-start gap-2">
               <a
                 href={EDOOBOX_LINKS.verkehrskunde}
                 target="_blank"
                 rel="nofollow noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-dark"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-dark"
               >
                 Sicher zum nächsten Termin
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
                   <path d="M4 8h8M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
-            </div>
-
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
     </>

@@ -30,7 +30,7 @@ function ServiceSectionStatic({
       <div className="absolute inset-0">
         <Image
           src={service.image}
-          alt={service.title}
+          alt={`${service.title} bei Let'ZHgo`}
           fill
           className="object-cover"
           sizes="100vw"
@@ -110,7 +110,7 @@ function ServiceSectionScroll({
       <motion.div className="absolute inset-0" style={{ scale: imageScale, y: imageY }}>
         <Image
           src={service.image}
-          alt={service.title}
+          alt={`${service.title} bei Let'ZHgo`}
           fill
           className="object-cover"
           sizes="100vw"
@@ -224,7 +224,8 @@ export default function ServicesPage() {
             <div className="relative h-[420px] w-[320px] -rotate-[10deg] overflow-hidden rounded-[28px] border border-border/70 bg-transparent shadow-[0_40px_100px_-60px_rgba(0,0,0,0.35)]">
               <Image
                 src="/images/motorrad-grundkurs-2.jpg"
-                alt="Schüler beim Motorrad-Grundkurs bei Let'ZHgo"
+                alt=""
+                aria-hidden
                 fill
                 sizes="320px"
                 className="object-cover opacity-[0.86]"
@@ -241,7 +242,8 @@ export default function ServicesPage() {
             <div className="relative h-[360px] w-[300px] rotate-[8deg] overflow-hidden rounded-[26px] border border-border/70 bg-transparent shadow-[0_40px_100px_-60px_rgba(0,0,0,0.35)]">
               <Image
                 src="/images/vku-popup.png"
-                alt="Verkehrskundeunterricht bei Let'ZHgo"
+                alt=""
+                aria-hidden
                 fill
                 sizes="300px"
                 className="object-cover opacity-[0.84]"

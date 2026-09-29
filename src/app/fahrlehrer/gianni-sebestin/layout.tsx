@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 const SLUG = "gianni-sebestin";
 const NAME = "Gianni Sebestin";
 const ROLE = "Fahrlehrer für Auto, Motorrad und Anhänger, Fahrlehrer-Ausbildner";
-const IMAGE = "https://letzhgo.ch/images/gianni.png";
+const IMAGE = "https://letzhgo.ch/images/gianni-card.jpg";
 const TEL = "+41794340966";
 const URL = `https://letzhgo.ch/fahrlehrer/${SLUG}`;
 

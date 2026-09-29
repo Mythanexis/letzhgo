@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 const SLUG = "samir-radic";
 const NAME = "Samir Radič";
 const ROLE = "Fahrlehrer für Auto und Motorrad, Theorielehrer Verkehrskunde";
-const IMAGE = "https://letzhgo.ch/images/samir.png";
+const IMAGE = "https://letzhgo.ch/images/samir-card.jpg";
 const TEL = "+41788888899";
 const URL = `https://letzhgo.ch/fahrlehrer/${SLUG}`;
 

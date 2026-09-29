@@ -114,7 +114,7 @@ export default function UeberUnsPage() {
                 <div className="relative overflow-hidden rounded-[26px] border border-border/80 bg-card shadow-[0_24px_60px_-24px_rgba(0,0,0,0.22)] ring-1 ring-black/4 lg:-rotate-[0.6deg] lg:transition-transform lg:duration-500 lg:hover:rotate-0">
                   <div className="relative aspect-4/3 sm:aspect-5/4">
                     <Image
-                      src="/images/fahrschul-team.jpg"
+                      src="/images/ueber-uns-team-2.jpg"
                       alt="Das Team von Let'ZHgo Fahrschule"
                       fill
                       className="object-cover object-center"
@@ -280,22 +280,22 @@ export default function UeberUnsPage() {
         </div>
       </section>
 
-      {/* Quote — Wald, leicht abgedunkelt; Bild unten ausrichten (Strasse), Text vertikal mittig */}
+      {/* Quote — Samir am Schreibtisch, abgedunkelt; Text vertikal mittig */}
       <section
         className="relative flex min-h-144 items-center justify-center overflow-hidden px-6 py-16 md:min-h-176 md:py-20"
         data-navbar-dark
       >
         <Image
-          src="/images/ueber-uns-quote-forest.png"
+          src="/images/ueber-uns-quote-samir.jpg"
           alt=""
           fill
-          className="object-cover object-bottom"
+          className="object-cover object-[center_28%]"
           sizes="100vw"
           priority={false}
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/36 via-black/30 to-black/42"
+          className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/55 via-black/50 to-black/60"
           aria-hidden
         />
         <div className="relative z-10 mx-auto w-full max-w-7xl">
@@ -315,32 +315,7 @@ export default function UeberUnsPage() {
       <Stats surface="light" />
 
       {/* Bewertungen */}
-      <section className="relative overflow-hidden bg-background">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-100"
-          aria-hidden
-          style={{
-            background:
-              "radial-gradient(960px 620px at 20% 24%, rgba(30, 99, 255, 0.16), transparent 62%), radial-gradient(900px 620px at 84% 70%, rgba(30, 99, 255, 0.12), transparent 64%), linear-gradient(180deg, rgba(247, 248, 250, 0.9), rgba(255, 255, 255, 1) 52%, rgba(247, 248, 250, 0.9) 100%)",
-          }}
-        />
-        <div
-          className="pointer-events-none absolute -left-24 top-16 h-80 w-80 rounded-full bg-accent/18 blur-[120px]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute -right-24 bottom-10 h-[26rem] w-[26rem] rounded-full bg-accent-light/22 blur-[125px]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.3]"
-          aria-hidden
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, var(--color-border) 1px, transparent 0)",
-            backgroundSize: "22px 22px",
-          }}
-        />
+      <section className="bg-[#f7f8fa]">
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
           <motion.div {...anim({ y: 34, duration: 0.85 })} className="relative">
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
@@ -366,22 +341,17 @@ export default function UeberUnsPage() {
                     delay: Math.min(i * 0.08, 0.35),
                     duration: 0.65,
                   })}
-                  className="flex h-full min-h-[21rem] flex-col rounded-2xl border border-border/80 bg-[#f7f8fa] p-6 shadow-[0_10px_26px_-18px_rgba(12,22,44,0.28)]"
+                  className="flex h-full min-h-[21rem] flex-col rounded-2xl border border-border bg-white p-7 shadow-sm"
                 >
-                      <div className="flex items-center justify-between">
-                        <span className="text-4xl leading-none text-accent/20" aria-hidden>
-                          &ldquo;
-                        </span>
-                        <div className="flex gap-0.5" aria-hidden>
-                          {Array.from({ length: 5 }).map((_, j) => (
-                            <svg key={j} className="h-4 w-4 text-[#f5a623]" viewBox="0 0 24 24" fill="currentColor">
-                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                          ))}
-                        </div>
+                      <div className="flex gap-0.5" aria-hidden>
+                        {Array.from({ length: 5 }).map((_, j) => (
+                          <svg key={j} className="h-4 w-4 text-[#f5a623]" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                          </svg>
+                        ))}
                       </div>
 
-                      <div className="mt-3 flex-1">
+                      <div className="mt-4 flex-1">
                         {(() => {
                           const reviewId = `${review.author}-${review.date}`;
                           const isExpanded = Boolean(expandedReviews[reviewId]);
@@ -450,7 +420,7 @@ export default function UeberUnsPage() {
                 href={GOOGLE_REVIEWS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-[#d7d4ec] bg-white px-6 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all hover:border-accent/30 hover:text-accent"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-6 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all hover:border-accent/30 hover:text-accent"
               >
                 <svg className="h-4 w-4" viewBox="0 0 24 24" aria-hidden>
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />

@@ -29,7 +29,7 @@ function InstructorCard({
           alt={instructor.name}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          sizes="(max-width: 767px) 320px, 440px"
         />
         <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
         <span className="absolute bottom-3 right-3 rounded-md bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">

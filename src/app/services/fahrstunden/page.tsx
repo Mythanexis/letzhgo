@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { IMAGES } from "@/lib/constants";
 import { useScrollAnim, useCoarsePointer } from "@/hooks/useScrollAnim";
 import { Users, MapPin, ClipboardCheck, GraduationCap, Car, Video } from "lucide-react";
 
@@ -80,8 +79,8 @@ export default function FahrstundenPage() {
       {/* Hero */}
       <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
         <Image
-          src={IMAGES.autoFahrstunden}
-          alt="Fahrstunden"
+          src="/images/service-hero-fahrstunden.jpg"
+          alt="Blick aufs Lenkrad und Armaturenbrett während einer Autofahrstunde"
           fill
           className="object-cover brightness-[0.35]"
           priority
@@ -391,13 +390,12 @@ export default function FahrstundenPage() {
           {/* Bild */}
           <motion.div {...anim({ scale: 1.04, duration: 1 })} className="relative min-h-[360px] lg:min-h-[600px]">
             <Image
-              src="/images/anhaenger-gianni.png"
-              alt="Gianni Sebestin mit Let'ZHgo Anhänger"
+              src="/images/service-anhaenger.jpg"
+              alt="Let'ZHgo Fahrzeug mit Kursanhänger"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-background" />
           </motion.div>
 
           {/* Content */}

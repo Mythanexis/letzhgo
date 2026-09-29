@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { IMAGES, EDOOBOX_LINKS } from "@/lib/constants";
+import { EDOOBOX_LINKS } from "@/lib/constants";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
 import PruefungsvorbereitungSection from "@/components/PruefungsvorbereitungSection";
 
@@ -77,8 +77,8 @@ export default function MotorradPage() {
     <>
       <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
         <Image
-          src={IMAGES.motorrad}
-          alt="Motorrad"
+          src="/images/service-hero-motorrad.jpg"
+          alt="Motorradfahrerin und Motorradfahrer unterwegs"
           fill
           className="object-cover brightness-[0.35]"
           priority
@@ -324,8 +324,8 @@ export default function MotorradPage() {
             <motion.div {...anim({ x: -24, duration: 0.7 })}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
                 <Image
-                  src="/images/motorrad-fahrstunden.png"
-                  alt="Motorrad-Fahrstunden bei Let'ZHgo"
+                  src="/images/service-motorrad-fahrstunden.jpg"
+                  alt="Let'ZHgo Team mit Motorrad"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -446,8 +446,8 @@ export default function MotorradPage() {
             <motion.div {...anim({ x: 24, delay: 0.1, duration: 0.7 })}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
                 <Image
-                  src="/images/partner-hostettler-zuerich-nord.png"
-                  alt="hostettler moto ag Zürich Nord"
+                  src="/images/hostettler-moto.jpg"
+                  alt="Motorrad mieten bei hostettler moto ag Zürich Nord"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
