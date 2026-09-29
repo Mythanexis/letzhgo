@@ -180,7 +180,7 @@ export const SERVICES_DETAIL = [
     title: "Autofahrstunden",
     description: "Jede Fahrstunde ist individuell auf dich abgestimmt. Wir begleiten dich vom ersten Anfahren bis zur praktischen Prüfung – in deinem Tempo und mit klarer Struktur.",
     longDescription: "Du lernst, selbstbewusst im Stadtverkehr, auf der Autobahn und in komplexen Verkehrssituationen zu fahren. Unser Ziel ist nicht nur die bestandene Prüfung, sondern dass du dich langfristig sicher und souverän im Strassenverkehr bewegst.",
-    image: IMAGES.autoFahrstunden,
+    image: "/images/service-hero-fahrstunden.jpg",
     bookingLink: "/kontakt",
   },
   {
@@ -188,7 +188,7 @@ export const SERVICES_DETAIL = [
     title: "Motorrad",
     description: "Grundkurs und Fahrstunden – lerne die wichtigsten Techniken für sicheres und kontrolliertes Fahren auf zwei Rädern.",
     longDescription: "Wir trainieren Kurventechnik, Bremsverhalten, Blickführung und Fahrzeugkontrolle Schritt für Schritt. Der Fokus liegt auf Sicherheit, Präzision und einem stabilen Fahrgefühl – damit du dich auf zwei Rädern jederzeit sicher fühlst.",
-    image: IMAGES.motorrad,
+    image: "/images/service-hero-motorrad.jpg",
     bookingLink: EDOOBOX_LINKS.motorrad,
   },
   {
@@ -196,7 +196,7 @@ export const SERVICES_DETAIL = [
     title: "Verkehrskunde",
     description: "Ein gutes Verständnis des Verkehrs ist die Grundlage für sicheres Fahren. In unserem Verkehrskundeunterricht lernst du, Situationen frühzeitig zu erkennen, Gefahren richtig einzuschätzen und vorausschauend zu handeln.",
     longDescription: "Wir zeigen dir, wie du komplexe Verkehrssituationen analysierst und verantwortungsbewusste Entscheidungen triffst – praxisnah, verständlich erklärt und optimal vorbereitet auf die Theorieprüfung.",
-    image: IMAGES.vkuPopup,
+    image: "/images/service-hero-verkehrskunde.jpg",
     bookingLink: EDOOBOX_LINKS.verkehrskunde,
   },
   {
