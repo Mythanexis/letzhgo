@@ -4,7 +4,8 @@ import { useMemo, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
-import { IMAGES } from "@/lib/constants";
+
+const QUOTE_IMAGE = "/images/philosophie-bmw.jpg";
 
 const QUOTE_TEXT =
   "Die Freude am Fahren bleibt nicht weiter ein Traum, sondern wird pure Wirklichkeit. Du wirst erstaunt sein, wie viel Vertrauen Du in Dich und ins Fahrzeug nach diesen Lektionen haben wirst.";
@@ -74,7 +75,7 @@ function ScrollRevealQuoteScroll({
       <div className="sticky top-0 h-dvh w-full overflow-hidden">
         <motion.div className="absolute inset-0" style={{ scale: imageScale }}>
           <Image
-            src={IMAGES.quoteBg}
+            src={QUOTE_IMAGE}
             alt=""
             aria-hidden="true"
             fill

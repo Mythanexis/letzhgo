@@ -8,7 +8,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-const QUOTE_BG = "/images/ueber-uns/quote-road.jpg";
+const QUOTE_BG = "/images/ueber-uns/quote-car-interior.jpg";
 
 const QUOTE_EYEBROW = "So bilden wir aus";
 
@@ -111,8 +111,8 @@ function HeroFullLayer({ reducedMotion }: { reducedMotion: boolean }) {
           <div className="relative overflow-hidden rounded-[26px] border border-border/80 bg-card shadow-[0_24px_60px_-20px_rgba(0,0,0,0.18)] ring-1 ring-black/[0.04] lg:rotate-[0.75deg] lg:transition-transform lg:duration-500 lg:hover:rotate-0">
             <div className="relative aspect-[4/3] sm:aspect-[5/4]">
               <Image
-                src="/images/ueber-uns-hero.png"
-                alt="Fahrzeuge und Team von Let'ZHgo"
+                src="/images/ueber-uns-team.jpg"
+                alt="Das Let'ZHgo Team"
                 fill
                 priority
                 className="object-cover object-center"

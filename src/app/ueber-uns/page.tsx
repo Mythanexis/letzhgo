@@ -114,7 +114,7 @@ export default function UeberUnsPage() {
                 <div className="relative overflow-hidden rounded-[26px] border border-border/80 bg-card shadow-[0_24px_60px_-24px_rgba(0,0,0,0.22)] ring-1 ring-black/4 lg:-rotate-[0.6deg] lg:transition-transform lg:duration-500 lg:hover:rotate-0">
                   <div className="relative aspect-4/3 sm:aspect-5/4">
                     <Image
-                      src="/images/fahrschul-team.jpg"
+                      src="/images/ueber-uns-team-2.jpg"
                       alt="Das Team von Let'ZHgo Fahrschule"
                       fill
                       className="object-cover object-center"

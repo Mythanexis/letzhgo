@@ -265,8 +265,8 @@ export default function HomePage() {
             >
               <div className="absolute right-0 top-0 z-[1] w-[82%] overflow-hidden rounded-[2rem] shadow-[0_26px_54px_-26px_rgba(8,26,58,0.5)]">
                 <Image
-                  src="/images/letzhgo-autos.jpeg"
-                  alt="Let'ZHgo Fahrzeugflotte"
+                  src="/images/theorie-1.jpg"
+                  alt="Theorieunterricht bei Let'ZHgo"
                   width={900}
                   height={1200}
                   className="h-[330px] w-full object-cover md:h-[420px] lg:h-[480px]"
@@ -275,8 +275,8 @@ export default function HomePage() {
               </div>
               <div className="absolute left-[-2%] top-[48%] z-[2] w-[62%] overflow-hidden rounded-[1.6rem] border-4 border-background shadow-[0_22px_48px_-24px_rgba(8,26,58,0.55)]">
                 <Image
-                  src="/images/manoevertraining.jpg"
-                  alt="Motorrad Manövertraining bei Let'ZHgo"
+                  src="/images/theorie-3.jpg"
+                  alt="Let'ZHgo Team mit Motorrad"
                   width={760}
                   height={560}
                   className="h-[220px] w-full object-cover md:h-[260px] lg:h-[300px]"

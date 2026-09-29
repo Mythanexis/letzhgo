@@ -64,7 +64,7 @@ export const INSTRUCTORS = [
     tags: ["Auto", "Nothelferkurs", "VKU"],
     languages: ["Deutsch", "Kroatisch", "Englisch"],
     whatsapp: "https://wa.me/41768156688",
-    image: "/images/merjema.jpg",
+    image: "/images/merjema-card.jpg",
     slug: "merjema-radic",
   },
   {
@@ -82,7 +82,7 @@ export const INSTRUCTORS = [
     tags: ["Auto", "VKU"],
     languages: ["Deutsch", "Kroatisch", "Englisch"],
     whatsapp: "https://wa.me/41793388032",
-    image: "/images/doma.jpg",
+    image: "/images/doma-card.jpg",
     slug: "doma-caleta",
   },
   {

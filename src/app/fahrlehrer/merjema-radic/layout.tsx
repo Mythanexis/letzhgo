@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 const SLUG = "merjema-radic";
 const NAME = "Merjema Secli-Radič";
 const ROLE = "Fahrlehrerin für Auto, Nothelferinstruktorin, Theorielehrerin für Verkehrskunde";
-const IMAGE = "https://letzhgo.ch/images/merjema.jpg";
+const IMAGE = "https://letzhgo.ch/images/merjema-card.jpg";
 const TEL = "+41768156688";
 const URL = `https://letzhgo.ch/fahrlehrer/${SLUG}`;
 
