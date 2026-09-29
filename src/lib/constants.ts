@@ -157,19 +157,19 @@ export const SERVICES_OVERVIEW = [
   {
     title: "Verkehrskundeunterricht",
     description: "Im Verkehrskundekurs lernst du, Gefahren frühzeitig zu erkennen und sicher im Strassenverkehr unterwegs zu sein.",
-    image: IMAGES.vkuPopup,
+    image: "/images/service-hero-verkehrskunde.jpg",
     href: "/services/verkehrskunde",
   },
   {
     title: "Motorrad",
     description: "Grundkurs und Fahrstunden – lerne dein Bike sicher zu beherrschen und mit Kontrolle und Vertrauen unterwegs zu sein.",
-    image: IMAGES.motorrad,
+    image: "/images/service-hero-motorrad.jpg",
     href: "/services/motorrad",
   },
   {
     title: "Fahrstunden",
     description: "In unseren Fahrstunden lernst du sicher, souverän und mit Freude selbstständig zu fahren.",
-    image: IMAGES.autoFahrstunden,
+    image: "/images/service-hero-fahrstunden.jpg",
     href: "/services/fahrstunden",
   },
 ] as const;

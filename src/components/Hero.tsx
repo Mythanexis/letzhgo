@@ -18,7 +18,13 @@ const HERO_SLIDE_DURATION_S = 6.4;
 const HERO_SLIDE_FADE_S = 1.6;
 
 /** Slideshow im Hero-Hintergrund: Crossfade + alternierender Ken-Burns-Zoom/Pan. */
-function HeroSlideshow({ slides }: { slides: HeroSlide[] }) {
+function HeroSlideshow({
+  slides,
+  className,
+}: {
+  slides: HeroSlide[];
+  className?: string;
+}) {
   const [index, setIndex] = useState(0);
   const reduceMotion = useReducedMotion();
   /** Wird nach dem allerersten Mount auf false gesetzt — verhindert, dass die
@@ -41,7 +47,7 @@ function HeroSlideshow({ slides }: { slides: HeroSlide[] }) {
   const skipInitialFade = index === 0 && isFirstMount.current;
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-black">
+    <div className={`absolute inset-0 overflow-hidden bg-black ${className ?? ""}`}>
       <AnimatePresence>
         <motion.div
           key={index}
@@ -444,6 +450,10 @@ interface HeroProps {
   showImage?: boolean;
   imageSrc?: string;
   images?: HeroSlide[];
+  /** Eigene Bilder für Mobile (unter `md`) — z. B. Hochformat-Fotos statt
+   *  der zugeschnittenen Querformat-Bilder von `images`. Wenn nicht gesetzt,
+   *  läuft überall dieselbe Slideshow wie in `images`. */
+  mobileImages?: HeroSlide[];
 }
 
 export default function Hero({
@@ -456,6 +466,7 @@ export default function Hero({
   showImage = false,
   imageSrc,
   images,
+  mobileImages,
 }: HeroProps) {
   if (showImage) {
     return (
@@ -464,7 +475,14 @@ export default function Hero({
         data-navbar-dark
       >
         {images && images.length > 0 ? (
-          <HeroSlideshow slides={images} />
+          mobileImages && mobileImages.length > 0 ? (
+            <>
+              <HeroSlideshow slides={mobileImages} className="md:hidden" />
+              <HeroSlideshow slides={images} className="hidden md:block" />
+            </>
+          ) : (
+            <HeroSlideshow slides={images} />
+          )
         ) : (
           <div className="absolute inset-0 overflow-hidden">
             <Image
@@ -580,7 +598,7 @@ export default function Hero({
               delay: HERO_BOOKING_START_MOBILE,
               ease: SNAP,
             }}
-            className="mt-8 w-full"
+            className="mt-20 w-full"
           >
             <BookingPanel />
           </motion.div>

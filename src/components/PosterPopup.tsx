@@ -138,7 +138,6 @@ export default function PosterPopup() {
                 height={600}
                 className="h-auto max-h-[85vh] w-full rounded-2xl object-contain shadow-2xl"
                 sizes="(max-width: 640px) 92vw, 600px"
-                priority
               />
             </div>
           </motion.div>

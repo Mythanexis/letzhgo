@@ -78,7 +78,7 @@ export default function FahrstundenPage() {
       <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
         <Image
           src="/images/service-hero-fahrstunden.jpg"
-          alt="Fahrstunden"
+          alt="Blick aufs Lenkrad und Armaturenbrett während einer Autofahrstunde"
           fill
           className="object-cover brightness-[0.35]"
           priority

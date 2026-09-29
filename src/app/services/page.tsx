@@ -30,7 +30,7 @@ function ServiceSectionStatic({
       <div className="absolute inset-0">
         <Image
           src={service.image}
-          alt={service.title}
+          alt={`${service.title} bei Let'ZHgo`}
           fill
           className="object-cover"
           sizes="100vw"
@@ -110,7 +110,7 @@ function ServiceSectionScroll({
       <motion.div className="absolute inset-0" style={{ scale: imageScale, y: imageY }}>
         <Image
           src={service.image}
-          alt={service.title}
+          alt={`${service.title} bei Let'ZHgo`}
           fill
           className="object-cover"
           sizes="100vw"
@@ -225,6 +225,7 @@ export default function ServicesPage() {
               <Image
                 src="/images/motorrad-grundkurs-2.jpg"
                 alt=""
+                aria-hidden
                 fill
                 sizes="320px"
                 className="object-cover opacity-[0.86]"
@@ -242,6 +243,7 @@ export default function ServicesPage() {
               <Image
                 src="/images/vku-popup.png"
                 alt=""
+                aria-hidden
                 fill
                 sizes="300px"
                 className="object-cover opacity-[0.84]"

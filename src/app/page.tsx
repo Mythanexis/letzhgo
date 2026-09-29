@@ -202,6 +202,24 @@ export default function HomePage() {
             alt: "Let'ZHgo Motorrad im Kursanhänger",
           },
         ]}
+        mobileImages={[
+          {
+            src: "/images/hero/mobile-1.jpg",
+            alt: "Das Let'ZHgo Team mit der Fahrzeugflotte auf dem Übungsplatz",
+          },
+          {
+            src: "/images/hero/mobile-2.jpg",
+            alt: "Let'ZHgo Fahrschule – Standort mit Kontaktdaten der Fahrlehrer",
+          },
+          {
+            src: "/images/hero/mobile-3.jpg",
+            alt: "Verkehrskundeunterricht bei Let'ZHgo",
+          },
+          {
+            src: "/images/hero/mobile-4.jpg",
+            alt: "Let'ZHgo Motorrad-Ausrüstung",
+          },
+        ]}
       />
 
       {/* Unsere Vorteile — Home (alternatives Layout) */}
@@ -506,6 +524,7 @@ export default function HomePage() {
                   width={900}
                   height={600}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 <div className="absolute left-4 top-4 rounded-full bg-black/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">

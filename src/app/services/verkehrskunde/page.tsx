@@ -26,7 +26,7 @@ export default function VerkehrskundePage() {
       <section className="relative flex h-[60vh] items-end overflow-hidden" data-navbar-dark>
         <Image
           src="/images/service-hero-verkehrskunde.jpg"
-          alt="Verkehrskundeunterricht"
+          alt="Fahrlehrerin erklärt die Grundregel im Verkehrskundeunterricht"
           fill
           className="object-cover brightness-[0.35]"
           priority

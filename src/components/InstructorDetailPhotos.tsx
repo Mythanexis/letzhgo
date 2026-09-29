@@ -40,7 +40,7 @@ export function InstructorDetailPhotosDesktop({
               alt={first.alt}
               fill
               className="object-cover"
-              sizes="(min-width: 1024px) 32vw, 100vw"
+              sizes="(min-width: 1024px) 40vw, 100vw"
               priority
             />
           </div>
@@ -124,7 +124,6 @@ export default function InstructorDetailPhotos({
               fill
               className="object-cover"
               sizes="(max-width: 640px) 42vw, 240px"
-              priority
             />
           </div>
         </div>
