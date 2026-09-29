@@ -6,7 +6,10 @@ import { motion } from "framer-motion";
 export type InstructorPhoto = { src: string; alt: string };
 
 /**
- * Desktop: rechte Spalte, Bilder untereinander, sticky (wie früher).
+ * Desktop: rechte Spalte, sticky. Zwei aufeinandergelegte Foto-Prints,
+ * leicht verdreht wie ein spontaner Schnappschuss-Stapel — richten sich
+ * beim Hover gerade auf. Ein Bild: nur der Haupt-Print, ebenfalls leicht
+ * gedreht statt stocksteif gerade.
  */
 export function InstructorDetailPhotosDesktop({
   images,
@@ -15,6 +18,8 @@ export function InstructorDetailPhotosDesktop({
 }) {
   if (images.length === 0) return null;
 
+  const [first, second] = images;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -22,19 +27,38 @@ export function InstructorDetailPhotosDesktop({
       transition={{ duration: 1.2, delay: 0.3 }}
       className="hidden lg:col-span-2 lg:block"
     >
-      <div className="lg:sticky lg:top-28 space-y-5">
-        {images.map((img, i) => (
-          <div key={img.src} className="overflow-hidden rounded-2xl">
+      <div className="group lg:sticky lg:top-28">
+        <div className="relative aspect-[4/5] w-full">
+          <div
+            className="absolute -inset-3 -z-10 rounded-[2rem] bg-accent/8"
+            aria-hidden
+          />
+
+          <div className="absolute inset-0 overflow-hidden rounded-2xl border-[6px] border-background shadow-[0_24px_56px_-20px_rgba(0,0,0,0.35)] ring-1 ring-black/5 lg:rotate-[-2deg] lg:transition-transform lg:duration-500 lg:group-hover:rotate-0">
             <Image
-              src={img.src}
-              alt={img.alt}
-              width={600}
-              height={400}
-              className="w-full object-cover"
-              priority={i === 0}
+              src={first.src}
+              alt={first.alt}
+              fill
+              className="object-cover"
+              sizes="(min-width: 1024px) 32vw, 100vw"
+              priority
             />
           </div>
-        ))}
+
+          {second && (
+            <div className="absolute -left-8 -top-8 z-10 w-[46%] overflow-hidden rounded-xl border-[6px] border-background shadow-[0_18px_44px_-14px_rgba(0,0,0,0.4)] ring-1 ring-black/5 lg:rotate-[6deg] lg:transition-transform lg:duration-500 lg:group-hover:rotate-[3deg]">
+              <div className="relative aspect-[4/3] w-full">
+                <Image
+                  src={second.src}
+                  alt={second.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 15vw, 46vw"
+                />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </motion.div>
   );

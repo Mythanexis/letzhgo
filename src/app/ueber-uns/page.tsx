@@ -280,22 +280,22 @@ export default function UeberUnsPage() {
         </div>
       </section>
 
-      {/* Quote — Wald, leicht abgedunkelt; Bild unten ausrichten (Strasse), Text vertikal mittig */}
+      {/* Quote — Samir am Schreibtisch, abgedunkelt; Text vertikal mittig */}
       <section
         className="relative flex min-h-144 items-center justify-center overflow-hidden px-6 py-16 md:min-h-176 md:py-20"
         data-navbar-dark
       >
         <Image
-          src="/images/ueber-uns-quote-forest.png"
+          src="/images/ueber-uns-quote-samir.jpg"
           alt=""
           fill
-          className="object-cover object-bottom"
+          className="object-cover object-[center_28%]"
           sizes="100vw"
           priority={false}
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/36 via-black/30 to-black/42"
+          className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/55 via-black/50 to-black/60"
           aria-hidden
         />
         <div className="relative z-10 mx-auto w-full max-w-7xl">
