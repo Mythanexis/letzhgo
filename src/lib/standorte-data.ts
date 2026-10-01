@@ -58,8 +58,8 @@ const STANDORTE_DATA: ReadonlyArray<Standort> = [
       "Theorie an der Binzmühlestrasse, Fahrstunden quer durch den Kreis 11 – mit erfahrenen Fahrlehrer:innen, die Oerlikon im Schlaf kennen.",
     metaDescription:
       "Fahrschule in Zürich-Oerlikon: Fahrstunden, Verkehrskunde & Nothelferkurs aus einer Hand. Direkt am Bahnhof Oerlikon. Jetzt mit Let'ZHgo starten.",
-    image: "/images/oerlikon-letzhgo.png",
-    imageAlt: "Fahrschule Let'ZHgo – Standort Zürich-Oerlikon",
+    image: "/images/standort-oerlikon-hero.jpg",
+    imageAlt: "Let'ZHgo Fahrlehrer-Team mit der Fahrzeugflotte am Standort Zürich-Oerlikon",
     welcome: [
       "Bist du auf der Suche nach einer Fahrschule in Zürich-Oerlikon, bei der du dich wohlfühlst? Bei Let'ZHgo lernst du nicht nur alles, was du für die Prüfung wissen musst – wir nehmen uns Zeit, hören zu und passen die Lektionen deinem Tempo an. Theorie, Nothelferkurs und Fahrstunden findest du bei uns an einer Adresse.",
       "Unser Team unterrichtet auf Deutsch, Kroatisch und Englisch. Egal ob du in Oerlikon, Affoltern, Seebach oder Schwamendingen wohnst – wir holen dich ab und trainieren genau die Strecken, die im Strassenverkehrsamt geprüft werden.",
@@ -102,8 +102,8 @@ const STANDORTE_DATA: ReadonlyArray<Standort> = [
       "Fahrstunden ab Bahnhof Rümlang, Autobahn um die Ecke – mit erfahrenen Fahrlehrer:innen, die das Furttal kennen.",
     metaDescription:
       "Fahrschule in Rümlang: Fahrstunden ab Bahnhof Rümlang mit erfahrenem Team von Let'ZHgo. Land- und Autobahnstrecken im Furttal.",
-    image: "/images/ruemlang-sunset-letzhgo.png",
-    imageAlt: "Fahrschule Let'ZHgo – Standort Rümlang",
+    image: "/images/standort-ruemlang-hero.jpg",
+    imageAlt: "Let'ZHgo Fahrlehrer-Team mit der Fahrzeugflotte am Standort Rümlang",
     welcome: [
       "Du suchst eine Fahrschule in Rümlang, die dich vom ersten Mal bis zur Prüfung begleitet? Bei Let'ZHgo lernst du mit erfahrenen Fahrlehrer:innen, die das Furttal und die umliegenden Strecken in- und auswendig kennen.",
       "Wir wissen, was auf der A51 und den Landstrassen Richtung Bülach und Glattbrugg zählt – und passen die Lektionen genau darauf an. Du kommst aus Rümlang, Oberglatt, Glattbrugg oder Opfikon? Wir vereinbaren den Treffpunkt mit dir.",
@@ -145,8 +145,8 @@ const STANDORTE_DATA: ReadonlyArray<Standort> = [
       "Eine Fahrschule, die das Unterland kennt – Altstadt, Landstrassen Richtung Eglisau und die A51 für den Autobahnteil deiner Ausbildung.",
     metaDescription:
       "Fahrschule in Bülach: Fahrstunden, Verkehrskunde und Nothelferkurs aus einer Hand. Erfahrenes Team von Let'ZHgo im Zürcher Unterland.",
-    image: "/images/letzhgo-autos.jpeg",
-    imageAlt: "Fahrschule Let'ZHgo – Fahrstunden in Bülach",
+    image: "/images/standort-buelach-hero.jpg",
+    imageAlt: "Let'ZHgo Fahrlehrer-Team mit der Fahrzeugflotte am Standort Bülach",
     welcome: [
       "Suchst du eine Fahrschule in Bülach, bei der du nicht eine Nummer bist? Bei Let'ZHgo nehmen wir uns für jede Schülerin und jeden Schüler Zeit. Wir holen dich in Bülach, Höri, Bachenbülach oder Hochfelden ab, fahren mit dir die typischen Prüfungsstrecken und üben so lange, bis du dich sicher fühlst.",
       "Theorieprüfung, Nothelferkurs, Verkehrskunde und Fahrstunden – alles aus einer Hand. Wir kennen die Strecken rund um Bülach, die Auffahrten auf die A51 und die typischen Prüfungsrouten des Strassenverkehrsamts Bülach.",
@@ -181,8 +181,8 @@ const STANDORTE_DATA: ReadonlyArray<Standort> = [
       "Eine Fahrschule am linken Seeufer mit Fokus auf das, was Horgen besonders macht: Hanglagen, Seestrasse und direkter Autobahnzugang.",
     metaDescription:
       "Fahrschule in Horgen: Fahrstunden, Verkehrskunde und Nothelferkurs am Zürichsee. Erfahrenes Team von Let'ZHgo am Südufer.",
-    image: "/images/letzhgo-autos.jpeg",
-    imageAlt: "Fahrschule Let'ZHgo – Fahrstunden in Horgen am Zürichsee",
+    image: "/images/standort-horgen-hero.jpg",
+    imageAlt: "Let'ZHgo Fahrlehrer-Team mit der Fahrzeugflotte am Standort Horgen am Zürichsee",
     welcome: [
       "Du wohnst in Horgen, Thalwil, Wädenswil oder Richterswil und willst eine Fahrschule, die das Gebiet kennt? Bei Let'ZHgo trainieren wir genau dort, wo du später fährst: Seestrasse im Berufsverkehr, Hangauffahrten oberhalb des Dorfs und die A3 für den Autobahnteil.",
       "Wir sind ein Team von erfahrenen Fahrlehrer:innen, die dich Schritt für Schritt begleiten – ruhig, klar und ohne unnötigen Druck. Theorie, Nothelferkurs und Verkehrskunde organisieren wir gleich mit.",
@@ -217,8 +217,8 @@ const STANDORTE_DATA: ReadonlyArray<Standort> = [
       "Die Fahrschule für das ganze Furttal – Fahrstunden ab Regensdorf-Watt, mit Strecken die im Strassenverkehrsamt Bülach geprüft werden.",
     metaDescription:
       "Fahrschule in Regensdorf: Fahrstunden, Verkehrskunde und Nothelferkurs im Furttal. Erfahrenes Team von Let'ZHgo, mehrsprachig.",
-    image: "/images/letzhgo-hero.webp",
-    imageAlt: "Fahrschule Let'ZHgo – Fahrstunden in Regensdorf Furttal",
+    image: "/images/standort-regensdorf-hero.jpg",
+    imageAlt: "Let'ZHgo Fahrlehrer-Team mit der Fahrzeugflotte am Standort Regensdorf Furttal",
     welcome: [
       "Du wohnst in Regensdorf, Watt, Buchs, Dällikon, Dänikon oder Otelfingen und suchst eine Fahrschule, die dich verlässlich zur Prüfung begleitet? Bei Let'ZHgo bekommst du genau das: ein erfahrenes Team, Theorie und Praxis aus einer Hand und mehrsprachige Betreuung auf Deutsch, Kroatisch und Englisch.",
       "Wir kennen die Strecken rund um Regensdorf und üben sie gezielt mit dir. Vom Lernfahrgesuch bis zur bestandenen Prüfung sind wir dein fester Ansprechpartner.",
