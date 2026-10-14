@@ -6,6 +6,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Users, MapPin, ClipboardCheck, GraduationCap, Car, Video } from "lucide-react";
 import Hero from "@/components/Hero";
+import TrustBar from "@/components/TrustBar";
+import PathSelector from "@/components/PathSelector";
 import ServiceCard from "@/components/ServiceCard";
 import ScrollRevealQuote from "@/components/ScrollRevealQuote";
 import PricingCard from "@/components/PricingCard";
@@ -69,12 +71,13 @@ export default function HomePage() {
     <>
       {/* Hero with full-width background image */}
       <Hero
-        title="Deine Fahrschule in Zürich."
-        subtitle="Ob Auto, Motorrad oder Anhänger – wir begleiten dich mit professioneller Unterstützung auf dem Weg zum Führerschein. Souverän, entspannt und in deinem Tempo."
-        ctaText="Mehr erfahren"
-        ctaHref="#services"
-        secondaryCtaText="Kontakt"
-        secondaryCtaHref="/kontakt"
+        title="Fahrstunde in Zürich buchen – Termine schon diese Woche."
+        subtitle="Ob Auto, Motorrad oder Anhänger: Mehrere Fahrlehrer:innen im Raum Zürich, flexible Termine und eine Antwort meist innerhalb einer Stunde."
+        ctaText="Jetzt Fahrstunde buchen"
+        ctaHref="/services/fahrstunden"
+        secondaryCtaText="Per WhatsApp anfragen"
+        secondaryCtaHref="https://wa.me/41794340966"
+        secondaryCtaIcon="whatsapp"
         showImage
         images={[
           {
@@ -124,15 +127,9 @@ export default function HomePage() {
 
       {/* Unsere Vorteile — Home (alternatives Layout) */}
       <section className="relative -mt-32 overflow-hidden rounded-t-3xl bg-background pt-40 md:mt-0 md:rounded-none md:pt-0">
-        <div
-          className="pointer-events-none absolute -left-20 top-12 h-72 w-72 rounded-full bg-accent/10 blur-[90px]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute -right-10 bottom-10 h-64 w-64 rounded-full bg-accent-light/20 blur-[90px]"
-          aria-hidden
-        />
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
+          <TrustBar />
+          <PathSelector />
           <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <motion.div {...anim({ y: 28, duration: 0.8 })}>
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
@@ -299,86 +296,7 @@ export default function HomePage() {
       {/* Autofahren ab 17 – vor Conversion-Block (FAQ/Kontakt) */}
       <AutofahrenAb17Section />
 
-      {/* Aktuelle Angebote: Schnupperkurs & Manöverplatz */}
-      {/* Schnupperkurs Motorrad */}
-      <section className="relative overflow-hidden">
-        {/* Hintergrundbild */}
-        <div className="pointer-events-none absolute inset-0">
-          <Image
-            src="/images/schnupperkurs.webp"
-            alt="Motorrad Schnupperkurs bei Let'ZHgo"
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
-        </div>
-
-        <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-24">
-          <div className="grid items-start gap-12 lg:grid-cols-[1.4fr_minmax(0,1fr)]">
-            <motion.div {...anim({ y: 30, delay: 0.15, duration: 1 })}>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-red-700">
-                Schnupperkurs Motorrad
-              </p>
-              <h2 className="mt-4 text-3xl font-extrabold leading-tight text-red-700 md:text-4xl lg:text-5xl">
-                Wir bieten dir auch wieder ab 9. Mai 2026 einen Schnupperkurs an.
-              </h2>
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#7a3b00] md:text-lg">
-                Wir helfen dir bei den ersten Fahrversuchen mit dem Motorrad. Wir
-                zeigen dir, wie man mit einem Motorrad fährt und auf was man alles
-                achten muss! Minderjährige müssen in Begleitung eines Elternteils
-                sein, welcher das Sorgerecht besitzt.
-              </p>
-            </motion.div>
-
-            <motion.div {...anim({ y: 30, delay: 0.3, duration: 1 })}>
-              <div className="rounded-3xl bg-white/95 p-6 shadow-xl backdrop-blur-sm md:p-8">
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-                      Zeitpunkt
-                    </p>
-                    <p className="mt-1 text-sm font-semibold text-foreground">
-                      Samstag 09.05.2026 | 13:00 - 17:00 Uhr
-                    </p>
-                  </div>
-                  <div className="rounded-full bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white shadow-md">
-                    Preis CHF 50.-
-                  </div>
-                </div>
-
-                <div className="mt-6 border-t border-border pt-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-                    Treffpunkt
-                  </p>
-                  <p className="mt-2 text-sm font-semibold text-foreground">
-                    Hostettler Moto AG | Zürich Nord
-                  </p>
-                  <p className="text-sm text-muted">
-                    Klotenerstrasse 10
-                    <br />
-                    8153 Rümlang
-                  </p>
-                </div>
-
-                <div className="mt-8">
-                  <Link
-                    href="https://app1.edoobox.com/de/LetZHgo/Schnupperkurs?edref=letzhgo"
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:scale-[1.02] hover:bg-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                  >
-                    Klick hier, wenn du dich anmelden möchtest
-                  </Link>
-                  <p className="mt-3 text-xs text-muted">
-                    Die Anmeldung erfolgt über unsere Kursplattform.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
+      {/* Aktuelle Angebote: Manöverplatz */}
       {/* Manöverplatz */}
       <ManoeverplatzSection />
 

@@ -9,10 +9,27 @@ export default function SmoothScroll() {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Ankam die Navigation mit einem #hash (z.B. von einer anderen Seite aus
+    // verlinkt), dann zu diesem Element springen statt immer nach oben.
+    const hash = window.location.hash ? window.location.hash.slice(1) : "";
+    let target: HTMLElement | null = null;
+    if (hash) {
+      try {
+        target = document.getElementById(decodeURIComponent(hash));
+      } catch {
+        target = document.getElementById(hash);
+      }
+    }
+
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
     if (isTouch) {
-      // Touch devices: plain instant scroll-to-top on navigation
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      if (target) {
+        const y = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, left: 0, behavior: "instant" });
+      } else {
+        // Plain instant scroll-to-top on navigation
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      }
       return;
     }
 
@@ -29,8 +46,13 @@ export default function SmoothScroll() {
       requestAnimationFrame(raf);
     }
 
-    // Kill any ongoing momentum and immediately snap to top
-    lenisRef.current.scrollTo(0, { immediate: true });
+    // Kill any ongoing momentum and immediately snap to top — or to the
+    // target anchor, if the URL carries one.
+    if (target) {
+      lenisRef.current.scrollTo(target, { immediate: true, offset: -80 });
+    } else {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
 
     return () => {};
   }, [pathname]);

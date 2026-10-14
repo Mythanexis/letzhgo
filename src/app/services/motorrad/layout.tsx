@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Motorrad-Grundkurs & Fahrstunden Zürich",
+  title: "Motorradprüfung Zürich – Grundkurs & Fahrstunden",
   description:
-    "Motorrad-Grundkurs und Fahrstunden in Zürich: Sicher Motorradfahren lernen mit professioneller Begleitung. Kategorien A1 und A.",
+    "Motorradprüfung Zürich: vom ersten Meter bis zur Prüfung. Grundkurs, individuelle Fahrstunden und Prüfungsvorbereitung mit professioneller Begleitung. Kategorien A1 und A.",
   alternates: { canonical: "/services/motorrad" },
   openGraph: {
-    title: "Motorrad-Grundkurs & Fahrstunden Zürich | Let'ZHgo",
+    title: "Motorradprüfung Zürich – vom ersten Meter bis zur Prüfung | Let'ZHgo",
     description:
       "Motorrad-Grundkurs und Fahrstunden in Zürich: Kategorien A1 und A.",
     url: "https://letzhgo.ch/services/motorrad",

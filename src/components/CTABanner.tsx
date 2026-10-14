@@ -49,7 +49,7 @@ export default function CTABanner({ className }: { className?: string }) {
                 </div>
               </div>
               <p className="mt-2 text-sm text-muted">
-                450+ zufriedene Schüler:innen auf Google & Trustindex
+                417+ zufriedene Schüler:innen auf Google & Trustindex
               </p>
             </div>
 

@@ -9,16 +9,16 @@ import { useScrollAnim } from "@/hooks/useScrollAnim";
 const GOOGLE_REVIEWS_URL =
   "https://www.google.com/maps/search/?api=1&query=Let%27ZHgo+Fahrschule+Binzm%C3%BChlestrasse+15+8050+Z%C3%BCrich";
 
-const REVIEW_COUNT = 417;
+export const REVIEW_COUNT = 417;
 
-type Review = {
+export type Review = {
   id: string;
   author: string;
   date: string;
   text: string;
 };
 
-const REVIEWS: Review[] = [
+export const REVIEWS: Review[] = [
   {
     id: "raul-b",
     author: "Raul B",
@@ -239,7 +239,7 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
 export default function GoogleReviewsSection() {
   const anim = useScrollAnim();
   return (
-    <section className="bg-[#f7f8fa]" aria-labelledby="google-reviews-heading">
+    <section id="bewertungen" className="scroll-mt-24 bg-[#f7f8fa] md:scroll-mt-28" aria-labelledby="google-reviews-heading">
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <motion.div {...anim({ y: 28, duration: 0.9 })} className="mx-auto max-w-4xl text-center">
           <h2

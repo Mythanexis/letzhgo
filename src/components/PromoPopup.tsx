@@ -38,19 +38,6 @@ export default function PromoPopup() {
       href: EDOOBOX_LINKS.verkehrskunde,
     },
     {
-      id: "schnupperkurs",
-      image: "/images/schnupperkurs.webp",
-      alt: "Motorrad Schnupperkurs bei Let'ZHgo",
-      badge: "Neu",
-      title: "Schnupperkurs Motorrad",
-      description:
-        "Wir bieten dir auch wieder ab 9. Mai 2026 einen Schnupperkurs an. Minderjährige müssen in Begleitung eines Elternteils sein.",
-      price: "CHF 50.–",
-      detail: "Samstag, 9. Mai 2026 · 13:00 – 15:00",
-      ctaText: "Probier's aus",
-      href: EDOOBOX_LINKS.schnupperkurs,
-    },
-    {
       id: "manoeverplatz",
       image: "/images/larag-areal.jpg",
       alt: "LARAG-Areal Rümlang – Manöverplatz",

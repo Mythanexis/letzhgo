@@ -231,7 +231,7 @@ export const PRICING = [
       "Verkehrsregeln vertieft verstehen",
       "Gefahrenerkennung trainieren",
       "Interaktive Gruppenlektionen",
-      "VKU-Bestätigung für Theorieprüfung",
+      "VKU-Bestätigung für die praktische Prüfung",
     ],
     link: EDOOBOX_LINKS.verkehrskunde,
   },

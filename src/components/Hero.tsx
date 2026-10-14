@@ -374,14 +374,24 @@ function HeroMailIcon({ className }: { className?: string }) {
   );
 }
 
+function HeroWhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.121.553 4.114 1.519 5.847L.525 23.503a.5.5 0 00.607.601l5.771-1.473A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-1.88 0-3.66-.5-5.19-1.41l-.36-.22-3.77.99 1.01-3.68-.24-.38A9.8 9.8 0 012.18 12c0-5.42 4.4-9.82 9.82-9.82 5.42 0 9.82 4.4 9.82 9.82 0 5.42-4.4 9.82-9.82 9.82z" />
+    </svg>
+  );
+}
+
 function HeroSlideIcon({
   variant,
   className,
 }: {
-  variant: "arrow" | "mail";
+  variant: "arrow" | "mail" | "whatsapp";
   className?: string;
 }) {
   if (variant === "mail") return <HeroMailIcon className={className} />;
+  if (variant === "whatsapp") return <HeroWhatsAppIcon className={className} />;
   return <HeroArrowIcon className={className} />;
 }
 
@@ -400,10 +410,11 @@ function HeroCtaArrowSlide({
   children: ReactNode;
   className: string;
   delay: number;
-  /** „Kontakt“: Mail statt Pfeil */
-  slideIcon?: "arrow" | "mail";
+  /** „Kontakt“: Mail, „WhatsApp“: WhatsApp-Icon statt Pfeil */
+  slideIcon?: "arrow" | "mail" | "whatsapp";
 }) {
   const reduceMotion = useReducedMotion();
+  const isExternal = /^https?:\/\//.test(href);
   const slideTf =
     "transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none";
   return (
@@ -414,6 +425,7 @@ function HeroCtaArrowSlide({
     >
       <Link
         href={href}
+        {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         className={`group relative inline-flex items-center justify-center overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black/30 ${className}`}
         onClick={(e) => handleSameHashAnchorClick(e, href, reduceMotion)}
       >
@@ -447,6 +459,8 @@ interface HeroProps {
   ctaHref?: string;
   secondaryCtaText?: string;
   secondaryCtaHref?: string;
+  /** Icon, das beim Hover/Focus im sekundären CTA einfährt. Default: Mail. */
+  secondaryCtaIcon?: "mail" | "whatsapp";
   showImage?: boolean;
   imageSrc?: string;
   images?: HeroSlide[];
@@ -463,6 +477,7 @@ export default function Hero({
   ctaHref,
   secondaryCtaText,
   secondaryCtaHref,
+  secondaryCtaIcon = "mail",
   showImage = false,
   imageSrc,
   images,
@@ -528,7 +543,7 @@ export default function Hero({
                   <HeroCtaArrowSlide
                     href={secondaryCtaHref}
                     delay={2.58}
-                    slideIcon="mail"
+                    slideIcon={secondaryCtaIcon}
                     className="rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-medium text-white backdrop-blur-md transition-colors hover:bg-white/20"
                   >
                     {secondaryCtaText}
@@ -581,7 +596,7 @@ export default function Hero({
                 <HeroCtaArrowSlide
                   href={secondaryCtaHref}
                   delay={2.38}
-                  slideIcon="mail"
+                  slideIcon={secondaryCtaIcon}
                   className="rounded-full border border-white/20 bg-white/10 px-6 py-3 text-base font-medium text-white backdrop-blur-md transition-colors hover:bg-white/20"
                 >
                   {secondaryCtaText}

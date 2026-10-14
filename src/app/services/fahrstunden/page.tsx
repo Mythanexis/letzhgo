@@ -385,7 +385,7 @@ export default function FahrstundenPage() {
       </section>
 
       {/* Anhänger */}
-      <section className="bg-background">
+      <section id="anhaenger" className="scroll-mt-24 bg-background md:scroll-mt-28">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* Bild */}
           <motion.div {...anim({ scale: 1.04, duration: 1 })} className="relative min-h-[360px] lg:min-h-[600px]">

@@ -105,16 +105,103 @@ export default function MotorradPage() {
             transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
             className="text-sm font-medium uppercase tracking-widest text-accent"
           >
-            Kursangebot
+            Motorrad – unser Spezialgebiet
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.22, ease: EASE }}
-            className="mt-3 text-4xl font-bold text-white md:text-6xl"
+            className="mt-3 text-3xl font-bold leading-tight text-white md:text-5xl lg:text-6xl"
           >
-            Motorrad
+            Motorradprüfung Zürich – vom ersten Meter bis zur Prüfung.
           </motion.h1>
+        </div>
+      </section>
+
+      {/* Gianni: Video & Ausrüstungs-Checkliste — direkt nach dem Hero, als erster Vertrauensbeweis */}
+      <section className="bg-[#f7f8fa] py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            <motion.div {...anim({ x: -24, duration: 0.7 })}>
+              <p className="text-sm font-medium uppercase tracking-widest text-accent">
+                Direkt vom Fahrlehrer
+              </p>
+              <h2 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
+                Bereit für die Prüfung?
+              </h2>
+              <p className="mt-5 leading-relaxed text-muted">
+                Gianni zeigt dir im Video, worauf es wirklich ankommt. Der offizielle
+                Flyer des Kantons Zürich listet zudem die Schutzausrüstung, die du
+                für die Motorrad-Prüfung tragen musst – Helm, Jacke, Handschuhe,
+                Hose und Stiefel.
+              </p>
+              <Link
+                href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/mobilitaet/fuehrerausweis-fahren-lernen/fahrschulen/Flyer_Motorrad.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 hidden items-center gap-2 rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white shadow-md transition-all hover:scale-[1.02] hover:bg-accent-dark lg:inline-flex"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Ausrüstungs-Flyer herunterladen
+              </Link>
+              <p className="mt-3 text-xs text-muted">
+                Quelle: Kanton Zürich, Strassenverkehrsamt –{" "}
+                <Link
+                  href="https://www.zh.ch/de/mobilitaet/fuehrerausweis-fahren-lernen/fahrschulen.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-accent"
+                >
+                  zh.ch
+                </Link>
+              </p>
+            </motion.div>
+
+            <motion.div {...anim({ x: 24, delay: 0.1, duration: 0.7 })} className="flex flex-col gap-8 md:flex-row md:items-start">
+              {/* Video */}
+              <div className="w-full overflow-hidden rounded-2xl shadow-lg md:flex-1">
+                <video
+                  className="w-full rounded-2xl"
+                  controls
+                  preload="metadata"
+                  poster="/images/gianni-video-poster.jpg"
+                >
+                  <source src="/videos/gianni-motorrad-tipps.mp4" type="video/mp4" />
+                </video>
+              </div>
+              {/* Bild + Button als eigene Einheit */}
+              <div className="flex flex-col items-center md:w-[45%] md:shrink-0 md:items-start">
+                <Link
+                  href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/mobilitaet/fuehrerausweis-fahren-lernen/fahrschulen/Flyer_Motorrad.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block w-3/4 overflow-hidden rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl md:w-full"
+                >
+                  <Image
+                    src="/images/ausruestung-motorrad-pruefung.png"
+                    alt="Ist deine Ausrüstung bereit für die Prüfung? – Kanton Zürich"
+                    width={600}
+                    height={900}
+                    className="w-full"
+                    sizes="(max-width: 768px) 75vw, (max-width: 1024px) 45vw, 20vw"
+                  />
+                </Link>
+                <Link
+                  href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/mobilitaet/fuehrerausweis-fahren-lernen/fahrschulen/Flyer_Motorrad.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white shadow-md transition-all hover:scale-[1.02] hover:bg-accent-dark lg:hidden"
+                >
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Ausrüstungs-Flyer herunterladen
+                </Link>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -460,172 +547,6 @@ export default function MotorradPage() {
 
       {/* Tageskurs Prüfungsvorbereitung Motorrad */}
       <PruefungsvorbereitungSection/>
-
-
-      {/* Gianni: Video & Ausrüstungs-Checkliste */}
-      <section className="bg-[#f7f8fa] py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <motion.div {...anim({ x: -24, duration: 0.7 })}>
-              <p className="text-sm font-medium uppercase tracking-widest text-accent">
-                Direkt vom Fahrlehrer
-              </p>
-              <h2 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
-                Bereit für die Prüfung?
-              </h2>
-              <p className="mt-5 leading-relaxed text-muted">
-                Gianni zeigt dir im Video, worauf es wirklich ankommt. Der offizielle
-                Flyer des Kantons Zürich listet zudem die Schutzausrüstung, die du
-                für die Motorrad-Prüfung tragen musst – Helm, Jacke, Handschuhe,
-                Hose und Stiefel.
-              </p>
-              <Link
-                href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/mobilitaet/fuehrerausweis-fahren-lernen/fahrschulen/Flyer_Motorrad.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 hidden items-center gap-2 rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white shadow-md transition-all hover:scale-[1.02] hover:bg-accent-dark lg:inline-flex"
-              >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Ausrüstungs-Flyer herunterladen
-              </Link>
-              <p className="mt-3 text-xs text-muted">
-                Quelle: Kanton Zürich, Strassenverkehrsamt –{" "}
-                <Link
-                  href="https://www.zh.ch/de/mobilitaet/fuehrerausweis-fahren-lernen/fahrschulen.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline hover:text-accent"
-                >
-                  zh.ch
-                </Link>
-              </p>
-            </motion.div>
-
-            <motion.div {...anim({ x: 24, delay: 0.1, duration: 0.7 })} className="flex flex-col gap-8 md:flex-row md:items-start">
-              {/* Video */}
-              <div className="w-full overflow-hidden rounded-2xl shadow-lg md:flex-1">
-                <video
-                  className="w-full rounded-2xl"
-                  controls
-                  preload="metadata"
-                  poster="/images/gianni-video-poster.jpg"
-                >
-                  <source src="/videos/gianni-motorrad-tipps.mp4" type="video/mp4" />
-                </video>
-              </div>
-              {/* Bild + Button als eigene Einheit */}
-              <div className="flex flex-col items-center md:w-[45%] md:shrink-0 md:items-start">
-                <Link
-                  href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/mobilitaet/fuehrerausweis-fahren-lernen/fahrschulen/Flyer_Motorrad.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block w-3/4 overflow-hidden rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl md:w-full"
-                >
-                  <Image
-                    src="/images/ausruestung-motorrad-pruefung.png"
-                    alt="Ist deine Ausrüstung bereit für die Prüfung? – Kanton Zürich"
-                    width={600}
-                    height={900}
-                    className="w-full"
-                    sizes="(max-width: 768px) 75vw, (max-width: 1024px) 45vw, 20vw"
-                  />
-                </Link>
-                <Link
-                  href="https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/mobilitaet/fuehrerausweis-fahren-lernen/fahrschulen/Flyer_Motorrad.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white shadow-md transition-all hover:scale-[1.02] hover:bg-accent-dark lg:hidden"
-                >
-                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  Ausrüstungs-Flyer herunterladen
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Schnupperkurs */}
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0">
-          <Image
-            src="/images/schnupperkurs.webp"
-            alt="Motorrad Schnupperkurs bei Let'ZHgo"
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
-        </div>
-
-        <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-8 md:py-24">
-          <div className="grid items-start gap-12 lg:grid-cols-[1fr_480px]">
-            <motion.div {...anim({ y: 30, delay: 0.15, duration: 1 })}>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-red-700">
-                Schnupperkurs Motorrad
-              </p>
-              <h2 className="mt-4 text-3xl font-extrabold leading-tight text-red-700 md:text-4xl lg:text-5xl">
-                Wir bieten dir auch wieder ab 9. Mai 2026 einen Schnupperkurs an.
-              </h2>
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#7a3b00] md:text-lg">
-                Wir helfen dir bei den ersten Fahrversuchen mit dem Motorrad. Wir
-                zeigen dir, wie man mit einem Motorrad fährt und auf was man alles
-                achten muss! Minderjährige müssen in Begleitung eines Elternteils
-                sein, welcher das Sorgerecht besitzt.
-              </p>
-            </motion.div>
-
-            <motion.div {...anim({ y: 30, delay: 0.3, duration: 1 })}>
-              <div className="rounded-3xl bg-white/95 p-6 shadow-xl backdrop-blur-sm md:p-8">
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-                      Zeitpunkt
-                    </p>
-                    <p className="mt-1 text-sm font-semibold text-foreground">
-                      Samstag 09.05.2026 | 13:00 - 17:00 Uhr
-                    </p>
-                  </div>
-                  <div className="rounded-full bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white shadow-md">
-                    Preis CHF 50.-
-                  </div>
-                </div>
-
-                <div className="mt-6 border-t border-border pt-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-                    Treffpunkt
-                  </p>
-                  <p className="mt-2 text-sm font-semibold text-foreground">
-                    Hostettler Moto AG | Zürich Nord
-                  </p>
-                  <p className="text-sm text-muted">
-                    Klotenerstrasse 10
-                    <br />
-                    8153 Rümlang
-                  </p>
-                </div>
-
-                <div className="mt-8">
-                  <Link
-                    href="https://app1.edoobox.com/de/LetZHgo/Schnupperkurs?edref=letzhgo"
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:scale-[1.02] hover:bg-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-dark focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                  >
-                    Klick hier, wenn du dich anmelden möchtest
-                  </Link>
-                  <p className="mt-3 text-xs text-muted">
-                    Die Anmeldung erfolgt über unsere Kursplattform.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
     </>
   );
 }
