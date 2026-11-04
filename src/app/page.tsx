@@ -8,7 +8,6 @@ import { Users, MapPin, ClipboardCheck, GraduationCap, Car, Video } from "lucide
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import PathSelector from "@/components/PathSelector";
-import ServiceCard from "@/components/ServiceCard";
 import ScrollRevealQuote from "@/components/ScrollRevealQuote";
 import PricingCard from "@/components/PricingCard";
 import CTABanner from "@/components/CTABanner";
@@ -23,6 +22,11 @@ import ManoeverplatzSection from "@/components/ManoeverplatzSection";
 import AutofahrenAb17Section from "@/components/AutofahrenAb17Section";
 import { SERVICES_OVERVIEW, PRICING } from "@/lib/constants";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
+
+const MANDATORY_COURSE_TITLES = ["Nothelferkurse", "Verkehrskundeunterricht"] as const;
+const MANDATORY_COURSES = SERVICES_OVERVIEW.filter((s) =>
+  (MANDATORY_COURSE_TITLES as readonly string[]).includes(s.title)
+);
 
 const ScrollSteps = dynamic(() => import("@/components/ScrollSteps"));
 const GoogleReviewsSection = dynamic(() => import("@/components/GoogleReviewsSection"));
@@ -166,31 +170,58 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Services Grid — Anker für Hero-CTA „Mehr erfahren“ (#services) */}
+      {/* Pflichtkurse — Anker für Hero-CTA „Mehr erfahren“ (#services) */}
       <section id="services" className="scroll-mt-24 bg-[#f7f8fa] md:scroll-mt-28">
-        <div className="mx-auto max-w-7xl px-6 py-32 md:py-40">
-        <motion.div {...anim({ y: 30, delay: 0.1, duration: 1 })} className="mb-12 text-center">
-          <p className="text-sm font-medium uppercase tracking-widest text-accent">Was wir anbieten</p>
-          <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl">Unsere Services</h2>
+        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+        <motion.div {...anim({ y: 30, delay: 0.1, duration: 1 })} className="mb-16 text-center md:mb-20">
+          <p className="text-sm font-medium uppercase tracking-widest text-accent">Pflichtkurse</p>
+          <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl">Pflicht vor der Autoprüfung</h2>
         </motion.div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {SERVICES_OVERVIEW.map((service, i) => (
-            <ServiceCard
-              key={service.title}
-              title={service.title}
-              description={service.description}
-              image={service.image}
-              href={service.href}
-              index={i}
-            />
+
+        <div className="flex flex-col gap-10 md:gap-14">
+          {MANDATORY_COURSES.map((course, i) => (
+            <motion.div
+              key={course.title}
+              {...anim({ y: 28, delay: 0.1 + i * 0.1, duration: 0.9 })}
+              className="grid items-center gap-5 md:grid-cols-2 md:gap-10"
+            >
+              <div className={`relative aspect-[16/9] overflow-hidden rounded-2xl ${i % 2 === 1 ? "md:order-2" : ""}`}>
+                <Image
+                  src={course.image}
+                  alt={`${course.title} bei Let'ZHgo`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 767px) 100vw, 46vw"
+                />
+              </div>
+              <div className={i % 2 === 1 ? "md:order-1" : ""}>
+                <h3 className="text-2xl font-bold text-foreground md:text-3xl">{course.title}</h3>
+                <p className="mt-3 max-w-md text-base leading-relaxed text-muted">
+                  {course.description}
+                </p>
+                <Link
+                  href={course.href}
+                  className="group mt-5 inline-flex items-center gap-2 text-base font-semibold text-accent no-underline hover:text-accent-dark"
+                >
+                  Mehr erfahren
+                  <span
+                    aria-hidden
+                    className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </Link>
+              </div>
+            </motion.div>
           ))}
         </div>
-        <motion.div {...anim({ y: 20, delay: 0.3, duration: 1 })} className="mt-12 text-center">
+
+        <motion.div {...anim({ y: 20, delay: 0.3, duration: 1 })} className="mt-20 text-center md:mt-24">
           <Link
             href="/services"
             className="group relative inline-flex items-center gap-2 pb-0.5 text-base font-semibold text-accent no-underline transition-colors after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-accent-dark after:content-[''] hover:after:scale-x-100"
           >
-            Services entdecken
+            Alle Services entdecken
             <span
               aria-hidden
               className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"
