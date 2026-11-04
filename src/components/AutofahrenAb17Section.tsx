@@ -6,8 +6,7 @@ import { useCoarsePointer, useScrollAnim } from "@/hooks/useScrollAnim";
 const AGE_RULES = [
   {
     ageKey: "17",
-    title: "Ab 17 Jahren",
-    subtitle: "Lernphase startet",
+    title: "Lernphase startet",
     points: [
       "Lernfahrausweis Kategorie B kann beantragt werden",
       "Lernfahrten sind nur mit Begleitperson erlaubt",
@@ -16,8 +15,7 @@ const AGE_RULES = [
   },
   {
     ageKey: "18",
-    title: "Ab 18 Jahren",
-    subtitle: "Selbstständig fahren",
+    title: "Selbstständig fahren",
     points: [
       "Praktische Fahrprüfung kann abgelegt werden",
       "Nach bestandener Prüfung darfst du alleine fahren",
@@ -26,8 +24,7 @@ const AGE_RULES = [
   },
   {
     ageKey: "20",
-    title: "Ab 20 Jahren",
-    subtitle: "Schneller zur Prüfung",
+    title: "Schneller zur Prüfung",
     points: [
       "Lernfahrausweis Kategorie B kann weiterhin beantragt werden",
       "Die obligatorische Lernphase von 12 Monaten entfällt",
@@ -45,11 +42,11 @@ const container = {
 };
 
 const item = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
@@ -77,49 +74,20 @@ export default function AutofahrenAb17Section() {
   const itemVariants = coarse ? itemStatic : item;
 
   return (
-    <section
-      className="relative overflow-hidden bg-[#f7f8fa] py-24 md:py-36"
-      aria-labelledby="autofahren-ab-17-heading"
-    >
-      {/* Atmosphäre */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-accent-light/50 via-[#f7f8fa] to-[#eef2ff]/60"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -left-32 top-0 h-[420px] w-[420px] rounded-full bg-accent/15 blur-[100px]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -right-24 bottom-0 h-[360px] w-[360px] rounded-full bg-accent/10 blur-[90px]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, var(--color-border) 1px, transparent 0)`,
-          backgroundSize: "28px 28px",
-        }}
-        aria-hidden
-      />
-
-      <div className="relative mx-auto max-w-7xl px-6">
-        <motion.header {...anim({ y: 20, duration: 0.7 })} className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-white/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent shadow-sm backdrop-blur-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-40" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-            </span>
+    <section className="bg-[#f7f8fa] py-24 md:py-32" aria-labelledby="autofahren-ab-17-heading">
+      <div className="mx-auto max-w-6xl px-6">
+        <motion.header {...anim({ y: 20, duration: 0.7 })} className="mx-auto max-w-2xl text-center">
+          <p className="text-sm font-medium uppercase tracking-widest text-accent">
             Wichtige Information
-          </div>
+          </p>
           <h2
             id="autofahren-ab-17-heading"
-            className="mt-7 text-3xl font-bold tracking-tight text-foreground md:text-5xl md:leading-[1.1]"
+            className="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-5xl"
           >
             Autofahren ab 17 Jahren
           </h2>
           <p className="mt-4 text-base text-muted md:text-lg">
-            Regeln nach Alter - schnell vergleichen, was für dich gilt.
+            Regeln nach Alter – schnell vergleichen, was für dich gilt.
           </p>
         </motion.header>
 
@@ -129,57 +97,33 @@ export default function AutofahrenAb17Section() {
           {...(coarse
             ? { animate: "show" as const }
             : { whileInView: "show" as const, viewport: { once: true, margin: "-40px" } })}
-          className="mt-14 grid gap-6 md:mt-20 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+          className="mt-14 grid gap-10 md:mt-20 md:grid-cols-3 md:gap-0"
         >
-          {AGE_RULES.map((rule) => (
+          {AGE_RULES.map((rule, i) => (
             <motion.article
               key={rule.ageKey}
               variants={itemVariants}
-              whileHover={{ y: -6 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              className="group relative"
+              className={`border-b border-border pb-8 last:border-b-0 last:pb-0 md:border-b-0 md:px-10 md:pb-0 ${
+                i === 0 ? "md:pl-0" : "md:border-l md:border-border"
+              } ${i === AGE_RULES.length - 1 ? "md:pr-0" : ""}`}
             >
-              <div
-                className="absolute -inset-px rounded-2xl bg-gradient-to-br from-accent/25 via-accent/5 to-transparent opacity-0 blur-sm transition-opacity duration-500 group-hover:opacity-100"
-                aria-hidden
-              />
-              <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/90 bg-white/90 p-7 shadow-[0_4px_24px_rgba(0,0,0,0.06)] backdrop-blur-md transition-all duration-300 group-hover:border-accent/35 group-hover:shadow-[0_20px_48px_-12px_rgba(1,68,220,0.18)] md:p-8">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="inline-flex font-black tabular-nums text-accent/90">
-                    <span className="text-4xl leading-none tracking-tight transition-transform duration-300 group-hover:scale-105 md:text-5xl">
-                      {rule.ageKey}
-                    </span>
-                  </span>
-                  {rule.subtitle && (
-                    <span className="rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
-                      {rule.subtitle}
-                    </span>
-                  )}
-                </div>
-                <h3 className="mt-4 text-lg font-bold text-foreground">
-                  {rule.title}
-                </h3>
-                <div className="mt-3 h-px w-12 bg-gradient-to-r from-accent to-transparent" />
-                <ul className="mt-5 flex flex-1 flex-col gap-3.5 text-sm leading-relaxed text-muted md:text-[0.9375rem]">
-                  {rule.points.map((point) => (
-                    <li
-                      key={point}
-                      className="flex gap-3 rounded-lg py-0.5 transition-colors duration-200 group-hover:text-foreground/90"
-                    >
-                      <span
-                        className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_8px_rgba(1,68,220,0.5)]"
-                        aria-hidden
-                      />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <span className="font-black leading-none tabular-nums text-accent text-5xl md:text-6xl">
+                {rule.ageKey}
+              </span>
+              <h3 className="mt-3 text-lg font-bold text-foreground md:text-xl">{rule.title}</h3>
+              <ul className="mt-3 flex flex-col gap-2 text-sm leading-relaxed text-muted md:text-[0.9375rem]">
+                {rule.points.map((point) => (
+                  <li key={point} className="flex gap-2.5">
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted" aria-hidden />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
             </motion.article>
           ))}
         </motion.div>
 
-        <p className="mt-10 text-left text-[11px] font-medium text-muted md:mt-12 md:text-xs">
+        <p className="mt-10 text-left text-xs font-medium text-muted md:mt-12">
           LFA = Lernfahrausweis
         </p>
       </div>
