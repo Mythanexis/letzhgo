@@ -127,7 +127,7 @@ export default function HomePage() {
 
       {/* Unsere Vorteile — Home (alternatives Layout) */}
       <section className="relative -mt-32 overflow-hidden rounded-t-3xl bg-background pt-40 md:mt-0 md:rounded-none md:pt-0">
-        <div className="mx-auto max-w-7xl px-6 pb-24 pt-32 md:pb-32 md:pt-40">
+        <div className="mx-auto max-w-7xl px-6 pb-24 pt-16 md:pb-32 md:pt-20">
           <TrustBar />
           <PathSelector />
           <div className="mx-auto max-w-2xl text-center">

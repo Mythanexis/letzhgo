@@ -35,25 +35,27 @@ export default function TrustBar() {
   return (
     <motion.div
       {...anim({ y: 16, duration: 0.7 })}
-      className="mb-12 flex flex-col gap-6 border-b border-border/70 pb-10 lg:flex-row lg:items-center lg:justify-between lg:gap-10"
+      className="mb-16 flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-12"
     >
       <Link
         href="#bewertungen"
-        className="group flex shrink-0 items-center gap-3 lg:border-r lg:border-border lg:pr-8"
+        className="group flex shrink-0 flex-col items-start gap-1.5"
       >
-        <StarRow />
-        <span className="text-sm font-semibold text-foreground">
-          5,0 · {REVIEW_COUNT}+ Bewertungen
+        <span className="text-4xl font-bold leading-none tracking-tight text-foreground">
+          5,0
         </span>
-        <span className="text-xs text-muted underline decoration-current underline-offset-2 group-hover:text-accent">
-          auf Google
+        <StarRow />
+        <span className="text-xs text-muted group-hover:text-accent">
+          {REVIEW_COUNT}+ Google-Bewertungen
         </span>
       </Link>
 
-      <div className="grid gap-4 sm:grid-cols-3 lg:flex-1">
+      <div className="hidden w-px shrink-0 self-stretch bg-border lg:block" />
+
+      <div className="grid gap-6 sm:grid-cols-3 lg:flex-1">
         {quotes.map((review) => (
           <p key={review.id} className="text-sm leading-relaxed text-muted">
-            <span className="text-foreground">&ldquo;{truncate(review.text, 80)}&rdquo;</span>
+            <span className="text-foreground">{truncate(review.text, 80)}</span>
             <br />
             <span className="text-xs font-semibold text-accent">— {review.author}</span>
           </p>
