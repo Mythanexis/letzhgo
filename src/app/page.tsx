@@ -132,10 +132,7 @@ export default function HomePage() {
           <PathSelector />
           <div className="mx-auto max-w-2xl text-center">
             <motion.div {...anim({ y: 28, duration: 0.8 })}>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
-                Let&apos;ZHgo Fahrschule
-              </p>
-              <h2 className="mt-4 text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl">
+              <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl">
                 Dein Vorteil:{" "}
                 <span className="text-accent">optimal vorbereitet.</span>
               </h2>

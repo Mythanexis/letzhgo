@@ -35,8 +35,8 @@ const PATHS = [
 export default function PathSelector() {
   const anim = useScrollAnim();
   return (
-    <div className="relative left-1/2 right-1/2 -mx-[50vw] mb-14 w-screen bg-[#f7f8fa] md:mb-16">
-      <div className="mx-auto max-w-7xl px-6 py-14 md:py-16">
+    <div className="relative left-1/2 right-1/2 -mx-[50vw] mb-20 w-screen bg-[#f7f8fa] md:mb-24">
+      <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
         <motion.div {...anim({ y: 16, duration: 0.7 })} className="mb-12 text-center">
           <h2 className="text-4xl font-bold text-foreground md:text-5xl">
             Wähle deinen Weg
