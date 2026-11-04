@@ -37,32 +37,32 @@ export default function HomePage() {
   const HOME_BENEFITS = [
     {
       title: "Maximale Flexibilität",
-      text: "Mehrere Fahrlehrer:innen – Termine, die in deinen Alltag passen.",
+      text: "Termine, die in deinen Alltag passen.",
       Icon: Users,
     },
     {
       title: "Im ganzen Raum Zürich",
-      text: "Oerlikon und Rümlang – echte Strassen, nicht nur Theorie.",
+      text: "Oerlikon und Rümlang – echte Strassen.",
       Icon: MapPin,
     },
     {
       title: "Prüfungssimulationen",
-      text: "Realistische Testläufe, damit der Prüfungstag kein Überraschungsmoment wird.",
+      text: "Realistische Testläufe vor der Prüfung.",
       Icon: ClipboardCheck,
     },
     {
       title: "Alles an einem Ort",
-      text: "Nothelfer, VKU, Fahrstunden und Motorradkurse – ohne Hin- und Herrennen.",
+      text: "Nothelfer, VKU, Fahrstunden und Motorrad.",
       Icon: GraduationCap,
     },
     {
       title: "Moderne Fahrzeuge",
-      text: "Gepflegte Flotte, bereit für Ausbildung und Prüfung.",
+      text: "Gepflegte Flotte für Ausbildung und Prüfung.",
       Icon: Car,
     },
     {
       title: "Videoanalyse",
-      text: "Aufnahmen anschauen, verstehen, schneller verbessern.",
+      text: "Aufnahmen anschauen und schneller verbessern.",
       Icon: Video,
     },
   ] as const;
@@ -127,10 +127,10 @@ export default function HomePage() {
 
       {/* Unsere Vorteile — Home (alternatives Layout) */}
       <section className="relative -mt-32 overflow-hidden rounded-t-3xl bg-background pt-40 md:mt-0 md:rounded-none md:pt-0">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 pb-24 pt-32 md:pb-32 md:pt-40">
           <TrustBar />
           <PathSelector />
-          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+          <div className="mx-auto max-w-2xl text-center">
             <motion.div {...anim({ y: 28, duration: 0.8 })}>
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
                 Let&apos;ZHgo Fahrschule
@@ -141,64 +141,30 @@ export default function HomePage() {
               </h2>
               <motion.p
                 {...anim({ y: 22, delay: 0.12, duration: 0.8 })}
-                className="mt-5 max-w-xl text-lg leading-relaxed text-muted"
+                className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted"
               >
                 Qualität, Flexibilität und moderne Ausbildungsmethoden. Genau die Punkte,
                 die den Unterschied auf dem Weg zur Prüfung machen.
               </motion.p>
-
-              <div className="relative mt-10">
-                <ul className="list-none space-y-0 p-0">
-                {HOME_BENEFITS.map((item, i) => (
-                  <motion.li
-                    key={item.title}
-                    {...anim({ x: -12, delay: 0.05 + i * 0.07, duration: 0.65 })}
-                    className="relative flex gap-5 border-b border-border/70 py-5 last:border-b-0 sm:gap-6"
-                  >
-                    <div className="relative z-[1] flex shrink-0 justify-center pt-0.5">
-                      <span className="flex h-9 w-9 items-center justify-center rounded-full border border-border/80 bg-accent/8 text-accent shadow-sm">
-                        <item.Icon className="h-4.5 w-4.5" strokeWidth={1.9} />
-                      </span>
-                    </div>
-                    <div className="min-w-0 pt-0.5">
-                      <h3 className="text-lg font-bold leading-snug text-foreground">
-                        {item.title}
-                      </h3>
-                      <p className="mt-1.5 max-w-md text-sm leading-relaxed text-muted sm:text-[0.9375rem]">
-                        {item.text}
-                      </p>
-                    </div>
-                  </motion.li>
-                ))}
-                </ul>
-              </div>
             </motion.div>
+          </div>
 
-            <motion.div
-              {...anim({ x: 24, delay: 0.1, duration: 0.9 })}
-              className="relative min-h-[420px] lg:min-h-[560px]"
-            >
-              <div className="absolute right-0 top-0 z-[1] w-[82%] overflow-hidden rounded-[2rem] shadow-[0_26px_54px_-26px_rgba(8,26,58,0.5)]">
-                <Image
-                  src="/images/theorie-1.jpg"
-                  alt="Theorieunterricht bei Let'ZHgo"
-                  width={900}
-                  height={1200}
-                  className="h-[330px] w-full object-cover md:h-[420px] lg:h-[480px]"
-                  sizes="(max-width: 1024px) 80vw, 36vw"
-                />
-              </div>
-              <div className="absolute left-[-2%] top-[48%] z-[2] w-[62%] overflow-hidden rounded-[1.6rem] border-4 border-background shadow-[0_22px_48px_-24px_rgba(8,26,58,0.55)]">
-                <Image
-                  src="/images/theorie-3.jpg"
-                  alt="Let'ZHgo Team mit Motorrad"
-                  width={760}
-                  height={560}
-                  className="h-[220px] w-full object-cover md:h-[260px] lg:h-[300px]"
-                  sizes="(max-width: 1024px) 60vw, 24vw"
-                />
-              </div>
-            </motion.div>
+          <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12 md:mt-20">
+            {HOME_BENEFITS.map((item, i) => (
+              <motion.div
+                key={item.title}
+                {...anim({ y: 24, delay: 0.05 + i * 0.07, duration: 0.65 })}
+                className="flex flex-col items-center gap-4 px-4 text-center"
+              >
+                <item.Icon className="h-12 w-12 text-accent" strokeWidth={1.5} />
+                <h3 className="text-xl font-bold leading-snug text-foreground">
+                  {item.title}
+                </h3>
+                <p className="text-base leading-relaxed text-muted">
+                  {item.text}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
