@@ -18,7 +18,6 @@ import PartnersSection from "@/components/PartnersSection";
 import HostettlerSection from "@/components/HostettlerSection";
 import GrundkursLocationSection from "@/components/GrundkursLocationSection";
 import PruefungsvorbereitungSection from "@/components/PruefungsvorbereitungSection";
-import ManoeverplatzSection from "@/components/ManoeverplatzSection";
 import AutofahrenAb17Section from "@/components/AutofahrenAb17Section";
 import { SERVICES_OVERVIEW, PRICING } from "@/lib/constants";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
@@ -175,7 +174,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
         <motion.div {...anim({ y: 30, delay: 0.1, duration: 1 })} className="mb-16 text-center md:mb-20">
           <p className="text-sm font-medium uppercase tracking-widest text-accent">Pflichtkurse</p>
-          <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl">Pflicht vor der Autoprüfung</h2>
+          <h2 className="mt-4 text-4xl font-bold text-foreground md:text-5xl">Bevor&apos;s zur Prüfung geht</h2>
         </motion.div>
 
         <div className="flex flex-col gap-10 md:gap-14">
@@ -185,7 +184,7 @@ export default function HomePage() {
               {...anim({ y: 28, delay: 0.1 + i * 0.1, duration: 0.9 })}
               className="grid items-center gap-5 md:grid-cols-2 md:gap-10"
             >
-              <div className={`relative aspect-[16/9] overflow-hidden rounded-2xl ${i % 2 === 1 ? "md:order-2" : ""}`}>
+              <div className={`relative aspect-[16/9] overflow-hidden rounded-2xl shadow-[0_18px_40px_-24px_rgba(8,26,58,0.35)] ${i % 2 === 1 ? "md:order-2" : ""}`}>
                 <Image
                   src={course.image}
                   alt={`${course.title} bei Let'ZHgo`}
@@ -289,10 +288,6 @@ export default function HomePage() {
 
       {/* Autofahren ab 17 – vor Conversion-Block (FAQ/Kontakt) */}
       <AutofahrenAb17Section />
-
-      {/* Aktuelle Angebote: Manöverplatz */}
-      {/* Manöverplatz */}
-      <ManoeverplatzSection />
 
       {/* Grundkurs bei Hostettler Moto Rümlang */}
       <GrundkursLocationSection />
