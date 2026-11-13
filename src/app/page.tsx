@@ -291,6 +291,9 @@ export default function HomePage() {
       {/* Tageskurs Prüfungsvorbereitung Motorrad */}
       <PruefungsvorbereitungSection />
 
+      {/* Blog */}
+      <BlogHomeSection />
+
       {/* Fahrlehrer:innen (nach Orten gruppiert) */}
       <InstructorsSection className="bg-[#f7f8fa]" />
 
@@ -360,9 +363,6 @@ export default function HomePage() {
 
       {/* TikTok */}
       <TikTokSection />
-
-      {/* Blog */}
-      <BlogHomeSection />
 
       {/* Autofahren ab 17 – vor Conversion-Block (FAQ/Kontakt) */}
       <AutofahrenAb17Section />

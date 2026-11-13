@@ -74,22 +74,20 @@ export default function AutofahrenAb17Section() {
   const itemVariants = coarse ? itemStatic : item;
 
   return (
-    <section className="bg-background py-24 md:py-32" aria-labelledby="autofahren-ab-17-heading">
-      <div className="mx-auto max-w-6xl px-6">
-        <motion.header {...anim({ y: 20, duration: 0.7 })} className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-medium uppercase tracking-widest text-accent">
-            Wichtige Information
-          </p>
+    <section className="bg-background" aria-labelledby="autofahren-ab-17-heading">
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <motion.div {...anim({ y: 28, duration: 0.9 })} className="text-center">
           <h2
             id="autofahren-ab-17-heading"
-            className="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-5xl"
+            className="text-4xl font-bold text-foreground md:text-5xl"
           >
             Autofahren ab 17 Jahren
           </h2>
-          <p className="mt-4 text-base text-muted md:text-lg">
-            Regeln nach Alter – schnell vergleichen, was für dich gilt.
+          <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted md:text-lg">
+            Die Regeln ändern sich mit dem Alter. Hier siehst du auf einen
+            Blick, was für dich gilt.
           </p>
-        </motion.header>
+        </motion.div>
 
         <motion.div
           variants={containerVariants}
@@ -97,24 +95,24 @@ export default function AutofahrenAb17Section() {
           {...(coarse
             ? { animate: "show" as const }
             : { whileInView: "show" as const, viewport: { once: true, margin: "-40px" } })}
-          className="mt-14 grid gap-10 md:mt-20 md:grid-cols-3 md:gap-0"
+          className="mt-16 grid gap-10 md:mt-24 md:grid-cols-3 md:gap-0"
         >
           {AGE_RULES.map((rule, i) => (
             <motion.article
               key={rule.ageKey}
               variants={itemVariants}
-              className={`border-b border-border pb-8 last:border-b-0 last:pb-0 md:border-b-0 md:px-10 md:pb-0 ${
-                i === 0 ? "md:pl-0" : "md:border-l md:border-border"
+              className={`border-t border-border pt-8 md:px-10 md:pt-0 ${
+                i === 0 ? "md:border-t-0 md:pl-0" : "md:border-l md:border-t-0 md:border-border"
               } ${i === AGE_RULES.length - 1 ? "md:pr-0" : ""}`}
             >
-              <span className="font-black leading-none tabular-nums text-accent text-5xl md:text-6xl">
+              <span className="text-4xl font-bold tabular-nums text-accent md:text-5xl">
                 {rule.ageKey}
               </span>
-              <h3 className="mt-3 text-lg font-bold text-foreground md:text-xl">{rule.title}</h3>
-              <ul className="mt-3 flex flex-col gap-2 text-sm leading-relaxed text-muted md:text-[0.9375rem]">
+              <h3 className="mt-3 text-xl font-bold text-foreground md:text-2xl">{rule.title}</h3>
+              <ul className="mt-4 flex flex-col gap-2.5 text-base leading-relaxed text-muted">
                 {rule.points.map((point) => (
-                  <li key={point} className="flex gap-2.5">
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted" aria-hidden />
+                  <li key={point} className="flex gap-3">
+                    <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-muted" aria-hidden />
                     <span>{point}</span>
                   </li>
                 ))}
@@ -123,7 +121,7 @@ export default function AutofahrenAb17Section() {
           ))}
         </motion.div>
 
-        <p className="mt-10 text-left text-xs font-medium text-muted md:mt-12">
+        <p className="mt-10 text-sm text-muted md:mt-12">
           LFA = Lernfahrausweis
         </p>
       </div>

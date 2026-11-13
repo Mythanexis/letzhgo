@@ -136,37 +136,30 @@ export default function BlogDetailPage({
         <div className="mx-auto max-w-5xl px-6 pb-24 md:pb-32">
           <motion.div
             {...anim({ y: 28, duration: 0.9 })}
-            className="grid overflow-hidden rounded-2xl bg-black md:grid-cols-2"
+            className="overflow-hidden rounded-2xl bg-black px-8 py-12 md:px-12 md:py-16 lg:px-14"
           >
-            <div className="px-8 py-12 md:px-12 md:py-16 lg:px-14">
-              <h3 className="text-2xl font-bold text-white md:text-3xl">
-                {post.cta
-                  ? "Bereit für den nächsten Schritt?"
-                  : "Bereit für deinen Führerschein?"}
-              </h3>
-              <p className="mt-5 max-w-md text-base leading-relaxed text-white/85">
-                {post.cta
-                  ? "Starte jetzt und sichere dir deinen Platz."
-                  : "Wir begleiten dich von Anfang an. Melde dich jetzt bei uns."}
-              </p>
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-10">
+              <div>
+                <h3 className="text-2xl font-bold text-white md:text-3xl">
+                  {post.cta
+                    ? "Bereit für den nächsten Schritt?"
+                    : "Bereit für deinen Führerschein?"}
+                </h3>
+                <p className="mt-3 max-w-md text-base leading-relaxed text-white/85">
+                  {post.cta
+                    ? "Starte jetzt und sichere dir deinen Platz."
+                    : "Wir begleiten dich von Anfang an. Melde dich jetzt bei uns."}
+                </p>
+              </div>
               <Link
                 href={post.cta?.href ?? "/kontakt"}
                 {...(post.cta?.external
                   ? { target: "_blank", rel: "nofollow noopener noreferrer" }
                   : {})}
-                className="mt-5 inline-flex items-center rounded-full bg-white px-6 py-3 text-[15px] font-semibold text-foreground no-underline transition-colors duration-200 hover:bg-white/90"
+                className="inline-flex shrink-0 items-center rounded-full bg-white px-7 py-3.5 text-base font-semibold text-foreground no-underline transition-colors duration-200 hover:bg-white/90 sm:self-end sm:mt-4"
               >
                 {post.cta?.label ?? "Kontakt aufnehmen"}
               </Link>
-            </div>
-            <div className="relative min-h-[220px] md:min-h-0">
-              <Image
-                src={post.coverImage}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="(max-width: 767px) 100vw, 640px"
-              />
             </div>
           </motion.div>
         </div>
