@@ -9,7 +9,7 @@ export default function GrundkursLocationSection() {
   const anim = useScrollAnim();
 
   return (
-    <section className="bg-background">
+    <section className="bg-[#f7f8fa]">
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <motion.div
           {...anim({ y: 28, duration: 0.9 })}

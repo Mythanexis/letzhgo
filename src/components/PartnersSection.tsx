@@ -2,17 +2,29 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { IMAGES } from "@/lib/constants";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
 
+// Die Logodateien sind weiss auf transparent und werden per CSS-Filter invertiert.
 const PARTNERS = [
-  { name: "TCS", logo: "/images/partners/partner-1.png", href: "https://www.tcs.ch" },
-  { name: "Bütikofer Harley-Davidson Zürich", logo: "/images/partners/partner-3.png", href: "https://www.buetikoferhd.ch" },
-  { name: "hostettler moto ag", logo: "/images/partners/partner-4.png", href: "https://www.hostettler-moto.ch/zuerich-nord/" },
-  { name: "Fahrlehrervergleich – Zertifizierte Fahrschule", logo: "/images/partners/partner-5.png", href: "#" },
-  { name: "Superfahrlehrer – Ausgezeichnete Fahrlehrer Zürich", logo: "/images/partners/partner-6.png", href: "#" },
-  { name: "Peter Sommer 2-Rad-Sport AG Wädenswil", logo: "/images/partners/partner-7.png", href: "#" },
-];
+  {
+    name: "Strassenverkehrsamt Kanton Zürich",
+    logo: "/images/partners/partner-1.png",
+    href: "https://www.zh.ch/de/sicherheitsdirektion/strassenverkehrsamt.html",
+  },
+  { name: "TCS", logo: "/images/partners/partner-6.png", href: "https://www.tcs.ch" },
+  {
+    name: "Bütikofer Harley-Davidson Zürich",
+    logo: "/images/partners/partner-7.png",
+    href: "https://www.buetikoferhd.ch",
+  },
+  {
+    name: "hostettler moto ag",
+    logo: "/images/partners/partner-4.png",
+    href: "https://www.hostettler-moto.ch/zuerich-nord/",
+  },
+  { name: "Honda und Peter Sommer 2-Rad-Sport AG", logo: "/images/partners/partner-3.png" },
+  { name: "Sandra's Fashion Truck", logo: "/images/partners/partner-5.png" },
+] as const;
 
 const MARQUEE_DURATION = 30;
 
@@ -21,69 +33,64 @@ export default function PartnersSection() {
   const logos = [...PARTNERS, ...PARTNERS];
 
   return (
-    <section className="relative overflow-hidden py-24 md:py-32" data-navbar-dark>
-      {/* Background image */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <Image
-          src={IMAGES.quoteBg}
-          alt=""
-          fill
-          className="object-cover brightness-[0.2]"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
+    <section className="overflow-hidden bg-background" aria-labelledby="partners-heading">
+      <motion.div
+        {...anim({ y: 16, duration: 0.7 })}
+        className="mx-auto max-w-7xl px-6 pt-16 text-center md:pt-20"
+      >
+        <h2 id="partners-heading" className="text-2xl font-bold text-foreground md:text-3xl">
+          Wir arbeiten zusammen mit
+        </h2>
+      </motion.div>
 
-      <div className="relative z-10">
-        <motion.div
-          {...anim({ y: 24, duration: 0.8 })}
-          className="mx-auto max-w-7xl px-6 text-center"
-        >
-          <h2 className="text-3xl font-extrabold uppercase tracking-wide text-white md:text-4xl">
-            Unsere Partner
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
-            Mit diesen exzellenten Partnern arbeiten wir sehr gerne und schon
-            jahrelang zusammen. Werde auch Du ein Teil davon!
-          </p>
-        </motion.div>
+      <div className="relative mt-16 md:mt-20">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent md:w-40" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent md:w-40" />
 
-        {/* Marquee */}
-        <div className="relative mt-16">
-          {/* Fade edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-black/80 to-transparent md:w-40" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-black/80 to-transparent md:w-40" />
-
-          <div className="flex overflow-hidden">
-            <motion.div
-              className="flex shrink-0 items-center gap-16 md:gap-24"
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{
-                x: {
-                  duration: MARQUEE_DURATION,
-                  repeat: Infinity,
-                  ease: "linear",
-                },
-              }}
-            >
-              {logos.map((partner, i) => (
-                <div
+        <div className="flex overflow-hidden">
+          <motion.div
+            className="flex shrink-0 items-center gap-16 md:gap-24"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ x: { duration: MARQUEE_DURATION, repeat: Infinity, ease: "linear" } }}
+          >
+            {logos.map((partner, i) => {
+              const image = (
+                <Image
+                  src={partner.logo}
+                  alt={partner.name}
+                  fill
+                  className="object-contain invert"
+                  sizes="224px"
+                />
+              );
+              const frame = "relative block h-14 w-40 shrink-0 md:h-16 md:w-48 lg:h-20 lg:w-56";
+              return "href" in partner ? (
+                <a
                   key={`${partner.name}-${i}`}
-                  className="relative h-12 w-32 shrink-0 md:h-14 md:w-40 lg:h-16 lg:w-44"
+                  href={partner.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${frame} opacity-70 transition-opacity hover:opacity-100`}
+                  aria-label={partner.name}
                 >
-                  <Image
-                    src={partner.logo}
-                    alt={partner.name}
-                    fill
-                    className="object-contain opacity-75"
-                    sizes="176px"
-                  />
+                  {image}
+                </a>
+              ) : (
+                <div key={`${partner.name}-${i}`} className={`${frame} opacity-70`}>
+                  {image}
                 </div>
-              ))}
-            </motion.div>
-          </div>
+              );
+            })}
+          </motion.div>
         </div>
       </div>
+
+      <motion.p
+        {...anim({ y: 16, delay: 0.1, duration: 0.7 })}
+        className="mx-auto max-w-7xl px-6 pb-16 pt-16 text-center text-base text-muted md:pb-20 md:pt-20"
+      >
+        Du möchtest mit uns zusammenarbeiten? Melde dich bei uns.
+      </motion.p>
     </section>
   );
 }

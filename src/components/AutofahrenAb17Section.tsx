@@ -74,7 +74,7 @@ export default function AutofahrenAb17Section() {
   const itemVariants = coarse ? itemStatic : item;
 
   return (
-    <section className="bg-[#f7f8fa] py-24 md:py-32" aria-labelledby="autofahren-ab-17-heading">
+    <section className="bg-background py-24 md:py-32" aria-labelledby="autofahren-ab-17-heading">
       <div className="mx-auto max-w-6xl px-6">
         <motion.header {...anim({ y: 20, duration: 0.7 })} className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-medium uppercase tracking-widest text-accent">

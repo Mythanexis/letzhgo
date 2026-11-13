@@ -286,9 +286,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Autofahren ab 17 – vor Conversion-Block (FAQ/Kontakt) */}
-      <AutofahrenAb17Section />
-
       {/* Grundkurs bei Hostettler Moto Rümlang */}
       <GrundkursLocationSection />
 
@@ -303,81 +300,48 @@ export default function HomePage() {
 
       {/* Bericht von 20 Minuten – Trust / PR */}
       <section className="bg-[#f7f8fa]">
-        <div className="mx-auto max-w-7xl px-6 py-24 md:py-28">
-          <motion.div {...anim({ y: 30, delay: 0.1, duration: 1 })} className="text-center">
-            <h2 className="flex flex-wrap items-center justify-center gap-3 text-2xl font-extrabold tracking-wide text-foreground md:gap-4 md:text-3xl">
-              <span className="uppercase">Bericht von</span>
-              <span className="inline-flex items-center rounded-full bg-accent px-5 py-2 text-sm font-bold uppercase tracking-[0.18em] text-white md:px-6 md:text-base">
-                20 Minuten
-              </span>
-            </h2>
-            <p className="mt-4 text-xs font-semibold uppercase tracking-[0.25em] text-muted md:text-sm">
-              Über den Bütikofer Harley-Davidson Laden und de Gianni.
-            </p>
+        <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+          <motion.p {...anim({ y: 20, duration: 0.8 })} className="text-base text-muted">
+            20 Minuten Lifestyle
+          </motion.p>
+
+          <motion.div
+            {...anim({ y: 28, delay: 0.1, duration: 0.9 })}
+            className="mt-6 overflow-hidden rounded-2xl bg-black shadow-[0_18px_40px_-24px_rgba(8,26,58,0.35)]"
+          >
+            <video className="aspect-video w-full" controls preload="metadata">
+              <source src="/videos/20-minuten-lifestyle-video.mp4" type="video/mp4" />
+              Dein Browser unterstützt das Abspielen dieses Videos nicht.
+            </video>
           </motion.div>
 
           <motion.div
-            {...anim({ y: 30, delay: 0.3, duration: 1 })}
-            className="mt-12 grid gap-10 lg:grid-cols-2 lg:items-start"
+            {...anim({ y: 24, delay: 0.2, duration: 0.9 })}
+            className="mt-10 grid gap-6 md:mt-14 md:grid-cols-2 md:gap-14"
           >
-            {/* Link zum 20-Minuten-Artikel */}
-            <Link
-              href="https://cp.lifestyle.20min.ch/de/stories/7786-motorrad-power-und-die-schonheit-der-schweiz"
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-              className="group flex h-full max-w-xl flex-col rounded-[32px] bg-white p-4 shadow-xl transition-transform hover:-translate-y-1 hover:shadow-2xl lg:ml-auto"
-            >
-              <div className="relative overflow-hidden rounded-3xl bg-black">
-                <Image
-                  src="/images/bericht-20-min.png"
-                  alt="20 Minuten Bericht: Motorrad-Power und die Schönheit der Schweiz"
-                  width={900}
-                  height={600}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                <div className="absolute left-4 top-4 rounded-full bg-black/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
-                  Video-Story
-                </div>
-              </div>
-              <div className="mt-4 flex items-center justify-between gap-4">
-                <p className="text-sm font-semibold text-foreground">
-                  Motorrad-Power und die Schönheit der Schweiz
-                </p>
-                <span className="inline-flex items-center gap-1 text-xs font-semibold text-accent group-hover:text-accent-dark">
-                  Artikel lesen
-                  <svg
-                    className="h-3 w-3"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M4 12L12 4M6 4H12V10"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </Link>
-
-            {/* Eingebettetes Video */}
-            <div className="flex h-full flex-col justify-center">
-              <div className="relative overflow-hidden rounded-[32px] bg-black shadow-xl">
-                <video
-                  className="h-full w-full rounded-[32px] object-cover"
-                  controls
-                  preload="none"
-                  poster="/images/bericht-20-min.png"
+            <h2 className="text-2xl font-bold leading-tight text-foreground md:text-3xl">
+              «Motorrad-Power und die Schönheit der Schweiz»
+            </h2>
+            <div className="md:pt-1">
+              <p className="max-w-md text-base leading-relaxed text-muted">
+                Die Lifestyle-Redaktion von 20 Minuten besucht Bütikofer
+                Harley-Davidson und unseren Fahrlehrer Gianni Sebestin, bevor
+                es auf die Grand Tour of Switzerland geht.
+              </p>
+              <a
+                href="https://cp.lifestyle.20min.ch/de/stories/7786-motorrad-power-und-die-schonheit-der-schweiz"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                className="group relative mt-5 inline-flex items-center gap-2 pb-0.5 text-base font-semibold text-accent no-underline transition-colors after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] after:content-[''] hover:text-accent-dark hover:after:scale-x-100"
+              >
+                Artikel lesen
+                <span
+                  aria-hidden
+                  className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"
                 >
-                  <source src="/videos/20-minuten-lifestyle-video.mp4" type="video/mp4" />
-                  Dein Browser unterstützt das Abspielen dieses Videos nicht.
-                </video>
-              </div>
+                  →
+                </span>
+              </a>
             </div>
           </motion.div>
         </div>
@@ -403,6 +367,9 @@ export default function HomePage() {
 
       {/* Blog */}
       <BlogHomeSection />
+
+      {/* Autofahren ab 17 – vor Conversion-Block (FAQ/Kontakt) */}
+      <AutofahrenAb17Section />
 
       {/* FAQ */}
       <FAQ className="bg-[#f7f8fa]" />
