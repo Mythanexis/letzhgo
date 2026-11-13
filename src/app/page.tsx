@@ -375,48 +375,38 @@ export default function HomePage() {
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr]">
           <motion.div {...anim({ x: -30, delay: 0.15, duration: 1 })}>
-            <p className="text-sm font-medium uppercase tracking-widest text-accent">
-              Kontakt
-            </p>
-            <h2 className="mt-4 text-3xl font-bold text-foreground md:text-4xl">
+            <h2 className="text-3xl font-bold text-foreground md:text-4xl">
               Schreib uns.
             </h2>
-            <p className="mt-4 text-muted">
+            <p className="mt-4 max-w-md text-base leading-relaxed text-muted">
               Hast du Fragen zu unseren Kursen oder möchtest dich anmelden? Wir
               melden uns so schnell wie möglich bei dir.
             </p>
 
-            <div className="mt-10 space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/10">
-                  <svg className="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <a href="mailto:info@letzhgo.ch" className="text-foreground transition-colors hover:text-accent">
+            <div className="mt-10 flex max-w-md flex-col gap-5 border-t border-border pt-8">
+              <div>
+                <p className="text-sm text-muted">E-Mail</p>
+                <a
+                  href="mailto:info@letzhgo.ch"
+                  className="mt-0.5 block text-base font-semibold text-foreground transition-colors hover:text-accent"
+                >
                   info@letzhgo.ch
                 </a>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/10">
-                  <svg className="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <span className="text-foreground">
+              <div>
+                <p className="text-sm text-muted">Adresse</p>
+                <p className="mt-0.5 text-base font-semibold text-foreground">
                   Binzmühlestrasse 15, 8050 Zürich
-                </span>
+                </p>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/10">
-                  <svg className="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <a href="tel:+41433001455" className="text-foreground transition-colors hover:text-accent">
+              <div>
+                <p className="text-sm text-muted">Telefon</p>
+                <a
+                  href="tel:+41433001455"
+                  className="mt-0.5 block text-base font-semibold text-foreground transition-colors hover:text-accent"
+                >
                   043 300 14 55
                 </a>
               </div>

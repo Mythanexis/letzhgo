@@ -185,7 +185,11 @@ export default function ContactForm() {
         />
       )}
       <form onSubmit={handleSubmit} onFocus={() => setRecaptchaTriggered(true)} className="space-y-6">
-        <div className="flex flex-wrap gap-2">
+        <div>
+          <p className="mb-2 text-sm font-medium text-foreground">
+            Worum geht es? <span className="font-normal text-muted">(optional)</span>
+          </p>
+          <div className="flex flex-wrap gap-2">
             {TAGS.map((tag) => {
               const active = selectedTag === tag;
               return (
@@ -203,6 +207,7 @@ export default function ContactForm() {
                 </button>
               );
             })}
+          </div>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -268,7 +273,7 @@ export default function ContactForm() {
 
         <button
           type="submit"
-          disabled={status === "loading" || !selectedTag}
+          disabled={status === "loading"}
           className="w-full rounded-full bg-accent py-4 font-medium text-white transition-colors hover:bg-accent-dark disabled:opacity-50"
         >
           {status === "loading" ? "Wird gesendet..." : "Nachricht senden"}
