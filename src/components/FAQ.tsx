@@ -15,7 +15,7 @@ export default function FAQ({ className }: FAQProps) {
 
   return (
     <section className={className}>
-      <div className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
       <div className="grid gap-12 lg:grid-cols-[1fr_1.5fr]">
         <motion.div {...anim({ x: -40, delay: 0.15, duration: 1 })}>
           <h2 className="text-3xl font-bold text-foreground md:text-4xl">
@@ -23,7 +23,7 @@ export default function FAQ({ className }: FAQProps) {
             <br />
             Beantwortet.
           </h2>
-          <p className="mt-4 text-muted">
+          <p className="mt-4 max-w-md text-base leading-relaxed text-muted">
             Du bist unsicher, wie der Weg zum Führerschein genau abläuft? Hier
             findest du die wichtigsten Antworten rund um Kurse, Fahrstunden und
             Prüfung.
@@ -38,7 +38,7 @@ export default function FAQ({ className }: FAQProps) {
             <div key={i}>
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className={`flex w-full items-center justify-between py-5 text-left text-lg font-medium transition-colors hover:text-accent ${openIndex === i ? "text-accent" : "text-foreground"}`}
+                className={`flex w-full cursor-pointer items-center justify-between py-5 text-left text-lg font-medium transition-colors hover:text-accent ${openIndex === i ? "text-accent" : "text-foreground"}`}
               >
                 {item.question}
                 <motion.span
