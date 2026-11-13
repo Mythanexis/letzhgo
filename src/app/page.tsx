@@ -218,9 +218,9 @@ export default function HomePage() {
         <motion.div {...anim({ y: 20, delay: 0.3, duration: 1 })} className="mt-20 text-center md:mt-24">
           <Link
             href="/services"
-            className="group relative inline-flex items-center gap-2 pb-0.5 text-base font-semibold text-accent no-underline transition-colors after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-accent-dark after:content-[''] hover:after:scale-x-100"
+            className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-semibold text-white no-underline transition-colors duration-200 hover:bg-accent-dark"
           >
-            Alle Services entdecken
+            Alle Services
             <span
               aria-hidden
               className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"

@@ -1,113 +1,72 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { MapPin, ExternalLink } from "lucide-react";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
+import { EDOOBOX_LINKS } from "@/lib/constants";
 
 export default function GrundkursLocationSection() {
   const anim = useScrollAnim();
 
   return (
-    <section className="relative overflow-hidden bg-[#060d1a]" data-navbar-dark>
-      <div className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[580px]">
-
-        {/* ── Text side ── */}
-        <div className="relative z-10 flex flex-col justify-center px-8 py-16 md:px-16 lg:py-24 xl:px-24">
-
-          <motion.p
-            {...anim({ y: 16, duration: 0.6 })}
-            className="text-sm font-semibold uppercase tracking-[0.2em] text-[#60a5fa]"
-          >
-            Motorrad-Grundkurs
-          </motion.p>
-
-          <motion.h2
-            {...anim({ y: 22, delay: 0.1, duration: 0.75 })}
-            className="mt-4 text-3xl font-extrabold leading-tight text-white md:text-4xl lg:text-5xl"
-          >
-            Grundkurs direkt bei&nbsp;
-            <span className="text-[#60a5fa]">Hostettler&nbsp;Moto</span>
-            {" "}in&nbsp;Rümlang.
-          </motion.h2>
-
-          <motion.p
-            {...anim({ y: 20, delay: 0.2, duration: 0.7 })}
-            className="mt-6 max-w-lg text-base leading-relaxed text-white/60 md:text-lg"
-          >
-            Den Motorrad-Grundkurs absolvierst du direkt vor Ort beim Schweizer
-            Motorradspezialisten – auf professioneller Infrastruktur, betreut von
-            unseren Fahrlehrern.
-          </motion.p>
-
-          {/* Location */}
-          <motion.div
-            {...anim({ y: 18, delay: 0.28, duration: 0.65 })}
-            className="mt-8 flex items-start gap-3 border-l-2 border-accent/40 pl-4"
-          >
-            <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-white/60">
-                Kursstandort
-              </p>
-              <p className="mt-0.5 text-sm font-semibold text-white">
-                Hostettler Moto AG · Klotenerstrasse 10, 8153 Rümlang
-              </p>
-            </div>
-          </motion.div>
-
-          {/* CTAs */}
-          <motion.div
-            {...anim({ y: 16, delay: 0.36, duration: 0.6 })}
-            className="mt-8 flex flex-wrap items-center gap-3"
-          >
-            <Link
-              href="/services/motorrad"
-              className="inline-flex items-center justify-center rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-accent-dark"
-            >
-              Werde Motorradfahrer:in
-            </Link>
-            <Link
-              href="https://www.hostettler-moto.ch/zuerich-nord/"
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white/80 transition-all hover:border-white/40 hover:text-white"
-            >
-              Hostettler Moto
-              <ExternalLink className="h-3.5 w-3.5" />
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* ── Image side ── */}
+    <section className="bg-background">
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <motion.div
-          {...anim({ scale: 1.04, delay: 0.15, duration: 1.1 })}
-          className="relative min-h-[320px] lg:min-h-0"
+          {...anim({ y: 28, duration: 0.9 })}
+          className="grid items-center gap-8 md:grid-cols-2 md:gap-14"
         >
-          <Image
-            src="/images/hostettler-moto.jpg"
-            alt="Motorrad-Grundkurs bei Hostettler Moto AG Rümlang"
-            fill
-            className="object-cover object-center"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
-          {/* Dark vignette left so it bleeds into the text panel */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#060d1a] via-[#060d1a]/30 to-transparent lg:via-[#060d1a]/10" />
-          {/* Bottom fade */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#060d1a] to-transparent lg:hidden" />
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_18px_40px_-24px_rgba(8,26,58,0.35)]">
+            <Image
+              src="/images/hostettler-showroom.jpg"
+              alt="Showroom von Hostettler Moto AG in Rümlang"
+              fill
+              className="object-cover"
+              sizes="(max-width: 767px) 100vw, 46vw"
+            />
+          </div>
 
-          {/* Floating badge */}
-          <div className="absolute right-5 top-5 lg:right-8 lg:top-8">
-            <div className="overflow-hidden rounded-xl bg-white px-4 py-3 shadow-lg">
-              <Image
-                src="/images/partner-hostettler-zuerich-nord.png"
-                alt="Hostettler Moto AG Zürich Nord"
-                width={110}
-                height={44}
-                className="object-contain"
-              />
+          <div>
+            <h2 className="text-2xl font-bold text-foreground md:text-3xl">
+              Motorrad-Grundkurs bei Hostettler Moto in Rümlang
+            </h2>
+            <p className="mt-3 max-w-md text-base leading-relaxed text-muted">
+              Den Grundkurs absolvierst du direkt vor Ort beim Schweizer
+              Motorradspezialisten, betreut von unseren Fahrlehrern.
+            </p>
+            <p className="mt-3 max-w-md text-base leading-relaxed text-muted">
+              In drei Teilen und zwölf Stunden lernst du dein Motorrad kennen,
+              übst die Fahrtechnik auf dem Platz und fährst anschliessend im
+              Verkehr mit. Der Kurs ist Voraussetzung für die praktische
+              Motorradprüfung.
+            </p>
+
+            <div className="mt-8 max-w-md border-t border-border pt-6">
+              <p className="text-base font-semibold text-foreground">Hostettler Moto AG</p>
+              <p className="mt-1 text-base text-muted">Klotenerstrasse 10, 8153 Rümlang</p>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Hostettler+Moto+AG+Klotenerstrasse+10+8153+R%C3%BCmlang"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative mt-2 inline-block pb-0.5 text-sm text-muted no-underline transition-colors after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-foreground after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] after:content-[''] hover:text-foreground hover:after:scale-x-100"
+              >
+                In Google Maps öffnen
+              </a>
             </div>
+
+            <a
+              href={EDOOBOX_LINKS.motorrad}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative mt-8 inline-flex items-center gap-2 pb-0.5 text-base font-semibold text-accent no-underline transition-colors after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] after:content-[''] hover:text-accent-dark hover:after:scale-x-100"
+            >
+              Grundkurs buchen
+              <span
+                aria-hidden
+                className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </a>
           </div>
         </motion.div>
       </div>
