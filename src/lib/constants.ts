@@ -46,7 +46,7 @@ export const IMAGES = {
   vkuPopup: "/images/vku-popup.png",
   motorrad: "/images/motorrad.png",
   quoteBg: "/images/quote-bg.png",
-  footerBg: "/images/footer-bg.png",
+  footerBg: "/images/footer-bg.jpg",
 } as const;
 
 export const INSTRUCTORS = [

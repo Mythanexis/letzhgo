@@ -36,9 +36,10 @@ export default function Footer() {
         alt=""
         aria-hidden="true"
         fill
-        className="object-cover brightness-[0.3]"
+        className="object-cover brightness-[0.18]"
         sizes="100vw"
       />
+      <div className="pointer-events-none absolute inset-0 bg-black/35" aria-hidden="true" />
 
       <div className="relative z-10 flex flex-1 flex-col">
         <div className="mx-auto flex w-full flex-1 flex-col items-start justify-start gap-16 px-6 py-24 md:px-24 lg:flex-row lg:items-center lg:justify-between lg:gap-20 lg:px-32">
