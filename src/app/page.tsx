@@ -13,7 +13,6 @@ import PricingCard from "@/components/PricingCard";
 import CTABanner from "@/components/CTABanner";
 import InstructorsSection from "@/components/InstructorsSection";
 import Stats from "@/components/Stats";
-import WegweiserHomeTeaser from "@/components/WegweiserHomeTeaser";
 import PartnersSection from "@/components/PartnersSection";
 import HostettlerSection from "@/components/HostettlerSection";
 import GrundkursLocationSection from "@/components/GrundkursLocationSection";
@@ -171,7 +170,7 @@ export default function HomePage() {
 
       {/* Pflichtkurse — Anker für Hero-CTA „Mehr erfahren“ (#services) */}
       <section id="services" className="scroll-mt-24 bg-[#f7f8fa] md:scroll-mt-28">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <motion.div {...anim({ y: 30, delay: 0.1, duration: 1 })} className="mb-16 text-center md:mb-20">
           <p className="text-sm font-medium uppercase tracking-widest text-accent">Pflichtkurse</p>
           <h2 className="mt-4 text-4xl font-bold text-foreground md:text-5xl">Bevor&apos;s zur Prüfung geht</h2>
@@ -361,9 +360,6 @@ export default function HomePage() {
 
       {/* TikTok */}
       <TikTokSection />
-
-      {/* Wegweiser Motorrad-Führerschein (nach Trust/Social) */}
-      <WegweiserHomeTeaser />
 
       {/* Blog */}
       <BlogHomeSection />

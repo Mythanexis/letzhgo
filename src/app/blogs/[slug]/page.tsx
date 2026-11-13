@@ -77,25 +77,24 @@ export default function BlogDetailPage({
 
             {/* Meta */}
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <span className="rounded-full bg-accent px-3.5 py-1 text-xs font-semibold uppercase tracking-wide text-white">
-                {post.category}
-              </span>
-              <span className="text-sm text-white/40">
+              <span className="text-sm text-white/70">{post.category}</span>
+              <span className="h-1 w-1 rounded-full bg-white/30" aria-hidden />
+              <span className="text-sm text-white/70">
                 {formatDate(post.publishedAt)}
               </span>
-              <span className="h-1 w-1 rounded-full bg-white/25" />
-              <span className="text-sm text-white/40">
+              <span className="h-1 w-1 rounded-full bg-white/30" aria-hidden />
+              <span className="text-sm text-white/70">
                 {post.readTime} Lesezeit
               </span>
             </div>
 
             {/* Title */}
-            <h1 className="mt-6 text-3xl font-bold leading-[1.1] tracking-tight text-white md:text-5xl lg:text-6xl">
+            <h1 className="mt-6 text-3xl font-bold leading-tight text-white md:text-5xl">
               {post.title}
             </h1>
 
             {/* Excerpt */}
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/50 md:text-xl">
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/70">
               {post.excerpt}
             </p>
           </motion.div>
@@ -104,7 +103,7 @@ export default function BlogDetailPage({
 
       {/* Article content */}
       <section className="bg-background">
-        <div className="mx-auto max-w-3xl px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-3xl px-6 pb-16 pt-16 md:pb-20 md:pt-24">
           {post.sections.map((section, i) => (
             <motion.div
               key={section.heading}
@@ -131,36 +130,43 @@ export default function BlogDetailPage({
             />
           </motion.div>
 
-          {/* Contextual CTA */}
+        </div>
+
+        {/* CTA-Kasten in voller Breite, wie der Wegweiser-Teaser */}
+        <div className="mx-auto max-w-5xl px-6 pb-24 md:pb-32">
           <motion.div
-            {...anim({ y: 24, delay: 0.1, duration: 0.8 })}
-            className="mt-20 overflow-hidden rounded-2xl border border-accent/10 bg-accent/4"
+            {...anim({ y: 28, duration: 0.9 })}
+            className="grid overflow-hidden rounded-2xl bg-black md:grid-cols-2"
           >
-            <div className="p-8 md:p-10">
-              <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-foreground md:text-2xl">
-                    {post.cta
-                      ? "Bereit für den nächsten Schritt?"
-                      : "Bereit für deinen Führerschein?"}
-                  </h3>
-                  <p className="mt-2 text-muted">
-                    {post.cta
-                      ? "Starte jetzt und sichere dir deinen Platz."
-                      : "Wir begleiten dich von Anfang an. Melde dich jetzt bei uns."}
-                  </p>
-                </div>
-                <Link
-                  href={post.cta?.href ?? "/kontakt"}
-                  {...(post.cta?.external
-                    ? { target: "_blank", rel: "nofollow noopener noreferrer" }
-                    : {})}
-                  className="inline-flex shrink-0 items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] hover:bg-accent-dark"
-                >
-                  {post.cta?.label ?? "Kontakt aufnehmen"}
-                  <span aria-hidden>→</span>
-                </Link>
-              </div>
+            <div className="px-8 py-12 md:px-12 md:py-16 lg:px-14">
+              <h3 className="text-2xl font-bold text-white md:text-3xl">
+                {post.cta
+                  ? "Bereit für den nächsten Schritt?"
+                  : "Bereit für deinen Führerschein?"}
+              </h3>
+              <p className="mt-5 max-w-md text-base leading-relaxed text-white/85">
+                {post.cta
+                  ? "Starte jetzt und sichere dir deinen Platz."
+                  : "Wir begleiten dich von Anfang an. Melde dich jetzt bei uns."}
+              </p>
+              <Link
+                href={post.cta?.href ?? "/kontakt"}
+                {...(post.cta?.external
+                  ? { target: "_blank", rel: "nofollow noopener noreferrer" }
+                  : {})}
+                className="mt-5 inline-flex items-center rounded-full bg-white px-6 py-3 text-[15px] font-semibold text-foreground no-underline transition-colors duration-200 hover:bg-white/90"
+              >
+                {post.cta?.label ?? "Kontakt aufnehmen"}
+              </Link>
+            </div>
+            <div className="relative min-h-[220px] md:min-h-0">
+              <Image
+                src={post.coverImage}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 767px) 100vw, 640px"
+              />
             </div>
           </motion.div>
         </div>
@@ -168,14 +174,14 @@ export default function BlogDetailPage({
 
       {/* Related posts */}
       <section className="bg-[#f7f8fa]">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
           <motion.div {...anim({ y: 24, delay: 0.1, duration: 0.8 })}>
             <h2 className="text-2xl font-bold text-foreground md:text-3xl">
               Weitere Beiträge
             </h2>
           </motion.div>
 
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((rel, i) => (
               <motion.div
                 key={rel.slug}
@@ -183,27 +189,26 @@ export default function BlogDetailPage({
               >
                 <Link
                   href={`/blogs/${rel.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white transition-all hover:-translate-y-1 hover:shadow-lg"
+                  className="group block no-underline"
                 >
-                  <div className="relative aspect-16/10 overflow-hidden">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
                     <Image
                       src={rel.coverImage}
                       alt={rel.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
-                  <div className="flex flex-1 flex-col p-5">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-accent">
-                      {rel.category}
-                    </span>
-                    <h3 className="mt-2 text-base font-bold leading-snug text-foreground transition-colors group-hover:text-accent">
+                  <div className="mt-5">
+                    <div className="flex items-center gap-3 text-sm text-muted">
+                      <span>{rel.category}</span>
+                      <span className="h-1 w-1 rounded-full bg-border" aria-hidden />
+                      <time>{formatDate(rel.publishedAt)}</time>
+                    </div>
+                    <h3 className="mt-2 text-lg font-bold leading-snug text-foreground md:text-xl">
                       {rel.title}
                     </h3>
-                    <div className="mt-auto pt-4 text-xs text-muted">
-                      {formatDate(rel.publishedAt)}
-                    </div>
                   </div>
                 </Link>
               </motion.div>

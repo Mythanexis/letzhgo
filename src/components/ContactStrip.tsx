@@ -45,10 +45,7 @@ export default function ContactStrip() {
         <div className="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-20">
           {/* Left */}
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-              Kontakt
-            </p>
-            <h2 className="mt-3 text-3xl font-bold leading-tight text-foreground md:text-4xl">
+            <h2 className="text-2xl font-bold leading-tight text-foreground md:text-3xl">
               Noch Fragen? Wir sind für dich da.
             </h2>
             <p className="mt-4 max-w-lg text-base leading-relaxed text-muted md:text-lg">
@@ -62,16 +59,14 @@ export default function ContactStrip() {
                   key={ch.label}
                   href={ch.href}
                   {...(ch.external ? { target: "_blank", rel: "nofollow noopener noreferrer" } : {})}
-                  className="group flex items-start gap-4 rounded-2xl border border-border bg-white p-5 transition-all hover:border-accent/25 hover:shadow-md"
+                  className="group flex items-start gap-4 rounded-2xl bg-white p-5 no-underline transition-colors hover:bg-white/70"
                 >
-                  <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/8 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
+                  <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-light text-accent">
                     {ch.icon}
                   </span>
                   <div className="min-w-0">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-muted">
-                      {ch.label}
-                    </p>
-                    <p className="mt-0.5 text-sm font-semibold text-foreground group-hover:text-accent">
+                    <p className="text-sm text-muted">{ch.label}</p>
+                    <p className="mt-0.5 text-sm font-semibold text-foreground">
                       {ch.value}
                     </p>
                   </div>
@@ -84,7 +79,7 @@ export default function ContactStrip() {
           <div className="flex flex-col items-start gap-4 lg:items-end">
             <Link
               href="/kontakt"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-semibold text-white shadow-sm transition-all hover:scale-[1.02] hover:bg-accent-dark"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-base font-semibold text-white no-underline transition-colors duration-200 hover:bg-accent-dark"
             >
               Kontaktformular öffnen
               <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden>

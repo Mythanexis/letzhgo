@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useScrollAnim } from "@/hooks/useScrollAnim";
+import WegweiserHomeTeaser from "@/components/WegweiserHomeTeaser";
 import { EDOOBOX_LINKS } from "@/lib/constants";
 
 const VORMITTAG = [
@@ -133,6 +134,10 @@ export default function PruefungsvorbereitungSection() {
               </dl>
             </div>
           </motion.div>
+        </div>
+
+        <div className="mt-24 md:mt-32">
+          <WegweiserHomeTeaser />
         </div>
       </div>
     </section>
