@@ -231,6 +231,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Autofahren ab 17 */}
+      <AutofahrenAb17Section />
+
       {/* Philosophie – Scroll Reveal Quote */}
       <ScrollRevealQuote />
 
@@ -363,9 +366,6 @@ export default function HomePage() {
 
       {/* TikTok */}
       <TikTokSection />
-
-      {/* Autofahren ab 17 – vor Conversion-Block (FAQ/Kontakt) */}
-      <AutofahrenAb17Section />
 
       {/* FAQ */}
       <FAQ className="bg-[#f7f8fa]" />
