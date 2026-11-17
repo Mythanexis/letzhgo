@@ -31,11 +31,11 @@ function Points({ items }: { items: string[] }) {
   );
 }
 
-export default function PruefungsvorbereitungSection() {
+export default function PruefungsvorbereitungSection({ className }: { className?: string } = {}) {
   const anim = useScrollAnim();
 
   return (
-    <section className="bg-background" aria-labelledby="pruefungsvorbereitung-heading">
+    <section className={className ?? "bg-background"} aria-labelledby="pruefungsvorbereitung-heading">
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div className="grid gap-12 md:grid-cols-[minmax(0,1fr)_380px] md:gap-20 lg:grid-cols-[minmax(0,1fr)_440px]">
           {/* Text */}

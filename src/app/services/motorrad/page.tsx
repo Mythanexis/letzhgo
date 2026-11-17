@@ -107,7 +107,7 @@ export default function MotorradPage() {
                   brauchst, siehst du in deinem Lernfahrausweis.
                 </p>
 
-                <h3 className="mt-14 text-2xl font-bold text-foreground md:text-3xl">
+                <h3 className="mt-14 text-xl font-bold text-foreground md:text-2xl">
                   Kursinhalte
                 </h3>
                 <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
@@ -128,7 +128,7 @@ export default function MotorradPage() {
                   Beispiel 12 Stunden = Kurs 1 + 2 + 3.
                 </p>
 
-                <h3 className="mt-14 text-2xl font-bold text-foreground md:text-3xl">
+                <h3 className="mt-14 text-xl font-bold text-foreground md:text-2xl">
                   Zielgruppe
                 </h3>
                 <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
@@ -136,7 +136,7 @@ export default function MotorradPage() {
                   beschränkt und A1.
                 </p>
 
-                <h3 className="mt-14 text-2xl font-bold text-foreground md:text-3xl">
+                <h3 className="mt-14 text-xl font-bold text-foreground md:text-2xl">
                   Teilnahmebedingungen
                 </h3>
                 <ul className="mt-4 flex flex-col gap-2.5">
@@ -148,7 +148,7 @@ export default function MotorradPage() {
                   ))}
                 </ul>
 
-                <h3 className="mt-14 text-2xl font-bold text-foreground md:text-3xl">
+                <h3 className="mt-14 text-xl font-bold text-foreground md:text-2xl">
                   Kursort
                 </h3>
                 <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
@@ -156,10 +156,10 @@ export default function MotorradPage() {
                   Klotenerstrasse 10, 8153 Rümlang an.
                 </p>
 
-                <h3 className="mt-14 text-2xl font-bold text-foreground md:text-3xl">
+                <h3 className="mt-14 text-xl font-bold text-foreground md:text-2xl">
                   Preise
                 </h3>
-                <div className="mt-6 overflow-hidden rounded-2xl border border-border">
+                <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-white">
                   <table className="w-full text-left text-sm">
                     <thead>
                       <tr className="border-b border-border bg-[#f7f8fa]">
@@ -216,12 +216,10 @@ export default function MotorradPage() {
                   <div>
                     <p className="text-sm text-muted">Kosten Grundkurs</p>
                     <p className="mt-0.5 text-2xl font-bold text-accent">CHF 570</p>
-                    <p className="text-sm text-muted">12 Stunden (3 Kursteile)</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted">Dauer</p>
-                    <p className="mt-0.5 text-base font-semibold text-foreground">4 oder 12 Stunden</p>
-                    <p className="text-sm text-muted">4 Stunden ist nur Grundkurs 3, siehe Lernfahrausweis</p>
+                    <p className="mt-2 text-sm text-muted">
+                      12 Stunden in 3 Teilen, oder 4 Stunden nur für Grundkurs
+                      3 laut Lernfahrausweis
+                    </p>
                   </div>
                 </div>
                 <a
@@ -408,10 +406,10 @@ export default function MotorradPage() {
       </section>
 
       {/* Tageskurs Prüfungsvorbereitung Motorrad */}
-      <PruefungsvorbereitungSection />
+      <PruefungsvorbereitungSection className="bg-[#f7f8fa]" />
 
       {/* Gianni: Video & Ausrüstung */}
-      <section className="bg-[#f7f8fa]">
+      <section className="bg-background">
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
           <motion.div
             {...anim({ y: 28, duration: 0.9 })}
