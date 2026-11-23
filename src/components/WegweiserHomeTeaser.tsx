@@ -36,7 +36,7 @@ export default function WegweiserHomeTeaser() {
 
       <div className="relative min-h-[260px] md:min-h-0">
         <Image
-          src="/images/wegweiser/wegweiser-home.jpg"
+          src="/images/wegweiser/wegweiser-home.webp"
           alt="Motorradfahrer auf einer Landstrasse"
           fill
           className="object-cover object-[60%_center]"

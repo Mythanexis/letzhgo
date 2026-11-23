@@ -273,7 +273,7 @@ export default function UeberUnsPage() {
 
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_18px_40px_-24px_rgba(8,26,58,0.35)] md:order-1">
               <Image
-                src="/images/ueber-uns-zwei-raeder.jpg"
+                src="/images/ueber-uns-zwei-raeder.webp"
                 alt="Motorrad-Grundkurs bei Let'ZHgo"
                 fill
                 className="object-cover"

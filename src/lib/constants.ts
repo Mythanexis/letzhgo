@@ -46,7 +46,7 @@ export const IMAGES = {
   vkuPopup: "/images/vku-popup.png",
   motorrad: "/images/motorrad.png",
   quoteBg: "/images/quote-bg.png",
-  footerBg: "/images/footer-bg.jpg",
+  footerBg: "/images/footer-bg.webp",
 } as const;
 
 export const INSTRUCTORS = [
@@ -135,7 +135,7 @@ export const EDOOBOX_LINKS = {
 export const WEGWEISER_MOTORRAD_IMAGES = {
   hero: "/images/wegweiser/wegweiser-teaser.png",
   /** Full-bleed hero on `/wegweiser-motorrad-fuehrerschein` only */
-  pageHero: "/images/wegweiser/wegweiser-page-hero-2.jpg",
+  pageHero: "/images/wegweiser/wegweiser-page-hero-2.webp",
   steps: [
     "/images/nothelferkurs.png",
     "/images/wegweiser/step-02.jpg",

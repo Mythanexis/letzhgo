@@ -110,7 +110,7 @@ export default function PruefungsvorbereitungSection({ className }: { className?
             <div className="md:sticky md:top-32">
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_18px_40px_-24px_rgba(8,26,58,0.35)]">
                 <Image
-                  src="/images/motorrad-team.jpg"
+                  src="/images/motorrad-team.webp"
                   alt="Das Motorrad-Team von Let'ZHgo"
                   fill
                   className="object-cover"

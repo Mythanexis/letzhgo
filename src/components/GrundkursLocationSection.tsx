@@ -17,7 +17,7 @@ export default function GrundkursLocationSection() {
         >
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_18px_40px_-24px_rgba(8,26,58,0.35)]">
             <Image
-              src="/images/hostettler-showroom.jpg"
+              src="/images/hostettler-showroom.webp"
               alt="Showroom von Hostettler Moto AG in Rümlang"
               fill
               className="object-cover"
