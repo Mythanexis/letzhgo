@@ -149,7 +149,15 @@ export default function Footer() {
             </span>
           </div>
         </div>
-        <div className="h-[env(safe-area-inset-bottom)]" />
+        {/* iOS Safari 26+ tints the bottom toolbar from a fixed/sticky element's own
+            background-color near the viewport edge. Sticky (not fixed) so it only
+            samples dark while the footer itself is in view; elsewhere the page falls
+            back to the light html/body background, which matches the rest of the site. */}
+        <div
+          aria-hidden="true"
+          className="sticky bottom-0 z-10 bg-neutral-950"
+          style={{ height: "env(safe-area-inset-bottom, 0px)" }}
+        />
       </div>
     </footer>
   );

@@ -286,6 +286,17 @@ export default function Navbar() {
 
   return (
     <>
+      {/* iOS Safari 26+ samples a fixed element's own background-color to tint the
+          status bar; it ignores theme-color and absolute/pseudo children. This strip
+          is sized to the notch/status-bar safe area so it stays invisible on devices
+          without one, and tracks the same dark/light state as the nav pill. */}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
+          glassNav ? "bg-neutral-900" : "bg-white"
+        }`}
+        style={{ height: "env(safe-area-inset-top, 0px)" }}
+      />
       <header
         className={`pointer-events-none fixed inset-x-0 top-0 flex justify-center px-3 pt-3 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform motion-reduce:transition-none motion-reduce:md:translate-y-0 sm:px-4 sm:pt-4 md:px-6 ${
           headerAboveMobileOverlay ? "z-70" : "z-50"
