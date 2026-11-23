@@ -28,7 +28,7 @@ const NAV_LINKS = [
 export default function Footer() {
   return (
     <footer
-      className="relative flex min-h-screen w-full flex-col overflow-x-clip"
+      className="relative flex min-h-dvh w-full flex-col overflow-x-clip"
       data-navbar-dark
     >
       <Image
