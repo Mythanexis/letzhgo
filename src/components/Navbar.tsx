@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/constants";
@@ -257,6 +257,21 @@ export default function Navbar() {
   const glassNav =
     !mobileOpen &&
     (overDarkBackdrop || (TRANSPARENT_AT_TOP_PATHS.includes(pathname) && !scrolled));
+
+  // Real-device testing showed iOS Safari's fixed-element status-bar/toolbar tinting
+  // (see the strip below) does NOT apply to a normal browsing tab, only reportedly to
+  // standalone/fullscreen contexts. The one fallback that's been reliable across Safari
+  // versions is the actual computed background-color of html/body, so we drive that
+  // directly off the same dark/light signal as the nav pill.
+  useLayoutEffect(() => {
+    const color = glassNav ? "#171717" : "";
+    document.documentElement.style.backgroundColor = color;
+    document.body.style.backgroundColor = color;
+    return () => {
+      document.documentElement.style.backgroundColor = "";
+      document.body.style.backgroundColor = "";
+    };
+  }, [glassNav]);
 
   const barShell = glassNav ? NAV_GLASS_SHELL : NAV_SOLID_SHELL;
 
