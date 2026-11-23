@@ -10,8 +10,6 @@ import {
 } from "framer-motion";
 const QUOTE_BG = "/images/ueber-uns/quote-car-interior.jpg";
 
-const QUOTE_EYEBROW = "So bilden wir aus";
-
 const QUOTE_TEXT =
   "Wir starten mit Zuhören – wirklich zuhören – um dein aktuelles Fahrniveau und dein Lerntempo zu verstehen. Darauf aufbauend gestalten wir eine Ausbildung, die strukturiert, realistisch und auf dich zugeschnitten ist. Jede Fahrstunde gibt dir Sicherheit und lässt dich Schritt für Schritt wachsen.";
 
@@ -68,33 +66,20 @@ function CurtainWord({
 /** Volle Hero-Fläche — eine Instanz, statisch (kein Parent-`transform`), liegt unter dem Zitat. */
 function HeroFullLayer({ reducedMotion }: { reducedMotion: boolean }) {
   return (
-    <div className="relative flex min-h-[100dvh] min-h-[100svh] w-full flex-col justify-center overflow-hidden bg-gradient-to-b from-accent-light/35 via-background to-background pt-20 pb-14 md:pt-28 md:pb-20">
-      <div
-        className="pointer-events-none absolute -right-20 top-1/3 h-72 w-72 rounded-full bg-accent/[0.06] blur-[80px]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-accent/5 blur-[70px]"
-        aria-hidden
-      />
-
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
+    <div className="relative flex min-h-[100dvh] min-h-[100svh] w-full flex-col justify-center overflow-hidden bg-background pt-20 pb-14 md:pt-28 md:pb-20">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-6 md:grid-cols-2 md:gap-14">
         <motion.div
           initial={reducedMotion ? false : { opacity: 0, y: 24 }}
           animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
           transition={reducedMotion ? undefined : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-xl lg:max-w-none lg:pt-2"
         >
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">Über uns</p>
-          <h1 className="mt-4 text-4xl font-bold leading-[1.08] tracking-tight text-foreground md:text-5xl lg:text-[3.25rem] lg:leading-[1.06]">
-            Dein Weg,{" "}
-            <span className="bg-gradient-to-r from-accent to-accent-dark bg-clip-text text-transparent">
-              unsere Mission.
-            </span>
+          <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
+            Dein Weg, <span className="text-accent">unsere Mission</span>
           </h1>
-          <p className="mt-6 text-lg leading-relaxed text-muted md:text-xl md:leading-relaxed">
-            Wir stehen für strukturierte Ausbildung, moderne Lernmethoden und persönliche
-            Betreuung – damit du nicht nur bestehst, sondern sicher unterwegs bist.
+          <p className="mt-4 max-w-md text-base leading-relaxed text-muted md:text-lg">
+            Wir stehen für strukturierte Ausbildung, moderne Lernmethoden und
+            persönliche Betreuung, damit du nicht nur bestehst, sondern
+            sicher unterwegs bist.
           </p>
         </motion.div>
 
@@ -102,24 +87,16 @@ function HeroFullLayer({ reducedMotion }: { reducedMotion: boolean }) {
           initial={reducedMotion ? false : { opacity: 0, y: 28, scale: 0.98 }}
           animate={reducedMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
           transition={reducedMotion ? undefined : { duration: 0.8, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none"
+          className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_18px_40px_-24px_rgba(8,26,58,0.35)]"
         >
-          <div
-            className="absolute -inset-1 rounded-[28px] bg-gradient-to-br from-accent/20 via-transparent to-accent/10 opacity-80 blur-xl"
-            aria-hidden
+          <Image
+            src="/images/ueber-uns-team.jpg"
+            alt="Das Let'ZHgo Team"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="(max-width: 767px) 100vw, 46vw"
           />
-          <div className="relative overflow-hidden rounded-[26px] border border-border/80 bg-card shadow-[0_24px_60px_-20px_rgba(0,0,0,0.18)] ring-1 ring-black/[0.04] lg:rotate-[0.75deg] lg:transition-transform lg:duration-500 lg:hover:rotate-0">
-            <div className="relative aspect-[4/3] sm:aspect-[5/4]">
-              <Image
-                src="/images/ueber-uns-team.jpg"
-                alt="Das Let'ZHgo Team"
-                fill
-                priority
-                className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 45vw"
-              />
-            </div>
-          </div>
         </motion.div>
       </div>
     </div>
@@ -191,10 +168,7 @@ function UeberUnsCurtainHeroScroll() {
           />
 
           <div className="relative flex h-full flex-col items-center justify-center px-6 text-center md:px-16">
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
-              {QUOTE_EYEBROW}
-            </p>
-            <blockquote className="mx-auto mt-8 max-w-4xl text-2xl font-medium leading-relaxed text-white md:text-3xl lg:text-4xl">
+            <blockquote className="mx-auto max-w-4xl text-2xl font-medium leading-relaxed text-white md:text-3xl lg:text-4xl">
               {words.map((word, i) => (
                 <CurtainWord
                   key={`${i}-${word}`}

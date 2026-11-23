@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Onest } from "next/font/google";
 import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import { FAQ_ITEMS } from "@/lib/constants";
@@ -9,6 +10,12 @@ import SmoothScroll from "@/components/SmoothScroll";
 import StickyWhatsApp from "@/components/StickyWhatsApp";
 import { ScrollAnimProvider } from "@/hooks/useScrollAnim";
 import "./globals.css";
+
+const onest = Onest({
+  subsets: ["latin"],
+  variable: "--font-onest",
+  display: "swap",
+});
 
 export const viewport: Viewport = {
   viewportFit: "cover",
@@ -178,7 +185,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de-CH" className="antialiased">
+    <html lang="de-CH" className={`${onest.variable} antialiased`}>
       <head>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
