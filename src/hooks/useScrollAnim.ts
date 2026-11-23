@@ -8,9 +8,7 @@ import {
   useSyncExternalStore,
   type ReactNode,
 } from "react";
-import type { TargetAndTransition, Transition } from "framer-motion";
-
-const EASE = [0.16, 1, 0.3, 1] as const;
+import type { TargetAndTransition } from "framer-motion";
 
 const COARSE_MEDIA = "(pointer: coarse)";
 
@@ -42,18 +40,11 @@ interface ScrollAnimOptions {
   rotateTo?: number;
 }
 
-type ScrollAnimReturn =
-  | {
-      initial: false;
-      animate: TargetAndTransition;
-      transition: { duration: number };
-    }
-  | {
-      initial: TargetAndTransition;
-      whileInView: TargetAndTransition;
-      transition: Transition;
-      viewport: { once: boolean; margin: string };
-    };
+interface ScrollAnimReturn {
+  initial: false;
+  animate: TargetAndTransition;
+  transition: { duration: number };
+}
 
 /**
  * Ein `matchMedia("(pointer: coarse)")` für Touch-Geräte — u.a. für „keine Scroll-Effekte“.
@@ -76,59 +67,29 @@ export function ScrollAnimProvider({ children }: { children: ReactNode }) {
 }
 
 /**
- * Viewport-/Scroll-Reveal-Animationen: auf Touch nur statisch (kein whileInView).
- * Desktop: wie bisher (y/x/scale + whileInView).
+ * Ehemals Viewport-/Scroll-Reveal-Animationen (fly-in beim Scrollen).
+ * Gibt jetzt überall nur noch den finalen, statischen Zustand zurück —
+ * keine whileInView-Fly-ins mehr. Einzige Fix-Stelle für alle Seiten.
  */
 export function useScrollAnim() {
-  const coarse = useCoarsePointer();
+  return useCallback(function anim({
+    y = 0,
+    x = 0,
+    scale,
+    rotateTo,
+  }: ScrollAnimOptions = {}): ScrollAnimReturn {
+    const hasRotate = rotateTo !== undefined;
 
-  return useCallback(
-    function anim({
-      delay = 0,
-      y = 0,
-      x = 0,
-      duration = 1,
-      scale,
-      rotateFrom,
-      rotateTo,
-    }: ScrollAnimOptions = {}): ScrollAnimReturn {
-      const hasRotate = rotateFrom !== undefined || rotateTo !== undefined;
-      const r0 = rotateFrom ?? 0;
-      const r1 = rotateTo ?? 0;
-
-      if (coarse) {
-        return {
-          initial: false,
-          animate: {
-            opacity: 1,
-            ...(hasRotate ? { rotate: r1 } : {}),
-            ...(y !== 0 ? { y: 0 } : {}),
-            ...(x !== 0 ? { x: 0 } : {}),
-            ...(scale !== undefined ? { scale: 1 } : {}),
-          },
-          transition: { duration: 0 },
-        };
-      }
-
-      return {
-        initial: {
-          opacity: 0,
-          ...(y !== 0 ? { y } : {}),
-          ...(x !== 0 ? { x } : {}),
-          ...(scale !== undefined ? { scale } : {}),
-          ...(hasRotate ? { rotate: r0 } : {}),
-        },
-        whileInView: {
-          opacity: 1,
-          ...(y !== 0 ? { y: 0 } : {}),
-          ...(x !== 0 ? { x: 0 } : {}),
-          ...(scale !== undefined ? { scale: 1 } : {}),
-          ...(hasRotate ? { rotate: r1 } : {}),
-        },
-        transition: { duration, delay, ease: EASE },
-        viewport: { once: true, margin: "-80px" },
-      };
-    },
-    [coarse],
-  );
+    return {
+      initial: false,
+      animate: {
+        opacity: 1,
+        ...(hasRotate ? { rotate: rotateTo } : {}),
+        ...(y !== 0 ? { y: 0 } : {}),
+        ...(x !== 0 ? { x: 0 } : {}),
+        ...(scale !== undefined ? { scale: 1 } : {}),
+      },
+      transition: { duration: 0 },
+    };
+  }, []);
 }

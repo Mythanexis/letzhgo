@@ -397,13 +397,7 @@ export default function InstructorsSection({
                 )}
               </AnimatePresence>
 
-              {/* Cards — animate only once on scroll-in, never on filter change */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.7 }}
-              >
+              <div>
                 {filteredInstructors.length > 0 ? (
                   <div className="flex flex-wrap justify-center gap-6 md:gap-8">
                     {filteredInstructors.map((instructor) => (
@@ -418,7 +412,7 @@ export default function InstructorsSection({
                     <p className="mt-2 text-sm text-muted">Versuche einen anderen Filter.</p>
                   </div>
                 )}
-              </motion.div>
+              </div>
             </div>
           </div>
         ) : layout === "singleGrid" ? (

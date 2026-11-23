@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useCoarsePointer, useScrollAnim } from "@/hooks/useScrollAnim";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 const AGE_RULES = [
   {
@@ -33,45 +33,18 @@ const AGE_RULES = [
   },
 ] as const;
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const containerStatic = {
+const containerVariants = {
   hidden: { opacity: 1 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0, delayChildren: 0 },
-  },
+  show: { opacity: 1 },
 };
 
-const itemStatic = {
+const itemVariants = {
   hidden: { opacity: 1, y: 0 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0 },
-  },
+  show: { opacity: 1, y: 0, transition: { duration: 0 } },
 };
 
 export default function AutofahrenAb17Section() {
-  const coarse = useCoarsePointer();
   const anim = useScrollAnim();
-  const containerVariants = coarse ? containerStatic : container;
-  const itemVariants = coarse ? itemStatic : item;
 
   return (
     <section className="bg-background" aria-labelledby="autofahren-ab-17-heading">
@@ -92,9 +65,7 @@ export default function AutofahrenAb17Section() {
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          {...(coarse
-            ? { animate: "show" as const }
-            : { whileInView: "show" as const, viewport: { once: true, margin: "-40px" } })}
+          animate="show"
           className="mt-16 grid gap-10 md:mt-24 md:grid-cols-3 md:gap-0"
         >
           {AGE_RULES.map((rule, i) => (

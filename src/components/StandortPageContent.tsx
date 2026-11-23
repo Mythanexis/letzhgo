@@ -19,7 +19,7 @@ import {
   STANDORTE,
   type StandortSlug,
 } from "@/lib/standorte-data";
-import { useScrollAnim, useCoarsePointer } from "@/hooks/useScrollAnim";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 import InstructorCard from "@/components/InstructorCard";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -80,7 +80,6 @@ export default function StandortPageContent({ slug }: { slug: StandortSlug }) {
 
   const router = useRouter();
   const anim = useScrollAnim();
-  const coarse = useCoarsePointer();
   const instructors = getInstructorsForStandort(standort);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [instructorModal, setInstructorModal] = useState(false);
@@ -301,29 +300,9 @@ export default function StandortPageContent({ slug }: { slug: StandortSlug }) {
                 key={item.title}
                 {...anim({ y: 30, delay: 0.1 + i * 0.08, duration: 0.6 })}
               >
-                <motion.div
-                  {...(coarse
-                    ? {
-                        initial: false,
-                        animate: { opacity: 1, scale: 1, rotate: 0 },
-                        transition: { duration: 0 },
-                      }
-                    : {
-                        initial: { scale: 0, rotate: -20 },
-                        whileInView: { scale: 1, rotate: 0 },
-                        transition: {
-                          duration: 0.5,
-                          delay: 0.2 + i * 0.08,
-                          type: "spring" as const,
-                          stiffness: 200,
-                          damping: 15,
-                        },
-                        viewport: { once: true, margin: "-60px" },
-                      })}
-                  className="w-fit"
-                >
+                <div className="w-fit">
                   <item.Icon className="h-12 w-12 text-accent" strokeWidth={1.2} />
-                </motion.div>
+                </div>
                 <h3 className="mt-5 text-xl font-bold text-foreground">
                   {item.title}
                 </h3>

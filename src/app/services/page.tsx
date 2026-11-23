@@ -186,128 +186,29 @@ export default function ServicesPage() {
   const servicesRef = useRef<HTMLDivElement>(null);
   return (
     <>
-      {/* Hero Header */}
-      <section className="relative flex h-dvh snap-start items-center overflow-hidden bg-background pt-16">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-100"
-          aria-hidden
-          style={{
-            background:
-              "radial-gradient(980px 660px at 20% 28%, rgba(30, 99, 255, 0.15), transparent 62%), radial-gradient(900px 620px at 84% 70%, rgba(30, 99, 255, 0.12), transparent 64%), radial-gradient(780px 520px at 55% 15%, rgba(30, 99, 255, 0.06), transparent 60%), linear-gradient(180deg, rgba(30, 99, 255, 0.055), transparent 58%)",
-          }}
-        />
-        <div
-          className="pointer-events-none absolute -left-24 top-16 h-72 w-72 rounded-full bg-accent/15 blur-[110px]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute -right-24 bottom-10 h-96 w-96 rounded-full bg-accent-light/35 blur-[120px]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.22]"
-          aria-hidden
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.08) 1px, transparent 0)",
-            backgroundSize: "22px 22px",
-          }}
-        />
-
-        <div className="pointer-events-none absolute inset-0" aria-hidden>
+      {/* Hero */}
+      <section className="relative bg-[#0a0a0a]" data-navbar-dark>
+        <div className="relative mx-auto max-w-7xl px-6 pb-16 pt-32 md:pb-20 md:pt-40">
           <motion.div
-            initial={{ opacity: 0, y: 26 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.25, ease: EASE }}
-            className="absolute left-10 top-24 hidden lg:block"
+            transition={{ duration: 1, delay: 0.1, ease: EASE }}
           >
-            <div className="relative h-[420px] w-[320px] -rotate-[10deg] overflow-hidden rounded-[28px] border border-border/70 bg-transparent shadow-[0_40px_100px_-60px_rgba(0,0,0,0.35)]">
-              <Image
-                src="/images/motorrad-grundkurs-2.jpg"
-                alt=""
-                aria-hidden
-                fill
-                sizes="320px"
-                className="object-cover opacity-[0.86]"
-              />
-            </div>
-          </motion.div>
+            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm text-white/50">
+              <Link href="/" className="transition-colors hover:text-white">Home</Link>
+              <span aria-hidden className="text-white/25">/</span>
+              <span className="text-white/80" aria-current="page">Services</span>
+            </nav>
 
-          <motion.div
-            initial={{ opacity: 0, y: 26 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.35, ease: EASE }}
-            className="absolute right-6 bottom-16 hidden lg:block"
-          >
-            <div className="relative h-[360px] w-[300px] rotate-[8deg] overflow-hidden rounded-[26px] border border-border/70 bg-transparent shadow-[0_40px_100px_-60px_rgba(0,0,0,0.35)]">
-              <Image
-                src="/images/vku-popup.png"
-                alt=""
-                aria-hidden
-                fill
-                sizes="300px"
-                className="object-cover opacity-[0.84]"
-              />
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="relative mx-auto w-full max-w-4xl px-6 md:px-10">
-          <div className="text-center">
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: EASE }}
-              className="text-sm font-semibold uppercase tracking-[0.2em] text-accent"
-            >
-              Was wir anbieten
-            </motion.p>
-            <motion.h1
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.1, ease: EASE }}
-              className="mt-5 text-5xl font-bold leading-[1.05] tracking-tight text-foreground md:text-7xl lg:text-8xl"
-            >
-              Unsere{" "}
-              <span className="bg-gradient-to-r from-accent to-accent-dark bg-clip-text text-transparent">
-                Services
-              </span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.22, ease: EASE }}
-              className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted"
-            >
+            <h1 className="mt-6 text-4xl font-bold leading-tight text-white md:text-5xl">
+              Unsere Services
+            </h1>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-white/70 md:text-lg">
               Kurse, Fahrstunden und Coachings – strukturiert, modern und auf dein Ziel
               abgestimmt. Du bekommst Klarheit, Tempo und echte Fortschritte.
-            </motion.p>
-          </div>
+            </p>
+          </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.9 }}
-          className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2"
-          aria-hidden
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="animate-bounce text-muted"
-          >
-            <path
-              d="M12 5v14M5 12l7 7 7-7"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </motion.div>
       </section>
 
       <div

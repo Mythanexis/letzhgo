@@ -27,6 +27,40 @@ const VKU_FACTS = [
   { label: "Gültigkeit", value: "Unbeschränkt" },
 ];
 
+const LEGAL_CHANGES_2027 = [
+  {
+    title: "VKU vor der Theorieprüfung",
+    description:
+      "Der obligatorische Verkehrskundeunterricht mit 8 Lektionen muss neu bereits vor der Theorieprüfung absolviert werden.",
+  },
+  {
+    title: "Neu 55 Theoriefragen",
+    description:
+      "Die Theorieprüfung der Kategorien A, A1 und B umfasst neu 55 Fragen. Auch Themen aus dem VKU werden geprüft.",
+  },
+  {
+    title: "Fahrerassistenzsysteme im VKU",
+    description:
+      "Themen wie Notbremsassistent, Spurhalteassistent, Abstandsregelung und die Grenzen automatisierter Systeme erhalten mehr Gewicht.",
+  },
+  {
+    title: "Nothilfekurs und Sehtest werden digital",
+    description:
+      "Die Bestätigungen werden elektronisch erfasst und direkt dem Gesuch zugeordnet.",
+  },
+  {
+    title: "Einführung der FABER PIN",
+    description:
+      "Die persönliche FABER PIN ermöglicht die eindeutige Zuordnung von Kursbestätigungen und Sehtest zum Führerausweisgesuch.",
+  },
+];
+
+const VKU_MODULES_2027 = [
+  { label: "VKU 2", title: "Verantwortung" },
+  { label: "VKU 3", title: "Rücksichtnahme" },
+  { label: "VKU 4", title: "Infrastruktur & defensiv fahren" },
+];
+
 export default function VerkehrskundePage() {
   const anim = useScrollAnim();
   return (
@@ -189,8 +223,91 @@ export default function VerkehrskundePage() {
         </div>
       </section>
 
-      {/* Ohne VKU keine Prüfung */}
+      {/* Neuerungen ab 2027 */}
       <section className="bg-[#f7f8fa]">
+        <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+          <motion.div {...anim({ y: 24, duration: 0.8 })}>
+            <p className="text-sm font-medium uppercase tracking-widest text-accent">
+              Ab 01.01.2027
+            </p>
+            <h2 className="mt-4 text-2xl font-bold text-foreground md:text-3xl">
+              Neue gesetzliche Vorschriften für den VKU
+            </h2>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+              Der Bundesrat hat eine Reform der Führerprüfung beschlossen. Für
+              den Verkehrskundeunterricht ändert sich damit einiges – hier die
+              wichtigsten Punkte auf einen Blick.
+            </p>
+          </motion.div>
+
+          <div className="mt-14 grid gap-x-10 gap-y-10 md:grid-cols-2">
+            {LEGAL_CHANGES_2027.map((item, i) => (
+              <motion.div
+                key={item.title}
+                {...anim({ y: 20, delay: i * 0.06, duration: 0.7 })}
+                className="flex gap-5"
+              >
+                <span className="text-sm font-bold text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="text-base font-semibold text-foreground">
+                    {item.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                    {item.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            {...anim({ y: 24, duration: 0.8 })}
+            className="mt-16 border-t border-border pt-8"
+          >
+            <h3 className="text-lg font-bold text-foreground">
+              Neue Kurszeiten ab 01.01.2027
+            </h3>
+            <div className="mt-6 grid gap-6 sm:grid-cols-3">
+              <div>
+                <p className="text-sm text-muted">Kurstage</p>
+                <p className="mt-0.5 text-base font-semibold text-foreground">
+                  Mo, Di, Mi, Do
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-muted">Uhrzeit</p>
+                <p className="mt-0.5 text-base font-semibold text-foreground">
+                  19:00 – 21:00 Uhr
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-muted">Kosten</p>
+                <p className="mt-0.5 text-base font-semibold text-accent">
+                  CHF 200.–
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-3">
+            {VKU_MODULES_2027.map((mod) => (
+              <div key={mod.label}>
+                <p className="text-xs font-semibold uppercase tracking-wide text-accent">
+                  {mod.label}
+                </p>
+                <p className="mt-1 text-base font-semibold text-foreground">
+                  {mod.title}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Ohne VKU keine Prüfung */}
+      <section className="bg-background">
         <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
           <motion.div
             {...anim({ y: 28, duration: 0.9 })}

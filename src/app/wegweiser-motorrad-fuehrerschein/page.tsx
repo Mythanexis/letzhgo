@@ -7,8 +7,6 @@ import { EDOOBOX_LINKS, WEGWEISER_MOTORRAD_IMAGES } from "@/lib/constants";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQ from "@/components/FAQ";
 import CTABanner from "@/components/CTABanner";
-import { useCoarsePointer } from "@/hooks/useScrollAnim";
-
 interface StepContent {
   id: string;
   title: string;
@@ -104,68 +102,22 @@ const STEPS = STEPS_RAW.map((step, i) => ({
   image: WEGWEISER_MOTORRAD_IMAGES.steps[i]!,
 }));
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (delay: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as const },
-  }),
-};
-
-const slideInLeft = {
-  hidden: { opacity: 0, x: -40 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const slideInRight = {
-  hidden: { opacity: 0, x: 40, scale: 0.97 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    scale: 1,
-    transition: { duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const fadeUpCoarse = {
+const fadeUpV = {
   hidden: { opacity: 1, y: 0 },
-  visible: (_delay: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0 },
-  }),
+  visible: { opacity: 1, y: 0, transition: { duration: 0 } },
 };
 
-const slideInLeftCoarse = {
+const slideInLeftV = {
   hidden: { opacity: 1, x: 0 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0 },
-  },
+  visible: { opacity: 1, x: 0, transition: { duration: 0 } },
 };
 
-const slideInRightCoarse = {
+const slideInRightV = {
   hidden: { opacity: 1, x: 0, scale: 1 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    scale: 1,
-    transition: { duration: 0 },
-  },
+  visible: { opacity: 1, x: 0, scale: 1, transition: { duration: 0 } },
 };
 
 export default function WegweiserMotorradFuehrerscheinPage() {
-  const coarse = useCoarsePointer();
-  const fadeUpV = coarse ? fadeUpCoarse : fadeUp;
-  const slideInLeftV = coarse ? slideInLeftCoarse : slideInLeft;
-  const slideInRightV = coarse ? slideInRightCoarse : slideInRight;
-
   return (
     <>
       {/* Hero */}
@@ -227,13 +179,7 @@ export default function WegweiserMotorradFuehrerscheinPage() {
           {STEPS.map((step, index) => (
             <motion.article
               key={step.id}
-              initial={coarse ? "visible" : "hidden"}
-              {...(coarse
-                ? {}
-                : {
-                    whileInView: "visible" as const,
-                    viewport: { once: true, margin: "-100px" },
-                  })}
+              initial="visible"
               className={`grid w-full grid-cols-1 lg:grid-cols-2 lg:min-h-[min(520px,75vh)] ${
                 index % 2 === 0 ? "bg-background" : "bg-[#f7f8fa]"
               }`}

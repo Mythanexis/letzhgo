@@ -2,58 +2,22 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { motion } from "framer-motion";
 import { Users, MapPin, ClipboardCheck, GraduationCap, Car, Video } from "lucide-react";
 import UeberUnsCurtainHero from "@/components/UeberUnsCurtainHero";
 import InstructorCard from "@/components/InstructorCard";
 import Stats from "@/components/Stats";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import FAQ from "@/components/FAQ";
 import ContactForm from "@/components/ContactForm";
 import { INSTRUCTORS, INSTRUCTORS_HOMEPAGE_ORDER } from "@/lib/constants";
-import { useCoarsePointer, useScrollAnim } from "@/hooks/useScrollAnim";
+import { useScrollAnim } from "@/hooks/useScrollAnim";
 
 export default function UeberUnsPage() {
   const anim = useScrollAnim();
-  const coarse = useCoarsePointer();
-  const GOOGLE_REVIEWS_URL = "https://www.google.com/maps/search/?api=1&query=Let%27ZHgo+Fahrschule+Binzm%C3%BChlestrasse+15+8050+Z%C3%BCrich";
-  const REVIEW_PREVIEW_CHARS = 200;
   const instructorsInOrder = INSTRUCTORS_HOMEPAGE_ORDER.map((name) =>
     INSTRUCTORS.find((instructor) => instructor.name === name),
   ).filter((instructor): instructor is (typeof INSTRUCTORS)[number] => Boolean(instructor));
-  const reviews = [
-    {
-      author: "Dogu Erbek",
-      text: "Ich habe alle Schritte für meinen Führerschein mit LetZHgo gemacht und es war fantastisch. Ich danke am besondersten Gianni, ohne den ich es nicht geschafft hätte. Er hat mich von Anfang bis Ende begleitet und war dabei sehr geduldig und hilfsbereit. Ich kann LetZHgo jedem, der seinen Führerschein machen möchte, wärmstens empfehlen.",
-      date: "vor 1 Monat",
-    },
-    {
-      author: "Delia Ullings",
-      text: "Wer gute Fahrstunden mit einer lockeren Atmosphäre sucht ist hier genau richtig! Ich habe mich immer auf meine Fahrstunden bei Gianni oder auch Heike gefreut. Beide erklären alles verständlich und mit viel Geduld. Der VKU ist auch super aufgebaut. Kann ich nur weiterempfehlen.",
-      date: "vor 5 Monaten",
-    },
-    {
-      author: "K Danijel",
-      text: "Ich durfte beim Gianni Fahrstunden für den Anhänger machen. Ich kann ihn und seine Fahrschule jedem zu 100% weiterempfehlen. Super sympathischer Typ, bringt einem alles in der Praxis bei und hat Spass bei den Fahrstunden. Er hat mir alles beigebracht, was ich brauchte, um die Prüfung innert von 3 Wochen zu bestehen! Danke viel mal und wir sehen uns im Frühling für die nächste Kategorie (Motorrad beschränkt).",
-      date: "vor 2 Monaten",
-    },
-    {
-      author: "Mia Numme",
-      text: "Ich kann Merjema als Fahrlehrerin absolut weiterempfehlen. Sie hat sofort erkannt, wo ich noch Verbesserung gebraucht habe, und genau dort angesetzt. Sie erklärt alles so, dass man wirklich versteht, warum man etwas tut und nicht nur wie. Ihre Art ist nicht ruhig, sondern richtig powerful - motivierend, klar und direkt, genau das, was ich gebraucht habe, um schnell Fortschritte zu machen. Jede Fahrstunde war intensiv, lehrreich und hat mir viel Sicherheit gegeben. Dank ihr bin ich bestens vorbereitet in die Prüfung gegangen. Eine Fahrlehrerin, die wirklich etwas bewirkt!",
-      date: "vor 4 Monaten",
-    },
-    {
-      author: "Tahira Leutwiler",
-      text: "Die Fahrschule, sowie meine Fahrlehrerin Merjema Radic haben mir einen sehr positiven Eindruck gemacht. Ich war bei Merjema im Nothelferkurs, welcher ebenfalls sehr hilfreich und umfassend war. Während der Fahrstunden habe ich mich immer sehr wohl gefühlt, da auf meine Bedürfnisse eingegangen wurde und ich in diesem Jahr sehr gefördert wurde. Sie sind alle sehr professionell und bereiten dich zu 100% auf die Fahrprüfung vor. Der VKU war ebenfalls sehr hilfreich und spannend. Merjema ist eine sehr angenehme Fahrlehrerin und weiss wovon sie spricht. Sie geht alles mit Ruhe und Gelassenheit an, was ich sehr wichtig finde. Danke euch allen viel mals für die tollen Kurse, sowie für meine Fahrstunden! :)",
-      date: "vor 2 Monaten",
-    },
-    {
-      author: "Rejana Saciri",
-      text: "Ich möchte meine positive Erfahrung mit der Fahrschule LetZHgo teilen. Besonders bedanken möchte ich mich bei meiner Fahrlehrerin Merjema Radic, die den Unterricht wirklich angenehm gestaltet hat. Wir hatten viel Spass zusammen, konnten lachen und uns gut unterhalten, was die Lernatmosphäre sehr entspannt gemacht hat. Merjema Radic hat mir alles sehr gut erklärt und mir alle wichtigen Aspekte des Fahrens anschaulich gezeigt. Ihre Geduld und Professionalität haben mir geholfen, schnell Fortschritte zu machen und mich sicher hinter das Steuer zu setzen. Insgesamt war es eine tolle Erfahrung, und ich kann LetZHgo nur weiterempfehlen!",
-      date: "vor 5 Monaten",
-    },
-  ];
-  const [expandedReviews, setExpandedReviews] = useState<Record<string, boolean>>({});
 
   return (
     <>
@@ -172,29 +136,9 @@ export default function UeberUnsPage() {
               { title: "Videoanalyse", text: "Fahrten per Video analysieren – Fehler erkennen, schneller Fortschritte machen.", Icon: Video },
             ].map((item, i) => (
               <motion.div key={item.title} {...anim({ y: 30, delay: 0.1 + i * 0.1, duration: 0.6 })}>
-                <motion.div
-                  {...(coarse
-                    ? {
-                        initial: false,
-                        animate: { opacity: 1, scale: 1, rotate: 0 },
-                        transition: { duration: 0 },
-                      }
-                    : {
-                        initial: { scale: 0, rotate: -20 },
-                        whileInView: { scale: 1, rotate: 0 },
-                        transition: {
-                          duration: 0.5,
-                          delay: 0.2 + i * 0.1,
-                          type: "spring" as const,
-                          stiffness: 200,
-                          damping: 15,
-                        },
-                        viewport: { once: true, margin: "-60px" },
-                      })}
-                  className="w-fit"
-                >
+                <div className="w-fit">
                   <item.Icon className="h-14 w-14 text-accent" strokeWidth={1.2} />
-                </motion.div>
+                </div>
                 <h3 className="mt-6 text-2xl font-bold text-foreground">{item.title}</h3>
                 <p className="mt-3 text-lg leading-relaxed text-muted">{item.text}</p>
               </motion.div>
@@ -270,113 +214,7 @@ export default function UeberUnsPage() {
       <Stats surface="light" />
 
       {/* Bewertungen */}
-      <section className="bg-[#f7f8fa]">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-          <motion.div {...anim({ y: 28, duration: 0.9 })}>
-            <div className="mx-auto max-w-4xl text-center">
-              <h2 className="text-4xl font-bold text-foreground md:text-5xl">
-                Das sagen unsere Fahrschüler:innen
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted md:text-lg">
-                Ehrliches Feedback aus echten Fahrstunden, transparent, direkt
-                und ohne Filter.
-              </p>
-            </div>
-
-            <div className="mt-14 grid gap-x-8 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
-              {reviews.map((review, i) => (
-                <motion.article
-                  key={`${review.author}-${review.date}`}
-                  {...anim({
-                    y: 24,
-                    delay: Math.min(i * 0.08, 0.35),
-                    duration: 0.65,
-                  })}
-                  className="flex h-full flex-col"
-                >
-                  <div className="flex gap-0.5" aria-hidden>
-                    {Array.from({ length: 5 }).map((_, j) => (
-                      <svg key={j} className="h-4 w-4 text-[#f5a623]" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                      </svg>
-                    ))}
-                  </div>
-                  <p className="mt-3 font-semibold text-foreground">{review.author}</p>
-                  <p className="mt-0.5 text-sm text-muted">{review.date}</p>
-
-                  <div className="mt-4 flex-1">
-                    {(() => {
-                      const reviewId = `${review.author}-${review.date}`;
-                      const isExpanded = Boolean(expandedReviews[reviewId]);
-                      const hasLongText = review.text.length > REVIEW_PREVIEW_CHARS;
-                      const previewText = hasLongText
-                        ? review.text.slice(0, REVIEW_PREVIEW_CHARS).trimEnd()
-                        : review.text;
-                      const extraText = hasLongText
-                        ? review.text.slice(REVIEW_PREVIEW_CHARS).trimStart()
-                        : "";
-                      return (
-                        <div>
-                          <p className="text-[15px] leading-relaxed text-foreground/80">
-                            {previewText}
-                            {!isExpanded && hasLongText ? "…" : ""}
-                          </p>
-                          <AnimatePresence initial={false}>
-                            {hasLongText && isExpanded && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                                className="overflow-hidden"
-                              >
-                                <p className="text-[15px] leading-relaxed text-foreground/80">
-                                  {extraText}
-                                </p>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                          {hasLongText && (
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setExpandedReviews((prev) => ({
-                                  ...prev,
-                                  [reviewId]: !prev[reviewId],
-                                }))
-                              }
-                              className="mt-3 inline-flex cursor-pointer text-sm font-semibold text-accent transition-colors hover:text-accent-dark"
-                            >
-                              {isExpanded ? "Weniger anzeigen" : "Mehr lesen"}
-                            </button>
-                          )}
-                        </div>
-                      );
-                    })()}
-                  </div>
-                </motion.article>
-              ))}
-            </div>
-
-            <div className="mt-14 flex justify-center">
-              <a
-                href={GOOGLE_REVIEWS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-2 pb-0.5 text-base font-semibold text-accent no-underline transition-colors after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] after:content-[''] hover:text-accent-dark hover:after:scale-x-100"
-              >
-                Alle 417+ Bewertungen auf Google
-                <span
-                  aria-hidden
-                  className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <GoogleReviewsSection />
 
       {/* Motorrad-Grundkurs Promo */}
       <section className="bg-background">
@@ -435,7 +273,7 @@ export default function UeberUnsPage() {
 
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_18px_40px_-24px_rgba(8,26,58,0.35)] md:order-1">
               <Image
-                src="/images/posters/motorrad-grundkurs.png"
+                src="/images/ueber-uns-zwei-raeder.jpg"
                 alt="Motorrad-Grundkurs bei Let'ZHgo"
                 fill
                 className="object-cover"
