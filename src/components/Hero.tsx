@@ -17,13 +17,23 @@ const HERO_SLIDE_DURATION_S = 6.4;
 /** Dauer der Crossfade-Überblendung zwischen zwei Bildern. */
 const HERO_SLIDE_FADE_S = 1.6;
 
-/** Slideshow im Hero-Hintergrund: Crossfade + alternierender Ken-Burns-Zoom/Pan. */
+/**
+ * Slideshow im Hero-Hintergrund: Crossfade + alternierender Ken-Burns-Zoom/Pan.
+ *
+ * `active=false` markiert die Variante, die am aktuellen Breakpoint per CSS
+ * versteckt ist (Mobile- vs. Desktop-Bildset laufen beide gleichzeitig im
+ * DOM, nur einer ist sichtbar). Ohne diese Gate liefen beide Rotationen
+ * permanent weiter und luden so auch das unsichtbare Set eager nach — hier
+ * frieren wir die unsichtbare Variante auf Slide 0 ein und laden sie lazy.
+ */
 function HeroSlideshow({
   slides,
   className,
+  active = true,
 }: {
   slides: HeroSlide[];
   className?: string;
+  active?: boolean;
 }) {
   const [index, setIndex] = useState(0);
   const reduceMotion = useReducedMotion();
@@ -35,12 +45,12 @@ function HeroSlideshow({
   }, []);
 
   useEffect(() => {
-    if (slides.length <= 1 || reduceMotion) return;
+    if (!active || slides.length <= 1 || reduceMotion) return;
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % slides.length);
     }, HERO_SLIDE_DURATION_S * 1000);
     return () => clearInterval(id);
-  }, [slides.length, reduceMotion]);
+  }, [active, slides.length, reduceMotion]);
 
   const slide = slides[index];
   const panLeft = index % 2 === 0;
@@ -79,8 +89,8 @@ function HeroSlideshow({
               alt={slide.alt}
               fill
               className="object-cover brightness-[0.4]"
-              priority={index === 0}
-              loading={index === 0 ? undefined : "eager"}
+              priority={active && index === 0}
+              loading={active ? (index === 0 ? undefined : "eager") : "lazy"}
               quality={75}
               sizes="100vw"
             />
@@ -483,6 +493,21 @@ export default function Hero({
   images,
   mobileImages,
 }: HeroProps) {
+  /**
+   * `null` = Breakpoint noch unbekannt (SSR/erster Client-Render) → beide
+   * Slideshow-Varianten bleiben aktiv, identisch zum bisherigen Verhalten,
+   * damit kein Hydration-Mismatch entsteht. Sobald `matchMedia` feuert,
+   * friert die gerade unsichtbare Variante ein (siehe `HeroSlideshow`).
+   */
+  const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   if (showImage) {
     return (
       <section
@@ -492,8 +517,8 @@ export default function Hero({
         {images && images.length > 0 ? (
           mobileImages && mobileImages.length > 0 ? (
             <>
-              <HeroSlideshow slides={mobileImages} className="md:hidden" />
-              <HeroSlideshow slides={images} className="hidden md:block" />
+              <HeroSlideshow slides={mobileImages} className="md:hidden" active={isDesktop !== true} />
+              <HeroSlideshow slides={images} className="hidden md:block" active={isDesktop !== false} />
             </>
           ) : (
             <HeroSlideshow slides={images} />
@@ -518,7 +543,7 @@ export default function Hero({
           <div className="max-w-3xl text-left text-white">
             <HeroHeadline
               title={title}
-              as="h1"
+              as={isDesktop !== false ? "h1" : "p"}
               className="text-6xl font-extrabold leading-[1.05] lg:text-7xl"
               headlineStartDelay={HERO_BOOKING_START_DESKTOP}
             />
@@ -573,7 +598,7 @@ export default function Hero({
             title={title}
             className="text-5xl font-extrabold leading-[1.05] text-white"
             headlineStartDelay={HERO_BOOKING_START_MOBILE}
-            as="h1"
+            as={isDesktop === true ? "p" : "h1"}
           />
           <HeroSubtitleReveal
             className="mx-auto mt-4 max-w-sm text-base text-white/80"

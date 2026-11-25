@@ -62,12 +62,12 @@ export default function CTABanner({ className }: { className?: string }) {
                 </Link>{" "}
                 oder folge uns auf Social Media – wir helfen dir gerne weiter.
               </p>
-              <div className="mt-5 flex flex-wrap items-center gap-4">
+              <div className="mt-5 flex flex-wrap items-center gap-1">
                 <a
                   href="https://www.instagram.com/letzhgo/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent transition-opacity hover:opacity-70"
+                  className="flex items-center justify-center p-2.5 text-accent transition-opacity hover:opacity-70"
                   aria-label="Let'ZHgo auf Instagram"
                 >
                   <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -78,7 +78,7 @@ export default function CTABanner({ className }: { className?: string }) {
                   href="https://www.facebook.com/LetZHgo/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent transition-opacity hover:opacity-70"
+                  className="flex items-center justify-center p-2.5 text-accent transition-opacity hover:opacity-70"
                   aria-label="Let'ZHgo auf Facebook"
                 >
                   <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -89,7 +89,7 @@ export default function CTABanner({ className }: { className?: string }) {
                   href="https://www.tiktok.com/@letzhgofahrschule"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent transition-opacity hover:opacity-70"
+                  className="flex items-center justify-center p-2.5 text-accent transition-opacity hover:opacity-70"
                   aria-label="Let'ZHgo auf TikTok"
                 >
                   <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -100,7 +100,7 @@ export default function CTABanner({ className }: { className?: string }) {
                   href="https://www.youtube.com/@letzhgo9343"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent transition-opacity hover:opacity-70"
+                  className="flex items-center justify-center p-2.5 text-accent transition-opacity hover:opacity-70"
                   aria-label="Let'ZHgo auf YouTube"
                 >
                   <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden>

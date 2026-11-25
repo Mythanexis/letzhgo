@@ -314,7 +314,7 @@ export default function HomePage() {
             {...anim({ y: 28, delay: 0.1, duration: 0.9 })}
             className="mt-6 overflow-hidden rounded-2xl bg-black shadow-[0_18px_40px_-24px_rgba(8,26,58,0.35)]"
           >
-            <video className="aspect-video w-full" controls preload="metadata">
+            <video className="aspect-video w-full" controls preload="none">
               <source src="/videos/20-minuten-lifestyle-video.mp4" type="video/mp4" />
               Dein Browser unterstützt das Abspielen dieses Videos nicht.
             </video>

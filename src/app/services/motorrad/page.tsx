@@ -478,7 +478,7 @@ export default function MotorradPage() {
               <video
                 className="w-full"
                 controls
-                preload="metadata"
+                preload="none"
                 poster="/images/gianni-video-poster.jpg"
               >
                 <source src="/videos/gianni-motorrad-tipps.mp4" type="video/mp4" />
