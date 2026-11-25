@@ -27,6 +27,11 @@ const REQUIREMENTS = [
 
 const GEAR_ITEMS = ["Helm", "Jacke", "Handschuhe", "Hose", "Stiefel"];
 
+const COURSE_LOCATIONS = [
+  { label: "Rümlang", venue: "Hostettler Moto AG, Klotenerstrasse 10, 8153 Rümlang" },
+  { label: "Horgen", venue: "Honda Moto Peter Sommer 2-Rad-Sport AG, Seestrasse 367, 8804 Au-Wädenswil" },
+];
+
 const INSTRUCTORS = [
   { name: "Gianni Sebestin", phone: "+41 79 434 09 66", whatsapp: "https://wa.me/41794340966" },
   { name: "Samir Radič", phone: "+41 78 888 88 99", whatsapp: "https://wa.me/41788888899" },
@@ -152,9 +157,19 @@ export default function MotorradPage() {
                   Kursort
                 </h3>
                 <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
-                  Den Motorrad-Grundkurs bieten wir bei Hostettler Moto AG,
-                  Klotenerstrasse 10, 8153 Rümlang an.
+                  Den Motorrad-Grundkurs bieten wir an folgenden Standorten an:
                 </p>
+                <ul className="mt-4 flex flex-col gap-2.5">
+                  {COURSE_LOCATIONS.map((loc) => (
+                    <li key={loc.label} className="flex gap-3 text-base leading-relaxed text-muted">
+                      <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-muted" aria-hidden />
+                      <span>
+                        <span className="font-semibold text-foreground">{loc.label}:</span>{" "}
+                        {loc.venue}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
 
                 <h3 className="mt-14 text-xl font-bold text-foreground md:text-2xl">
                   Preise
