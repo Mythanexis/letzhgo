@@ -105,9 +105,14 @@ function PanelContent({ onClose }: { onClose: () => void }) {
   );
 }
 
+/** Mindest-Überlappung in px pro Achse, bevor wir den FAB als „im Weg“ werten
+ *  — verhindert Geflacker durch blosse 1–2px-Kanten-Berührungen beim Scrollen. */
+const OBSTRUCTION_TOLERANCE_PX = 2;
+
 export default function StickyWhatsApp() {
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [obstructed, setObstructed] = useState(false);
   const reduceMotion = useReducedMotion();
   const panelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -147,6 +152,49 @@ export default function StickyWhatsApp() {
     return () => {
       document.removeEventListener("keydown", onKey);
       document.removeEventListener("mousedown", onClick);
+    };
+  }, [open]);
+
+  // Fixe Position + volle Breite der Seite bedeuten: irgendwo liegt immer
+  // mal ein Button/Formularfeld/CTA direkt unter dem FAB. Statt ihn dort
+  // permanent über Inhalte zu legen, weicht er aus (schrumpft/verblasst),
+  // solange er ein anderes antippbares Element überdeckt.
+  useEffect(() => {
+    if (open) {
+      setObstructed(false);
+      return;
+    }
+    let raf = 0;
+    const check = () => {
+      const btn = buttonRef.current;
+      if (!btn) return;
+      const r = btn.getBoundingClientRect();
+      const candidates = document.querySelectorAll("a[href], button, input, textarea, select, h1, h2");
+      let hit = false;
+      for (const el of candidates) {
+        if (el === btn || btn.contains(el) || el.contains(btn)) continue;
+        const er = el.getBoundingClientRect();
+        if (er.width === 0 || er.height === 0) continue;
+        const ix = Math.min(r.right, er.right) - Math.max(r.left, er.left);
+        const iy = Math.min(r.bottom, er.bottom) - Math.max(r.top, er.top);
+        if (ix > OBSTRUCTION_TOLERANCE_PX && iy > OBSTRUCTION_TOLERANCE_PX) {
+          hit = true;
+          break;
+        }
+      }
+      setObstructed(hit);
+    };
+    const onScrollOrResize = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(check);
+    };
+    check();
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
     };
   }, [open]);
 
@@ -234,7 +282,13 @@ export default function StickyWhatsApp() {
                 : "Fahrlehrer:in auf WhatsApp kontaktieren"
             }
             aria-expanded={open}
-            className="group relative flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.7),0_4px_14px_-2px_rgba(0,0,0,0.2)] outline-none transition-all duration-300 hover:scale-105 hover:bg-[#1fb855] focus-visible:ring-4 focus-visible:ring-[#25D366]/30 md:h-16 md:w-16"
+            aria-hidden={obstructed || undefined}
+            tabIndex={obstructed ? -1 : undefined}
+            className={`group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.7),0_4px_14px_-2px_rgba(0,0,0,0.2)] outline-none transition-all duration-300 hover:bg-[#1fb855] focus-visible:ring-4 focus-visible:ring-[#25D366]/30 md:h-16 md:w-16 ${
+              obstructed
+                ? "pointer-events-none scale-50 opacity-0"
+                : "cursor-pointer hover:scale-105"
+            }`}
           >
             {!open && (
               <span
